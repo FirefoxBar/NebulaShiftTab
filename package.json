@@ -1,0 +1,91 @@
+{
+  "name": "nebula-shift-tab",
+  "version": "1.0.0",
+  "description": "new-tab",
+  "author": "ShuangYa",
+  "license": "GPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FirefoxBar/HeaderEditor.git"
+  },
+  "scripts": {
+    "start": "cross-env TARGET_BROWSER=chrome rsbuild dev",
+    "build": "npm run build:firefox",
+    "build:firefox": "cross-env TARGET_BROWSER=firefox rsbuild build",
+    "build:chrome": "cross-env TARGET_BROWSER=chrome rsbuild build",
+    "check": "biome check --write",
+    "format": "biome format --write",
+    "release": "node ./scripts/release.mjs",
+    "pack": "node ./scripts/pack.mjs"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/modifiers": "^9.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@douyinfe/semi-icons": "^2.91.0",
+    "@douyinfe/semi-ui": "^2.91.0",
+    "acorn": "^8.14.0",
+    "acron": "^1.0.5",
+    "ahooks": "^3.7.5",
+    "dayjs": "^1.9.5",
+    "eventemitter3": "^4.0.0",
+    "fast-deep-equal": "^3.1.3",
+    "jsonata": "^2.1.0",
+    "lodash-es": "^4.17.21",
+    "nanoid": "^4.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.1.2",
+    "@modern-js/tsconfig": "^2.68.5",
+    "@plasmohq/chrome-webstore-api": "^2.11.0",
+    "@plasmohq/edge-addons-api": "^2.0.0",
+    "@rsbuild/core": "^1.4.11",
+    "@rsbuild/plugin-less": "^1.6.0",
+    "@rsbuild/plugin-react": "^1.3.4",
+    "@types/chrome": "^0.1.4",
+    "@types/estree": "^1.0.6",
+    "@types/lodash-es": "^4.17.6",
+    "@types/node": "^18.15.5",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "amo-upload": "^1.0.0",
+    "axios": "^1.7.2",
+    "cpr": "^3.0.1",
+    "cross-env": "^7.0.3",
+    "lint-staged": "^13.2.2",
+    "lodash": "^4.17.21",
+    "rimraf": "^6.0.1",
+    "sign-addon": "^6.4.0",
+    "simple-git-hooks": "^2.13.0",
+    "typescript": "^5.7.3"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+      "biome check --write --files-ignore-unknown=true"
+    ]
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "lodash-es": "patches/lodash-es.patch",
+      "lodash": "patches/lodash.patch"
+    },
+    "ignoredBuiltDependencies": [
+      "core-js"
+    ],
+    "onlyBuiltDependencies": [
+      "puppeteer",
+      "simple-git-hooks",
+      "spawn-sync"
+    ]
+  }
+}

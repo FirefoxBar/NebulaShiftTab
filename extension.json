@@ -1,0 +1,37 @@
+{
+  "dist": "NebulaShiftTab-{VER}",
+  "auto": {
+    "amo": true,
+    "cws": true,
+    "edge": true,
+    "xpi": true
+  },
+  "cws": [
+    {
+      "browser": "chrome",
+      "id": "eningockdidmgiojffjmkdblpjocbhgh"
+    }
+  ],
+  "edge": [
+    {
+      "product_id": "06690001-aab2-4abb-8035-c92a44db84cf",
+      "browser": "chrome"
+    }
+  ],
+  "amo": [
+    {
+      "browser": "firefox",
+      "id": "nebula-shift-tab-amo@addon.firefoxcn.net"
+    }
+  ],
+  "xpi": [
+    {
+      "browser": "firefox",
+      "id": "nebula-shift-tab@addon.firefoxcn.net",
+      "min_version": "113.0.0"
+    }
+  ],
+  "github": {
+    "enable": true
+  }
+}

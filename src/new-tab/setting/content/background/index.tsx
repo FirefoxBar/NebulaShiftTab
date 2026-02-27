@@ -1,0 +1,183 @@
+import {
+  Button,
+  List,
+  Select,
+  Slider,
+  Typography,
+  Upload,
+} from '@douyinfe/semi-ui';
+import React, { useState } from 'react';
+import Modal from '@/components/modal';
+import usePref from '@/hooks/use-pref';
+import { DefaultBackgroundEngines, StorageKey } from '@/share/constant';
+import type { PrefValue } from '@/share/types';
+import { CustomBg } from './custom-bg';
+
+import './index.less';
+
+type BackgroundType = PrefValue['background']['type'];
+
+export const BackgroundSetting: React.FC = () => {
+  const [type, setType] = useState<BackgroundType>('builtin');
+  const [background, setBackground] = usePref('background', {
+    onInitial: (value: PrefValue['background']) => {
+      setType(value.type);
+    },
+  });
+
+  // 更新背景设置的辅助函数
+  const updateBackground = (updates: Partial<typeof background>) => {
+    setBackground({
+      ...background,
+      ...updates,
+    });
+  };
+
+  // 处理本地图片上传
+  const handleImageUpload = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const base64String = e.target?.result as string;
+      chrome.storage.local.set({
+        [StorageKey.bg]: base64String,
+      });
+      chrome.storage.local.remove(StorageKey.bgLastUpdate);
+      updateBackground({
+        type: 'image',
+      });
+    };
+    reader.readAsDataURL(file);
+    return false; // 阻止自动上传
+  };
+
+  return (
+    <div className="background-setting">
+      <List className="setting-list">
+        <List.Item
+          main={
+            <div className="list-item">
+              <Typography.Text className="title">背景类型</Typography.Text>
+            </div>
+          }
+          extra={
+            <Select
+              value={type}
+              placeholder="选择背景类型"
+              onChange={v => setType(v as BackgroundType)}
+              style={{ width: '150px' }}
+            >
+              <Select.Option value="builtin">内置壁纸</Select.Option>
+              <Select.Option value="image">本地图片</Select.Option>
+              <Select.Option value="custom">自定义</Select.Option>
+            </Select>
+          }
+        />
+
+        {type === 'builtin' && (
+          <List.Item
+            main={
+              <div className="list-item">
+                <Typography.Text className="title">内置壁纸</Typography.Text>
+              </div>
+            }
+            extra={
+              <Select
+                value={background.key}
+                placeholder="选择内置壁纸"
+                onChange={v =>
+                  updateBackground({ type: 'builtin', key: v as string })
+                }
+                style={{ width: '200px' }}
+              >
+                {DefaultBackgroundEngines.map(engine => (
+                  <Select.Option key={engine.key} value={engine.key}>
+                    {engine.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            }
+          />
+        )}
+
+        {type === 'image' && (
+          <List.Item
+            main={
+              <div className="list-item">
+                <Typography.Text className="title">本地图片</Typography.Text>
+              </div>
+            }
+            extra={
+              <Upload
+                accept="image/*"
+                showUploadList={false}
+                customRequest={({ file, onSuccess }) => {
+                  handleImageUpload(file.fileInstance!);
+                  onSuccess('success');
+                }}
+              >
+                <Button>选择图片</Button>
+              </Upload>
+            }
+          />
+        )}
+
+        {type === 'custom' && (
+          <List.Item
+            main={
+              <div className="list-item">
+                <Typography.Text className="title">自定义背景</Typography.Text>
+              </div>
+            }
+            extra={
+              <Button
+                onClick={() => {
+                  const m = Modal.info({
+                    title: '自定义背景',
+                    content: (
+                      <CustomBg
+                        initialValue={background.value}
+                        onSubmit={v => {
+                          updateBackground({ type: 'custom', value: v });
+                          m.destroy();
+                        }}
+                        onCancel={() => m.destroy()}
+                      />
+                    ),
+                    footer: null,
+                    icon: null,
+                    closeOnEsc: false,
+                    maskClosable: false,
+                  });
+                }}
+              >
+                配置
+              </Button>
+            }
+          />
+        )}
+
+        <List.Item
+          main={
+            <div className="list-item">
+              <Typography.Text className="title">背景变暗</Typography.Text>
+              <Typography.Text type="quaternary" className="content">
+                数值越大越暗
+              </Typography.Text>
+            </div>
+          }
+          extra={
+            <div style={{ width: '200px', paddingLeft: '10px' }}>
+              <Slider
+                value={background.dark}
+                min={0}
+                max={99}
+                onChange={v => updateBackground({ dark: v as number })}
+                showTip={true}
+              />
+            </div>
+          }
+        />
+      </List>
+    </div>
+  );
+};

@@ -1,0 +1,63 @@
+name: dev
+
+on:
+  push:
+    branches:
+    - dev
+    - fix/*
+    - feat/*
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform(amo,cws,xpi,edge)'
+        required: true
+        type: string
+      version:
+        description: 'Version'
+        required: true
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Inject Env
+      run: |
+        echo "INPUT_PLATFORM=${{ github.event.inputs.platform }}" >> $GITHUB_ENV
+        echo "INPUT_VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 10
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'pnpm'
+    - name: Install dependencies
+      run: pnpm i --frozen-lockfile
+    - name: Get snapshot version
+      env:
+        TOKEN: ${{ secrets.SNAPSHOT_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: node ./scripts/get-snapshot-version.mjs
+    - name: Build
+      uses: ./.github/actions/build
+    - name: Publish snapshot
+      env:
+        AMO_KEY: ${{ secrets.AMO_KEY }}
+        AMO_SECRET: ${{ secrets.AMO_SECRET }}
+        CRX_PRIV_KEY: ${{ secrets.CRX_PRIV_KEY }}
+        PACK_PLATFORM: xpi
+        DEBUG: '*'
+      run: npm run pack
+    - name: Upload snapshot release
+      uses: actions/upload-artifact@v4
+      with:
+        name: release
+        retention-days: 7
+        path: temp/release

@@ -1,0 +1,19 @@
+name: "Build"
+description: "Build"
+runs:
+  using: "composite"
+  steps:
+    - name: Build Firefox
+      shell: bash
+      run: npm run build:firefox
+    - name: Build Chrome
+      shell: bash
+      run: npm run build:chrome
+    - name: Upload bundle
+      uses: actions/upload-artifact@v4
+      with:
+        name: dist
+        retention-days: 7
+        path: |
+          dist_chrome
+          dist_firefox

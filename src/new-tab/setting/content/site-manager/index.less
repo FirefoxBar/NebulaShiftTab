@@ -1,0 +1,50 @@
+.sites-manager-container {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+
+  .list-item {
+    border: 1px solid var(--semi-color-border);
+    border-radius: 6px;
+    margin: 8px 0;
+    padding: 12px;
+    cursor: grab;
+
+    &.dragging {
+      z-index: 999;
+      position: relative;
+      background-color: var(--semi-color-bg-0);
+    }
+  }
+
+  .item-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .site-icon {
+      width: 32px;
+      margin-right: 4px;
+    }
+  }
+
+  .item-info {
+    flex: 1;
+
+    strong {
+      font-weight: bold;
+    }
+
+    span {
+      font-size: 12px;
+      color: #666;
+    }
+  }
+
+  .item-actions {
+    display: flex;
+    gap: 8px;
+  }
+}

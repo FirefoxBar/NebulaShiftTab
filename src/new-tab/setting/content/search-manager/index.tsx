@@ -1,0 +1,225 @@
+import { DndContext, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS as cssDndKit } from '@dnd-kit/utilities';
+import { IconPlus, IconTreeTriangleDown } from '@douyinfe/semi-icons';
+import {
+  Button,
+  Dropdown,
+  List,
+  Modal,
+  SplitButtonGroup,
+  Typography,
+} from '@douyinfe/semi-ui';
+import { nanoid } from 'nanoid';
+import { useState } from 'react';
+import usePref from '@/hooks/use-pref';
+import { DefaultSearchEngines } from '@/share/constant';
+import { prefs } from '@/share/prefs';
+import type { SearchItem } from '@/share/types';
+import { SearchEditForm } from './SearchEditForm';
+
+import './index.less';
+
+// 拖拽项组件
+const SortableItem = ({
+  item,
+  handleEditSearch,
+  handleDeleteSearch,
+}: {
+  item: SearchItem;
+  handleEditSearch: (search: SearchItem) => void;
+  handleDeleteSearch: (key: string) => void;
+}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: item.key,
+  });
+
+  const style = {
+    transform: cssDndKit.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={`list-item ${isDragging ? 'dragging' : ''}`}
+      {...listeners}
+      {...attributes}
+    >
+      <div className="item-content">
+        <div className="item-info">{item.name}</div>
+        <div className="item-actions">
+          <Button size="small" onClick={() => handleEditSearch(item)}>
+            编辑
+          </Button>
+          <Button
+            size="small"
+            type="danger"
+            onClick={() => handleDeleteSearch(item.key)}
+          >
+            删除
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const SearchManager: React.FC = () => {
+  const [editingSearch, setEditingSearch] = useState<SearchItem | undefined>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searches, setSearches] = usePref('searches');
+
+  // 添加搜索
+  const handleAddSearch = () => {
+    setEditingSearch(undefined);
+    setIsModalOpen(true);
+  };
+
+  // 编辑搜索
+  const handleEditSearch = (search: SearchItem) => {
+    setEditingSearch({ ...search });
+    setIsModalOpen(true);
+  };
+
+  // 删除搜索
+  const handleDeleteSearch = (key: string) => {
+    const newSearches = [...searches];
+    const index = newSearches.findIndex(search => search.key === key);
+    if (index === -1) {
+      return;
+    }
+    Modal.warning({
+      title: '删除搜索引擎',
+      content: `确定要删除 "${newSearches[index].name}" 吗？`,
+      onOk: () => {
+        newSearches.splice(index, 1);
+        setSearches(newSearches);
+      },
+    });
+  };
+
+  // 保存搜索
+  const handleSaveSearch = (updatedSearch: SearchItem) => {
+    if (!updatedSearch.key) {
+      updatedSearch.key = nanoid();
+    }
+    const newSearches = [...searches];
+    const index = newSearches.findIndex(
+      search => search.key === updatedSearch.key,
+    );
+
+    if (index !== -1) {
+      newSearches[index] = updatedSearch;
+    } else {
+      // 添加新搜索
+      newSearches.push(updatedSearch);
+    }
+
+    setSearches(newSearches);
+    setEditingSearch(undefined);
+    setIsModalOpen(false);
+  };
+
+  // 取消编辑
+  const handleCancelEdit = () => {
+    setEditingSearch(undefined);
+    setIsModalOpen(false);
+  };
+
+  // 拖拽结束处理
+  const handleDragEnd = (event: any) => {
+    const { active, over } = event;
+
+    if (active.id !== over?.id) {
+      const oldIndex = searches.findIndex(search => search.key === active.id);
+      const newIndex = searches.findIndex(search => search.key === over.id);
+
+      const newSearches = arrayMove(searches, oldIndex, newIndex);
+      setSearches(newSearches);
+      prefs.set('searches', newSearches);
+    }
+  };
+
+  // 初始化鼠标传感器
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: { distance: 1 },
+    }),
+  );
+
+  return (
+    <div className="searches-manager-container">
+      <Modal
+        title={editingSearch?.key ? '编辑搜索引擎' : '添加搜索引擎'}
+        visible={isModalOpen}
+        footer={null}
+        onCancel={handleCancelEdit}
+        width={600}
+        maskClosable={false}
+        closeOnEsc={false}
+      >
+        <SearchEditForm
+          initialData={editingSearch || undefined}
+          onSave={handleSaveSearch}
+          onCancel={handleCancelEdit}
+        />
+      </Modal>
+
+      <div className="header">
+        <Typography.Title heading={6}>
+          搜索管理 ({searches.length})
+        </Typography.Title>
+        <SplitButtonGroup>
+          <Button icon={<IconPlus />} onClick={handleAddSearch}>
+            添加
+          </Button>
+          <Dropdown
+            menu={DefaultSearchEngines.map(x => ({
+              node: 'item',
+              name: x.name,
+              onClick: () => handleSaveSearch({ ...x, key: '' }),
+            }))}
+            trigger="click"
+            position="bottomRight"
+          >
+            <Button type="primary" icon={<IconTreeTriangleDown />} />
+          </Dropdown>
+        </SplitButtonGroup>
+      </div>
+
+      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+        <SortableContext
+          items={searches.map(search => search.key)}
+          strategy={verticalListSortingStrategy}
+        >
+          <List
+            dataSource={searches}
+            split={false}
+            renderItem={item => (
+              <SortableItem
+                key={item.key}
+                item={item}
+                handleEditSearch={handleEditSearch}
+                handleDeleteSearch={handleDeleteSearch}
+              />
+            )}
+          />
+        </SortableContext>
+      </DndContext>
+    </div>
+  );
+};

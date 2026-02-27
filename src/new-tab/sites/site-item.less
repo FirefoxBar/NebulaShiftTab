@@ -1,0 +1,39 @@
+.site-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+  opacity: 0.85;
+
+  .site-icon-container {
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .site-icon {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+  }
+
+  .site-name {
+    margin-top: 12px;
+    font-size: 14px;
+    text-align: center;
+    color: #ddd;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}

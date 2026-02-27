@@ -51,7 +51,6 @@ jobs:
       env:
         AMO_KEY: ${{ secrets.AMO_KEY }}
         AMO_SECRET: ${{ secrets.AMO_SECRET }}
-        CRX_PRIV_KEY: ${{ secrets.CRX_PRIV_KEY }}
         PACK_PLATFORM: xpi
         DEBUG: '*'
       run: npm run pack

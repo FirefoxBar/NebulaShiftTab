@@ -3,9 +3,9 @@ Nebula Shift Tab
 </h1>
 
 [![Release](https://img.shields.io/github/release/FirefoxBar/NebulaShiftTab.svg?label=Release)](https://github.com/FirefoxBar/NebulaShiftTab/releases)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/eningockdidmgiojffjmkdblpjocbhgh?label=Chrome)](https://chrome.google.com/webstore/detail/header-editor/eningockdidmgiojffjmkdblpjocbhgh)
-[![Edge](https://img.shields.io/badge/dynamic/json?label=Edge&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fafopnekiinpekooejpchnkgfffaeceko)](https://microsoftedge.microsoft.com/addons/detail/header-editor/afopnekiinpekooejpchnkgfffaeceko)
-[![Mozilla Add-ons](https://img.shields.io/amo/users/header-editor?label=Firefox)](https://addons.mozilla.org/en-US/firefox/addon/header-editor/)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/ifpdfibcbnbkebbcaenihbfbocncjdhd?label=Chrome)](https://chrome.google.com/webstore/detail/nebula-shift-tab/ifpdfibcbnbkebbcaenihbfbocncjdhd)
+[![Edge](https://img.shields.io/badge/dynamic/json?label=Edge&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Floglacfgaifapahekfegphcggaffdohp)](https://microsoftedge.microsoft.com/addons/detail/nebula-shift-tab/loglacfgaifapahekfegphcggaffdohp)
+[![Mozilla Add-ons](https://img.shields.io/amo/users/nebula-shift-tab?label=Firefox)](https://addons.mozilla.org/en-US/firefox/addon/nebula-shift-tab/)
 [![license](https://img.shields.io/github/license/FirefoxBar/NebulaShiftTab.svg?label=License)](https://github.com/FirefoxBar/NebulaShiftTab/blob/master/LICENSE)
 [![Discussions](https://img.shields.io/github/discussions/FirefoxBar/NebulaShiftTab?label=Discussions)](https://github.com/FirefoxBar/NebulaShiftTab/discussions)
 [![Build Status](https://github.com/FirefoxBar/NebulaShiftTab/actions/workflows/dev.yml/badge.svg)](https://github.com/FirefoxBar/NebulaShiftTab/actions/workflows/dev.yml)
@@ -16,8 +16,8 @@ A lightweight new tab plugin
 
 | Browser | Download |
 | --- | --- |
-| ![Firefox Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/firefox/firefox_16x16.png) Firefox | [Official Download](https://github.com/FirefoxBar/NebulaShiftTab/releases) or [Mozilla Add-ons](https://addons.mozilla.org/en-US/firefox/addon/header-editor-lite/) |
-| ![Chrome Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/chrome/chrome_16x16.png) Chrome | [Chrome Web Store](https://chrome.google.com/webstore/detail/header-editor/eningockdidmgiojffjmkdblpjocbhgh) |
+| ![Firefox Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/firefox/firefox_16x16.png) Firefox | [Official Download](https://github.com/FirefoxBar/NebulaShiftTab/releases) or [Mozilla Add-ons](https://addons.mozilla.org/zh-CN/firefox/addon/nebula-shift-tab/) |
+| ![Chrome Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/chrome/chrome_16x16.png) Chrome | [Chrome Web Store](https://chrome.google.com/webstore/detail/nebula-shift-tab/ifpdfibcbnbkebbcaenihbfbocncjdhd) |
 | ![Edge Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/edge/edge_16x16.png) Edge | [Edge Addons](https://microsoftedge.microsoft.com/addons/detail/header-editor/afopnekiinpekooejpchnkgfffaeceko) |
 
 ## Permissions

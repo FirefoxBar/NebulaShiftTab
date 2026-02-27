@@ -20,6 +20,10 @@ const baseManifest = {
   host_permissions: ['*://*/*'],
 };
 
+const firefoxDataCollection = {
+  required: ['none'],
+};
+
 function getManifest(browser, options) {
   const { packer, version } = options || {};
   // copy
@@ -40,6 +44,7 @@ function getManifest(browser, options) {
       manifest.browser_specific_settings = {
         gecko: {
           id,
+          data_collection_permissions: firefoxDataCollection,
           strict_min_version: '113.0',
           update_url:
             'https://ext.firefoxcn.net/nebula-shift-tab/install/update.json',
@@ -50,6 +55,7 @@ function getManifest(browser, options) {
       manifest.browser_specific_settings = {
         gecko: {
           id,
+          data_collection_permissions: firefoxDataCollection,
           strict_min_version: '113.0',
         },
       };

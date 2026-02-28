@@ -1,0 +1,389 @@
+{
+  "add": {
+    "message": "添加",
+    "description": "Add button text"
+  },
+  "addSearchEngine": {
+    "message": "添加搜索引擎",
+    "description": "Add search engine dialog title"
+  },
+  "addSite": {
+    "message": "添加网站",
+    "description": "Add site button text"
+  },
+  "apiOrImageAddress": {
+    "message": "{type} 地址",
+    "description": "Dynamic label for API or image address"
+  },
+  "autoFetch": {
+    "message": "自动获取",
+    "description": "Option for auto fetch icon type"
+  },
+  "backgroundDarkness": {
+    "message": "背景暗度",
+    "description": "Label for background darkness setting"
+  },
+  "backgroundSettings": {
+    "message": "背景设置",
+    "description": "Tab label for background settings"
+  },
+  "backgroundType": {
+    "message": "背景类型",
+    "description": "Label for background type selection"
+  },
+  "backupToFile": {
+    "message": "备份到文件",
+    "description": "Button text for backing up to file"
+  },
+  "builtinIcon": {
+    "message": "内置图标",
+    "description": "Option for built-in icon type"
+  },
+  "builtinWallpaper": {
+    "message": "内置壁纸",
+    "description": "Option for built-in wallpaper"
+  },
+  "cancel": {
+    "message": "取消",
+    "description": "Cancel button text"
+  },
+  "configure": {
+    "message": "配置",
+    "description": "Button text for configuring custom background"
+  },
+  "confirmDeleteSearchEngine": {
+    "message": "确定要删除 \"$name$\" 吗？",
+    "description": "Confirm deletion message for search engine",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Example Search Engine Name"
+      }
+    }
+  },
+  "confirmDeleteSite": {
+    "message": "确定要删除 \"$name$\" 吗？",
+    "description": "Confirm deletion message for site",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "continueImport": {
+    "message": "继续导入",
+    "description": "Button text for continuing import"
+  },
+  "custom": {
+    "message": "自定义",
+    "description": "Option for custom icon type"
+  },
+  "customBackground": {
+    "message": "自定义背景",
+    "description": "Title for custom background configuration"
+  },
+  "customIconUrl": {
+    "message": "自定义图标网址",
+    "description": "Label for custom icon URL field"
+  },
+  "daily": {
+    "message": "每天",
+    "description": "Option for daily refresh"
+  },
+  "darkMode": {
+    "message": "深色模式",
+    "description": "Label for dark mode setting"
+  },
+  "delete": {
+    "message": "删除",
+    "description": "Delete button text"
+  },
+  "deleteSearchEngine": {
+    "message": "删除搜索引擎",
+    "description": "Delete search engine dialog title"
+  },
+  "deleteSite": {
+    "message": "删除网站",
+    "description": "Delete site dialog title"
+  },
+  "description": {
+    "message": "一个轻量级的新标签页",
+    "description": "Extension description"
+  },
+  "edit": {
+    "message": "编辑",
+    "description": "Edit button text"
+  },
+  "editSearchEngine": {
+    "message": "编辑搜索引擎",
+    "description": "Edit search engine dialog title"
+  },
+  "editSite": {
+    "message": "编辑网站",
+    "description": "Edit site button text"
+  },
+  "enterExtractionPath": {
+    "message": "请输入提取搜索建议的路径",
+    "description": "Placeholder for extraction path field"
+  },
+  "enterJSONAtaPath": {
+    "message": "请输入 JSONAta 路径表达式",
+    "description": "Placeholder for JSONAta path input"
+  },
+  "enterSearchEngineName": {
+    "message": "请输入搜索引擎名称",
+    "description": "Placeholder for search engine name input"
+  },
+  "enterSearchKeywords": {
+    "message": "输入搜索关键词...",
+    "description": "Placeholder for search input field"
+  },
+  "enterSearchUrl": {
+    "message": "请输入搜索网址",
+    "description": "Validation message for search URL"
+  },
+  "enterSiteName": {
+    "message": "请输入网站名称",
+    "description": "Placeholder for site name input"
+  },
+  "enterSiteUrl": {
+    "message": "请输入网站地址",
+    "description": "Placeholder for site URL input"
+  },
+  "enterUrl": {
+    "message": "请输入网址",
+    "description": "Error message for missing URL"
+  },
+  "everyXHours": {
+    "message": "每 $num$ 小时",
+    "description": "Template for refresh interval every num hours",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "everyXMinutes": {
+    "message": "每 $num$ 分钟",
+    "description": "Template for refresh interval every num minutes",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "extName": {
+    "message": "Nebula Shift 新标签页",
+    "description": "Extension name"
+  },
+  "extractionExpression": {
+    "message": "提取表达式",
+    "description": "Label for extraction expression"
+  },
+  "extractionPath": {
+    "message": "提取路径（使用 JSONata 表达式）",
+    "description": "Label for extraction path field"
+  },
+  "failedToGetSuggestions": {
+    "message": "获取搜索建议失败",
+    "description": "Error message when failing to get search suggestions"
+  },
+  "followSystem": {
+    "message": "跟随系统",
+    "description": "Option for following system dark mode setting"
+  },
+  "generalSettings": {
+    "message": "常规设置",
+    "description": "Tab label for general settings"
+  },
+  "higherValueDarker": {
+    "message": "数值越大越暗",
+    "description": "Description for background darkness setting"
+  },
+  "iconPack": {
+    "message": "图标包",
+    "description": "Label for icon pack setting"
+  },
+  "iconProvider": {
+    "message": "图标提供者",
+    "description": "Label for icon provider setting"
+  },
+  "iconType": {
+    "message": "图标类型",
+    "description": "Label for icon type selection"
+  },
+  "image": {
+    "message": "图片",
+    "description": "Label for image option"
+  },
+  "importBackup": {
+    "message": "导入备份",
+    "description": "Title for import backup modal"
+  },
+  "importExport": {
+    "message": "导入和导出",
+    "description": "Tab label for import/export section"
+  },
+  "importWillOverrideSettings": {
+    "message": "导入备份将覆盖当前设置",
+    "description": "Description for import warning"
+  },
+  "invalidUrl": {
+    "message": "请输入有效的网址",
+    "description": "Error message for invalid URL"
+  },
+  "json": {
+    "message": "JSON",
+    "description": "JSON option"
+  },
+  "jsonp": {
+    "message": "JSONP",
+    "description": "JSONP option"
+  },
+  "liquidGlass": {
+    "message": "液态玻璃",
+    "description": "Name of an icon pack"
+  },
+  "localIcon": {
+    "message": "本地图标",
+    "description": "Option for local icon type"
+  },
+  "localImage": {
+    "message": "本地图片",
+    "description": "Option for local image"
+  },
+  "name": {
+    "message": "名称",
+    "description": "Label for name field"
+  },
+  "never": {
+    "message": "从不",
+    "description": "Option for never refreshing"
+  },
+  "off": {
+    "message": "关闭",
+    "description": "Option for disabling dark mode"
+  },
+  "on": {
+    "message": "开启",
+    "description": "Option for enabling dark mode"
+  },
+  "pleaseEnterAddressMsg": {
+    "message": "请输入地址",
+    "description": "Message for requiring address input"
+  },
+  "pleaseEnterValidURLMsg": {
+    "message": "请输入有效网址",
+    "description": "Message for requiring valid URL"
+  },
+  "pleaseSelect": {
+    "message": "请选择",
+    "description": "Message for requiring selection"
+  },
+  "refreshFrequency": {
+    "message": "刷新频率",
+    "description": "Label for refresh frequency"
+  },
+  "restoreFromFile": {
+    "message": "从文件恢复",
+    "description": "Button text for restoring from file"
+  },
+  "save": {
+    "message": "保存",
+    "description": "Save button text"
+  },
+  "searchManagement": {
+    "message": "搜索引擎管理",
+    "description": "Search management section title"
+  },
+  "searchUrl": {
+    "message": "搜索网址",
+    "description": "Label for search URL field"
+  },
+  "searchUrlPlaceholder": {
+    "message": "输入搜索网址，使用 {{q}} 作为关键词占位符",
+    "description": "Placeholder for search URL field"
+  },
+  "searchUrlRequiresPlaceholder": {
+    "message": "搜索网址必须包含 {{q}} 作为关键词占位符",
+    "description": "Validation message for search URL placeholder"
+  },
+  "selectBackgroundType": {
+    "message": "选择背景类型",
+    "description": "Placeholder for background type selection"
+  },
+  "selectBuiltinWallpaper": {
+    "message": "选择内置壁纸",
+    "description": "Placeholder for builtin wallpaper selection"
+  },
+  "selectDarkMode": {
+    "message": "选择深色模式设置",
+    "description": "Placeholder for dark mode selection"
+  },
+  "selectIcon": {
+    "message": "选择图标",
+    "description": "Label for icon selection"
+  },
+  "selectIconPack": {
+    "message": "选择图标包",
+    "description": "Placeholder for icon pack selection"
+  },
+  "selectIconProvider": {
+    "message": "选择图标提供商",
+    "description": "Placeholder for icon provider selection"
+  },
+  "selectIconType": {
+    "message": "请选择图标类型",
+    "description": "Placeholder for icon type selection"
+  },
+  "selectImage": {
+    "message": "选择图片",
+    "description": "Button text for selecting image"
+  },
+  "selectImageFile": {
+    "message": "选择图像文件",
+    "description": "Button text for selecting image file"
+  },
+  "selectRefreshFrequency": {
+    "message": "选择刷新频率",
+    "description": "Placeholder for refresh frequency selection"
+  },
+  "selectSuggestionType": {
+    "message": "请选择建议类型（可选）",
+    "description": "Placeholder for suggestion type selection"
+  },
+  "settings": {
+    "message": "设置",
+    "description": "Title for settings panel"
+  },
+  "siteManagement": {
+    "message": "网站管理",
+    "description": "Site management section title"
+  },
+  "suggestionType": {
+    "message": "建议类型",
+    "description": "Label for suggestion type selection"
+  },
+  "suggestionUrl": {
+    "message": "建议网址",
+    "description": "Label for suggestion URL field"
+  },
+  "type": {
+    "message": "类型",
+    "description": "Label for type selection"
+  },
+  "url": {
+    "message": "网址",
+    "description": "Label for URL field"
+  },
+  "validUrlRequired": {
+    "message": "请输入有效的网址",
+    "description": "Error message for invalid URL"
+  },
+  "whenAutoSelected": {
+    "message": "当选择“自动获取”时，图标将从此源获取",
+    "description": "Description for icon provider setting"
+  }
+}

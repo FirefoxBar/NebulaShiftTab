@@ -42,7 +42,7 @@ const ExtractInput = () => {
     <Form.Input
       field="extract"
       label={t('extractionExpression')}
-      placeholder={t('enterJSONAtaPath')}
+      placeholder={t('enterJSONataPath')}
     />
   );
 };

@@ -77,8 +77,8 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
       </Form.Select>
       <Form.Input
         field="extractSuggestion"
-        label={t('extractionPath')}
-        placeholder={t('enterExtractionPath')}
+        label={t('extractionExpression')}
+        placeholder={t('enterJSONataPath')}
       />
 
       <div className="footer">

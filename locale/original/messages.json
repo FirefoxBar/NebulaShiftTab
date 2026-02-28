@@ -122,13 +122,9 @@
     "message": "Edit Site",
     "description": "Edit site button text"
   },
-  "enterExtractionPath": {
-    "message": "Please enter path to extract search suggestions",
-    "description": "Placeholder for extraction path field"
-  },
-  "enterJSONAtaPath": {
-    "message": "Enter JSONata path expression",
-    "description": "Placeholder for JSONata path input"
+  "enterJSONataPath": {
+    "message": "Enter JSONata expression",
+    "description": "Placeholder for JSONata input"
   },
   "enterSearchEngineName": {
     "message": "Please enter search engine name",
@@ -179,12 +175,8 @@
     "description": "Extension name"
   },
   "extractionExpression": {
-    "message": "Extraction Expression",
+    "message": "Extraction Expression (JSONata)",
     "description": "Label for extraction expression"
-  },
-  "extractionPath": {
-    "message": "Extraction Path (using JSONata expression)",
-    "description": "Label for extraction path field"
   },
   "failedToGetSuggestions": {
     "message": "Failed to get search suggestions",

@@ -2,6 +2,8 @@ import { List, Select, Typography } from '@douyinfe/semi-ui';
 import type React from 'react';
 import usePref from '@/hooks/use-pref';
 import { t } from '@/share/locale';
+import { ExportButton } from './export-button';
+import { ImportButton } from './import-button';
 
 export const GeneralSettings: React.FC = () => {
   const [darkMode, setDarkMode] = usePref('darkMode');
@@ -69,6 +71,26 @@ export const GeneralSettings: React.FC = () => {
             <Select.Option value="icon.horse">icon.horse</Select.Option>
           </Select>
         }
+      />
+      <List.Item
+        main={
+          <div className="list-item">
+            <Typography.Text className="title">
+              {t('backupToFile')}
+            </Typography.Text>
+          </div>
+        }
+        extra={<ExportButton />}
+      />
+      <List.Item
+        main={
+          <div className="list-item">
+            <Typography.Text className="title">
+              {t('restoreFromFile')}
+            </Typography.Text>
+          </div>
+        }
+        extra={<ImportButton />}
       />
     </List>
   );

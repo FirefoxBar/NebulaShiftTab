@@ -51,8 +51,8 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
               const urlPattern =
                 /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
               if (
-                !value.replace('{k}', 'test') ||
-                urlPattern.test(value.replace('{k}', 'test'))
+                !value.replace('{{q}}', 'test') ||
+                urlPattern.test(value.replace('{{q}}', 'test'))
               ) {
                 return true;
               } else {

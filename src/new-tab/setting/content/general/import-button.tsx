@@ -1,52 +1,10 @@
-import { Button, Space } from '@douyinfe/semi-ui';
-import { omit, pick } from 'lodash-es';
+import { Button } from '@douyinfe/semi-ui';
 import Modal from '@/components/modal';
 import { StorageKey } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
-import { getLocalStorage } from '@/share/storage';
 import type { PrefValue } from '@/share/types';
-
-interface BaseBackup {
-  version: string;
-}
-interface BackupV1 extends BaseBackup {
-  version: '1';
-  pref: Partial<PrefValue>;
-  siteIcons: Record<string, string>;
-  bg: string;
-}
-
-async function createExport() {
-  const pref = prefs.getAll();
-
-  const backup: BackupV1 = {
-    version: '1',
-    pref,
-    bg: '',
-    siteIcons: await chrome.storage.local.get(
-      pref.sites
-        .filter(x => x.iconType === 'local')
-        .map(x => `${StorageKey.siteIcon}_${x.id}`),
-    ),
-  };
-
-  if (pref.background.type === 'image') {
-    const b = await getLocalStorage(StorageKey.bg);
-    if (b) {
-      backup.bg = b;
-    }
-  }
-
-  const res = JSON.stringify(backup, null, 2);
-
-  const file = new Blob([res], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(file);
-  const time = new Date().toLocaleString().replace(/[^0-9]/g, '-');
-  a.download = `nebula-shift-tab-${time}.json`;
-  a.click();
-}
+import { BackupV1, BaseBackup } from './types';
 
 async function doImport() {
   Modal.warning({
@@ -80,7 +38,9 @@ async function doImport() {
               });
             }
             await chrome.storage.local.set(v1.siteIcons);
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            }, 500);
           }
         };
         reader.readAsText(file);
@@ -89,13 +49,6 @@ async function doImport() {
     },
   });
 }
-export const ExportAndImport = () => {
-  return (
-    <div className="export-import">
-      <Space>
-        <Button onClick={createExport}>{t('backupToFile')}</Button>
-        <Button onClick={doImport}>{t('restoreFromFile')}</Button>
-      </Space>
-    </div>
-  );
+export const ImportButton = () => {
+  return <Button onClick={doImport}>{t('restoreFromFile')}</Button>;
 };

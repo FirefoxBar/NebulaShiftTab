@@ -242,10 +242,6 @@
     "message": "JSONP",
     "description": "JSONP option"
   },
-  "liquidGlass": {
-    "message": "液态玻璃",
-    "description": "Name of an icon pack"
-  },
   "localIcon": {
     "message": "本地图标",
     "description": "Option for local icon type"

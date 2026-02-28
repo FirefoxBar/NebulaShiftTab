@@ -9,30 +9,28 @@
  * 在这里，打包文件夹统一命名为pack
  */
 
-import { mkdir, unlink } from "node:fs/promises";
-import { rimraf } from "rimraf";
-import getManifest from "./browser-config/get-manifest.js";
+import { mkdir, unlink } from 'node:fs/promises';
+import { rimraf } from 'rimraf';
+import getManifest from './browser-config/get-manifest.js';
 import {
   join as _join,
   path as _path,
   extension,
   getDistPath,
   getVersion,
-} from "./config.mjs";
-import amo from "./pack-utils/amo.mjs";
-import crx from "./pack-utils/crx.mjs";
-import cws from "./pack-utils/cws.mjs";
-import edge from "./pack-utils/edge.mjs";
-import xpi from "./pack-utils/xpi.mjs";
-import { copyDir, outputJSON } from "./utils.mjs";
-import { createZip } from "./zip.mjs";
+} from './config.mjs';
+import amo from './pack-utils/amo.mjs';
+import cws from './pack-utils/cws.mjs';
+import edge from './pack-utils/edge.mjs';
+import xpi from './pack-utils/xpi.mjs';
+import { copyDir, outputJSON } from './utils.mjs';
+import { createZip } from './zip.mjs';
 
 const packUtils = {
   amo,
   cws,
   xpi,
   edge,
-  crx,
 };
 
 /**
@@ -43,11 +41,11 @@ const packUtils = {
  * @returns
  */
 async function prepareOnePlatform(name, extensionConfig) {
-  if (typeof packUtils[name] === "undefined") {
+  if (typeof packUtils[name] === 'undefined') {
     console.error(`pack-utils for ${name} not found`);
     return;
   }
-  const dirName = [name, extensionConfig.browser].join("_");
+  const dirName = [name, extensionConfig.browser].join('_');
   const thisPack = _join(_path.pack, dirName);
   const zipPath = _join(_path.pack, `${dirName}.zip`);
   try {
@@ -56,7 +54,7 @@ async function prepareOnePlatform(name, extensionConfig) {
     // 重新生成manifest
     const version = await getVersion(thisPack);
     await outputJSON(
-      _join(thisPack, "manifest.json"),
+      _join(thisPack, 'manifest.json'),
       getManifest(extensionConfig.browser, {
         dev: false,
         version,
@@ -74,7 +72,7 @@ async function prepareOnePlatform(name, extensionConfig) {
 }
 async function packOnePlatform(name, prepare, extensionConfig) {
   const { thisPack, zipPath } = prepare;
-  if (typeof packUtils[name] === "undefined") {
+  if (typeof packUtils[name] === 'undefined') {
     console.error(`pack-utils for ${name} not found`);
     return;
   }
@@ -111,11 +109,11 @@ async function main() {
 
   let platform = [];
   if (process.env.INPUT_PLATFORM) {
-    platform = process.env.INPUT_PLATFORM.split(",");
+    platform = process.env.INPUT_PLATFORM.split(',');
   } else if (process.env.PACK_PLATFORM) {
-    platform = process.env.PACK_PLATFORM.split(",");
+    platform = process.env.PACK_PLATFORM.split(',');
   } else {
-    platform = Object.keys(extension.auto).filter((x) =>
+    platform = Object.keys(extension.auto).filter(x =>
       Boolean(extension.auto[x]),
     );
   }

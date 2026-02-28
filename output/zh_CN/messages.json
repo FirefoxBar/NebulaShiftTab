@@ -122,13 +122,9 @@
     "message": "编辑网站",
     "description": "Edit site button text"
   },
-  "enterExtractionPath": {
-    "message": "请输入提取搜索建议的路径",
-    "description": "Placeholder for extraction path field"
-  },
-  "enterJSONAtaPath": {
-    "message": "请输入 JSONAta 路径表达式",
-    "description": "Placeholder for JSONAta path input"
+  "enterJSONataPath": {
+    "message": "请输入 JSONata 表达式",
+    "description": "Placeholder for JSONata input"
   },
   "enterSearchEngineName": {
     "message": "请输入搜索引擎名称",
@@ -179,12 +175,8 @@
     "description": "Extension name"
   },
   "extractionExpression": {
-    "message": "提取表达式",
+    "message": "提取表达式（JSONata）",
     "description": "Label for extraction expression"
-  },
-  "extractionPath": {
-    "message": "提取路径（使用 JSONata 表达式）",
-    "description": "Label for extraction path field"
   },
   "failedToGetSuggestions": {
     "message": "获取搜索建议失败",

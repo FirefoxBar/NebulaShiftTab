@@ -40,11 +40,10 @@ export const GeneralSettings: React.FC = () => {
             placeholder={t('selectIconPack')}
             onChange={v => setIconPack(v as any)}
           >
+            <Select.Option value="default">Default</Select.Option>
             <Select.Option value="mbe-style">MBE Style</Select.Option>
             <Select.Option value="delta-icons">Delta Icons</Select.Option>
-            <Select.Option value="liquid-glass">
-              {t('liquidGlass')}
-            </Select.Option>
+            <Select.Option value="liquid-glass">Liquid Glass</Select.Option>
           </Select>
         }
       />

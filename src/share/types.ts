@@ -1,6 +1,6 @@
 export interface PrefValue {
   darkMode: 'auto' | 'on' | 'off';
-  iconPack: 'mbe-style' | 'delta-icons' | 'liquid-glass';
+  iconPack: 'default' | 'mbe-style' | 'delta-icons' | 'liquid-glass';
   iconProvider: 'google' | 'duckduckgo' | 'icon.horse' | 'browser';
   background: {
     dark: number;
@@ -36,5 +36,4 @@ export interface BackgroundItem {
   // 单位：分钟
   refresh: number | 'new-day';
   extract: string;
-  custom?: () => Promise<string>;
 }

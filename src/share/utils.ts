@@ -12,6 +12,7 @@ import type {
   UnaryExpression,
 } from 'estree';
 import type jsonata from 'jsonata';
+import { random } from 'lodash-es';
 
 // 解析 jsonp
 export const parseJsonp = async <T = any>(jsonp: string): Promise<T> => {
@@ -128,7 +129,14 @@ export const parseJsonp = async <T = any>(jsonp: string): Promise<T> => {
 
 export const createJsonAta = async (expr: string) => {
   const { default: jsonata } = await import('jsonata');
-  return jsonata(expr);
+  const res = jsonata(expr);
+  res.registerFunction(
+    'array_rand',
+    items => items[Math.floor(Math.random() * items.length)],
+  );
+  res.registerFunction('json_decode', item => JSON.parse(item));
+  res.registerFunction('rand', (min, max) => random(min, max, false));
+  return res;
 };
 
 export const extractData = <T = any>(

@@ -68,15 +68,15 @@ jobs:
       run: pnpm i --frozen-lockfile
     - name: Get snapshot version
       env:
-        TOKEN: ${{ secrets.SNAPSHOT_TOKEN }}
+        TOKEN: ${{ secrets.ORG_EXT_API_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: node ./scripts/get-snapshot-version.mjs
     - name: Build
       uses: ./.github/actions/build
     - name: Publish snapshot
       env:
-        AMO_KEY: ${{ secrets.AMO_KEY }}
-        AMO_SECRET: ${{ secrets.AMO_SECRET }}
+        AMO_KEY: ${{ secrets.ORG_AMO_KEY }}
+        AMO_SECRET: ${{ secrets.ORG_AMO_SECRET }}
         PACK_PLATFORM: xpi
         DEBUG: '*'
       run: npm run pack

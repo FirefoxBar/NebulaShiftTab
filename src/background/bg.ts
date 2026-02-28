@@ -71,10 +71,6 @@ async function handleBackgroundItem(item: BackgroundItem) {
   try {
     let imageUrl = item.url;
 
-    if (item.type === 'custom' && item.custom) {
-      imageUrl = await item.custom();
-    }
-
     // 如果是API类型，需要先解析获取图片URL
     if (item.type === 'api' && item.extract) {
       const response = await fetch(item.url);

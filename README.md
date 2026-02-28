@@ -10,7 +10,15 @@ Nebula Shift Tab
 [![Discussions](https://img.shields.io/github/discussions/FirefoxBar/NebulaShiftTab?label=Discussions)](https://github.com/FirefoxBar/NebulaShiftTab/discussions)
 [![Build Status](https://github.com/FirefoxBar/NebulaShiftTab/actions/workflows/dev.yml/badge.svg)](https://github.com/FirefoxBar/NebulaShiftTab/actions/workflows/dev.yml)
 
-A lightweight new tab plugin
+A flexible, lightweight new tab page featuring:
+* Smart Search: Supports custom engines with real-time suggestions.
+* Dynamic Backgrounds: Compatible with private APIs and scheduled auto-updates.
+* Quick Navigation: Includes multiple built-in icon libraries with full customization support.
+
+一款灵活轻量的新标签页，核心功能包括：
+* 智能搜索：支持自定义引擎及实时建议。
+* 动态背景：兼容私有 API，支持定时自动更新。
+* 快捷导航：内置多套图标库，支持完全自定义。
 
 ## Get this extension
 
@@ -41,19 +49,21 @@ Nebula Shift Tab require those permissions:
 
 图标包均来源于第三方，其中：
 
+* default: 从 App Store 获取各应用的原始图标
 * mbe-style: 来源于[meolunr/MBEStyle](https://github.com/meolunr/MBEStyle)，原始协议为 [GPL-3.0](https://github.com/meolunr/MBEStyle/blob/master/LICENSE)
 * delta-icons: 来源于[Delta-Icons/android](https://github.com/Delta-Icons/android)，原始协议为 [CC BY-NC-ND License 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 * liquid-glass: 来源于网络收集
 
-上述图标作者未参与本项目开发，不以任何形式为本项目背书。如您认为项目所使用的图标侵犯了您的权利，请提交 issue，我们将从项目中移除相关图标。
+上述图标作者未参与本项目开发，不以任何形式为本项目背书。本项目亦无权转授权。如您认为项目所使用的图标侵犯了您的权利，请提交 issue，我们将从项目中移除相关图标。
 
 All icon packs are sourced from third parties, including:
 
+* default: get the original icons of each app from the App Store.
 * mbe-style: from [meolunr/MBEStyle](https://github.com/meolunr/MBEStyle), originally licensed under [GPL-3.0](https://github.com/meolunr/MBEStyle/blob/master/LICENSE)
 * delta-icons: from [Delta-Icons/android](https://github.com/Delta-Icons/android), originally licensed under [CC BY-NC-ND License 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
-* liquid-glass: Collected from the internet
+* liquid-glass: collected from the internet
 
-The authors of the above icons were not involved in the development of this project and do not endorse it in any way. If you believe that the icons used in this project infringe upon your rights, please submit an issue, and we will remove the relevant icons from the project.
+The authors of the above icons were not involved in the development of this project and do not endorse it in any way. This project is not authorized for sublicensing. If you believe that the icons used in this project infringe upon your rights, please submit an issue, and we will remove the relevant icons from the project.
 
 ## Licenses
 

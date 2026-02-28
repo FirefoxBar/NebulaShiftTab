@@ -5,6 +5,7 @@ const baseManifest = {
   description: '__MSG_description__',
   version: '1.0.0',
   background: {},
+  default_locale: 'en',
   chrome_url_overrides: {
     newtab: 'new-tab.html',
   },

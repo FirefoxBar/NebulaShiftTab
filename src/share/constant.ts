@@ -56,24 +56,17 @@ export const DefaultBackgroundEngines: BackgroundItem[] = [
   {
     key: 'spotlight',
     name: 'Spotlight',
-    url: '',
+    url: 'https://fd.api.iris.microsoft.com/v4/api/selection?placement=88000820&bcnt=4&country=CN&locale=zh-CN&fmt=json',
     type: 'custom',
     refresh: 'new-day',
-    extract: '',
-    custom: async () => {
-      const res = await fetch(
-        'https://fd.api.iris.microsoft.com/v4/api/selection?&placement=88000820&bcnt=4&country=CN&locale=zh-CN&fmt=json',
-      );
-      const data = await res.json();
-      const img = JSON.parse(data.batchrsp.items[0].item);
-      return img.ad.landscapeImage.asset;
-    },
+    extract:
+      '$json_decode($array_rand($.batchrsp.items).item).ad.landscapeImage.asset',
   },
 ];
 
 export const defaultPrefValue: PrefValue = {
   darkMode: 'auto',
-  iconPack: 'mbe-style',
+  iconPack: 'default',
   iconProvider: 'duckduckgo',
   background: {
     dark: 40,
@@ -81,27 +74,5 @@ export const defaultPrefValue: PrefValue = {
     key: 'bing',
   },
   searches: DefaultSearchEngines,
-  sites: [
-    {
-      id: '1',
-      name: 'Google',
-      url: 'https://www.google.com',
-      iconType: 'builtin',
-      icon: '',
-    },
-    {
-      id: '2',
-      name: '百度',
-      url: 'https://www.baidu.com',
-      iconType: 'builtin',
-      icon: '',
-    },
-    {
-      id: '3',
-      name: '淘宝',
-      url: 'https://www.taobao.com',
-      iconType: 'builtin',
-      icon: '',
-    },
-  ],
+  sites: [],
 };

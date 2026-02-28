@@ -242,10 +242,6 @@
     "message": "JSONP",
     "description": "JSONP option"
   },
-  "liquidGlass": {
-    "message": "Liquid Glass",
-    "description": "Name of an icon pack"
-  },
   "localIcon": {
     "message": "Local Icon",
     "description": "Option for local icon type"

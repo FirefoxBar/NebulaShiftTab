@@ -1,0 +1,390 @@
+{
+  "extName": {
+    "message": "Nebula Shift Tab",
+    "description": "Extension name"
+  },
+  "description": {
+    "message": "A lightweight new tab",
+    "description": "Extension description"
+  },
+  "editSite": {
+    "message": "Edit Site",
+    "description": "Edit site button text"
+  },
+  "addSite": {
+    "message": "Add Site",
+    "description": "Add site button text"
+  },
+  "siteManagement": {
+    "message": "Site Management",
+    "description": "Site management section title"
+  },
+  "add": {
+    "message": "Add",
+    "description": "Add button text"
+  },
+  "deleteSite": {
+    "message": "Delete Site",
+    "description": "Delete site dialog title"
+  },
+  "confirmDeleteSite": {
+    "message": "Are you sure you want to delete \"$name$\"?",
+    "description": "Confirm deletion message for site",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Example Site Name"
+      }
+    }
+  },
+  "edit": {
+    "message": "Edit",
+    "description": "Edit button text"
+  },
+  "delete": {
+    "message": "Delete",
+    "description": "Delete button text"
+  },
+  "editSearchEngine": {
+    "message": "Edit Search Engine",
+    "description": "Edit search engine dialog title"
+  },
+  "addSearchEngine": {
+    "message": "Add Search Engine",
+    "description": "Add search engine dialog title"
+  },
+  "searchManagement": {
+    "message": "Search Management",
+    "description": "Search management section title"
+  },
+  "deleteSearchEngine": {
+    "message": "Delete Search Engine",
+    "description": "Delete search engine dialog title"
+  },
+  "confirmDeleteSearchEngine": {
+    "message": "Are you sure you want to delete \"$name$\"?",
+    "description": "Confirm deletion message for search engine",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Example Search Engine Name"
+      }
+    }
+  },
+  "name": {
+    "message": "Name",
+    "description": "Label for name field"
+  },
+  "url": {
+    "message": "URL",
+    "description": "Label for URL field"
+  },
+  "enterSiteName": {
+    "message": "Please enter site name",
+    "description": "Placeholder for site name input"
+  },
+  "invalidUrl": {
+    "message": "Please enter a valid URL",
+    "description": "Error message for invalid URL"
+  },
+  "enterSiteUrl": {
+    "message": "Please enter site URL",
+    "description": "Placeholder for site URL input"
+  },
+  "iconType": {
+    "message": "Icon Type",
+    "description": "Label for icon type selection"
+  },
+  "selectIconType": {
+    "message": "Please select icon type",
+    "description": "Placeholder for icon type selection"
+  },
+  "builtinIcon": {
+    "message": "Built-in Icon",
+    "description": "Option for built-in icon type"
+  },
+  "autoFetch": {
+    "message": "Auto Fetch",
+    "description": "Option for auto fetch icon type"
+  },
+  "localIcon": {
+    "message": "Local Icon",
+    "description": "Option for local icon type"
+  },
+  "custom": {
+    "message": "Custom",
+    "description": "Option for custom icon type"
+  },
+  "customIconUrl": {
+    "message": "Custom Icon URL",
+    "description": "Label for custom icon URL field"
+  },
+  "enterUrl": {
+    "message": "Please enter URL",
+    "description": "Error message for missing URL"
+  },
+  "validUrlRequired": {
+    "message": "Please enter a valid URL",
+    "description": "Error message for invalid URL"
+  },
+  "selectIcon": {
+    "message": "Select Icon",
+    "description": "Label for icon selection"
+  },
+  "selectImageFile": {
+    "message": "Select Image File",
+    "description": "Button text for selecting image file"
+  },
+  "cancel": {
+    "message": "Cancel",
+    "description": "Cancel button text"
+  },
+  "save": {
+    "message": "Save",
+    "description": "Save button text"
+  },
+  "searchUrl": {
+    "message": "Search URL",
+    "description": "Label for search URL field"
+  },
+  "searchUrlPlaceholder": {
+    "message": "Enter search URL, use {{q}} as placeholder for keywords",
+    "description": "Placeholder for search URL field"
+  },
+  "enterSearchUrl": {
+    "message": "Please enter search URL",
+    "description": "Validation message for search URL"
+  },
+  "searchUrlRequiresPlaceholder": {
+    "message": "Search URL must contain {{q}} as keyword placeholder",
+    "description": "Validation message for search URL placeholder"
+  },
+  "suggestionUrl": {
+    "message": "Suggestion URL",
+    "description": "Label for suggestion URL field"
+  },
+  "suggestionType": {
+    "message": "Suggestion Type",
+    "description": "Label for suggestion type selection"
+  },
+  "selectSuggestionType": {
+    "message": "Please select suggestion type (optional)",
+    "description": "Placeholder for suggestion type selection"
+  },
+  "json": {
+    "message": "JSON",
+    "description": "JSON option"
+  },
+  "jsonp": {
+    "message": "JSONP",
+    "description": "JSONP option"
+  },
+  "extractionPath": {
+    "message": "Extraction Path (using JSONata expression)",
+    "description": "Label for extraction path field"
+  },
+  "enterExtractionPath": {
+    "message": "Please enter path to extract search suggestions",
+    "description": "Placeholder for extraction path field"
+  },
+  "enterSearchEngineName": {
+    "message": "Please enter search engine name",
+    "description": "Placeholder for search engine name input"
+  },
+  "backgroundType": {
+    "message": "Background Type",
+    "description": "Label for background type selection"
+  },
+  "selectBackgroundType": {
+    "message": "Select background type",
+    "description": "Placeholder for background type selection"
+  },
+  "builtinWallpaper": {
+    "message": "Built-in Wallpaper",
+    "description": "Option for built-in wallpaper"
+  },
+  "localImage": {
+    "message": "Local Image",
+    "description": "Option for local image"
+  },
+  "backgroundDarkness": {
+    "message": "Background Darkness",
+    "description": "Label for background darkness setting"
+  },
+  "higherValueDarker": {
+    "message": "Higher value is darker",
+    "description": "Description for background darkness setting"
+  },
+  "selectBuiltinWallpaper": {
+    "message": "Select built-in wallpaper",
+    "description": "Placeholder for builtin wallpaper selection"
+  },
+  "selectImage": {
+    "message": "Select Image",
+    "description": "Button text for selecting image"
+  },
+  "configure": {
+    "message": "Configure",
+    "description": "Button text for configuring custom background"
+  },
+  "customBackground": {
+    "message": "Custom Background",
+    "description": "Title for custom background configuration"
+  },
+  "darkMode": {
+    "message": "Dark Mode",
+    "description": "Label for dark mode setting"
+  },
+  "selectDarkMode": {
+    "message": "Select dark mode setting",
+    "description": "Placeholder for dark mode selection"
+  },
+  "followSystem": {
+    "message": "Follow System",
+    "description": "Option for following system dark mode setting"
+  },
+  "on": {
+    "message": "On",
+    "description": "Option for enabling dark mode"
+  },
+  "off": {
+    "message": "Off",
+    "description": "Option for disabling dark mode"
+  },
+  "iconPack": {
+    "message": "Icon Pack",
+    "description": "Label for icon pack setting"
+  },
+  "selectIconPack": {
+    "message": "Select icon pack",
+    "description": "Placeholder for icon pack selection"
+  },
+  "iconProvider": {
+    "message": "Icon Provider",
+    "description": "Label for icon provider setting"
+  },
+  "whenAutoSelected": {
+    "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
+    "description": "Description for icon provider setting"
+  },
+  "selectIconProvider": {
+    "message": "Select icon provider",
+    "description": "Placeholder for icon provider selection"
+  },
+  "liquidGlass": {
+    "message": "Liquid Glass",
+    "description": "Name of an icon pack"
+  },
+  "settings": {
+    "message": "Settings",
+    "description": "Title for settings panel"
+  },
+  "importExport": {
+    "message": "Import and Export",
+    "description": "Tab label for import/export section"
+  },
+  "generalSettings": {
+    "message": "General Settings",
+    "description": "Tab label for general settings"
+  },
+  "backgroundSettings": {
+    "message": "Background Settings",
+    "description": "Tab label for background settings"
+  },
+  "failedToGetSuggestions": {
+    "message": "Failed to get search suggestions",
+    "description": "Error message when failing to get search suggestions"
+  },
+  "enterSearchKeywords": {
+    "message": "Enter search keywords...",
+    "description": "Placeholder for search input field"
+  },
+  "apiOrImageAddress": {
+    "message": "{type} Address",
+    "description": "Dynamic label for API or image address"
+  },
+  "pleaseEnterAddressMsg": {
+    "message": "Please enter address",
+    "description": "Message for requiring address input"
+  },
+  "pleaseEnterValidURLMsg": {
+    "message": "Please enter a valid URL",
+    "description": "Message for requiring valid URL"
+  },
+  "extractionExpression": {
+    "message": "Extraction Expression",
+    "description": "Label for extraction expression"
+  },
+  "enterJSONAtaPath": {
+    "message": "Enter JSONAta path expression",
+    "description": "Placeholder for JSONAta path input"
+  },
+  "type": {
+    "message": "Type",
+    "description": "Label for type selection"
+  },
+  "pleaseSelect": {
+    "message": "Please select",
+    "description": "Message for requiring selection"
+  },
+  "refreshFrequency": {
+    "message": "Refresh Frequency",
+    "description": "Label for refresh frequency"
+  },
+  "never": {
+    "message": "Never",
+    "description": "Option for never refreshing"
+  },
+  "daily": {
+    "message": "Daily",
+    "description": "Option for daily refresh"
+  },
+  "everyXMinutes": {
+    "message": "Every $num$ minutes",
+    "description": "Template for refresh interval every num minutes",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "everyXHours": {
+    "message": "Every $num$ hours",
+    "description": "Template for refresh interval every num hours",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "image": {
+    "message": "Image",
+    "description": "Label for image option"
+  },
+  "selectRefreshFrequency": {
+    "message": "Select refresh frequency",
+    "description": "Placeholder for refresh frequency selection"
+  },
+  "importBackup": {
+    "message": "Import Backup",
+    "description": "Title for import backup modal"
+  },
+  "importWillOverrideSettings": {
+    "message": "Importing backup will overwrite current settings",
+    "description": "Description for import warning"
+  },
+  "continueImport": {
+    "message": "Continue Import",
+    "description": "Button text for continuing import"
+  },
+  "backupToFile": {
+    "message": "Backup to File",
+    "description": "Button text for backing up to file"
+  },
+  "restoreFromFile": {
+    "message": "Restore from File",
+    "description": "Button text for restoring from file"
+  }
+}

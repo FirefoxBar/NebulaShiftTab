@@ -13,6 +13,7 @@ import {
   SiteIconContext,
   useSiteIconContext,
 } from '@/components/site-icon-context';
+import { t } from '@/share/locale';
 import type { SiteItem } from '@/share/types';
 
 import './SiteEditForm.less';
@@ -34,32 +35,32 @@ const IconField = () => {
   return (
     <div className="form-icon">
       <div>
-        <Form.Slot label="图标类型">
+        <Form.Slot label={t('iconType')}>
           <Select
-            placeholder="请选择图标类型"
+            placeholder={t('selectIconType')}
             value={iconType}
             onChange={v => formApi.setValue('iconType', v as string)}
           >
-            <Select.Option value="builtin">内置图标</Select.Option>
-            <Select.Option value="auto">自动获取</Select.Option>
-            <Select.Option value="local">本地图标</Select.Option>
-            <Select.Option value="custom">自定义</Select.Option>
+            <Select.Option value="builtin">{t('builtinIcon')}</Select.Option>
+            <Select.Option value="auto">{t('autoFetch')}</Select.Option>
+            <Select.Option value="local">{t('localIcon')}</Select.Option>
+            <Select.Option value="custom">{t('custom')}</Select.Option>
           </Select>
         </Form.Slot>
 
         {iconType === 'custom' && (
           <Form.Input
-            label="自定义图标地址"
+            label={t('customIconUrl')}
             field="icon"
             rules={[
-              { required: true, message: '请输入地址' },
-              { type: 'url', message: '请输入有效的URL' },
+              { required: true, message: t('enterUrl') },
+              { type: 'url', message: t('validUrlRequired') },
             ]}
           />
         )}
 
         {iconType === 'local' && (
-          <Form.Slot label="选择图标">
+          <Form.Slot label={t('selectIcon')}>
             <Upload
               showUploadList={false}
               accept="image/*"
@@ -75,7 +76,7 @@ const IconField = () => {
               action=""
             >
               <Button icon={<IconUpload />} theme="light">
-                选择图片文件
+                {t('selectImageFile')}
               </Button>
             </Upload>
           </Form.Slot>
@@ -110,16 +111,16 @@ export const SiteEditForm: React.FC<SiteEditFormProps> = ({
     >
       <Form.Input
         field="name"
-        label="名称"
-        placeholder="请输入站点名称"
-        rules={[{ required: true, message: '请输入站点名称' }]}
+        label={t('name')}
+        placeholder={t('enterSiteName')}
+        rules={[{ required: true, message: t('enterSiteName') }]}
       />
       <Form.Input
         field="url"
-        label="网址"
-        placeholder="请输入站点网址"
+        label={t('url')}
+        placeholder={t('enterSiteUrl')}
         rules={[
-          { required: true, message: '请输入站点网址' },
+          { required: true, message: t('enterSiteUrl') },
           {
             validator: (_rule: any, value: any) => {
               const urlPattern =
@@ -127,7 +128,7 @@ export const SiteEditForm: React.FC<SiteEditFormProps> = ({
               if (!value || urlPattern.test(value)) {
                 return true;
               } else {
-                return new Error('请输入有效的网址');
+                return new Error(t('invalidUrl'));
               }
             },
           },
@@ -138,10 +139,10 @@ export const SiteEditForm: React.FC<SiteEditFormProps> = ({
 
       <div className="footer">
         <Button onClick={onCancel} type="tertiary">
-          取消
+          {t('cancel')}
         </Button>
         <Button htmlType="submit" type="primary" theme="solid">
-          保存
+          {t('save')}
         </Button>
       </div>
     </Form>

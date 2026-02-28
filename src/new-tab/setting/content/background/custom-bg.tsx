@@ -1,6 +1,7 @@
 import { Button, Form, Select, useFieldState } from '@douyinfe/semi-ui';
 import { nanoid } from 'nanoid';
 import React from 'react';
+import { t } from '@/share/locale';
 import type { BackgroundItem } from '@/share/types';
 
 interface CustomBgProps {
@@ -19,10 +20,12 @@ const URLInput = () => {
   return (
     <Form.Input
       field="url"
-      label={`${type === 'api' ? 'API' : '图片'}地址`}
+      label={t('apiOrImageAddress', {
+        type: type === 'api' ? 'API' : t('image'),
+      })}
       rules={[
-        { required: true, message: '请输入地址' },
-        { type: 'url', message: '请输入有效的URL' },
+        { required: true, message: t('pleaseEnterAddressMsg') },
+        { type: 'url', message: t('pleaseEnterValidURLMsg') },
       ]}
     />
   );
@@ -38,8 +41,8 @@ const ExtractInput = () => {
   return (
     <Form.Input
       field="extract"
-      label="提取表达式"
-      placeholder="输入 JSONAta 路径表达式"
+      label={t('extractionExpression')}
+      placeholder={t('enterJSONAtaPath')}
     />
   );
 };
@@ -82,37 +85,37 @@ export const CustomBg: React.FC<CustomBgProps> = ({
     >
       <Form.RadioGroup
         field="type"
-        label="类型"
-        rules={[{ required: true, message: '请选择' }]}
+        label={t('type')}
+        rules={[{ required: true, message: t('pleaseSelect') }]}
         options={[
           { label: 'API', value: 'api' },
-          { label: '图片', value: 'image' },
+          { label: t('image'), value: 'image' },
         ]}
       />
       <Form.Select
         field="refresh"
-        label="刷新频率"
-        placeholder="选择刷新频率"
-        rules={[{ required: true, message: '请选择刷新频率' }]}
+        label={t('refreshFrequency')}
+        placeholder={t('selectRefreshFrequency')}
+        rules={[{ required: true, message: t('pleaseSelect') }]}
       >
-        <Select.Option value={0}>从不</Select.Option>
-        <Select.Option value="new-day">每天</Select.Option>
-        <Select.Option value={1}>每1分钟</Select.Option>
-        <Select.Option value={5}>每5分钟</Select.Option>
-        <Select.Option value={10}>每10分钟</Select.Option>
-        <Select.Option value={30}>每30分钟</Select.Option>
-        <Select.Option value={60}>每小时</Select.Option>
-        <Select.Option value={120}>每2小时</Select.Option>
-        <Select.Option value={240}>每4小时</Select.Option>
-        <Select.Option value={480}>每8小时</Select.Option>
-        <Select.Option value={720}>每12小时</Select.Option>
-        <Select.Option value={1440}>每24小时</Select.Option>
+        <Select.Option value={0}>{t('never')}</Select.Option>
+        <Select.Option value="new-day">{t('daily')}</Select.Option>
+        <Select.Option value={1}>{t('everyXMinutes', '1')}</Select.Option>
+        <Select.Option value={5}>{t('everyXMinutes', '5')}</Select.Option>
+        <Select.Option value={10}>{t('everyXMinutes', '10')}</Select.Option>
+        <Select.Option value={30}>{t('everyXMinutes', '30')}</Select.Option>
+        <Select.Option value={60}>{t('everyXHours', '1')}</Select.Option>
+        <Select.Option value={120}>{t('everyXHours', '2')}</Select.Option>
+        <Select.Option value={240}>{t('everyXHours', '4')}</Select.Option>
+        <Select.Option value={480}>{t('everyXHours', '8')}</Select.Option>
+        <Select.Option value={720}>{t('everyXHours', '12')}</Select.Option>
+        <Select.Option value={1440}>{t('everyXHours', '24')}</Select.Option>
       </Form.Select>
       <URLInput />
       <ExtractInput />
       <div className="footer">
         <Button type="tertiary" onClick={onCancel}>
-          取消
+          {t('cancel')}
         </Button>
         <Button
           htmlType="submit"
@@ -120,7 +123,7 @@ export const CustomBg: React.FC<CustomBgProps> = ({
           theme="solid"
           style={{ marginRight: 8 }}
         >
-          保存
+          {t('save')}
         </Button>
       </div>
     </Form>

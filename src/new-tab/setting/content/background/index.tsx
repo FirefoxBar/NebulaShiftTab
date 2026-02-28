@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 import Modal from '@/components/modal';
 import usePref from '@/hooks/use-pref';
 import { DefaultBackgroundEngines, StorageKey } from '@/share/constant';
+import { t } from '@/share/locale';
 import type { PrefValue } from '@/share/types';
 import { CustomBg } from './custom-bg';
 
@@ -56,19 +57,23 @@ export const BackgroundSetting: React.FC = () => {
         <List.Item
           main={
             <div className="list-item">
-              <Typography.Text className="title">背景类型</Typography.Text>
+              <Typography.Text className="title">
+                {t('backgroundType')}
+              </Typography.Text>
             </div>
           }
           extra={
             <Select
               value={type}
-              placeholder="选择背景类型"
+              placeholder={t('selectBackgroundType')}
               onChange={v => setType(v as BackgroundType)}
               style={{ width: '150px' }}
             >
-              <Select.Option value="builtin">内置壁纸</Select.Option>
-              <Select.Option value="image">本地图片</Select.Option>
-              <Select.Option value="custom">自定义</Select.Option>
+              <Select.Option value="builtin">
+                {t('builtinWallpaper')}
+              </Select.Option>
+              <Select.Option value="image">{t('localImage')}</Select.Option>
+              <Select.Option value="custom">{t('custom')}</Select.Option>
             </Select>
           }
         />
@@ -77,13 +82,15 @@ export const BackgroundSetting: React.FC = () => {
           <List.Item
             main={
               <div className="list-item">
-                <Typography.Text className="title">内置壁纸</Typography.Text>
+                <Typography.Text className="title">
+                  {t('builtinWallpaper')}
+                </Typography.Text>
               </div>
             }
             extra={
               <Select
                 value={background.key}
-                placeholder="选择内置壁纸"
+                placeholder={t('selectBuiltinWallpaper')}
                 onChange={v =>
                   updateBackground({ type: 'builtin', key: v as string })
                 }
@@ -103,7 +110,9 @@ export const BackgroundSetting: React.FC = () => {
           <List.Item
             main={
               <div className="list-item">
-                <Typography.Text className="title">本地图片</Typography.Text>
+                <Typography.Text className="title">
+                  {t('localImage')}
+                </Typography.Text>
               </div>
             }
             extra={
@@ -115,7 +124,7 @@ export const BackgroundSetting: React.FC = () => {
                   onSuccess('success');
                 }}
               >
-                <Button>选择图片</Button>
+                <Button>{t('selectImage')}</Button>
               </Upload>
             }
           />
@@ -125,14 +134,16 @@ export const BackgroundSetting: React.FC = () => {
           <List.Item
             main={
               <div className="list-item">
-                <Typography.Text className="title">自定义背景</Typography.Text>
+                <Typography.Text className="title">
+                  {t('customBackground')}
+                </Typography.Text>
               </div>
             }
             extra={
               <Button
                 onClick={() => {
                   const m = Modal.info({
-                    title: '自定义背景',
+                    title: t('customBackground'),
                     content: (
                       <CustomBg
                         initialValue={background.value}
@@ -150,7 +161,7 @@ export const BackgroundSetting: React.FC = () => {
                   });
                 }}
               >
-                配置
+                {t('configure')}
               </Button>
             }
           />
@@ -159,9 +170,11 @@ export const BackgroundSetting: React.FC = () => {
         <List.Item
           main={
             <div className="list-item">
-              <Typography.Text className="title">背景变暗</Typography.Text>
+              <Typography.Text className="title">
+                {t('backgroundDarkness')}
+              </Typography.Text>
               <Typography.Text type="quaternary" className="content">
-                数值越大越暗
+                {t('higherValueDarker')}
               </Typography.Text>
             </div>
           }

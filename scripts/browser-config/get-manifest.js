@@ -1,12 +1,14 @@
 const extensionConfig = require('../../extension.json');
 
 const baseManifest = {
+  name: '__MSG_extName__',
+  description: '__MSG_description__',
+  version: '1.0.0',
   background: {},
   chrome_url_overrides: {
     newtab: 'new-tab.html',
   },
   homepage_url: 'https://team.firefoxcn.net',
-  description: 'Nebula Shift Tab',
   icons: {
     16: 'icons/logo.png',
     32: 'icons/logo.png',
@@ -14,9 +16,7 @@ const baseManifest = {
     128: 'icons/logo.png',
   },
   manifest_version: 3,
-  name: 'Nebula Shift Tab',
   permissions: ['storage', 'alarms', 'unlimitedStorage'],
-  version: '1.0.0',
   host_permissions: ['*://*/*'],
 };
 

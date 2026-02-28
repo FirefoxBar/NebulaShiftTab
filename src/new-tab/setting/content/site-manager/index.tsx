@@ -16,12 +16,13 @@ import {
   useSiteIconContext,
 } from '@/components/site-icon-context';
 import usePref from '@/hooks/use-pref';
+import { StorageKey } from '@/share/constant';
+import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import type { SiteItem } from '@/share/types';
 import { SiteEditForm } from './SiteEditForm';
 
 import './index.less';
-import { StorageKey } from '@/share/constant';
 
 // 拖拽项组件
 const SortableItem = ({
@@ -67,14 +68,14 @@ const SortableItem = ({
         </div>
         <div className="item-actions">
           <Button size="small" onClick={() => handleEditSite(item)}>
-            编辑
+            {t('edit')}
           </Button>
           <Button
             size="small"
             type="danger"
             onClick={() => handleDeleteSite(item.id)}
           >
-            删除
+            {t('delete')}
           </Button>
         </div>
       </div>
@@ -107,8 +108,8 @@ export const SitesManager: React.FC = () => {
       return;
     }
     Modal.warning({
-      title: '删除站点',
-      content: `确定要删除 "${newSites[index].name}" 吗？`,
+      title: t('deleteSite'),
+      content: t('confirmDeleteSite', newSites[index].name),
       onOk: () => {
         chrome.storage.local.remove(`${StorageKey.siteIcon}_${id}`);
         newSites.splice(index, 1);
@@ -184,7 +185,7 @@ export const SitesManager: React.FC = () => {
   return (
     <div className="sites-manager-container">
       <Modal
-        title={editingSite?.id ? '编辑站点' : '添加站点'}
+        title={editingSite?.id ? t('editSite') : t('addSite')}
         visible={isModalOpen}
         footer={null}
         onCancel={handleCancelEdit}
@@ -201,10 +202,10 @@ export const SitesManager: React.FC = () => {
 
       <div className="header">
         <Typography.Title heading={6}>
-          站点管理 ({sites.length})
+          {t('siteManagement')} ({sites.length})
         </Typography.Title>
         <Button icon={<IconPlus />} onClick={handleAddSite}>
-          添加
+          {t('add')}
         </Button>
       </div>
 

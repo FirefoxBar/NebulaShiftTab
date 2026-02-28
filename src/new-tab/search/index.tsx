@@ -2,6 +2,7 @@ import { useRequest } from 'ahooks';
 import type React from 'react';
 import { useRef, useState } from 'react';
 import usePref from '@/hooks/use-pref';
+import { t } from '@/share/locale';
 import type { SearchItem } from '@/share/types';
 import { createJsonAta, extractData, parseJsonp } from '@/share/utils';
 import { SearchIcon } from './search-icon';
@@ -54,7 +55,7 @@ export const Search: React.FC = () => {
       );
 
       if (!response.ok) {
-        throw new Error('获取搜索建议失败');
+        throw new Error(t('failedToGetSuggestions'));
       }
 
       let data: any;
@@ -181,7 +182,7 @@ export const Search: React.FC = () => {
           onKeyDown={handleKeyDown}
           onFocus={() => setActive(true)}
           onBlur={() => setTimeout(() => setActive(false), 150)}
-          placeholder="输入搜索关键词..."
+          placeholder={t('enterSearchKeywords')}
           className="search-input"
         />
         <button

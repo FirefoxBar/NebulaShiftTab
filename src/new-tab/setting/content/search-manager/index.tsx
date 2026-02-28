@@ -19,6 +19,7 @@ import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import usePref from '@/hooks/use-pref';
 import { DefaultSearchEngines } from '@/share/constant';
+import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import type { SearchItem } from '@/share/types';
 import { SearchEditForm } from './SearchEditForm';
@@ -63,14 +64,14 @@ const SortableItem = ({
         <div className="item-info">{item.name}</div>
         <div className="item-actions">
           <Button size="small" onClick={() => handleEditSearch(item)}>
-            编辑
+            {t('edit')}
           </Button>
           <Button
             size="small"
             type="danger"
             onClick={() => handleDeleteSearch(item.key)}
           >
-            删除
+            {t('delete')}
           </Button>
         </div>
       </div>
@@ -103,8 +104,8 @@ export const SearchManager: React.FC = () => {
       return;
     }
     Modal.warning({
-      title: '删除搜索引擎',
-      content: `确定要删除 "${newSearches[index].name}" 吗？`,
+      title: t('deleteSearchEngine'),
+      content: t('confirmDeleteSearchEngine', newSearches[index].name),
       onOk: () => {
         newSearches.splice(index, 1);
         setSearches(newSearches);
@@ -164,7 +165,9 @@ export const SearchManager: React.FC = () => {
   return (
     <div className="searches-manager-container">
       <Modal
-        title={editingSearch?.key ? '编辑搜索引擎' : '添加搜索引擎'}
+        title={
+          editingSearch?.key ? t('editSearchEngine') : t('addSearchEngine')
+        }
         visible={isModalOpen}
         footer={null}
         onCancel={handleCancelEdit}
@@ -181,11 +184,11 @@ export const SearchManager: React.FC = () => {
 
       <div className="header">
         <Typography.Title heading={6}>
-          搜索管理 ({searches.length})
+          {t('searchManagement')} ({searches.length})
         </Typography.Title>
         <SplitButtonGroup>
           <Button icon={<IconPlus />} onClick={handleAddSearch}>
-            添加
+            {t('add')}
           </Button>
           <Dropdown
             menu={DefaultSearchEngines.map(x => ({

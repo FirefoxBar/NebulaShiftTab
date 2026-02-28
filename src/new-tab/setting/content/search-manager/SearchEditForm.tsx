@@ -1,4 +1,5 @@
 import { Button, Form, Select } from '@douyinfe/semi-ui';
+import { t } from '@/share/locale';
 import type { SearchItem } from '@/share/types';
 
 import './SearchEditForm.less';
@@ -32,20 +33,20 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
     >
       <Form.Input
         field="name"
-        label="名称"
-        placeholder="请输入搜索引擎名称"
-        rules={[{ required: true, message: '请输入搜索引擎名称' }]}
+        label={t('name')}
+        placeholder={t('enterSearchEngineName')}
+        rules={[{ required: true, message: t('enterSearchEngineName') }]}
       />
       <Form.Input
         field="url"
-        label="搜索地址"
-        placeholder="输入搜索地址，使用 {{q}} 表示关键词占位符"
+        label={t('searchUrl')}
+        placeholder={t('searchUrlPlaceholder')}
         rules={[
-          { required: true, message: '请输入搜索地址' },
+          { required: true, message: t('enterSearchUrl') },
           {
             validator: (_rule: any, value: any) => {
               if (!value.includes('{{q}}')) {
-                return new Error('搜索地址必须包含 {{q}} 关键词占位符');
+                return new Error(t('searchUrlRequiresPlaceholder'));
               }
               const urlPattern =
                 /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
@@ -55,7 +56,7 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
               ) {
                 return true;
               } else {
-                return new Error('请输入有效的网址');
+                return new Error(t('invalidUrl'));
               }
             },
           },
@@ -63,29 +64,29 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
       />
       <Form.Input
         field="suggestion"
-        label="建议地址"
-        placeholder="请输入搜索建议地址（可选）"
+        label={t('suggestionUrl')}
+        placeholder={t('suggestionUrl')}
       />
       <Form.Select
         field="suggestionType"
-        label="建议类型"
-        placeholder="请选择建议类型（可选）"
+        label={t('suggestionType')}
+        placeholder={t('selectSuggestionType')}
       >
-        <Select.Option value="json">JSON</Select.Option>
-        <Select.Option value="jsonp">JSONP</Select.Option>
+        <Select.Option value="json">{t('json')}</Select.Option>
+        <Select.Option value="jsonp">{t('jsonp')}</Select.Option>
       </Form.Select>
       <Form.Input
         field="extractSuggestion"
-        label="提取路径（使用 JSONata 表达式）"
-        placeholder="请输入提取搜索建议的路径"
+        label={t('extractionPath')}
+        placeholder={t('enterExtractionPath')}
       />
 
       <div className="footer">
         <Button onClick={onCancel} type="tertiary">
-          取消
+          {t('cancel')}
         </Button>
         <Button htmlType="submit" type="primary" theme="solid">
-          保存
+          {t('save')}
         </Button>
       </div>
     </Form>

@@ -2,6 +2,7 @@ import { Button, Space } from '@douyinfe/semi-ui';
 import { omit, pick } from 'lodash-es';
 import Modal from '@/components/modal';
 import { StorageKey } from '@/share/constant';
+import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import { getLocalStorage } from '@/share/storage';
 import type { PrefValue } from '@/share/types';
@@ -49,9 +50,9 @@ async function createExport() {
 
 async function doImport() {
   Modal.warning({
-    title: '导入备份',
-    content: '导入备份将会覆盖当前设置',
-    okText: '继续导入',
+    title: t('importBackup'),
+    content: t('importWillOverrideSettings'),
+    okText: t('continueImport'),
     onOk: () => {
       const input = document.createElement('input');
       input.type = 'file';
@@ -92,8 +93,8 @@ export const ExportAndImport = () => {
   return (
     <div className="export-import">
       <Space>
-        <Button onClick={createExport}>备份到文件</Button>
-        <Button onClick={doImport}>从文件恢复</Button>
+        <Button onClick={createExport}>{t('backupToFile')}</Button>
+        <Button onClick={doImport}>{t('restoreFromFile')}</Button>
       </Space>
     </div>
   );

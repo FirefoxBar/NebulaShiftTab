@@ -1,5 +1,6 @@
 import { SideSheet, TabPane, Tabs } from '@douyinfe/semi-ui';
 import type React from 'react';
+import { t } from '@/share/locale';
 import { BackgroundSetting } from './background';
 import { ExportAndImport } from './export-and-import';
 import { GeneralSettings } from './general';
@@ -24,7 +25,7 @@ const SettingContent: React.FC<SettingSideSheetProps> = ({
 
   return (
     <SideSheet
-      title="设置"
+      title={t('settings')}
       placement="right"
       visible={visible}
       onCancel={handleClose}
@@ -32,19 +33,19 @@ const SettingContent: React.FC<SettingSideSheetProps> = ({
       className="setting-drawer"
     >
       <Tabs type="line">
-        <TabPane itemKey="bookmark-management" tab="站点管理">
+        <TabPane itemKey="bookmark-management" tab={t('siteManagement')}>
           <SitesManager />
         </TabPane>
-        <TabPane itemKey="search-management" tab="搜索管理">
+        <TabPane itemKey="search-management" tab={t('searchManagement')}>
           <SearchManager />
         </TabPane>
-        <TabPane itemKey="background-settings" tab="背景设置">
+        <TabPane itemKey="background-settings" tab={t('backgroundSettings')}>
           <BackgroundSetting />
         </TabPane>
-        <TabPane itemKey="general-settings" tab="通用设置">
+        <TabPane itemKey="general-settings" tab={t('generalSettings')}>
           <GeneralSettings />
         </TabPane>
-        <TabPane itemKey="export-and-import" tab="导入和导出">
+        <TabPane itemKey="export-and-import" tab={t('importExport')}>
           <ExportAndImport />
         </TabPane>
       </Tabs>

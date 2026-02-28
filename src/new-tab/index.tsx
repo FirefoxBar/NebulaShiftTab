@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom/client';
-import SemiLocale from '@/components/semi-locale';
 import { StorageKey } from '@/share/constant';
 import { prefs } from '@/share/prefs';
 import { getLocalStorage } from '@/share/storage';
@@ -11,12 +10,10 @@ import './index.less';
 import isDarkMode from '@/share/is-dark-mode';
 
 const Page = () => {
-  return (
-    <SemiLocale>
+  return (<>
       <Search />
       <Sites />
-      <Setting />
-    </SemiLocale>
+      <Setting /></>
   );
 };
 

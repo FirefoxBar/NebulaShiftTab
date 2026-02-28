@@ -1,5 +1,6 @@
 import { SideSheet, TabPane, Tabs } from '@douyinfe/semi-ui';
 import type React from 'react';
+import SemiLocale from '@/components/semi-locale';
 import { t } from '@/share/locale';
 import { BackgroundSetting } from './background';
 import { ExportAndImport } from './export-and-import';
@@ -24,32 +25,34 @@ const SettingContent: React.FC<SettingSideSheetProps> = ({
   };
 
   return (
-    <SideSheet
-      title={t('settings')}
-      placement="right"
-      visible={visible}
-      onCancel={handleClose}
-      height="100%"
-      className="setting-drawer"
-    >
-      <Tabs type="line">
-        <TabPane itemKey="bookmark-management" tab={t('siteManagement')}>
-          <SitesManager />
-        </TabPane>
-        <TabPane itemKey="search-management" tab={t('searchManagement')}>
-          <SearchManager />
-        </TabPane>
-        <TabPane itemKey="background-settings" tab={t('backgroundSettings')}>
-          <BackgroundSetting />
-        </TabPane>
-        <TabPane itemKey="general-settings" tab={t('generalSettings')}>
-          <GeneralSettings />
-        </TabPane>
-        <TabPane itemKey="export-and-import" tab={t('importExport')}>
-          <ExportAndImport />
-        </TabPane>
-      </Tabs>
-    </SideSheet>
+    <SemiLocale>
+      <SideSheet
+        title={t('settings')}
+        placement="right"
+        visible={visible}
+        onCancel={handleClose}
+        height="100%"
+        className="setting-drawer"
+      >
+        <Tabs type="line">
+          <TabPane itemKey="bookmark-management" tab={t('siteManagement')}>
+            <SitesManager />
+          </TabPane>
+          <TabPane itemKey="search-management" tab={t('searchManagement')}>
+            <SearchManager />
+          </TabPane>
+          <TabPane itemKey="background-settings" tab={t('backgroundSettings')}>
+            <BackgroundSetting />
+          </TabPane>
+          <TabPane itemKey="general-settings" tab={t('generalSettings')}>
+            <GeneralSettings />
+          </TabPane>
+          <TabPane itemKey="export-and-import" tab={t('importExport')}>
+            <ExportAndImport />
+          </TabPane>
+        </Tabs>
+      </SideSheet>
+    </SemiLocale>
   );
 };
 

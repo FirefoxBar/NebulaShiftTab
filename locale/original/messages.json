@@ -127,8 +127,8 @@
     "description": "Placeholder for extraction path field"
   },
   "enterJSONAtaPath": {
-    "message": "Enter JSONAta path expression",
-    "description": "Placeholder for JSONAta path input"
+    "message": "Enter JSONata path expression",
+    "description": "Placeholder for JSONata path input"
   },
   "enterSearchEngineName": {
     "message": "Please enter search engine name",

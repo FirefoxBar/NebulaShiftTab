@@ -18,19 +18,16 @@ A lightweight new tab plugin
 | --- | --- |
 | ![Firefox Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/firefox/firefox_16x16.png) Firefox | [Official Download](https://github.com/FirefoxBar/NebulaShiftTab/releases) or [Mozilla Add-ons](https://addons.mozilla.org/zh-CN/firefox/addon/nebula-shift-tab/) |
 | ![Chrome Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/chrome/chrome_16x16.png) Chrome | [Chrome Web Store](https://chrome.google.com/webstore/detail/nebula-shift-tab/ifpdfibcbnbkebbcaenihbfbocncjdhd) |
-| ![Edge Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/edge/edge_16x16.png) Edge | [Edge Addons](https://microsoftedge.microsoft.com/addons/detail/header-editor/afopnekiinpekooejpchnkgfffaeceko) |
+| ![Edge Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/edge/edge_16x16.png) Edge | [Edge Addons](https://microsoftedge.microsoft.com/addons/detail/nebula-shift-tab/loglacfgaifapahekfegphcggaffdohp) |
 
 ## Permissions
 
 Nebula Shift Tab require those permissions:
 
 * `alarms`: Update background images regularly
-
 * `storage`, `unlimitedStorage`: Storage settings
 
 ## How to build
-
-### Build
 
 * Install Node.js 20.x and pnpm 10.x.
 * Clone this project, or download the source code and extract it.
@@ -40,7 +37,7 @@ Nebula Shift Tab require those permissions:
   * For firefox version, run `npm run build:firefox`
 * Find build result at `/dist_*`
 
-#### 图标包 Icon pack
+## 图标包 Icon pack
 
 图标包均来源于第三方，其中：
 

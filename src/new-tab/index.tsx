@@ -10,10 +10,12 @@ import './index.less';
 import isDarkMode from '@/share/is-dark-mode';
 
 const Page = () => {
-  return (<>
+  return (
+    <>
       <Search />
       <Sites />
-      <Setting /></>
+      <Setting />
+    </>
   );
 };
 

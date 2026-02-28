@@ -1,4 +1,4 @@
-import { PrefValue } from '@/share/types';
+import type { PrefValue } from '@/share/types';
 
 export interface BaseBackup {
   version: string;

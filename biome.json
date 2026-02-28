@@ -29,7 +29,11 @@
         "noArrayIndexKey": "warn"
       },
       "correctness": {
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "noUnusedImports": {
+          "level": "info",
+          "fix": "safe"
+        }
       },
       "a11y": {
         "useKeyWithClickEvents": "off",

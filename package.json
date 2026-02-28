@@ -84,7 +84,6 @@
       "core-js"
     ],
     "onlyBuiltDependencies": [
-      "puppeteer",
       "simple-git-hooks",
       "spawn-sync"
     ]

@@ -3,8 +3,7 @@ import { StorageKey } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import { getLocalStorage } from '@/share/storage';
-import type { PrefValue } from '@/share/types';
-import { BackupV1 } from './types';
+import type { BackupV1 } from './types';
 
 async function createExport() {
   const pref = prefs.getAll();

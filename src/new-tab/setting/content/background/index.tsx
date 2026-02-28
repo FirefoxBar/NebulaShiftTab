@@ -6,7 +6,8 @@ import {
   Typography,
   Upload,
 } from '@douyinfe/semi-ui';
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
 import Modal from '@/components/modal';
 import usePref from '@/hooks/use-pref';
 import { DefaultBackgroundEngines, StorageKey } from '@/share/constant';

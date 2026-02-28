@@ -1,5 +1,5 @@
 import isEqual from 'fast-deep-equal';
-import { debounce, throttle } from 'lodash-es';
+import { debounce } from 'lodash-es';
 import { defaultPrefValue } from './constant';
 import emitter from './emitter';
 import { getSyncStorage } from './storage';

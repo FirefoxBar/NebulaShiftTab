@@ -1,7 +1,7 @@
 import { useRequest } from 'ahooks';
 import jsonata from 'jsonata';
 import { random } from 'lodash-es';
-import { FC, useState } from 'react';
+import { type FC, useState } from 'react';
 import './JSONAtaTest.css';
 
 const createJsonAta = (expr: string) => {

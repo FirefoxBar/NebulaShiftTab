@@ -1,6 +1,6 @@
 import { Button, Form, Select, useFieldState } from '@douyinfe/semi-ui';
 import { nanoid } from 'nanoid';
-import React from 'react';
+import type React from 'react';
 import { t } from '@/share/locale';
 import type { BackgroundItem } from '@/share/types';
 

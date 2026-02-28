@@ -4,7 +4,7 @@ import { StorageKey } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import type { PrefValue } from '@/share/types';
-import { BackupV1, BaseBackup } from './types';
+import type { BackupV1, BaseBackup } from './types';
 
 async function doImport() {
   Modal.warning({

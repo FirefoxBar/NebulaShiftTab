@@ -32,8 +32,7 @@
     "description": "Confirm deletion message for site",
     "placeholders": {
       "name": {
-        "content": "$1",
-        "example": "Example Site Name"
+        "content": "$1"
       }
     }
   },

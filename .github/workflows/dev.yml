@@ -123,6 +123,8 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 20
+    - name: Install base dependencies
+      run: pnpm i --frozen-lockfile
     - name: Install dependencies
       run: |
         cd $GITHUB_WORKSPACE/docs

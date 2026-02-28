@@ -1,0 +1,32 @@
+.jsonata-test {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jsonata-test textarea,
+.jsonata-test input[type="text"] {
+  border: 1px solid var(--rp-c-bg-mute);
+  border-radius: var(--rp-radius-small);
+  padding: 12px;
+  outline: none;
+}
+
+.jsonata-test textarea:focus,
+.jsonata-test input[type="text"]:focus {
+  border-color: var(--rp-c-brand);
+}
+
+.jsonata-test .result {
+  border-radius: var(--rp-radius-small);
+  background-color: var(--rp-c-bg-mute);
+}
+
+.jsonata-test .result > .content {
+  padding: 12px;
+}
+
+.jsonata-test .result > .title {
+  padding: 12px;
+  border-bottom: 1px solid var(--rp-c-divider);
+}

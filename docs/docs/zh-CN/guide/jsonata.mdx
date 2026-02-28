@@ -1,0 +1,104 @@
+---
+title: JSONAta 表达式
+---
+
+import JSONAtaTest from "../../../components/JSONAtaTest.tsx";
+
+## JSONata 基础教程
+
+JSONata 是一种轻量级的查询和转换语言，专为 JSON 数据设计。
+
+### 1. 基础语法
+
+#### 访问字段
+
+```plaintext
+name          // 访问当前对象的 name 字段
+user.name     // 访问嵌套字段
+```
+
+#### 数组操作
+
+```plaintext
+items[0]              // 访问第一个元素
+items[name = "Alice"] // 过滤数组
+items.name            // 提取所有元素的 name 字段（自动映射）
+```
+
+### 2. 常用运算符
+
+| 类型   | 示例                           | 说明       |
+| ------ | ------------------------------ | ---------- |
+| 比较   | `price > 100`                  | 大于       |
+| 逻辑   | `active and price < 50`        | 与         |
+| 字符串 | `"Hello " & name`              | 拼接       |
+| 算术   | `quantity * price`             | 乘法       |
+| 条件   | `status = "ok" ? "Yes" : "No"` | 三元表达式 |
+
+### 3. 内置函数
+
+```plaintext
+$length(name)           // 字符串长度
+$substring(name, 0, 3)  // 截取子串
+$join(names, ", ")      // 数组合并为字符串
+$sum(prices)            // 求和
+$average(scores)        // 平均值
+$count(items)           // 计数
+$sort(items, function($v){$v.price}) // 排序
+```
+
+### 4. 变量与上下文
+
+- `$` 表示当前上下文
+- 自定义变量：`$myVar := expression; $myVar * 2`
+- 环境传入变量可在表达式中直接使用（如 Node-RED 中的 `msg.payload`）
+
+### 5. Nebula Shift Tab 扩展函数
+
+为方便使用，Nebula Shift Tab 提供了一些额外函数，以简化一些场景下的操作。
+
+```plaintext
+$array_rand(items)      // 随机返回一个数组元素
+$json_decode(item)      // 将 JSON 字符串解析为对象
+$rand(min, max)         // 随机生成一个整数
+```
+
+### 6. 演示
+
+输入：
+
+```json
+{
+  "order": {
+    "id": "123",
+    "items": [
+      { "name": "Apple", "price": 1.2, "qty": 3 },
+      { "name": "Banana", "price": 0.8, "qty": 5 }
+    ]
+  }
+}
+```
+
+JSONata 表达式：
+
+```plaintext
+$array_rand($.order.items).name
+```
+
+输出结果：`Apple` 或 `Banana`
+
+### 7. 学习资源
+
+您可以在[官方文档](https://docs.jsonata.org/overview.html)中学习更完整的 JSONAta 语法
+
+## 在线测试
+
+<JSONAtaTest
+  lang={{
+    inputData: "输入测试数据，如 { \"data\": 123 }",
+    inputExpr: "输入 JSONata 表达式，如 $.data + 1",
+    executing: "正在运行...",
+    error: "运行错误",
+    result: "运行结果",
+  }}
+/>

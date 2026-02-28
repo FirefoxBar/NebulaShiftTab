@@ -1,0 +1,104 @@
+---
+title: JSONata Expressions
+---
+
+import JSONAtaTest from "../../../components/JSONAtaTest.tsx";
+
+## JSONata Basics Tutorial
+
+JSONata is a lightweight query and transformation language designed specifically for JSON data.
+
+### 1. Basic Syntax
+
+#### Accessing Fields
+
+```plaintext
+name          // Access the 'name' field of the current object
+user.name     // Access a nested field
+```
+
+#### Array Operations
+
+```plaintext
+items[0]              // Access the first element
+items[name = "Alice"] // Filter the array
+items.name            // Extract the 'name' field from all elements (automatic mapping)
+```
+
+### 2. Common Operators
+
+| Type       | Example                        | Description           |
+| ---------- | ------------------------------ | --------------------- |
+| Comparison | `price > 100`                  | Greater than          |
+| Logical    | `active and price < 50`        | Logical AND           |
+| String     | `"Hello " & name`              | Concatenation         |
+| Arithmetic | `quantity * price`             | Multiplication        |
+| Conditional| `status = "ok" ? "Yes" : "No"` | Ternary expression    |
+
+### 3. Built-in Functions
+
+```plaintext
+$length(name)                         // String length
+$substring(name, 0, 3)                // Extract substring
+$join(names, ", ")                    // Join array into a string
+$sum(prices)                          // Summation
+$average(scores)                      // Average
+$count(items)                         // Count
+$sort(items, function($v){$v.price})  // Sort
+```
+
+### 4. Variables and Context
+
+- `$` represents the current context.
+- Custom variables: `$myVar := expression; $myVar * 2`
+- Variables passed from the environment can be used directly in expressions (e.g., `msg.payload` in Node-RED).
+
+### 5. Nebula Shift Tab Extension Functions
+
+To facilitate usage, Nebula Shift Tab provides several additional functions to simplify operations in specific scenarios.
+
+```plaintext
+$array_rand(items)      // Randomly return an element from an array
+$json_decode(item)      // Parse a JSON string into an object
+$rand(min, max)         // Generate a random integer
+```
+
+### 6. Demo
+
+Input:
+
+```json
+{
+  "order": {
+    "id": "123",
+    "items": [
+      { "name": "Apple", "price": 1.2, "qty": 3 },
+      { "name": "Banana", "price": 0.8, "qty": 5 }
+    ]
+  }
+}
+```
+
+JSONata Expression:
+
+```plaintext
+$array_rand($.order.items).name
+```
+
+Output Result: `Apple` or `Banana`
+
+### 7. Learning Resources
+
+You can learn the complete JSONata syntax in the [official documentation](https://docs.jsonata.org/overview.html).
+
+## Online Tester
+
+<JSONAtaTest
+  lang={{
+    inputData: "Enter test data, e.g., { \"data\": 123 }",
+    inputExpr: "Enter a JSONata expression, e.g., $.data + 1",
+    executing: "Running...",
+    error: "Runtime Error",
+    result: "Result",
+  }}
+/>

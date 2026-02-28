@@ -64,5 +64,6 @@
   "chat.openai.com": "chatgpt",
   "hupu.com": "hupu",
   "kimi.com": "kimi",
-  "kuaishou.com": "kuaishou"
+  "kuaishou.com": "kuaishou",
+  "github.com": "github"
 }

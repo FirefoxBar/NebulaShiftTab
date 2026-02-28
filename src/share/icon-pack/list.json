@@ -44,7 +44,8 @@
     "google.com.hk": "google.webp",
     "chat.openai.com": "chatgpt.webp",
     "kimi.com": "kimi.webp",
-    "kuaishou.com": "kuaishou.webp"
+    "kuaishou.com": "kuaishou.webp",
+    "github.com": "github.webp"
   },
   "delta-icons": {
     "_default": "_default.png",
@@ -83,7 +84,8 @@
     "qq.com": "tencent.png",
     "chat.openai.com": "chatgpt.png",
     "kimi.com": "kimi.png",
-    "kuaishou.com": "kuaishou.png"
+    "kuaishou.com": "kuaishou.png",
+    "github.com": "github.png"
   },
   "liquid-glass": {
     "_default": "_default.png",
@@ -132,7 +134,8 @@
     "youdao.com": "youdao.png",
     "hupu.com": "hupu.png",
     "kimi.com": "kimi.png",
-    "kuaishou.com": "kuaishou.png"
+    "kuaishou.com": "kuaishou.png",
+    "github.com": "github.webp"
   },
   "mbe-style": {
     "_default": "_default.png",

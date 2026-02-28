@@ -42,7 +42,9 @@
     "douyin.com": "aweme.webp",
     "tiktok.com": "aweme.webp",
     "google.com.hk": "google.webp",
-    "chat.openai.com": "chatgpt.webp"
+    "chat.openai.com": "chatgpt.webp",
+    "kimi.com": "kimi.webp",
+    "kuaishou.com": "kuaishou.webp"
   },
   "delta-icons": {
     "_default": "_default.png",
@@ -54,7 +56,9 @@
     "tieba.baidu.com": "baidu-tieba.png",
     "pan.baidu.com": "baiduyun.png",
     "bilibili.com": "bilibili.png",
+    "epicgames.com": "epic.png",
     "facebook.com": "facebook.png",
+    "feishu.cn": "feishu.png",
     "gmail.com": "gmail.png",
     "mail.google.com": "gmail.png",
     "maps.google.com": "google-map.png",
@@ -64,16 +68,22 @@
     "instagram.com": "instagram.png",
     "iqiyi.com": "iqiyi.png",
     "mail.qq.com": "qq-mail.png",
+    "steampowered.com": "steam.png",
+    "steamcommunity.com": "steam.png",
     "weibo.com": "weibo.png",
     "wikipedia.org": "wikipedia.png",
     "youtube.com": "youtube.png",
     "openai.com": "chatgpt.png",
+    "deepseek.com": "deepseek.png",
+    "qianwen.com": "qianwen.png",
     "douyin.com": "aweme.png",
     "tiktok.com": "aweme.png",
     "google.com.hk": "google.png",
     "taobao.com": "taobao.png",
     "qq.com": "tencent.png",
-    "chat.openai.com": "chatgpt.png"
+    "chat.openai.com": "chatgpt.png",
+    "kimi.com": "kimi.png",
+    "kuaishou.com": "kuaishou.png"
   },
   "liquid-glass": {
     "_default": "_default.png",
@@ -120,7 +130,9 @@
     "v.qq.com": "tencent-video.png",
     "toutiao.com": "toutiao.png",
     "youdao.com": "youdao.png",
-    "hupu.com": "hupu.png"
+    "hupu.com": "hupu.png",
+    "kimi.com": "kimi.png",
+    "kuaishou.com": "kuaishou.png"
   },
   "mbe-style": {
     "_default": "_default.png",
@@ -173,6 +185,7 @@
     "v.qq.com": "tencent-video.png",
     "tmall.com": "tmall.png",
     "toutiao.com": "toutiao.png",
-    "youdao.com": "youdao.png"
+    "youdao.com": "youdao.png",
+    "kuaishou.com": "kuaishou.png"
   }
 }

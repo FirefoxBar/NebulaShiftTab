@@ -45,17 +45,17 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
         rules={[
           { required: true, message: t('enterSearchUrl') },
           {
-            transform: x => x.replace('{{q}}', 'test'),
-            type: 'url',
-            message: t('invalidUrl'),
-          },
-          {
             validator: (_rule: any, value: any) => {
               if (!value.includes('{{q}}')) {
                 return new Error(t('searchUrlRequiresPlaceholder'));
               }
               return true;
             },
+          },
+          {
+            transform: x => x.replace('{{q}}', 'test'),
+            type: 'url',
+            message: t('invalidUrl'),
           },
         ]}
       />

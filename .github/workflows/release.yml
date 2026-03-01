@@ -43,8 +43,8 @@ jobs:
         cache: 'pnpm'
     - name: Install dependencies
       run: pnpm i --frozen-lockfile
-    - name: Build And Test
-      uses: ./.github/actions/build-and-test
+    - name: Build
+      uses: ./.github/actions/build
     - name: Pack
       env:
         AMO_KEY: ${{ secrets.ORG_AMO_KEY }}

@@ -100,10 +100,6 @@
     "message": "深色模式",
     "description": "Label for dark mode setting"
   },
-  "delete": {
-    "message": "删除",
-    "description": "Delete button text"
-  },
   "deleteSearchEngine": {
     "message": "删除搜索引擎",
     "description": "Delete search engine dialog title"
@@ -115,10 +111,6 @@
   "description": {
     "message": "一个轻量级的新标签页",
     "description": "Extension description"
-  },
-  "edit": {
-    "message": "编辑",
-    "description": "Edit button text"
   },
   "editSearchEngine": {
     "message": "编辑搜索引擎",

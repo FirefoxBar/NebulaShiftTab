@@ -4,28 +4,28 @@ import { icons } from '@/share/theme';
 import type { PrefValue } from '@/share/types';
 
 interface IconContextValue {
-  activePackKey: string;
-  activePack?: Record<string, string>;
+  theme: string;
+  activeIconPack?: Record<string, string>;
   defaultIcon?: string;
   iconProvider: PrefValue['iconProvider'];
 }
 
+export const SiteIconContext = createContext<IconContextValue>({} as any);
+
 export const useSiteIconContext = (): IconContextValue => {
-  const [themeKey] = usePref('theme');
+  const [theme] = usePref('theme');
   const [iconProvider] = usePref('iconProvider');
 
-  const activeIconPack = themeKey ? icons[themeKey] : undefined;
+  const activeIconPack = theme ? icons[theme] : undefined;
 
   const defaultIcon = activeIconPack
-    ? `/icons/${themeKey}/${activeIconPack._default}`
+    ? `/theme/${theme}/icons/${activeIconPack._default}`
     : '';
 
   return {
     iconProvider,
-    activePackKey: themeKey,
-    activePack: activeIconPack,
+    theme,
+    activeIconPack,
     defaultIcon,
   };
 };
-
-export const SiteIconContext = createContext<IconContextValue>({} as any);

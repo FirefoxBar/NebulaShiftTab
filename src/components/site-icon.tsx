@@ -12,7 +12,7 @@ interface SiteIconProps {
 }
 
 export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
-  const { defaultIcon, activePackKey, activePack, iconProvider } =
+  const { defaultIcon, theme, activeIconPack, iconProvider } =
     useContext(SiteIconContext);
   const [icon, setIcon] = useState('');
 
@@ -34,7 +34,7 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
     }
 
     const getIconFromPack = () => {
-      if (!activePack) {
+      if (!activeIconPack) {
         return '';
       }
 
@@ -43,8 +43,8 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
         const hostname = urlObj.hostname;
 
         // 尝试精确匹配完整域名
-        if (activePack[hostname]) {
-          return `/icons/${activePackKey}/${activePack[hostname]}`;
+        if (activeIconPack[hostname]) {
+          return `/theme/${theme}/icons/${activeIconPack[hostname]}`;
         }
 
         // 尝试匹配主域名（去掉子域名）
@@ -56,8 +56,8 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
           } else {
             mainDomain = parts.slice(parts.length - 3).join('.');
           }
-          if (activePack[mainDomain]) {
-            return `/icons/${activePackKey}/${activePack[mainDomain]}`;
+          if (activeIconPack[mainDomain]) {
+            return `/theme/${theme}/icons/${activeIconPack[mainDomain]}`;
           }
         }
       } catch (_e) {
@@ -95,7 +95,7 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
       }
     }
   }, [
-    activePackKey,
+    activeIconPack,
     iconProvider,
     site[SiteItemAlias.url],
     site[SiteItemAlias.iconType],

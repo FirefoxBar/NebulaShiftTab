@@ -1,13 +1,10 @@
 import type React from 'react';
-import { useEffect, useState } from 'react';
 import {
   SiteIconContext,
   useSiteIconContext,
 } from '@/components/site-icon-context';
 import usePref from '@/hooks/use-pref';
-import { prefs } from '@/share/prefs';
 import { SiteItemAlias } from '@/share/type-alias';
-import type { SiteItem as TSiteItem } from '@/share/types';
 import { SiteItem } from './site-item';
 
 import './index.less';

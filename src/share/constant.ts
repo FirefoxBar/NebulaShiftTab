@@ -7,7 +7,9 @@ export const StorageKey = {
   siteIcon: 'site-icon',
 };
 
-export enum APIs {}
+export enum APIs {
+  REFRESH_BACKGROUND = 'refresh-background',
+}
 
 export const DefaultSearchEngines: SearchItem[] = [
   {
@@ -73,7 +75,7 @@ export const DefaultBackgroundEngines: BackgroundItem[] = [
 
 export const defaultPrefValue: PrefValue = {
   darkMode: 'auto',
-  iconPack: 'default',
+  theme: 'default',
   iconProvider: 'duckduckgo',
   background: {
     dark: 40,

@@ -139,6 +139,14 @@ class Prefs {
       emitter.off(emitter.EVENT_PREFS_UPDATE, c);
     };
   }
+
+  getAndWatch<K extends keyof PrefValue>(
+    key: K,
+    cb: (value: PrefValue[K]) => void,
+  ) {
+    this.ready(() => cb(this.get(key)));
+    return this.watchKey(key, cb);
+  }
 }
 
 export const prefs = new Prefs();

@@ -3,6 +3,7 @@ import { StorageKey } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import { getLocalStorage } from '@/share/storage';
+import { SiteItemAlias } from '@/share/type-alias';
 import type { BackupV1 } from './types';
 
 async function createExport() {
@@ -14,8 +15,8 @@ async function createExport() {
     bg: '',
     siteIcons: await chrome.storage.local.get(
       pref.sites
-        .filter(x => x.iconType === 'local')
-        .map(x => `${StorageKey.siteIcon}_${x.id}`),
+        .filter(x => x[SiteItemAlias.iconType] === 'local')
+        .map(x => `${StorageKey.siteIcon}_${x[SiteItemAlias.id]}`),
     ),
   };
 

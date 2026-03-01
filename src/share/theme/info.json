@@ -1,0 +1,14 @@
+{
+  "default": {
+    "css": false
+  },
+  "delta-icons": {
+    "css": false
+  },
+  "liquid-glass": {
+    "css": true
+  },
+  "mbe-style": {
+    "css": false
+  }
+}

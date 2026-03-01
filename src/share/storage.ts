@@ -13,3 +13,16 @@ export const getLocalStorage = async <T = any>(key: string) =>
 
 export const getSyncStorage = async <T = any>(key: string) =>
   getStorage<T>(sync, key);
+
+export const getAndWatch = <T = any>(
+  s: chrome.storage.StorageArea,
+  key: string,
+  callback: (value?: T) => void,
+) => {
+  getStorage<T>(s, key).then(value => callback(value));
+  s.onChanged.addListener(changes => {
+    if (key in changes) {
+      callback(changes[key].newValue as T);
+    }
+  });
+};

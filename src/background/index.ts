@@ -1,3 +1,4 @@
+import createApiHandler from './api-handler';
 import { initBg } from './bg';
 
 let initd = false;
@@ -6,7 +7,7 @@ function init() {
     return;
   }
   initd = true;
-  // createApiHandler();
+  createApiHandler();
   initBg();
 }
 

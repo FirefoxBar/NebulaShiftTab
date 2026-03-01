@@ -62,9 +62,12 @@ async function shouldUpdate(item: BackgroundItem) {
   return false;
 }
 
-async function handleBackgroundItem(item: BackgroundItem) {
+async function handleBackgroundItem(
+  item: BackgroundItem,
+  forceRefresh = false,
+) {
   // 判断是否需要更新
-  const bShouldUpdate = await shouldUpdate(item);
+  const bShouldUpdate = forceRefresh || (await shouldUpdate(item));
 
   if (!bShouldUpdate) {
     console.log('skip update');
@@ -164,38 +167,40 @@ async function handleBackgroundItem(item: BackgroundItem) {
 }
 
 let isUpdating = false;
-const runBackgroundTask = async (item: BackgroundItem) => {
-  if (isUpdating) {
+const runBackgroundTask = async (
+  item: BackgroundItem,
+  forceRefresh = false,
+) => {
+  if (isUpdating && !forceRefresh) {
     return;
   }
   isUpdating = true;
   try {
-    await handleBackgroundItem(item);
+    await handleBackgroundItem(item, forceRefresh);
   } catch (_e) {
     // ignore
   }
   isUpdating = false;
 };
 
-function checkBg() {
+export function checkBg(forceRefresh = false) {
   const setting = prefs.get('background');
   if (setting.type === 'image') {
     return;
   }
   if (setting.type === 'custom' && setting.value) {
-    runBackgroundTask(setting.value);
+    return runBackgroundTask(setting.value, forceRefresh);
   }
   if (setting.type === 'builtin') {
     const v = DefaultBackgroundEngines.find(
       x => x[BackgroundItemAlias.key] === setting.key,
     );
-    v && runBackgroundTask(v);
+    return v ? runBackgroundTask(v, forceRefresh) : undefined;
   }
 }
 
 export function initBg() {
-  prefs.ready(() => checkBg());
-  prefs.watchKey('background', () => checkBg());
+  prefs.getAndWatch('background', () => checkBg());
 
   // 监听定时任务
   chrome.alarms.onAlarm.addListener(alarm => {

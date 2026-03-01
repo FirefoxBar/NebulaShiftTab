@@ -1,27 +1,18 @@
-function execute(request: any) {
-  if (request.method === 'notifyBackground') {
-    request.method = request.reason;
-    delete request.reason;
-  }
-  switch (request.method) {
-    default:
-      break;
-  }
-  return false;
-}
+import { APIs } from '@/share/constant';
+import { checkBg } from './bg';
 
 export default function createApiHandler() {
   chrome.runtime.onMessage.addListener(request => {
-    if (request.method === 'batchExecute') {
-      const queue = request.batch.map((item: any) => {
-        const res = execute(item);
-        if (res) {
-          return res;
-        }
-        return Promise.resolve();
-      });
-      return Promise.allSettled(queue);
+    if (request.method === 'notifyBackground') {
+      request.method = request.reason;
+      delete request.reason;
     }
-    return execute(request);
+    switch (request.method) {
+      case APIs.REFRESH_BACKGROUND:
+        return checkBg(true);
+      default:
+        break;
+    }
+    return false;
   });
 }

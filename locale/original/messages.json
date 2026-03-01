@@ -192,10 +192,6 @@
     "message": "Higher value is darker",
     "description": "Description for background darkness setting"
   },
-  "iconPack": {
-    "message": "Icon Pack",
-    "description": "Label for icon pack setting"
-  },
   "iconProvider": {
     "message": "Icon Provider",
     "description": "Label for icon provider setting"
@@ -267,6 +263,10 @@
   "pleaseSelect": {
     "message": "Please select",
     "description": "Message for requiring selection"
+  },
+  "reacquireBackground": {
+    "message": "Reacquire Background",
+    "description": "Button text for reacquiring background"
   },
   "refreshFrequency": {
     "message": "Refresh Frequency",
@@ -355,6 +355,10 @@
   "suggestionUrl": {
     "message": "Suggestion URL",
     "description": "Label for suggestion URL field"
+  },
+  "theme": {
+    "message": "Theme",
+    "description": "Label for theme setting"
   },
   "type": {
     "message": "Type",

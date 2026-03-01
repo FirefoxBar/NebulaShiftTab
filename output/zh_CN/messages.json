@@ -192,10 +192,6 @@
     "message": "数值越大越暗",
     "description": "Description for background darkness setting"
   },
-  "iconPack": {
-    "message": "图标包",
-    "description": "Label for icon pack setting"
-  },
   "iconProvider": {
     "message": "图标提供者",
     "description": "Label for icon provider setting"
@@ -355,6 +351,10 @@
   "suggestionUrl": {
     "message": "建议网址",
     "description": "Label for suggestion URL field"
+  },
+  "theme": {
+    "message": "主题",
+    "description": "Label for theme setting"
   },
   "type": {
     "message": "类型",

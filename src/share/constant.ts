@@ -64,7 +64,7 @@ export const DefaultBackgroundEngines: BackgroundItem[] = [
     [BackgroundItemAlias.name]: 'Spotlight',
     [BackgroundItemAlias.url]:
       'https://fd.api.iris.microsoft.com/v4/api/selection?placement=88000820&bcnt=4&country=CN&locale=zh-CN&fmt=json',
-    [BackgroundItemAlias.type]: 'custom',
+    [BackgroundItemAlias.type]: 'api',
     [BackgroundItemAlias.refresh]: 'new-day',
     [BackgroundItemAlias.extract]:
       '$json_decode($array_rand($.batchrsp.items).item).ad.landscapeImage.asset',

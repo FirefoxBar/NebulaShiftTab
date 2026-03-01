@@ -12,7 +12,7 @@ interface LastUpdate {
   key: string;
 }
 
-async function handleBackgroundItem(item: BackgroundItem) {
+async function shouldUpdate(item: BackgroundItem) {
   // 获取上次更新时间
   const storedData = (await storage.get([
     StorageKey.bg,
@@ -24,53 +24,49 @@ async function handleBackgroundItem(item: BackgroundItem) {
   const lastUpdate: LastUpdate | undefined =
     storedData[StorageKey.bgLastUpdate];
 
-  // 判断是否需要更新
-  let shouldUpdate = false;
-
   if (!lastUpdate) {
-    shouldUpdate = true;
-  } else {
-    if (lastUpdate.type !== item[BackgroundItemAlias.type]) {
-      shouldUpdate = true;
-    }
-
-    if (
-      lastUpdate.type === 'builtin' &&
-      item[BackgroundItemAlias.key] !== lastUpdate.key
-    ) {
-      shouldUpdate = true;
-    }
-
-    const lastUpdateTime = new Date(lastUpdate.time);
-
-    if (item[BackgroundItemAlias.refresh] === 0) {
-      shouldUpdate = false;
-    }
-
-    if (!shouldUpdate && item[BackgroundItemAlias.refresh] === 'new-day') {
-      // 如果设置了new-day，比较日期是否是同一天
-      const now = new Date();
-      shouldUpdate =
-        lastUpdateTime.getDate() !== now.getDate() ||
-        lastUpdateTime.getMonth() !== now.getMonth() ||
-        lastUpdateTime.getFullYear() !== now.getFullYear();
-    }
-
-    if (
-      !shouldUpdate &&
-      typeof item[BackgroundItemAlias.refresh] === 'number'
-    ) {
-      // 如果设置了时间间隔（秒），比较当前时间和上次更新时间
-      const now = Date.now();
-      const elapsedSeconds = Math.floor(
-        (now - lastUpdateTime.getTime()) / 1000,
-      );
-      shouldUpdate =
-        elapsedSeconds >= (item[BackgroundItemAlias.refresh] as number);
-    }
+    return true;
   }
 
-  if (!shouldUpdate) {
+  if (lastUpdate.type !== item[BackgroundItemAlias.type]) {
+    return true;
+  }
+
+  if (item[BackgroundItemAlias.key] !== lastUpdate.key) {
+    return true;
+  }
+
+  const lastUpdateTime = new Date(lastUpdate.time);
+
+  if (item[BackgroundItemAlias.refresh] === 0) {
+    return false;
+  }
+
+  if (item[BackgroundItemAlias.refresh] === 'new-day') {
+    // 如果设置了new-day，比较日期是否是同一天
+    const now = new Date();
+    return (
+      lastUpdateTime.getDate() !== now.getDate() ||
+      lastUpdateTime.getMonth() !== now.getMonth() ||
+      lastUpdateTime.getFullYear() !== now.getFullYear()
+    );
+  }
+
+  if (typeof item[BackgroundItemAlias.refresh] === 'number') {
+    // 如果设置了时间间隔（秒），比较当前时间和上次更新时间
+    const now = Date.now();
+    const elapsedSeconds = Math.floor((now - lastUpdateTime.getTime()) / 1000);
+    return elapsedSeconds >= (item[BackgroundItemAlias.refresh] as number);
+  }
+
+  return false;
+}
+
+async function handleBackgroundItem(item: BackgroundItem) {
+  // 判断是否需要更新
+  const bShouldUpdate = await shouldUpdate(item);
+
+  if (!bShouldUpdate) {
     console.log('skip update');
     return;
   }

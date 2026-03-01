@@ -68,7 +68,17 @@ export const BackgroundSetting: React.FC = () => {
             <Select
               value={type}
               placeholder={t('selectBackgroundType')}
-              onChange={v => setType(v as BackgroundType)}
+              onChange={v => {
+                setType(v as BackgroundType);
+                if (v === 'builtin') {
+                  updateBackground({
+                    type: 'builtin',
+                    key: DefaultBackgroundEngines[0][
+                      BackgroundItemAlias.key
+                    ] as string,
+                  });
+                }
+              }}
               style={{ width: '150px' }}
             >
               <Select.Option value="builtin">

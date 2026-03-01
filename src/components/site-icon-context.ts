@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import usePref from '@/hooks/use-pref';
-import { iconPack } from '@/share/icon-pack';
+import { icons } from '@/share/theme';
 import type { PrefValue } from '@/share/types';
 
 interface IconContextValue {
@@ -11,20 +11,18 @@ interface IconContextValue {
 }
 
 export const useSiteIconContext = (): IconContextValue => {
-  const [activeIconPackKey] = usePref('iconPack');
+  const [themeKey] = usePref('theme');
   const [iconProvider] = usePref('iconProvider');
 
-  const activeIconPack = activeIconPackKey
-    ? iconPack[activeIconPackKey]
-    : undefined;
+  const activeIconPack = themeKey ? icons[themeKey] : undefined;
 
   const defaultIcon = activeIconPack
-    ? `/icons/${activeIconPackKey}/${activeIconPack._default}`
+    ? `/icons/${themeKey}/${activeIconPack._default}`
     : '';
 
   return {
     iconProvider,
-    activePackKey: activeIconPackKey,
+    activePackKey: themeKey,
     activePack: activeIconPack,
     defaultIcon,
   };

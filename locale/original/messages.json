@@ -192,9 +192,9 @@
     "message": "Higher value is darker",
     "description": "Description for background darkness setting"
   },
-  "iconPack": {
-    "message": "Icon Pack",
-    "description": "Label for icon pack setting"
+  "theme": {
+    "message": "Theme",
+    "description": "Label for theme setting"
   },
   "iconProvider": {
     "message": "Icon Provider",

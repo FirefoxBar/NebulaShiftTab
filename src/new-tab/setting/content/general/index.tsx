@@ -7,7 +7,7 @@ import { ImportButton } from './import-button';
 
 export const GeneralSettings: React.FC = () => {
   const [darkMode, setDarkMode] = usePref('darkMode');
-  const [iconPack, setIconPack] = usePref('iconPack');
+  const [theme, setTheme] = usePref('theme');
   const [iconProvider, setIconProvider] = usePref('iconProvider');
 
   return (
@@ -33,20 +33,21 @@ export const GeneralSettings: React.FC = () => {
       <List.Item
         main={
           <div className="list-item">
-            <Typography.Text className="title">{t('iconPack')}</Typography.Text>
+            <Typography.Text className="title">{t('theme')}</Typography.Text>
           </div>
         }
         extra={
           <Select
-            value={iconPack}
+            value={theme}
             placeholder={t('selectIconPack')}
-            onChange={v => setIconPack(v as any)}
-          >
-            <Select.Option value="default">Default</Select.Option>
-            <Select.Option value="mbe-style">MBE Style</Select.Option>
-            <Select.Option value="delta-icons">Delta Icons</Select.Option>
-            <Select.Option value="liquid-glass">Liquid Glass</Select.Option>
-          </Select>
+            onChange={v => setTheme(v as any)}
+            optionList={[
+              { label: 'Default', value: 'default' },
+              { label: 'MBE Style', value: 'mbe-style' },
+              { label: 'Delta Icons', value: 'delta-icons' },
+              { label: 'Liquid Glass', value: 'liquid-glass' },
+            ]}
+          />
         }
       />
       <List.Item

@@ -73,7 +73,7 @@ export const DefaultBackgroundEngines: BackgroundItem[] = [
 
 export const defaultPrefValue: PrefValue = {
   darkMode: 'auto',
-  iconPack: 'default',
+  theme: 'default',
   iconProvider: 'duckduckgo',
   background: {
     dark: 40,

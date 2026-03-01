@@ -3,6 +3,7 @@ import type React from 'react';
 import { useContext, useState } from 'react';
 import { StorageKey } from '@/share/constant';
 import { getLocalStorage } from '@/share/storage';
+import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteItem as TSiteItem } from '@/share/types';
 import { SiteIconContext } from './site-icon-context';
 
@@ -16,13 +17,18 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
   const [icon, setIcon] = useState('');
 
   useAsyncEffect(async () => {
-    if (['local', 'custom'].includes(site.iconType) && site.icon) {
-      setIcon(site.icon);
+    if (
+      ['local', 'custom'].includes(site[SiteItemAlias.iconType]) &&
+      site[SiteItemAlias.icon]
+    ) {
+      setIcon(site[SiteItemAlias.icon]!);
       return;
     }
 
-    if (site.iconType === 'local') {
-      const s = await getLocalStorage(`${StorageKey.siteIcon}_${site.id}`);
+    if (site[SiteItemAlias.iconType] === 'local') {
+      const s = await getLocalStorage(
+        `${StorageKey.siteIcon}_${site[SiteItemAlias.id]}`,
+      );
       setIcon(s || defaultIcon);
       return;
     }
@@ -33,7 +39,7 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
       }
 
       try {
-        const urlObj = new URL(site.url);
+        const urlObj = new URL(site[SiteItemAlias.url]);
         const hostname = urlObj.hostname;
 
         // 尝试精确匹配完整域名
@@ -55,20 +61,20 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
           }
         }
       } catch (_e) {
-        console.error('Invalid URL:', site.url);
+        console.error('Invalid URL:', site[SiteItemAlias.url]);
       }
     };
 
-    if (site.iconType === 'builtin') {
+    if (site[SiteItemAlias.iconType] === 'builtin') {
       const res = getIconFromPack();
       setIcon(res || defaultIcon || '');
       return;
     }
 
     // 如果是auto类型或者内置图标未找到，使用chrome默认的favicon
-    if (site.iconType === 'auto') {
+    if (site[SiteItemAlias.iconType] === 'auto') {
       try {
-        const urlObj = new URL(site.url);
+        const urlObj = new URL(site[SiteItemAlias.url]);
         switch (iconProvider) {
           case 'google':
             setIcon(
@@ -85,15 +91,21 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
             return;
         }
       } catch (_e) {
-        console.error('Invalid URL for favicon:', site.url);
+        console.error('Invalid URL for favicon:', site[SiteItemAlias.url]);
       }
     }
-  }, [activePackKey, iconProvider, site.url, site.iconType, site.icon]);
+  }, [
+    activePackKey,
+    iconProvider,
+    site[SiteItemAlias.url],
+    site[SiteItemAlias.iconType],
+    site[SiteItemAlias.icon],
+  ]);
 
   return (
     <img
       src={icon || defaultIcon}
-      alt={site.name}
+      alt={site[SiteItemAlias.name]}
       className="site-icon"
       onError={e => {
         const target = e.target as HTMLImageElement;

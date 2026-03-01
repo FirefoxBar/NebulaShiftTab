@@ -16,6 +16,7 @@ import type { PrefValue } from '@/share/types';
 import { CustomBg } from './custom-bg';
 
 import './index.less';
+import { BackgroundItemAlias } from '@/share/type-alias';
 
 type BackgroundType = PrefValue['background']['type'];
 
@@ -98,8 +99,11 @@ export const BackgroundSetting: React.FC = () => {
                 style={{ width: '200px' }}
               >
                 {DefaultBackgroundEngines.map(engine => (
-                  <Select.Option key={engine.key} value={engine.key}>
-                    {engine.name}
+                  <Select.Option
+                    key={engine[BackgroundItemAlias.key]}
+                    value={engine[BackgroundItemAlias.key]}
+                  >
+                    {engine[BackgroundItemAlias.name]}
                   </Select.Option>
                 ))}
               </Select>

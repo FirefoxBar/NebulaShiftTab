@@ -1,3 +1,9 @@
+import {
+  BackgroundItemAlias,
+  SearchItemAlias,
+  SiteItemAlias,
+} from './type-alias';
+
 export interface PrefValue {
   darkMode: 'auto' | 'on' | 'off';
   iconPack: 'default' | 'mbe-style' | 'delta-icons' | 'liquid-glass';
@@ -12,28 +18,28 @@ export interface PrefValue {
   searches: Array<SearchItem>;
 }
 export interface SiteItem {
-  id: string;
-  name: string;
-  url: string;
-  iconType: 'builtin' | 'auto' | 'local' | 'custom';
-  icon: string;
+  [SiteItemAlias.id]: string;
+  [SiteItemAlias.name]: string;
+  [SiteItemAlias.url]: string;
+  [SiteItemAlias.iconType]: 'builtin' | 'auto' | 'local' | 'custom';
+  [SiteItemAlias.icon]?: string;
 }
 
 export interface SearchItem {
-  key: string;
-  name: string;
-  url: string;
-  suggestion?: string;
-  suggestionType?: 'json' | 'jsonp';
-  extractSuggestion?: string;
+  [SearchItemAlias.key]: string;
+  [SearchItemAlias.name]: string;
+  [SearchItemAlias.url]: string;
+  [SearchItemAlias.suggestion]?: string;
+  [SearchItemAlias.suggestionType]?: 'json' | 'jsonp';
+  [SearchItemAlias.extractSuggestion]?: string;
 }
 
 export interface BackgroundItem {
-  key: string;
-  name: string;
-  url: string;
-  type: 'api' | 'image' | 'custom';
+  [BackgroundItemAlias.key]: string;
+  [BackgroundItemAlias.name]: string;
+  [BackgroundItemAlias.url]: string;
+  [BackgroundItemAlias.type]: 'api' | 'image' | 'custom';
   // 单位：分钟
-  refresh: number | 'new-day';
-  extract: string;
+  [BackgroundItemAlias.refresh]: number | 'new-day';
+  [BackgroundItemAlias.extract]: string;
 }

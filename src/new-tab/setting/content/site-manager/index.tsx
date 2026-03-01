@@ -19,8 +19,9 @@ import usePref from '@/hooks/use-pref';
 import { StorageKey } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
+import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteItem } from '@/share/types';
-import { SiteEditForm } from './SiteEditForm';
+import { SiteEditForm } from './site-edit-form';
 
 import './index.less';
 
@@ -42,7 +43,7 @@ const SortableItem = ({
     transition,
     isDragging,
   } = useSortable({
-    id: item.id,
+    id: item[SiteItemAlias.id],
   });
 
   const style = {
@@ -62,9 +63,9 @@ const SortableItem = ({
         <SiteIcon site={item} />
         <div className="item-info">
           <div>
-            <strong>{item.name}</strong>
+            <strong>{item[SiteItemAlias.name]}</strong>
           </div>
-          <div>{item.url}</div>
+          <div className="url">{item[SiteItemAlias.url]}</div>
         </div>
         <div className="item-actions">
           <Button size="small" onClick={() => handleEditSite(item)}>
@@ -73,7 +74,7 @@ const SortableItem = ({
           <Button
             size="small"
             type="danger"
-            onClick={() => handleDeleteSite(item.id)}
+            onClick={() => handleDeleteSite(item[SiteItemAlias.id])}
           >
             {t('delete')}
           </Button>
@@ -103,13 +104,13 @@ export const SitesManager: React.FC = () => {
   // 删除站点
   const handleDeleteSite = (id: string) => {
     const newSites = [...sites];
-    const index = newSites.findIndex(site => site.id === id);
+    const index = newSites.findIndex(site => site[SiteItemAlias.id] === id);
     if (index === -1) {
       return;
     }
     Modal.warning({
       title: t('deleteSite'),
-      content: t('confirmDeleteSite', newSites[index].name),
+      content: t('confirmDeleteSite', newSites[index][SiteItemAlias.name]),
       onOk: () => {
         chrome.storage.local.remove(`${StorageKey.siteIcon}_${id}`);
         newSites.splice(index, 1);
@@ -120,11 +121,13 @@ export const SitesManager: React.FC = () => {
 
   // 保存站点
   const handleSaveSite = (updatedSite: SiteItem) => {
-    if (!updatedSite.id) {
-      updatedSite.id = nanoid();
+    if (!updatedSite[SiteItemAlias.id]) {
+      updatedSite[SiteItemAlias.id] = nanoid();
     }
     const newSites = [...sites];
-    const index = newSites.findIndex(site => site.id === updatedSite.id);
+    const index = newSites.findIndex(
+      site => site[SiteItemAlias.id] === updatedSite[SiteItemAlias.id],
+    );
 
     if (index !== -1) {
       newSites[index] = updatedSite;
@@ -135,14 +138,18 @@ export const SitesManager: React.FC = () => {
 
     newSites.forEach(site => {
       if (
-        ['local', 'custom'].includes(site.iconType) &&
-        site.icon.startsWith('data:image/')
+        ['local', 'custom'].includes(site[SiteItemAlias.iconType]) &&
+        site[SiteItemAlias.icon]?.startsWith('data:image/')
       ) {
         chrome.storage.local.set({
-          [`${StorageKey.siteIcon}_${site.id}`]: site.icon,
+          [`${StorageKey.siteIcon}_${site[SiteItemAlias.id]}`]:
+            site[SiteItemAlias.icon],
         });
-        site.iconType = 'local';
-        site.icon = '';
+        site[SiteItemAlias.iconType] = 'local';
+        delete site[SiteItemAlias.icon];
+      }
+      if (site[SiteItemAlias.icon] === '') {
+        delete site[SiteItemAlias.icon];
       }
     });
 
@@ -164,8 +171,12 @@ export const SitesManager: React.FC = () => {
     const { active, over } = event;
 
     if (active.id !== over?.id) {
-      const oldIndex = sites.findIndex(site => site.id === active.id);
-      const newIndex = sites.findIndex(site => site.id === over.id);
+      const oldIndex = sites.findIndex(
+        site => site[SiteItemAlias.id] === active.id,
+      );
+      const newIndex = sites.findIndex(
+        site => site[SiteItemAlias.id] === over.id,
+      );
 
       const newSites = arrayMove(sites, oldIndex, newIndex);
       setSites(newSites);
@@ -185,7 +196,7 @@ export const SitesManager: React.FC = () => {
   return (
     <div className="sites-manager-container">
       <Modal
-        title={editingSite?.id ? t('editSite') : t('addSite')}
+        title={editingSite?.[SiteItemAlias.id] ? t('editSite') : t('addSite')}
         visible={isModalOpen}
         footer={null}
         onCancel={handleCancelEdit}
@@ -212,7 +223,7 @@ export const SitesManager: React.FC = () => {
       <SiteIconContext.Provider value={iconContext}>
         <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
           <SortableContext
-            items={sites.map(site => site.id)}
+            items={sites.map(site => site[SiteItemAlias.id])}
             strategy={verticalListSortingStrategy}
           >
             <List
@@ -220,7 +231,7 @@ export const SitesManager: React.FC = () => {
               split={false}
               renderItem={item => (
                 <SortableItem
-                  key={item.id}
+                  key={item[SiteItemAlias.id]}
                   item={item}
                   handleEditSite={handleEditSite}
                   handleDeleteSite={handleDeleteSite}

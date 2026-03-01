@@ -1,5 +1,6 @@
 import type React from 'react';
 import { SiteIcon } from '@/components/site-icon';
+import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteItem as TSiteItem } from '@/share/types';
 
 import './site-item.less';
@@ -10,11 +11,11 @@ interface SiteItemProps {
 
 export const SiteItem: React.FC<SiteItemProps> = ({ site }) => {
   return (
-    <a href={site.url} className="site-item">
+    <a href={site[SiteItemAlias.url]} className="site-item">
       <div className="site-icon-container">
         <SiteIcon site={site} />
       </div>
-      <div className="site-name">{site.name}</div>
+      <div className="site-name">{site[SiteItemAlias.name]}</div>
     </a>
   );
 };

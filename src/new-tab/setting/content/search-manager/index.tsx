@@ -21,8 +21,9 @@ import usePref from '@/hooks/use-pref';
 import { DefaultSearchEngines } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
+import { SearchItemAlias } from '@/share/type-alias';
 import type { SearchItem } from '@/share/types';
-import { SearchEditForm } from './SearchEditForm';
+import { SearchEditForm } from './search-edit-form';
 
 import './index.less';
 
@@ -44,7 +45,7 @@ const SortableItem = ({
     transition,
     isDragging,
   } = useSortable({
-    id: item.key,
+    id: item[SearchItemAlias.key],
   });
 
   const style = {
@@ -61,7 +62,7 @@ const SortableItem = ({
       {...attributes}
     >
       <div className="item-content">
-        <div className="item-info">{item.name}</div>
+        <div className="item-info">{item[SearchItemAlias.name]}</div>
         <div className="item-actions">
           <Button size="small" onClick={() => handleEditSearch(item)}>
             {t('edit')}
@@ -69,7 +70,7 @@ const SortableItem = ({
           <Button
             size="small"
             type="danger"
-            onClick={() => handleDeleteSearch(item.key)}
+            onClick={() => handleDeleteSearch(item[SearchItemAlias.key])}
           >
             {t('delete')}
           </Button>
@@ -99,13 +100,18 @@ export const SearchManager: React.FC = () => {
   // 删除搜索
   const handleDeleteSearch = (key: string) => {
     const newSearches = [...searches];
-    const index = newSearches.findIndex(search => search.key === key);
+    const index = newSearches.findIndex(
+      search => search[SearchItemAlias.key] === key,
+    );
     if (index === -1) {
       return;
     }
     Modal.warning({
       title: t('deleteSearchEngine'),
-      content: t('confirmDeleteSearchEngine', newSearches[index].name),
+      content: t(
+        'confirmDeleteSearchEngine',
+        newSearches[index][SearchItemAlias.name],
+      ),
       onOk: () => {
         newSearches.splice(index, 1);
         setSearches(newSearches);
@@ -115,12 +121,13 @@ export const SearchManager: React.FC = () => {
 
   // 保存搜索
   const handleSaveSearch = (updatedSearch: SearchItem) => {
-    if (!updatedSearch.key) {
-      updatedSearch.key = nanoid();
+    if (!updatedSearch[SearchItemAlias.key]) {
+      updatedSearch[SearchItemAlias.key] = nanoid();
     }
     const newSearches = [...searches];
     const index = newSearches.findIndex(
-      search => search.key === updatedSearch.key,
+      search =>
+        search[SearchItemAlias.key] === updatedSearch[SearchItemAlias.key],
     );
 
     if (index !== -1) {
@@ -146,8 +153,12 @@ export const SearchManager: React.FC = () => {
     const { active, over } = event;
 
     if (active.id !== over?.id) {
-      const oldIndex = searches.findIndex(search => search.key === active.id);
-      const newIndex = searches.findIndex(search => search.key === over.id);
+      const oldIndex = searches.findIndex(
+        search => search[SearchItemAlias.key] === active.id,
+      );
+      const newIndex = searches.findIndex(
+        search => search[SearchItemAlias.key] === over.id,
+      );
 
       const newSearches = arrayMove(searches, oldIndex, newIndex);
       setSearches(newSearches);
@@ -166,7 +177,9 @@ export const SearchManager: React.FC = () => {
     <div className="searches-manager-container">
       <Modal
         title={
-          editingSearch?.key ? t('editSearchEngine') : t('addSearchEngine')
+          editingSearch?.[SearchItemAlias.key]
+            ? t('editSearchEngine')
+            : t('addSearchEngine')
         }
         visible={isModalOpen}
         footer={null}
@@ -193,8 +206,9 @@ export const SearchManager: React.FC = () => {
           <Dropdown
             menu={DefaultSearchEngines.map(x => ({
               node: 'item',
-              name: x.name,
-              onClick: () => handleSaveSearch({ ...x, key: '' }),
+              name: x[SearchItemAlias.name],
+              onClick: () =>
+                handleSaveSearch({ ...x, [SearchItemAlias.key]: '' }),
             }))}
             trigger="click"
             position="bottomRight"
@@ -206,7 +220,7 @@ export const SearchManager: React.FC = () => {
 
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         <SortableContext
-          items={searches.map(search => search.key)}
+          items={searches.map(search => search[SearchItemAlias.key])}
           strategy={verticalListSortingStrategy}
         >
           <List
@@ -214,7 +228,7 @@ export const SearchManager: React.FC = () => {
             split={false}
             renderItem={item => (
               <SortableItem
-                key={item.key}
+                key={item[SearchItemAlias.key]}
                 item={item}
                 handleEditSearch={handleEditSearch}
                 handleDeleteSearch={handleDeleteSearch}

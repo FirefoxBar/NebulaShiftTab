@@ -8,6 +8,7 @@ import { createJsonAta, extractData, parseJsonp } from '@/share/utils';
 import { SearchIcon } from './search-icon';
 
 import './search.less';
+import { SearchItemAlias } from '@/share/type-alias';
 
 async function decodeResponse(response: Response): Promise<string> {
   const contentType = response.headers.get('content-type');
@@ -40,15 +41,15 @@ export const Search: React.FC = () => {
       if (
         !currentEngine ||
         !searchValue.trim() ||
-        !currentEngine.suggestion ||
-        !currentEngine.suggestionType ||
-        !currentEngine.extractSuggestion
+        !currentEngine[SearchItemAlias.suggestion] ||
+        !currentEngine[SearchItemAlias.suggestionType] ||
+        !currentEngine[SearchItemAlias.extractSuggestion]
       ) {
         return [];
       }
 
       const response = await fetch(
-        currentEngine.suggestion.replace(
+        currentEngine[SearchItemAlias.suggestion]!.replace(
           '{{q}}',
           encodeURIComponent(searchValue),
         ),
@@ -59,9 +60,9 @@ export const Search: React.FC = () => {
       }
 
       let data: any;
-      if (currentEngine.suggestionType === 'json') {
+      if (currentEngine[SearchItemAlias.suggestionType] === 'json') {
         data = await response.json();
-      } else if (currentEngine.suggestionType === 'jsonp') {
+      } else if (currentEngine[SearchItemAlias.suggestionType] === 'jsonp') {
         // 对于 JSONP 类型，我们需要获取文本并解析
         const text = await decodeResponse(response);
         data = await parseJsonp(text);
@@ -69,7 +70,9 @@ export const Search: React.FC = () => {
 
       if (data) {
         // 使用 jsonata 提取建议数据
-        const expression = await createJsonAta(currentEngine.extractSuggestion);
+        const expression = await createJsonAta(
+          currentEngine[SearchItemAlias.extractSuggestion]!,
+        );
         const extractedSuggestions =
           (await extractData<string[]>(expression, data)) || [];
         return extractedSuggestions.map(item => String(item));
@@ -99,7 +102,7 @@ export const Search: React.FC = () => {
     if (!currentEngine || !searchValue.trim()) return;
 
     // 替换URL中的{{q}}为实际查询词
-    const searchUrl = currentEngine.url.replace(
+    const searchUrl = currentEngine[SearchItemAlias.url].replace(
       '{{q}}',
       encodeURIComponent(searchValue),
     );
@@ -109,7 +112,7 @@ export const Search: React.FC = () => {
   // 选择建议项
   const handleSuggestionClick = (suggestion: string) => {
     if (!currentEngine || !suggestion) return;
-    const searchUrl = currentEngine.url.replace(
+    const searchUrl = currentEngine[SearchItemAlias.url].replace(
       '{{q}}',
       encodeURIComponent(suggestion),
     );
@@ -163,12 +166,12 @@ export const Search: React.FC = () => {
       <div className="search-engines">
         {searches.map(engine => (
           <button
-            key={engine.name}
+            key={engine[SearchItemAlias.name]}
             type="button"
-            className={`engine-btn ${currentEngine?.name === engine.name ? 'active' : ''}`}
+            className={`engine-btn ${currentEngine?.[SearchItemAlias.name] === engine[SearchItemAlias.name] ? 'active' : ''}`}
             onClick={() => setCurrentEngine(engine)}
           >
-            {engine.name}
+            {engine[SearchItemAlias.name]}
           </button>
         ))}
       </div>

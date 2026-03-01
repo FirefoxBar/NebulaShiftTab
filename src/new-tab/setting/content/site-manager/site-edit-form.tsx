@@ -14,9 +14,10 @@ import {
   useSiteIconContext,
 } from '@/components/site-icon-context';
 import { t } from '@/share/locale';
+import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteItem } from '@/share/types';
 
-import './SiteEditForm.less';
+import './site-edit-form.less';
 
 interface SiteEditFormProps {
   initialData?: SiteItem;
@@ -27,7 +28,7 @@ interface SiteEditFormProps {
 const IconField = () => {
   const iconContext = useSiteIconContext();
   const formApi = useFormApi();
-  const { value: iconType } = useFieldState('iconType');
+  const { value: iconType } = useFieldState(SiteItemAlias.iconType);
   const { values } = useFormState();
 
   // console.log(values);
@@ -39,7 +40,9 @@ const IconField = () => {
           <Select
             placeholder={t('selectIconType')}
             value={iconType}
-            onChange={v => formApi.setValue('iconType', v as string)}
+            onChange={v =>
+              formApi.setValue(SiteItemAlias.iconType, v as string)
+            }
           >
             <Select.Option value="builtin">{t('builtinIcon')}</Select.Option>
             <Select.Option value="auto">{t('autoFetch')}</Select.Option>
@@ -51,7 +54,7 @@ const IconField = () => {
         {iconType === 'custom' && (
           <Form.Input
             label={t('customIconUrl')}
-            field="icon"
+            field={SiteItemAlias.icon}
             rules={[
               { required: true, message: t('enterUrl') },
               { type: 'url', message: t('validUrlRequired') },
@@ -68,7 +71,7 @@ const IconField = () => {
                 const reader = new FileReader();
                 reader.onload = e => {
                   const base64String = e.target?.result as string;
-                  formApi.setValue('icon', base64String);
+                  formApi.setValue(SiteItemAlias.icon, base64String);
                   onSuccess(null);
                 };
                 reader.readAsDataURL(file.fileInstance!);
@@ -91,11 +94,11 @@ const IconField = () => {
 
 export const SiteEditForm: React.FC<SiteEditFormProps> = ({
   initialData = {
-    id: '',
-    name: '',
-    url: '',
-    iconType: 'builtin',
-    icon: '',
+    [SiteItemAlias.id]: '',
+    [SiteItemAlias.name]: '',
+    [SiteItemAlias.url]: '',
+    [SiteItemAlias.iconType]: 'builtin',
+    [SiteItemAlias.icon]: '',
   } as SiteItem,
   onSave,
   onCancel,
@@ -110,28 +113,18 @@ export const SiteEditForm: React.FC<SiteEditFormProps> = ({
       className="site-edit-form"
     >
       <Form.Input
-        field="name"
+        field={SiteItemAlias.name}
         label={t('name')}
         placeholder={t('enterSiteName')}
         rules={[{ required: true, message: t('enterSiteName') }]}
       />
       <Form.Input
-        field="url"
+        field={SiteItemAlias.url}
         label={t('url')}
         placeholder={t('enterSiteUrl')}
         rules={[
           { required: true, message: t('enterSiteUrl') },
-          {
-            validator: (_rule: any, value: any) => {
-              const urlPattern =
-                /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
-              if (!value || urlPattern.test(value)) {
-                return true;
-              } else {
-                return new Error(t('invalidUrl'));
-              }
-            },
-          },
+          { type: 'url', message: t('invalidUrl') },
         ]}
       />
 

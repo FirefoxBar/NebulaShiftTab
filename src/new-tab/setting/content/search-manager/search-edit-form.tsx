@@ -1,8 +1,9 @@
 import { Button, Form, Select } from '@douyinfe/semi-ui';
 import { t } from '@/share/locale';
+import { SearchItemAlias } from '@/share/type-alias';
 import type { SearchItem } from '@/share/types';
 
-import './SearchEditForm.less';
+import './search-edit-form.less';
 
 interface SearchEditFormProps {
   initialData?: SearchItem;
@@ -12,12 +13,12 @@ interface SearchEditFormProps {
 
 export const SearchEditForm: React.FC<SearchEditFormProps> = ({
   initialData = {
-    key: '',
-    name: '',
-    url: '',
-    suggestion: '',
-    suggestionType: 'json',
-    extractSuggestion: '',
+    [SearchItemAlias.key]: '',
+    [SearchItemAlias.name]: '',
+    [SearchItemAlias.url]: '',
+    [SearchItemAlias.suggestion]: '',
+    [SearchItemAlias.suggestionType]: 'json',
+    [SearchItemAlias.extractSuggestion]: '',
   } as SearchItem,
   onSave,
   onCancel,
@@ -32,43 +33,39 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
       className="search-edit-form"
     >
       <Form.Input
-        field="name"
+        field={SearchItemAlias.name}
         label={t('name')}
         placeholder={t('enterSearchEngineName')}
         rules={[{ required: true, message: t('enterSearchEngineName') }]}
       />
       <Form.Input
-        field="url"
+        field={SearchItemAlias.url}
         label={t('searchUrl')}
         placeholder={t('searchUrlPlaceholder')}
         rules={[
           { required: true, message: t('enterSearchUrl') },
           {
+            transform: x => x.replace('{{q}}', 'test'),
+            type: 'url',
+            message: t('invalidUrl'),
+          },
+          {
             validator: (_rule: any, value: any) => {
               if (!value.includes('{{q}}')) {
                 return new Error(t('searchUrlRequiresPlaceholder'));
               }
-              const urlPattern =
-                /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
-              if (
-                !value.replace('{{q}}', 'test') ||
-                urlPattern.test(value.replace('{{q}}', 'test'))
-              ) {
-                return true;
-              } else {
-                return new Error(t('invalidUrl'));
-              }
+              return true;
             },
           },
         ]}
       />
       <Form.Input
-        field="suggestion"
+        field={SearchItemAlias.suggestion}
         label={t('suggestionUrl')}
         placeholder={t('suggestionUrl')}
       />
       <Form.Select
-        field="suggestionType"
+        field={SearchItemAlias.suggestionType}
         label={t('suggestionType')}
         placeholder={t('selectSuggestionType')}
       >
@@ -76,7 +73,7 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
         <Select.Option value="jsonp">{t('jsonp')}</Select.Option>
       </Form.Select>
       <Form.Input
-        field="extractSuggestion"
+        field={SearchItemAlias.extractSuggestion}
         label={t('extractionExpression')}
         placeholder={t('enterJSONataPath')}
       />

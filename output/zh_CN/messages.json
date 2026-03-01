@@ -264,6 +264,10 @@
     "message": "请选择",
     "description": "Message for requiring selection"
   },
+  "reacquireBackground": {
+    "message": "重新获取背景",
+    "description": "Button text for reacquiring background"
+  },
   "refreshFrequency": {
     "message": "刷新频率",
     "description": "Label for refresh frequency"

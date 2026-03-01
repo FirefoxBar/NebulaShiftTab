@@ -371,5 +371,9 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "reacquireBackground": {
+    "message": "Reacquire Background",
+    "description": "Button text for reacquiring background"
   }
 }

@@ -7,7 +7,9 @@ export const StorageKey = {
   siteIcon: 'site-icon',
 };
 
-export enum APIs {}
+export enum APIs {
+  REFRESH_BACKGROUND = 'refresh-background',
+}
 
 export const DefaultSearchEngines: SearchItem[] = [
   {

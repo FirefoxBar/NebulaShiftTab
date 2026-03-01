@@ -1,24 +1,22 @@
 import ReactDOM from 'react-dom/client';
 import { StorageKey } from '@/share/constant';
+import isDarkMode from '@/share/is-dark-mode';
 import { prefs } from '@/share/prefs';
 import { getAndWatch, getLocalStorage, local } from '@/share/storage';
+import { themeInfo } from '@/share/theme';
 import { Search } from './search';
 import Setting from './setting';
 import { Sites } from './sites';
 
 import './index.less';
-import isDarkMode from '@/share/is-dark-mode';
-import { themeInfo } from '@/share/theme';
 
-const Page = () => {
-  return (
-    <>
-      <Search />
-      <Sites />
-      <Setting />
-    </>
-  );
-};
+const Page = () => (
+  <>
+    <Search />
+    <Sites />
+    <Setting />
+  </>
+);
 
 const bgEl = document.createElement('div');
 bgEl.className = 'main-bg';

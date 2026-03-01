@@ -17,6 +17,7 @@ import { CustomBg } from './custom-bg';
 
 import './index.less';
 import { BackgroundItemAlias } from '@/share/type-alias';
+import { RefreshButton } from './refresh-button';
 
 type BackgroundType = PrefValue['background']['type'];
 
@@ -204,6 +205,17 @@ export const BackgroundSetting: React.FC = () => {
               />
             </div>
           }
+        />
+
+        <List.Item
+          main={
+            <div className="list-item">
+              <Typography.Text className="title">
+                {t('reacquireBackground')}
+              </Typography.Text>
+            </div>
+          }
+          extra={<RefreshButton />}
         />
       </List>
     </div>

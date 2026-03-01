@@ -6,7 +6,12 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS as cssDndKit } from '@dnd-kit/utilities';
-import { IconPlus, IconTreeTriangleDown } from '@douyinfe/semi-icons';
+import {
+  IconDelete,
+  IconEdit,
+  IconPlus,
+  IconTreeTriangleDown,
+} from '@douyinfe/semi-icons';
 import {
   Button,
   Dropdown,
@@ -64,16 +69,12 @@ const SortableItem = ({
       <div className="item-content">
         <div className="item-info">{item[SearchItemAlias.name]}</div>
         <div className="item-actions">
-          <Button size="small" onClick={() => handleEditSearch(item)}>
-            {t('edit')}
-          </Button>
+          <Button onClick={() => handleEditSearch(item)} icon={<IconEdit />} />
           <Button
-            size="small"
             type="danger"
             onClick={() => handleDeleteSearch(item[SearchItemAlias.key])}
-          >
-            {t('delete')}
-          </Button>
+            icon={<IconDelete />}
+          />
         </div>
       </div>
     </div>

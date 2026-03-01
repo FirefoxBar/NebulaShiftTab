@@ -6,7 +6,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS as cssDndKit } from '@dnd-kit/utilities';
-import { IconPlus } from '@douyinfe/semi-icons';
+import { IconDelete, IconEdit, IconPlus } from '@douyinfe/semi-icons';
 import { Button, List, Modal, Typography } from '@douyinfe/semi-ui';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
@@ -68,16 +68,12 @@ const SortableItem = ({
           <div className="url">{item[SiteItemAlias.url]}</div>
         </div>
         <div className="item-actions">
-          <Button size="small" onClick={() => handleEditSite(item)}>
-            {t('edit')}
-          </Button>
+          <Button onClick={() => handleEditSite(item)} icon={<IconEdit />} />
           <Button
-            size="small"
             type="danger"
             onClick={() => handleDeleteSite(item[SiteItemAlias.id])}
-          >
-            {t('delete')}
-          </Button>
+            icon={<IconDelete />}
+          />
         </div>
       </div>
     </div>

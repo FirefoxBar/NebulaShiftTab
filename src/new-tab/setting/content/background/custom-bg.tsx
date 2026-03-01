@@ -55,10 +55,10 @@ export const CustomBg: React.FC<CustomBgProps> = ({
   const handleCustomSubmit = (values: any) => {
     const customBackground: BackgroundItem = {
       [BackgroundItemAlias.key]: nanoid(),
-      [BackgroundItemAlias.url]: values.url,
-      [BackgroundItemAlias.type]: values.type,
-      [BackgroundItemAlias.refresh]: values.refresh,
-      [BackgroundItemAlias.extract]: values.extract,
+      [BackgroundItemAlias.url]: values[BackgroundItemAlias.url],
+      [BackgroundItemAlias.type]: values[BackgroundItemAlias.type],
+      [BackgroundItemAlias.refresh]: values[BackgroundItemAlias.refresh],
+      [BackgroundItemAlias.extract]: values[BackgroundItemAlias.extract],
     };
 
     onSubmit?.(customBackground);
@@ -67,16 +67,7 @@ export const CustomBg: React.FC<CustomBgProps> = ({
   return (
     <Form
       className="custom-bg-form"
-      initValues={
-        initialValue
-          ? {
-              type: initialValue[BackgroundItemAlias.type],
-              url: initialValue[BackgroundItemAlias.url],
-              refresh: initialValue[BackgroundItemAlias.refresh],
-              extract: initialValue[BackgroundItemAlias.extract],
-            }
-          : {}
-      }
+      initValues={initialValue || {}}
       onSubmit={handleCustomSubmit}
       labelPosition="left"
       labelWidth={120}
@@ -115,12 +106,7 @@ export const CustomBg: React.FC<CustomBgProps> = ({
         <Button type="tertiary" onClick={onCancel}>
           {t('cancel')}
         </Button>
-        <Button
-          htmlType="submit"
-          type="primary"
-          theme="solid"
-          style={{ marginRight: 8 }}
-        >
+        <Button htmlType="submit" type="primary" theme="solid">
           {t('save')}
         </Button>
       </div>

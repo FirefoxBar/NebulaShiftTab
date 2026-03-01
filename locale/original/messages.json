@@ -100,10 +100,6 @@
     "message": "Dark Mode",
     "description": "Label for dark mode setting"
   },
-  "delete": {
-    "message": "Delete",
-    "description": "Delete button text"
-  },
   "deleteSearchEngine": {
     "message": "Delete Search Engine",
     "description": "Delete search engine dialog title"
@@ -115,10 +111,6 @@
   "description": {
     "message": "A lightweight new tab",
     "description": "Extension description"
-  },
-  "edit": {
-    "message": "Edit",
-    "description": "Edit button text"
   },
   "editSearchEngine": {
     "message": "Edit Search Engine",

@@ -264,6 +264,10 @@
     "message": "Please select",
     "description": "Message for requiring selection"
   },
+  "reacquireBackground": {
+    "message": "Reacquire Background",
+    "description": "Button text for reacquiring background"
+  },
   "refreshFrequency": {
     "message": "Refresh Frequency",
     "description": "Label for refresh frequency"
@@ -371,9 +375,5 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
-  },
-  "reacquireBackground": {
-    "message": "Reacquire Background",
-    "description": "Button text for reacquiring background"
   }
 }

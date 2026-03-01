@@ -12,8 +12,14 @@
     "description": "Add site button text"
   },
   "apiOrImageAddress": {
-    "message": "{type} Address",
-    "description": "Dynamic label for API or image address"
+    "message": "$type$ Address",
+    "description": "Dynamic label for API or image address",
+    "placeholders": {
+      "type": {
+        "content": "$1",
+        "example": "API"
+      }
+    }
   },
   "autoFetch": {
     "message": "Auto Fetch",

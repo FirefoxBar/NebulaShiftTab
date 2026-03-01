@@ -36,7 +36,7 @@ export interface SearchItem {
 
 export interface BackgroundItem {
   [BackgroundItemAlias.key]: string;
-  [BackgroundItemAlias.name]: string;
+  [BackgroundItemAlias.name]?: string;
   [BackgroundItemAlias.url]: string;
   [BackgroundItemAlias.type]: 'api' | 'image' | 'custom';
   // 单位：分钟

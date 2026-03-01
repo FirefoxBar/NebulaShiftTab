@@ -2,6 +2,7 @@ import { Button, Form, Select, useFieldState } from '@douyinfe/semi-ui';
 import { nanoid } from 'nanoid';
 import type React from 'react';
 import { t } from '@/share/locale';
+import { BackgroundItemAlias } from '@/share/type-alias';
 import type { BackgroundItem } from '@/share/types';
 
 interface CustomBgProps {
@@ -11,7 +12,7 @@ interface CustomBgProps {
 }
 
 const URLInput = () => {
-  const { value: type } = useFieldState('type');
+  const { value: type } = useFieldState(BackgroundItemAlias.type);
 
   if (!type) {
     return null;
@@ -19,10 +20,8 @@ const URLInput = () => {
 
   return (
     <Form.Input
-      field="url"
-      label={t('apiOrImageAddress', {
-        type: type === 'api' ? 'API' : t('image'),
-      })}
+      field={BackgroundItemAlias.url}
+      label={t('apiOrImageAddress', type === 'api' ? 'API' : t('image'))}
       rules={[
         { required: true, message: t('pleaseEnterAddressMsg') },
         { type: 'url', message: t('pleaseEnterValidURLMsg') },
@@ -32,7 +31,7 @@ const URLInput = () => {
 };
 
 const ExtractInput = () => {
-  const { value: type } = useFieldState('type');
+  const { value: type } = useFieldState(BackgroundItemAlias.type);
 
   if (type !== 'api') {
     return null;
@@ -40,7 +39,7 @@ const ExtractInput = () => {
 
   return (
     <Form.Input
-      field="extract"
+      field={BackgroundItemAlias.extract}
       label={t('extractionExpression')}
       placeholder={t('enterJSONataPath')}
     />
@@ -55,12 +54,11 @@ export const CustomBg: React.FC<CustomBgProps> = ({
   // 处理自定义背景表单提交
   const handleCustomSubmit = (values: any) => {
     const customBackground: BackgroundItem = {
-      key: nanoid(),
-      name: '',
-      url: values.url,
-      type: values.type,
-      refresh: values.refresh,
-      extract: values.extract,
+      [BackgroundItemAlias.key]: nanoid(),
+      [BackgroundItemAlias.url]: values.url,
+      [BackgroundItemAlias.type]: values.type,
+      [BackgroundItemAlias.refresh]: values.refresh,
+      [BackgroundItemAlias.extract]: values.extract,
     };
 
     onSubmit?.(customBackground);
@@ -72,10 +70,10 @@ export const CustomBg: React.FC<CustomBgProps> = ({
       initValues={
         initialValue
           ? {
-              type: initialValue.type,
-              url: initialValue.url,
-              refresh: initialValue.refresh,
-              extract: initialValue.extract,
+              type: initialValue[BackgroundItemAlias.type],
+              url: initialValue[BackgroundItemAlias.url],
+              refresh: initialValue[BackgroundItemAlias.refresh],
+              extract: initialValue[BackgroundItemAlias.extract],
             }
           : {}
       }
@@ -84,7 +82,7 @@ export const CustomBg: React.FC<CustomBgProps> = ({
       labelWidth={120}
     >
       <Form.RadioGroup
-        field="type"
+        field={BackgroundItemAlias.type}
         label={t('type')}
         rules={[{ required: true, message: t('pleaseSelect') }]}
         options={[
@@ -93,7 +91,7 @@ export const CustomBg: React.FC<CustomBgProps> = ({
         ]}
       />
       <Form.Select
-        field="refresh"
+        field={BackgroundItemAlias.refresh}
         label={t('refreshFrequency')}
         placeholder={t('selectRefreshFrequency')}
         rules={[{ required: true, message: t('pleaseSelect') }]}

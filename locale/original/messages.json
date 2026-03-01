@@ -192,10 +192,6 @@
     "message": "Higher value is darker",
     "description": "Description for background darkness setting"
   },
-  "theme": {
-    "message": "Theme",
-    "description": "Label for theme setting"
-  },
   "iconProvider": {
     "message": "Icon Provider",
     "description": "Label for icon provider setting"
@@ -355,6 +351,10 @@
   "suggestionUrl": {
     "message": "Suggestion URL",
     "description": "Label for suggestion URL field"
+  },
+  "theme": {
+    "message": "Theme",
+    "description": "Label for theme setting"
   },
   "type": {
     "message": "Type",

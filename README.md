@@ -6,7 +6,7 @@ Nebula Shift Tab
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/ifpdfibcbnbkebbcaenihbfbocncjdhd?label=Chrome)](https://chrome.google.com/webstore/detail/nebula-shift-tab/ifpdfibcbnbkebbcaenihbfbocncjdhd)
 [![Edge](https://img.shields.io/badge/dynamic/json?label=Edge&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Floglacfgaifapahekfegphcggaffdohp)](https://microsoftedge.microsoft.com/addons/detail/nebula-shift-tab/loglacfgaifapahekfegphcggaffdohp)
 [![Mozilla Add-ons](https://img.shields.io/amo/users/nebula-shift-tab?label=Firefox)](https://addons.mozilla.org/en-US/firefox/addon/nebula-shift-tab/)
-[![license](https://img.shields.io/github/license/FirefoxBar/NebulaShiftTab.svg?label=License)](https://github.com/FirefoxBar/NebulaShiftTab/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/FirefoxBar/NebulaShiftTab.svg?label=License)](https://github.com/FirefoxBar/NebulaShiftTab/blob/main/LICENSE)
 [![Discussions](https://img.shields.io/github/discussions/FirefoxBar/NebulaShiftTab?label=Discussions)](https://github.com/FirefoxBar/NebulaShiftTab/discussions)
 [![Build Status](https://github.com/FirefoxBar/NebulaShiftTab/actions/workflows/dev.yml/badge.svg)](https://github.com/FirefoxBar/NebulaShiftTab/actions/workflows/dev.yml)
 

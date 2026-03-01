@@ -73,5 +73,5 @@ export function getNote() {
   if (repo && runId) {
     return `Submit via GitHub Actions: https://github.com/${repo}/actions/runs/${runId}`;
   }
-  return 'https://github.com/FirefoxBar/HeaderEditor/blob/master/README.md';
+  return 'https://github.com/FirefoxBar/NebulaShiftTab/blob/main/README.md';
 }

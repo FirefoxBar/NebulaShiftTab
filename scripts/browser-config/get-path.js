@@ -1,11 +1,5 @@
 function getOutputFile(version, extension) {
-  return (
-    ['HeaderEditor', version].join(
-      '-',
-    ) +
-    '.' +
-    extension
-  );
+  return ['NebulaShiftTab', version].join('-') + '.' + extension;
 }
 
 function getDistDir(browser) {

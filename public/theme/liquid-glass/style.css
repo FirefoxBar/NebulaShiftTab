@@ -1,3 +1,34 @@
 .site-item .site-icon-container .site-icon {
   border-radius: 24px;
 }
+
+.search-container .search-input-wrapper {
+  backdrop-filter: blur(5px);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.search-container .search-input-wrapper .search-button {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.search-container.show-suggestions .search-input-wrapper {
+  border-radius: 27px;
+}
+
+.search-container .search-suggestions {
+  border-radius: 27px;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(5px);
+  margin-top: 12px;
+  padding: 8px;
+}
+
+.search-container .search-suggestions .suggestion-item {
+  padding: 8px 16px;
+  border-radius: 27px;
+}
+
+.search-container.active .search-input-wrapper {
+  background-color: rgba(255, 255, 255, 0.4);
+}

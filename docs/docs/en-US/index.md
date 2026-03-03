@@ -16,10 +16,10 @@ features:
   - title: Smart Search
     details: Supports custom engines with real-time suggestions
     icon: 🔍
-  - title: Dynamic Backgrounds
-    details: Compatible with private APIs and scheduled auto-updates
-    icon: 🖼
-  - title: Quick Navigation
-    details: Includes multiple built-in icon libraries with full customization support
-    icon: 🔗
+  - title: Personalization
+    details: Supports proprietary background API and includes multiple built-in icon libraries.
+    icon: 👓
+  - title: Privacy Safe
+    details: Open source and free, does not collect any data
+    icon: 🔒
 ---

@@ -10,15 +10,17 @@ Nebula Shift Tab
 [![Discussions](https://img.shields.io/github/discussions/FirefoxBar/NebulaShiftTab?label=Discussions)](https://github.com/FirefoxBar/NebulaShiftTab/discussions)
 [![Build Status](https://github.com/FirefoxBar/NebulaShiftTab/actions/workflows/dev.yml/badge.svg)](https://github.com/FirefoxBar/NebulaShiftTab/actions/workflows/dev.yml)
 
-A flexible, lightweight new tab page featuring:
+A flexible, lightweight new tab page, with the following features:
 * Smart Search: Supports custom engines with real-time suggestions.
 * Dynamic Backgrounds: Compatible with private APIs and scheduled auto-updates.
 * Quick Navigation: Includes multiple built-in icon libraries with full customization support.
+* Privacy Safe: This extension is open source and free, and does not collect any data.
 
-一款灵活轻量的新标签页，核心功能包括：
+一款灵活轻量的新标签页，核心特点：
 * 智能搜索：支持自定义引擎及实时建议。
 * 动态背景：兼容私有 API，支持定时自动更新。
 * 快捷导航：内置多套图标库，支持完全自定义。
+* 保护隐私：本扩展开源免费，不收集任何数据。
 
 ## Get this extension
 
@@ -28,12 +30,16 @@ A flexible, lightweight new tab page featuring:
 | ![Chrome Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/chrome/chrome_16x16.png) Chrome | [Chrome Web Store](https://chrome.google.com/webstore/detail/nebula-shift-tab/ifpdfibcbnbkebbcaenihbfbocncjdhd) |
 | ![Edge Logo](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/edge/edge_16x16.png) Edge | [Edge Addons](https://microsoftedge.microsoft.com/addons/detail/nebula-shift-tab/loglacfgaifapahekfegphcggaffdohp) |
 
-## Permissions
+## Privacy and Permissions
 
 Nebula Shift Tab require those permissions:
 
 * `alarms`: Update background images regularly
 * `storage`, `unlimitedStorage`: Storage settings
+
+Nebula Shift Tab does not collect any data. But when using third-party services (such as Google Search), these services may obtain your basic information, such as your IP address. These are not essential features of this extension and are not within its control. You can learn about the privacy policies of third-party services on your own, or you can disable the relevant services.
+
+Nebula Shift Tab 自身不收集任何数据。但是，在使用第三方服务（例如 Google 搜索等）时，相应服务可能会获取你的基本信息，如 IP 地址等。它们不是本扩展的必须功能，也不在本扩展的控制范围内。您可以自行了解并第三方服务的隐私政策，或关闭相关服务。
 
 ## How to build
 

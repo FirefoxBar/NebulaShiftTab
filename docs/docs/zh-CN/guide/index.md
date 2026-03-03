@@ -13,3 +13,7 @@ title: 安装
 | Edge | [Edge Addons](https://microsoftedge.microsoft.com/addons/detail/nebula-shift-tab/loglacfgaifapahekfegphcggaffdohp) |
 
 * 官方下载与 Mozilla Add-ons 完全一致，但 Mozilla Add-ons 审核非常缓慢，通常需要一周以上，您可能无法获取到最新版本。
+
+## 隐私说明
+
+Nebula Shift Tab 自身不收集任何数据。但是，在使用第三方服务（例如 Google 搜索等）时，相应服务可能会获取你的基本信息，如 IP 地址等。它们不是本扩展的必须功能，也不在本扩展的控制范围内。您可以自行了解并第三方服务的隐私政策，或关闭相关服务。

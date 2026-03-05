@@ -64,10 +64,13 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
       />
       <BoolFlagsField
         field={SearchItemAlias.showOn}
-        label="显示于"
+        label={t('displayedAt')}
         optionList={[
-          { label: '首页', flag: SearchItemShowOnFlag.HOME },
-          { label: '右键菜单', flag: SearchItemShowOnFlag.CONTEXT_MENU },
+          { label: t('home'), flag: SearchItemShowOnFlag.HOME },
+          {
+            label: t('rightClickMenu'),
+            flag: SearchItemShowOnFlag.CONTEXT_MENU,
+          },
         ]}
       />
       <Form.Input

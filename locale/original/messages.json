@@ -387,5 +387,15 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "displayedAt": {
+    "message": "Displayed at",
+    "description": "Label for displayed at field"
+  },
+  "home": {
+    "message": "Home"
+  },
+  "rightClickMenu": {
+    "message": "Right Click Menu"
   }
 }

@@ -34,6 +34,8 @@ Nebula Shift Tab require those permissions:
 
 * `alarms`: Update background images regularly
 * `storage`, `unlimitedStorage`: Storage settings
+* `tabs`: Open search results in new tabs
+* `contextMenus`: Add right-click menu items
 
 ## How to build
 

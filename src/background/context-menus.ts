@@ -3,28 +3,13 @@ import { SearchItemShowOnFlag } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import { SearchItemAlias } from '@/share/type-alias';
+import { getNewTabs } from './utils';
 
 const noop = () => {
   if (chrome.runtime.lastError) {
     // ignore
   }
 };
-
-async function getNewTabs() {
-  const tabs = await chrome.tabs.query({
-    currentWindow: true,
-  });
-  const patterns = [
-    'chrome://newtab/',
-    'edge://newtab/',
-    'about:newtab',
-    'chrome://startpage/',
-    'browser://newtab/',
-    chrome.runtime.getURL('new-tab.html'),
-  ];
-  console.log(tabs.map(x => x.url));
-  return tabs.filter(x => patterns.includes(x.url || ''));
-}
 
 async function openOrUpdate(url: string) {
   const newTabs = await getNewTabs();

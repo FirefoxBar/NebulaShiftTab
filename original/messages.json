@@ -124,6 +124,10 @@
     "message": "A lightweight new tab",
     "description": "Extension description"
   },
+  "displayedAt": {
+    "message": "Displayed at",
+    "description": "Label for displayed at field"
+  },
   "editSearchEngine": {
     "message": "Edit Search Engine",
     "description": "Edit search engine dialog title"
@@ -203,6 +207,9 @@
   "higherValueDarker": {
     "message": "Higher value is darker",
     "description": "Description for background darkness setting"
+  },
+  "home": {
+    "message": "Home"
   },
   "iconProvider": {
     "message": "Icon Provider",
@@ -287,6 +294,9 @@
   "restoreFromFile": {
     "message": "Restore from File",
     "description": "Button text for restoring from file"
+  },
+  "rightClickMenu": {
+    "message": "Right Click Menu"
   },
   "save": {
     "message": "Save",

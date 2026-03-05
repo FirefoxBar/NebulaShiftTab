@@ -11,6 +11,10 @@
     "message": "Add Site",
     "description": "Add site button text"
   },
+  "addToHome": {
+    "message": "Add to Home",
+    "description": "Right-click menu for adding a link to home screen"
+  },
   "apiOrImageAddress": {
     "message": "$type$ Address",
     "description": "Dynamic label for API or image address",

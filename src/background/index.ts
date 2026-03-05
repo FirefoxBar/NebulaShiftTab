@@ -1,5 +1,6 @@
 import createApiHandler from './api-handler';
 import { initBg } from './bg';
+import { initContextMenus } from './context-menus';
 
 let initd = false;
 function init() {
@@ -9,6 +10,7 @@ function init() {
   initd = true;
   createApiHandler();
   initBg();
+  initContextMenus();
 }
 
 try {

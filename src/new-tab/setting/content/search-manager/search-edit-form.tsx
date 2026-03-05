@@ -4,6 +4,8 @@ import { SearchItemAlias } from '@/share/type-alias';
 import type { SearchItem } from '@/share/types';
 
 import './search-edit-form.less';
+import { BoolFlagsField } from '@/components/bool-flags-editor';
+import { SearchItemShowOnFlag, searchItemShowOnAll } from '@/share/constant';
 
 interface SearchEditFormProps {
   initialData?: SearchItem;
@@ -16,6 +18,7 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
     [SearchItemAlias.key]: '',
     [SearchItemAlias.name]: '',
     [SearchItemAlias.url]: '',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
     [SearchItemAlias.suggestion]: '',
     [SearchItemAlias.suggestionType]: 'json',
     [SearchItemAlias.extractSuggestion]: '',
@@ -57,6 +60,14 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
             type: 'url',
             message: t('invalidUrl'),
           },
+        ]}
+      />
+      <BoolFlagsField
+        field={SearchItemAlias.showOn}
+        label="显示于"
+        optionList={[
+          { label: '首页', flag: SearchItemShowOnFlag.HOME },
+          { label: '右键菜单', flag: SearchItemShowOnFlag.CONTEXT_MENU },
         ]}
       />
       <Form.Input

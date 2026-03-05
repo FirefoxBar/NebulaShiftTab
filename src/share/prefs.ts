@@ -1,8 +1,9 @@
 import isEqual from 'fast-deep-equal';
 import { debounce } from 'lodash-es';
-import { defaultPrefValue } from './constant';
+import { defaultPrefValue, searchItemShowOnAll } from './constant';
 import emitter from './emitter';
 import { getSyncStorage } from './storage';
+import { SearchItemAlias } from './type-alias';
 import type { PrefValue } from './types';
 
 class Prefs {
@@ -90,6 +91,13 @@ class Prefs {
     noSync = false,
   ) {
     const oldValue = this.values[key as keyof PrefValue];
+    if (key === 'searches' && value) {
+      (value as PrefValue['searches']).forEach(it => {
+        if (typeof it[SearchItemAlias.showOn] === 'undefined') {
+          it[SearchItemAlias.showOn] = searchItemShowOnAll;
+        }
+      });
+    }
     if (!isEqual(value, oldValue)) {
       (this.values as any)[key] = value;
       emitter.emit(emitter.EVENT_PREFS_UPDATE, key, value);

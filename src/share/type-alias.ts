@@ -5,6 +5,7 @@ export const SearchItemAlias = {
   suggestion: 's' as const,
   suggestionType: 't' as const,
   extractSuggestion: 'e' as const,
+  showOn: 'o' as const,
 };
 
 export const BackgroundItemAlias = {

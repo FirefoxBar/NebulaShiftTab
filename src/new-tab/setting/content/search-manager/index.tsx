@@ -23,7 +23,6 @@ import {
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import usePref from '@/hooks/use-pref';
-import { DefaultSearchEngines } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import { SearchItemAlias } from '@/share/type-alias';
@@ -31,6 +30,7 @@ import type { SearchItem } from '@/share/types';
 import { SearchEditForm } from './search-edit-form';
 
 import './index.less';
+import { searchEngines } from '@/share/constant';
 
 // 拖拽项组件
 const SortableItem = ({
@@ -205,7 +205,7 @@ export const SearchManager: React.FC = () => {
             {t('add')}
           </Button>
           <Dropdown
-            menu={DefaultSearchEngines.map(x => ({
+            menu={searchEngines.map(x => ({
               node: 'item',
               name: x[SearchItemAlias.name],
               onClick: () =>

@@ -383,5 +383,9 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "addToHome": {
+    "message": "Add to Home",
+    "description": "Right-click menu for adding a link to home screen"
   }
 }

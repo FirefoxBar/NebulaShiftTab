@@ -31,6 +31,7 @@ export interface SearchItem {
   [SearchItemAlias.key]: string;
   [SearchItemAlias.name]: string;
   [SearchItemAlias.url]: string;
+  [SearchItemAlias.showOn]: number;
   [SearchItemAlias.suggestion]?: string;
   [SearchItemAlias.suggestionType]?: 'json' | 'jsonp';
   [SearchItemAlias.extractSuggestion]?: string;

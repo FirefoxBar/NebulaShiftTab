@@ -10,13 +10,12 @@ import type React from 'react';
 import { useState } from 'react';
 import Modal from '@/components/modal';
 import usePref from '@/hooks/use-pref';
-import { DefaultBackgroundEngines, StorageKey } from '@/share/constant';
+import { backgroundEngines, StorageKey } from '@/share/constant';
 import { t } from '@/share/locale';
+import { BackgroundItemAlias } from '@/share/type-alias';
 import type { PrefValue } from '@/share/types';
 import { CustomBg } from './custom-bg';
-
 import './index.less';
-import { BackgroundItemAlias } from '@/share/type-alias';
 import { RefreshButton } from './refresh-button';
 
 type BackgroundType = PrefValue['background']['type'];
@@ -74,7 +73,7 @@ export const BackgroundSetting: React.FC = () => {
                 if (v === 'builtin') {
                   updateBackground({
                     type: 'builtin',
-                    key: DefaultBackgroundEngines[0][
+                    key: backgroundEngines[0][
                       BackgroundItemAlias.key
                     ] as string,
                   });
@@ -107,7 +106,7 @@ export const BackgroundSetting: React.FC = () => {
                   updateBackground({ type: 'builtin', key: v as string })
                 }
               >
-                {DefaultBackgroundEngines.map(engine => (
+                {backgroundEngines.map(engine => (
                   <Select.Option
                     key={engine[BackgroundItemAlias.key]}
                     value={engine[BackgroundItemAlias.key]}

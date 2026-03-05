@@ -124,6 +124,10 @@
     "message": "一个轻量级的新标签页",
     "description": "Extension description"
   },
+  "displayedAt": {
+    "message": "显示于",
+    "description": "Label for displayed at field"
+  },
   "editSearchEngine": {
     "message": "编辑搜索引擎",
     "description": "Edit search engine dialog title"
@@ -203,6 +207,9 @@
   "higherValueDarker": {
     "message": "数值越大越暗",
     "description": "Description for background darkness setting"
+  },
+  "home": {
+    "message": "首页"
   },
   "iconProvider": {
     "message": "图标提供者",
@@ -287,6 +294,9 @@
   "restoreFromFile": {
     "message": "从文件恢复",
     "description": "Button text for restoring from file"
+  },
+  "rightClickMenu": {
+    "message": "右键菜单"
   },
   "save": {
     "message": "保存",

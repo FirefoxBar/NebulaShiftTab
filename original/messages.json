@@ -25,8 +25,16 @@
     "message": "Auto Fetch",
     "description": "Option for auto fetch icon type"
   },
+  "backgroundBlur": {
+    "message": "Background Blur",
+    "description": "Label for background blur setting"
+  },
   "backgroundDarkness": {
     "message": "Background Darkness",
+    "description": "Label for background darkness setting"
+  },
+  "backgroundDarknessDarkMode": {
+    "message": "Background Darkness (Dark Mode)",
     "description": "Label for background darkness setting"
   },
   "backgroundSettings": {

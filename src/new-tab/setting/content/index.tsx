@@ -33,7 +33,7 @@ const SettingContent: React.FC<SettingSideSheetProps> = ({
         height="100%"
         className="setting-drawer"
       >
-        <Tabs type="line">
+        <Tabs type="line" lazyRender={true}>
           <TabPane itemKey="bookmark-management" tab={t('siteManagement')}>
             <SitesManager />
           </TabPane>

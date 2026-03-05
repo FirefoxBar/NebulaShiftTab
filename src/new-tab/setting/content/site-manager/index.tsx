@@ -8,8 +8,6 @@ import {
 import { CSS as cssDndKit } from '@dnd-kit/utilities';
 import { IconDelete, IconEdit, IconPlus } from '@douyinfe/semi-icons';
 import { Button, List, Modal, Typography } from '@douyinfe/semi-ui';
-import { nanoid } from 'nanoid';
-import { useState } from 'react';
 import { SiteIcon } from '@/components/site-icon';
 import {
   SiteIconContext,
@@ -21,7 +19,7 @@ import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteItem } from '@/share/types';
-import { SiteEditForm } from './site-edit-form';
+import { showSiteEditModal } from './site-edit-modal';
 
 import './index.less';
 
@@ -81,21 +79,16 @@ const SortableItem = ({
 };
 
 export const SitesManager: React.FC = () => {
-  const [editingSite, setEditingSite] = useState<SiteItem | undefined>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [sites, setSites] = usePref('sites');
 
   // 添加站点
-  const handleAddSite = () => {
-    setEditingSite(undefined);
-    setIsModalOpen(true);
-  };
+  const handleAddSite = () => showSiteEditModal({});
 
   // 编辑站点
-  const handleEditSite = (site: SiteItem) => {
-    setEditingSite({ ...site });
-    setIsModalOpen(true);
-  };
+  const handleEditSite = (site: SiteItem) =>
+    showSiteEditModal({
+      initialData: { ...site },
+    });
 
   // 删除站点
   const handleDeleteSite = (id: string) => {
@@ -113,53 +106,6 @@ export const SitesManager: React.FC = () => {
         setSites(newSites);
       },
     });
-  };
-
-  // 保存站点
-  const handleSaveSite = (updatedSite: SiteItem) => {
-    if (!updatedSite[SiteItemAlias.id]) {
-      updatedSite[SiteItemAlias.id] = nanoid();
-    }
-    const newSites = [...sites];
-    const index = newSites.findIndex(
-      site => site[SiteItemAlias.id] === updatedSite[SiteItemAlias.id],
-    );
-
-    if (index !== -1) {
-      newSites[index] = updatedSite;
-    } else {
-      // 添加新站点
-      newSites.push(updatedSite);
-    }
-
-    newSites.forEach(site => {
-      if (
-        ['local', 'custom'].includes(site[SiteItemAlias.iconType]) &&
-        site[SiteItemAlias.icon]?.startsWith('data:image/')
-      ) {
-        chrome.storage.local.set({
-          [`${StorageKey.siteIcon}_${site[SiteItemAlias.id]}`]:
-            site[SiteItemAlias.icon],
-        });
-        site[SiteItemAlias.iconType] = 'local';
-        delete site[SiteItemAlias.icon];
-      }
-      if (site[SiteItemAlias.icon] === '') {
-        delete site[SiteItemAlias.icon];
-      }
-    });
-
-    console.log('newSites', newSites);
-
-    setSites(newSites);
-    setEditingSite(undefined);
-    setIsModalOpen(false);
-  };
-
-  // 取消编辑
-  const handleCancelEdit = () => {
-    setEditingSite(undefined);
-    setIsModalOpen(false);
   };
 
   // 拖拽结束处理
@@ -191,22 +137,6 @@ export const SitesManager: React.FC = () => {
 
   return (
     <div className="sites-manager-container">
-      <Modal
-        title={editingSite?.[SiteItemAlias.id] ? t('editSite') : t('addSite')}
-        visible={isModalOpen}
-        footer={null}
-        onCancel={handleCancelEdit}
-        width={500}
-        maskClosable={false}
-        closeOnEsc={false}
-      >
-        <SiteEditForm
-          initialData={editingSite || undefined}
-          onSave={handleSaveSite}
-          onCancel={handleCancelEdit}
-        />
-      </Modal>
-
       <div className="header">
         <Typography.Title heading={6}>
           {t('siteManagement')} ({sites.length})

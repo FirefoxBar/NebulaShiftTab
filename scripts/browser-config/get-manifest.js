@@ -17,7 +17,13 @@ const baseManifest = {
     128: 'icons/logo.png',
   },
   manifest_version: 3,
-  permissions: ['storage', 'alarms', 'unlimitedStorage'],
+  permissions: [
+    'storage',
+    'alarms',
+    'unlimitedStorage',
+    'contextMenus',
+    'tabs',
+  ],
   host_permissions: ['*://*/*'],
 };
 

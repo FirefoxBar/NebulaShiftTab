@@ -19,6 +19,7 @@
   "epicgames.com": "epic",
   "facebook.com": "facebook",
   "feishu.cn": "feishu",
+  "fanqienovel.com": "fanqienovel",
   "gmail.com": "gmail",
   "mail.google.com": "gmail",
   "maps.google.com": "google-map",
@@ -64,5 +65,6 @@
   "hupu.com": "hupu",
   "kimi.com": "kimi",
   "kuaishou.com": "kuaishou",
-  "github.com": "github"
+  "github.com": "github",
+  "weread.qq.com": "weread"
 }

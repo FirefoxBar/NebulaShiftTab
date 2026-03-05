@@ -4,6 +4,8 @@ import { SearchItemAlias } from '@/share/type-alias';
 import type { SearchItem } from '@/share/types';
 
 import './search-edit-form.less';
+import { BoolFlagsField } from '@/components/bool-flags-editor';
+import { SearchItemShowOnFlag, searchItemShowOnAll } from '@/share/constant';
 
 interface SearchEditFormProps {
   initialData?: SearchItem;
@@ -16,6 +18,7 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
     [SearchItemAlias.key]: '',
     [SearchItemAlias.name]: '',
     [SearchItemAlias.url]: '',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
     [SearchItemAlias.suggestion]: '',
     [SearchItemAlias.suggestionType]: 'json',
     [SearchItemAlias.extractSuggestion]: '',
@@ -56,6 +59,17 @@ export const SearchEditForm: React.FC<SearchEditFormProps> = ({
             transform: x => x.replace('{{q}}', 'test'),
             type: 'url',
             message: t('invalidUrl'),
+          },
+        ]}
+      />
+      <BoolFlagsField
+        field={SearchItemAlias.showOn}
+        label={t('displayedAt')}
+        optionList={[
+          { label: t('home'), flag: SearchItemShowOnFlag.HOME },
+          {
+            label: t('rightClickMenu'),
+            flag: SearchItemShowOnFlag.CONTEXT_MENU,
           },
         ]}
       />

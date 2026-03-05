@@ -1,4 +1,4 @@
-import { DefaultBackgroundEngines, StorageKey } from '@/share/constant';
+import { backgroundEngines, StorageKey } from '@/share/constant';
 import { prefs } from '@/share/prefs';
 import { BackgroundItemAlias } from '@/share/type-alias';
 import type { BackgroundItem, PrefValue } from '@/share/types';
@@ -192,7 +192,7 @@ export function checkBg(forceRefresh = false) {
     return runBackgroundTask(setting.value, forceRefresh);
   }
   if (setting.type === 'builtin') {
-    const v = DefaultBackgroundEngines.find(
+    const v = backgroundEngines.find(
       x => x[BackgroundItemAlias.key] === setting.key,
     );
     return v ? runBackgroundTask(v, forceRefresh) : undefined;

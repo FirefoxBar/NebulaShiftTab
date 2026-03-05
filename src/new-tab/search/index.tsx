@@ -2,13 +2,14 @@ import { useRequest } from 'ahooks';
 import type React from 'react';
 import { useRef, useState } from 'react';
 import usePref from '@/hooks/use-pref';
+import { hasFlag } from '@/share/bool-flags';
+import { SearchItemShowOnFlag } from '@/share/constant';
 import { t } from '@/share/locale';
+import { SearchItemAlias } from '@/share/type-alias';
 import type { SearchItem } from '@/share/types';
 import { createJsonAta, extractData, parseJsonp } from '@/share/utils';
 import { SearchIcon } from './search-icon';
-
 import './search.less';
-import { SearchItemAlias } from '@/share/type-alias';
 
 async function decodeResponse(response: Response): Promise<string> {
   const contentType = response.headers.get('content-type');
@@ -164,16 +165,20 @@ export const Search: React.FC = () => {
       className={`search-container ${active ? 'active' : ''} ${showSuggestions ? 'show-suggestions' : ''}`}
     >
       <div className="search-engines">
-        {searches.map(engine => (
-          <button
-            key={engine[SearchItemAlias.name]}
-            type="button"
-            className={`engine-btn ${currentEngine?.[SearchItemAlias.name] === engine[SearchItemAlias.name] ? 'active' : ''}`}
-            onClick={() => setCurrentEngine(engine)}
-          >
-            {engine[SearchItemAlias.name]}
-          </button>
-        ))}
+        {searches
+          .filter(x =>
+            hasFlag(x[SearchItemAlias.showOn], SearchItemShowOnFlag.HOME),
+          )
+          .map(engine => (
+            <button
+              key={engine[SearchItemAlias.name]}
+              type="button"
+              className={`engine-btn ${currentEngine?.[SearchItemAlias.name] === engine[SearchItemAlias.name] ? 'active' : ''}`}
+              onClick={() => setCurrentEngine(engine)}
+            >
+              {engine[SearchItemAlias.name]}
+            </button>
+          ))}
       </div>
 
       <div className="search-input-wrapper">

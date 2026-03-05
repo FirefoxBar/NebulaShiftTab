@@ -6,7 +6,9 @@
     "amap.com": "amap.webp",
     "amazon.cn": "amazon.webp",
     "amazon.com": "amazon.webp",
+    "baidu.com": "baidu.webp",
     "map.baidu.com": "baidu-map.webp",
+    "bilibili.com": "bilibili.webp",
     "chaoxing.com": "chaoxingstudy.webp",
     "dingtalk.com": "dingding.webp",
     "douban.com": "douban.webp",
@@ -18,6 +20,8 @@
     "gmail.com": "gmail.webp",
     "mail.google.com": "gmail.webp",
     "maps.google.com": "google-map.webp",
+    "translate.google.com": "google-translate.webp",
+    "translate.google.com.hk": "google-translate.webp",
     "google.com": "google.webp",
     "google.com.hk": "google.webp",
     "instagram.com": "instagram.webp",
@@ -41,10 +45,15 @@
     "qianwen.com": "qianwen.webp",
     "douyin.com": "aweme.webp",
     "tiktok.com": "aweme.webp",
+    "jianshu.com": "jianshu.webp",
+    "study.163.com": "netease-study.webp",
+    "qq.com": "tencent.webp",
     "chat.openai.com": "chatgpt.webp",
+    "hupu.com": "hupu.webp",
     "kimi.com": "kimi.webp",
     "kuaishou.com": "kuaishou.webp",
-    "github.com": "github.webp"
+    "github.com": "github.webp",
+    "weread.qq.com": "weread.webp"
   },
   "delta-icons": {
     "_default": "_default.png",
@@ -100,6 +109,7 @@
     "douban.com": "douban.png",
     "facebook.com": "facebook.png",
     "feishu.cn": "feishu.png",
+    "fanqienovel.com": "fanqienovel.png",
     "gmail.com": "gmail.png",
     "mail.google.com": "gmail.png",
     "translate.google.com": "google-translate.png",
@@ -133,7 +143,8 @@
     "hupu.com": "hupu.png",
     "kimi.com": "kimi.png",
     "kuaishou.com": "kuaishou.png",
-    "github.com": "github.webp"
+    "github.com": "github.webp",
+    "weread.qq.com": "weread.png"
   },
   "mbe-style": {
     "_default": "_default.png",
@@ -187,6 +198,7 @@
     "tmall.com": "tmall.png",
     "toutiao.com": "toutiao.png",
     "youdao.com": "youdao.png",
-    "kuaishou.com": "kuaishou.png"
+    "kuaishou.com": "kuaishou.png",
+    "weread.qq.com": "weread.png"
   }
 }

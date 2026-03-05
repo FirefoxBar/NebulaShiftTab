@@ -1,3 +1,36 @@
-.site-item .site-icon-container .site-icon {
-  border-radius: 24px;
+body {
+  --site-icon-radius: 24px;
+  --search-input-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+  --search-input-bg: rgba(255, 255, 255, 0.25);
+  --search-input-bg-active: rgba(255, 255, 255, 0.4);
+  --search-input-radius-active: 27px;
+  --search-button-color: rgba(0, 0, 0, 0.6);
+
+  --search-suggestion-bg: rgba(255, 255, 255, 0.4);
+  --search-suggestion-radius: 27px;
+}
+
+body[theme-mode="dark"] {
+  --search-input-color: rgba(255, 255, 255, 0.8);
+  --search-input-bg: rgba(0, 0, 0, 0.25);
+  --search-input-bg-active: rgba(0, 0, 0, 0.35);
+  --search-button-color: rgba(255, 255, 255, 0.8);
+  --search-suggestion-color: rgba(255, 255, 255, 0.8);
+  --search-suggestion-bg: rgba(0, 0, 0, 0.35);
+  --search-suggestion-bg-hover: rgba(0, 0, 0, 0.3);
+}
+
+.search-container .search-input-wrapper {
+  backdrop-filter: blur(5px);
+}
+
+.search-container .search-suggestions {
+  backdrop-filter: blur(5px);
+  margin-top: 12px;
+  padding: 8px;
+}
+
+.search-container .search-suggestions .suggestion-item {
+  padding: 8px 16px;
+  border-radius: var(--search-suggestion-radius);
 }

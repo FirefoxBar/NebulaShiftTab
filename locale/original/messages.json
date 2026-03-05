@@ -11,6 +11,10 @@
     "message": "Add Site",
     "description": "Add site button text"
   },
+  "addToHome": {
+    "message": "Add to Home",
+    "description": "Right-click menu for adding a link to home screen"
+  },
   "apiOrImageAddress": {
     "message": "$type$ Address",
     "description": "Dynamic label for API or image address",
@@ -25,8 +29,16 @@
     "message": "Auto Fetch",
     "description": "Option for auto fetch icon type"
   },
+  "backgroundBlur": {
+    "message": "Background Blur",
+    "description": "Label for background blur setting"
+  },
   "backgroundDarkness": {
     "message": "Background Darkness",
+    "description": "Label for background darkness setting"
+  },
+  "backgroundDarknessDarkMode": {
+    "message": "Background Darkness (Dark Mode)",
     "description": "Label for background darkness setting"
   },
   "backgroundSettings": {
@@ -375,5 +387,15 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "displayedAt": {
+    "message": "Displayed at",
+    "description": "Label for displayed at field"
+  },
+  "home": {
+    "message": "Home"
+  },
+  "rightClickMenu": {
+    "message": "Right Click Menu"
   }
 }

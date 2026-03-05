@@ -1,5 +1,6 @@
 import type React from 'react';
 import { lazy, Suspense, useEffect, useState } from 'react';
+import { SiteItemAlias } from '@/share/type-alias';
 import { SettingIcon } from './icon';
 
 const SettingSideSheet = lazy(() => import('./content'));
@@ -7,6 +8,24 @@ const SettingSideSheet = lazy(() => import('./content'));
 const Setting: React.FC = () => {
   const [visible, setVisible] = useState(false);
   const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    if (query.get('action') === 'add-site') {
+      import('./content/site-manager/site-edit-modal').then(
+        ({ showSiteEditModal }) => {
+          showSiteEditModal({
+            initialData: {
+              [SiteItemAlias.id]: '',
+              [SiteItemAlias.iconType]: 'builtin',
+              [SiteItemAlias.name]: query.get('name') || '',
+              [SiteItemAlias.url]: query.get('url') || '',
+            },
+          });
+        },
+      );
+    }
+  }, []);
 
   useEffect(() => {
     if (visible && !loaded) {

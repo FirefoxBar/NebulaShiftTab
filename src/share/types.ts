@@ -10,6 +10,8 @@ export interface PrefValue {
   iconProvider: 'google' | 'duckduckgo' | 'icon.horse' | 'browser';
   background: {
     dark: number;
+    dark2: number;
+    blur: number;
     type: 'image' | 'builtin' | 'custom';
     key?: string;
     value?: BackgroundItem;
@@ -29,6 +31,7 @@ export interface SearchItem {
   [SearchItemAlias.key]: string;
   [SearchItemAlias.name]: string;
   [SearchItemAlias.url]: string;
+  [SearchItemAlias.showOn]: number;
   [SearchItemAlias.suggestion]?: string;
   [SearchItemAlias.suggestionType]?: 'json' | 'jsonp';
   [SearchItemAlias.extractSuggestion]?: string;

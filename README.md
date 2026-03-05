@@ -51,7 +51,7 @@ Nebula Shift Tab require those permissions:
 
 图标包均来源于第三方，其中：
 
-* default: 从 App Store 获取各应用的原始图标
+* default: 从 App Store 获取各应用的原始图标，然后使用 cwebp 转换
 * mbe-style: 来源于[meolunr/MBEStyle](https://github.com/meolunr/MBEStyle)，原始协议为 [GPL-3.0](https://github.com/meolunr/MBEStyle/blob/master/LICENSE)
 * delta-icons: 来源于[Delta-Icons/android](https://github.com/Delta-Icons/android)，原始协议为 [CC BY-NC-ND License 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 * liquid-glass: 来源于网络收集
@@ -60,12 +60,14 @@ Nebula Shift Tab require those permissions:
 
 All icon packs are sourced from third parties, including:
 
-* default: get the original icons of each app from the App Store.
+* default: get the original icons of each app from the App Store, then convert them using cwebp
 * mbe-style: from [meolunr/MBEStyle](https://github.com/meolunr/MBEStyle), originally licensed under [GPL-3.0](https://github.com/meolunr/MBEStyle/blob/master/LICENSE)
 * delta-icons: from [Delta-Icons/android](https://github.com/Delta-Icons/android), originally licensed under [CC BY-NC-ND License 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 * liquid-glass: collected from the internet
 
 The authors of the above icons were not involved in the development of this project and do not endorse it in any way. This project is not authorized for sublicensing. If you believe that the icons used in this project infringe upon your rights, please submit an issue, and we will remove the relevant icons from the project.
+
+> cwebp options: -resize 256 0 -m 6 -q 90 -mt
 
 ## Licenses
 

@@ -26,7 +26,7 @@ async function isDir(path) {
 }
 
 async function main() {
-  const baseList = Object.values(iconMap);
+  const baseList = new Set(Object.values(iconMap));
 
   const themeList = await readdir(themes);
 
@@ -47,9 +47,17 @@ async function main() {
       iconFileList.map(file => [file.replace(/\.(\w+)$/, ''), file]),
     );
 
+    if (theme === 'default') {
+      baseList.forEach(key => {
+        if (!iconFileMap[key]) {
+          console.log(`⚠️  ${key} not in default theme`);
+        }
+      });
+    }
+
     Object.keys(iconFileMap).forEach(key => {
-      if (!baseList.includes(key)) {
-        console.log(`⚠️ ${theme}/${iconFileMap[key]} not in icon-map.json`);
+      if (!baseList.has(key)) {
+        console.log(`⚠️  ${theme}/${iconFileMap[key]} not in icon-map.json`);
       }
     });
 

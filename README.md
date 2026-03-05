@@ -37,7 +37,7 @@ Nebula Shift Tab require those permissions:
 * `alarms`: Update background images regularly
 * `storage`, `unlimitedStorage`: Storage settings
 * `tabs`: Open search results in new tabs
-* `contextMenus`: Add right-click menu items
+* `contextMenus`: Add search engines to right-click menu
 
 Nebula Shift Tab does not collect any data. But when using third-party services (such as Google Search), these services may obtain your basic information, such as your IP address. These are not essential features of this extension and are not within its control. You can learn about the privacy policies of third-party services on your own, or you can disable the relevant services.
 

@@ -80,7 +80,6 @@ export const BackgroundSetting: React.FC = () => {
                   });
                 }
               }}
-              style={{ width: '150px' }}
             >
               <Select.Option value="builtin">
                 {t('builtinWallpaper')}
@@ -107,7 +106,6 @@ export const BackgroundSetting: React.FC = () => {
                 onChange={v =>
                   updateBackground({ type: 'builtin', key: v as string })
                 }
-                style={{ width: '200px' }}
               >
                 {DefaultBackgroundEngines.map(engine => (
                   <Select.Option
@@ -195,15 +193,54 @@ export const BackgroundSetting: React.FC = () => {
             </div>
           }
           extra={
-            <div style={{ width: '200px', paddingLeft: '10px' }}>
-              <Slider
-                value={background.dark}
-                min={0}
-                max={99}
-                onChange={v => updateBackground({ dark: v as number })}
-                showTip={true}
-              />
+            <Slider
+              value={background.dark}
+              min={0}
+              max={99}
+              onChange={v => updateBackground({ dark: v as number })}
+              showTip={true}
+            />
+          }
+        />
+
+        <List.Item
+          main={
+            <div className="list-item">
+              <Typography.Text className="title">
+                {t('backgroundDarknessDarkMode')}
+              </Typography.Text>
+              <Typography.Text type="quaternary" className="content">
+                {t('higherValueDarker')}
+              </Typography.Text>
             </div>
+          }
+          extra={
+            <Slider
+              value={background.dark2}
+              min={0}
+              max={99}
+              onChange={v => updateBackground({ dark2: v as number })}
+              showTip={true}
+            />
+          }
+        />
+
+        <List.Item
+          main={
+            <div className="list-item">
+              <Typography.Text className="title">
+                {t('backgroundBlur')}
+              </Typography.Text>
+            </div>
+          }
+          extra={
+            <Slider
+              value={background.blur}
+              min={0}
+              max={100}
+              onChange={v => updateBackground({ blur: v as number })}
+              showTip={true}
+            />
           }
         />
 

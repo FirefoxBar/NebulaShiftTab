@@ -79,6 +79,8 @@ export const defaultPrefValue: PrefValue = {
   iconProvider: 'duckduckgo',
   background: {
     dark: 40,
+    dark2: 40,
+    blur: 0,
     type: 'builtin',
     key: 'bing',
   },

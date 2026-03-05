@@ -10,6 +10,8 @@ export interface PrefValue {
   iconProvider: 'google' | 'duckduckgo' | 'icon.horse' | 'browser';
   background: {
     dark: number;
+    dark2: number;
+    blur: number;
     type: 'image' | 'builtin' | 'custom';
     key?: string;
     value?: BackgroundItem;

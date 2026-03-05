@@ -29,6 +29,14 @@
     "message": "Background Darkness",
     "description": "Label for background darkness setting"
   },
+  "backgroundBlur": {
+    "message": "Background Blur",
+    "description": "Label for background blur setting"
+  },
+  "backgroundDarknessDarkMode": {
+    "message": "Background Darkness (Dark Mode)",
+    "description": "Label for background darkness setting"
+  },
   "backgroundSettings": {
     "message": "Background Settings",
     "description": "Tab label for background settings"

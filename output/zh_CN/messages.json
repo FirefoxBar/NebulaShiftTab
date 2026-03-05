@@ -11,6 +11,10 @@
     "message": "添加网站",
     "description": "Add site button text"
   },
+  "addToHome": {
+    "message": "添加到首页",
+    "description": "Right-click menu for adding a link to home screen"
+  },
   "apiOrImageAddress": {
     "message": "$type$ 地址",
     "description": "Dynamic label for API or image address",
@@ -25,8 +29,16 @@
     "message": "自动获取",
     "description": "Option for auto fetch icon type"
   },
+  "backgroundBlur": {
+    "message": "背景模糊",
+    "description": "Label for background blur setting"
+  },
   "backgroundDarkness": {
     "message": "背景暗度",
+    "description": "Label for background darkness setting"
+  },
+  "backgroundDarknessDarkMode": {
+    "message": "背景暗度（深色模式）",
     "description": "Label for background darkness setting"
   },
   "backgroundSettings": {

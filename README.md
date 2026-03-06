@@ -73,7 +73,7 @@ All icon packs are sourced from third parties, including:
 
 The authors of the above icons were not involved in the development of this project and do not endorse it in any way. This project is not authorized for sublicensing. If you believe that the icons used in this project infringe upon your rights, please submit an issue, and we will remove the relevant icons from the project.
 
-> cwebp options: -resize 256 0 -m 6 -q 90 -mt
+> cwebp options: -af -resize 256 0 -m 6 -q 90 -mt -blend_alpha 0xffffff
 
 ## Licenses
 

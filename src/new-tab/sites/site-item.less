@@ -4,8 +4,6 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
-  transition: opacity 0.2s ease;
-  opacity: var(--site-opacity);
 
   .site-icon-container {
     width: var(--site-icon-size);
@@ -19,6 +17,7 @@
       height: 100%;
       object-fit: cover;
       border-radius: var(--site-icon-radius);
+      transition: all 0.2s ease;
     }
   }
 
@@ -33,7 +32,7 @@
     white-space: nowrap;
   }
 
-  &:hover {
-    opacity: 1;
+  &:hover .site-icon {
+    transform: translateY(-4px);
   }
 }

@@ -57,7 +57,7 @@ Nebula Shift Tab 自身不收集任何数据。但是，在使用第三方服务
 
 图标包均来源于第三方，其中：
 
-* default: 从 App Store 获取各应用的原始图标，然后使用 cwebp 转换
+* default: 从 App Store、Play 等应用商店获取各应用的原始图标，然后使用 cwebp 转换
 * mbe-style: 来源于[meolunr/MBEStyle](https://github.com/meolunr/MBEStyle)，原始协议为 [GPL-3.0](https://github.com/meolunr/MBEStyle/blob/master/LICENSE)
 * delta-icons: 来源于[Delta-Icons/android](https://github.com/Delta-Icons/android)，原始协议为 [CC BY-NC-ND License 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 * liquid-glass: 来源于网络收集
@@ -66,7 +66,7 @@ Nebula Shift Tab 自身不收集任何数据。但是，在使用第三方服务
 
 All icon packs are sourced from third parties, including:
 
-* default: get the original icons of each app from the App Store, then convert them using cwebp
+* default: get the original icons of each app from app stores such as the App Store and Play Store, then convert them using cwebp
 * mbe-style: from [meolunr/MBEStyle](https://github.com/meolunr/MBEStyle), originally licensed under [GPL-3.0](https://github.com/meolunr/MBEStyle/blob/master/LICENSE)
 * delta-icons: from [Delta-Icons/android](https://github.com/Delta-Icons/android), originally licensed under [CC BY-NC-ND License 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 * liquid-glass: collected from the internet

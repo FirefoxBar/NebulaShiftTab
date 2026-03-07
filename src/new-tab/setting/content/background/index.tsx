@@ -194,7 +194,7 @@ export const BackgroundSetting: React.FC = () => {
           extra={
             <Slider
               value={background.dark}
-              min={0}
+              min={-99}
               max={99}
               onChange={v => updateBackground({ dark: v as number })}
               showTip={true}
@@ -216,7 +216,7 @@ export const BackgroundSetting: React.FC = () => {
           extra={
             <Slider
               value={background.dark2}
-              min={0}
+              min={-99}
               max={99}
               onChange={v => updateBackground({ dark2: v as number })}
               showTip={true}

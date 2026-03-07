@@ -12,6 +12,15 @@ export function initThemeHandler() {
       bgEl.style.backgroundColor = 'transparent';
       return;
     }
+    if (dark < 0) {
+      const abs = Math.abs(dark);
+      if (abs < 10) {
+        bgEl.style.backgroundColor = `rgba(255,255,255,0.0${abs})`;
+        return;
+      }
+      bgEl.style.backgroundColor = `rgba(255,255,255,0.${abs})`;
+      return;
+    }
     if (dark < 10) {
       bgEl.style.backgroundColor = `rgba(0,0,0,0.0${dark})`;
       return;

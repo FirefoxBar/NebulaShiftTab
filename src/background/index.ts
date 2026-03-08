@@ -12,7 +12,8 @@ function init() {
   createApiHandler();
   initBg();
   initContextMenus();
-
+}
+function onInstalled() {
   getNewTabs().then(tabs =>
     tabs.forEach(tab => {
       chrome.tabs.update(tab.id, {
@@ -24,6 +25,7 @@ function init() {
 
 try {
   chrome.runtime.onStartup.addListener(init);
+  chrome.runtime.onInstalled.addListener(onInstalled);
 } catch (_e) {
   // ignore
 }

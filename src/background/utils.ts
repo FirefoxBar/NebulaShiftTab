@@ -8,7 +8,7 @@ export async function getNewTabs() {
     'about:newtab',
     'chrome://startpage/',
     'browser://newtab/',
+    chrome.runtime.getURL('new-tab.html'),
   ];
-  // console.log(tabs.map(x => x.url));
-  return tabs.filter(x => patterns.includes(x.url || ''));
+  return tabs.filter(x => patterns.some(y => (x.url || '').startsWith(y)));
 }

@@ -8,7 +8,6 @@ export const SearchItemShowOnFlag = {
 };
 
 export const searchItemShowOnAll = packFlags(true, true);
-const showOnContextMenu = packFlags(false, true);
 
 export const searchEngines: SearchItem[] = [
   {
@@ -93,25 +92,25 @@ export const searchEngines: SearchItem[] = [
     [SearchItemAlias.key]: 'github',
     [SearchItemAlias.name]: 'GitHub',
     [SearchItemAlias.url]: 'https://github.com/search?q={{q}}',
-    [SearchItemAlias.showOn]: showOnContextMenu,
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
   },
   {
     [SearchItemAlias.key]: 'mdn',
     [SearchItemAlias.name]: 'Mozilla Developer Network',
     [SearchItemAlias.url]: 'https://developer.mozilla.org/en-US/search?q={{q}}',
-    [SearchItemAlias.showOn]: showOnContextMenu,
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
   },
   {
     [SearchItemAlias.key]: 'taobao',
     [SearchItemAlias.name]: '淘宝',
     [SearchItemAlias.url]: 'https://s.taobao.com/search?q={{q}}',
-    [SearchItemAlias.showOn]: showOnContextMenu,
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
   },
   {
     [SearchItemAlias.key]: 'jd',
     [SearchItemAlias.name]: '京东',
     [SearchItemAlias.url]: 'https://search.jd.com/Search?keyword={{q}}',
-    [SearchItemAlias.showOn]: showOnContextMenu,
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
   },
 ];
 

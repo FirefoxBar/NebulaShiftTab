@@ -52,6 +52,44 @@ export const searchEngines: SearchItem[] = [
     [SearchItemAlias.extractSuggestion]: '$.data.result.tag.value',
   },
   {
+    [SearchItemAlias.key]: '360',
+    [SearchItemAlias.name]: '360搜索',
+    [SearchItemAlias.url]: 'https://www.so.com/s?q={{q}}',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
+    [SearchItemAlias.suggestion]:
+      'https://sug.so.360.cn/suggest?encodein=utf-8&encodeout=utf-8&format=json&word={{q}}&fields=word',
+    [SearchItemAlias.suggestionType]: 'json',
+    [SearchItemAlias.extractSuggestion]: '$.result.word',
+  },
+  {
+    [SearchItemAlias.key]: 'douyin-so',
+    [SearchItemAlias.name]: '抖音搜索',
+    [SearchItemAlias.url]:
+      'https://so.douyin.com/s?search_entrance=aweme&keyword={{q}}',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
+    [SearchItemAlias.suggestion]:
+      'https://so.douyin.com/aweme/v1/m_web/search/sug/?keyword={{q}}&aid=581610',
+    [SearchItemAlias.suggestionType]: 'json',
+    [SearchItemAlias.extractSuggestion]: '$.sug_list.content',
+  },
+  {
+    [SearchItemAlias.key]: 'douyin-web',
+    [SearchItemAlias.name]: '抖音',
+    [SearchItemAlias.url]: 'https://www.douyin.com/search/{{q}}',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
+    [SearchItemAlias.suggestion]:
+      'https://www-hj.douyin.com/aweme/v1/web/search/sug/?aid=6383&keyword={{q}}',
+    [SearchItemAlias.suggestionType]: 'json',
+    [SearchItemAlias.extractSuggestion]: '$.sug_list.content',
+  },
+  {
+    [SearchItemAlias.key]: 'xiaohongshu',
+    [SearchItemAlias.name]: '小红书',
+    [SearchItemAlias.url]:
+      'https://www.xiaohongshu.com/search_result?keyword={{q}}',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
+  },
+  {
     [SearchItemAlias.key]: 'github',
     [SearchItemAlias.name]: 'GitHub',
     [SearchItemAlias.url]: 'https://github.com/search?q={{q}}',

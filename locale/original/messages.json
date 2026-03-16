@@ -208,6 +208,10 @@
     "message": "General Settings",
     "description": "Tab label for general settings"
   },
+  "helpUrl": {
+    "message": "https://nebula-shift-tab.firefoxcn.net/en-US/guide/index.html",
+    "description": "URL for help"
+  },
   "higherValueDarker": {
     "message": "Higher value is darker",
     "description": "Description for background darkness setting"
@@ -402,16 +406,12 @@
     "message": "Please enter a valid URL",
     "description": "Error message for invalid URL"
   },
-  "whenAutoSelected": {
-    "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
-    "description": "Description for icon provider setting"
-  },
   "viewHelp": {
     "message": "View Help",
     "description": "Button text for viewing help"
   },
-  "helpUrl": {
-    "message": "https://nebula-shift-tab.firefoxcn.net/en-US/guide/index.html",
-    "description": "URL for help"
+  "whenAutoSelected": {
+    "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
+    "description": "Description for icon provider setting"
   }
 }

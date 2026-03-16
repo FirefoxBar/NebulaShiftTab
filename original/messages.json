@@ -112,6 +112,10 @@
     "message": "Dark Mode",
     "description": "Label for dark mode setting"
   },
+  "dateFormat": {
+    "message": "Date format",
+    "description": "Label for date format selection"
+  },
   "deleteSearchEngine": {
     "message": "Delete Search Engine",
     "description": "Delete search engine dialog title"
@@ -381,6 +385,10 @@
   "theme": {
     "message": "Theme",
     "description": "Label for theme setting"
+  },
+  "timeFormat": {
+    "message": "Time Format",
+    "description": "Label for time format selection"
   },
   "type": {
     "message": "Type",

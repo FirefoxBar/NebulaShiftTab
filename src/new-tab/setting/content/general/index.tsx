@@ -1,4 +1,4 @@
-import { List, Select, Typography } from '@douyinfe/semi-ui';
+import { Input, List, Select, Typography } from '@douyinfe/semi-ui';
 import type React from 'react';
 import usePref from '@/hooks/use-pref';
 import { t } from '@/share/locale';
@@ -8,10 +8,32 @@ import { ImportButton } from './import-button';
 export const GeneralSettings: React.FC = () => {
   const [darkMode, setDarkMode] = usePref('darkMode');
   const [theme, setTheme] = usePref('theme');
+  const [timeFormat, setTimeFormat] = usePref('timeFormat');
+  const [dateFormat, setDateFormat] = usePref('dateFormat');
   const [iconProvider, setIconProvider] = usePref('iconProvider');
 
   return (
     <List className="setting-list">
+      <List.Item
+        main={
+          <div className="list-item">
+            <Typography.Text className="title">
+              {t('timeFormat')}
+            </Typography.Text>
+          </div>
+        }
+        extra={<Input value={timeFormat} onChange={setTimeFormat} />}
+      />
+      <List.Item
+        main={
+          <div className="list-item">
+            <Typography.Text className="title">
+              {t('dateFormat')}
+            </Typography.Text>
+          </div>
+        }
+        extra={<Input value={dateFormat} onChange={setDateFormat} />}
+      />
       <List.Item
         main={
           <div className="list-item">

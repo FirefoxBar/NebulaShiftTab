@@ -7,9 +7,11 @@ import { Sites } from './sites';
 import { initThemeHandler } from './theme-handler';
 
 import './index.less';
+import { Time } from './time';
 
 const Page = () => (
   <>
+    <Time />
     <Search />
     <Sites />
     <Setting />

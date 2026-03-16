@@ -52,6 +52,7 @@ export default defineConfig({
       html: './',
       js: 'assets/js',
       css: 'assets/css',
+      font: 'assets/font',
     },
     externals: [
       ({ request }, callback) => {

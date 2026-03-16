@@ -46,6 +46,9 @@ importers:
       dayjs:
         specifier: ^1.9.5
         version: 1.11.19
+      dayjs-plugin-lunar:
+        specifier: ^1.4.1
+        version: 1.4.1(dayjs@1.11.19)(tyme4ts@1.4.4)
       eventemitter3:
         specifier: ^4.0.0
         version: 4.0.7
@@ -67,6 +70,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      tyme4ts:
+        specifier: ^1.4.4
+        version: 1.4.4
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.1.2
@@ -920,6 +926,12 @@ packages:
   date-fns@2.30.0:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
+
+  dayjs-plugin-lunar@1.4.1:
+    resolution: {integrity: sha512-nHKJMKoVAGt/Wp6x3xH8GrjWhB25YBYd6iYTCfLkCm4GAS6q3jvfHpLwRnIX8bjHgl8sPlTPiLFcylcEaEnj8Q==}
+    peerDependencies:
+      dayjs: ^1.0.0
+      tyme4ts: ^1.0.0
 
   dayjs@1.11.19:
     resolution: {integrity: sha512-t5EcLVS6QPBNqM2z8fakk/NKel+Xzshgt8FFKAn+qwlD1pzZWxh0nVCrvFK7ZDb6XucZeF9z8C7CBWTRIVApAw==}
@@ -2076,6 +2088,9 @@ packages:
   tweetnacl@0.14.5:
     resolution: {integrity: sha512-KXXFFdAbFXY4geFIwoyNK+f5Z1b7swfXABfL7HXCmoIWMKU3dmS26672A4EeQtDzLKy7SXmfBu51JolvEKwtGA==}
 
+  tyme4ts@1.4.4:
+    resolution: {integrity: sha512-a6FfENUrQpg9F3hOhwFW0EDgmIbvOEXbtO7A2R8/49tGDnjqjUsuNIP0OOBnsGmN9y3hAsO69LsBgJk1re1/KA==}
+
   type-detect@4.1.0:
     resolution: {integrity: sha512-Acylog8/luQ8L7il+geoSxhEkazvkslg7PSNKOX59mbB9cOveP5aq9h74Y7YU8yDpJwetzQQrfIwtf4Wp4LKcw==}
     engines: {node: '>=4'}
@@ -3048,6 +3063,11 @@ snapshots:
   date-fns@2.30.0:
     dependencies:
       '@babel/runtime': 7.28.6
+
+  dayjs-plugin-lunar@1.4.1(dayjs@1.11.19)(tyme4ts@1.4.4):
+    dependencies:
+      dayjs: 1.11.19
+      tyme4ts: 1.4.4
 
   dayjs@1.11.19: {}
 
@@ -4600,6 +4620,8 @@ snapshots:
       safe-buffer: 5.2.1
 
   tweetnacl@0.14.5: {}
+
+  tyme4ts@1.4.4: {}
 
   type-detect@4.1.0: {}
 

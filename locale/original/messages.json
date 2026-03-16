@@ -397,5 +397,13 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "timeFormat": {
+    "message": "Time Format",
+    "description": "Label for time format selection"
+  },
+  "dateFormat": {
+    "message": "Date format",
+    "description": "Label for date format selection"
   }
 }

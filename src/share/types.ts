@@ -8,6 +8,8 @@ export interface PrefValue {
   darkMode: 'auto' | 'on' | 'off';
   theme: 'default' | 'mbe-style' | 'delta-icons' | 'liquid-glass';
   iconProvider: 'google' | 'duckduckgo' | 'icon.horse' | 'browser';
+  timeFormat: string;
+  dateFormat: string;
   background: {
     dark: number;
     dark2: number;

@@ -29,6 +29,8 @@ export const defaultPrefValue: PrefValue = {
   darkMode: 'auto',
   theme: 'default',
   iconProvider: 'duckduckgo',
+  timeFormat: 'HH:mm',
+  dateFormat: 'M月D日 dddd LMLD',
   background: {
     dark: 40,
     dark2: 40,

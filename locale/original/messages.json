@@ -405,5 +405,13 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "viewHelp": {
+    "message": "View Help",
+    "description": "Button text for viewing help"
+  },
+  "helpUrl": {
+    "message": "https://nebula-shift-tab.firefoxcn.net/en-US/guide/index.html",
+    "description": "URL for help"
   }
 }

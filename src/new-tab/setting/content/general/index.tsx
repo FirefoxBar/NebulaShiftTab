@@ -1,4 +1,5 @@
-import { Input, List, Select, Typography } from '@douyinfe/semi-ui';
+import { IconExternalOpen } from '@douyinfe/semi-icons';
+import { Button, Input, List, Select, Typography } from '@douyinfe/semi-ui';
 import type React from 'react';
 import usePref from '@/hooks/use-pref';
 import { t } from '@/share/locale';
@@ -12,109 +13,98 @@ export const GeneralSettings: React.FC = () => {
   const [dateFormat, setDateFormat] = usePref('dateFormat');
   const [iconProvider, setIconProvider] = usePref('iconProvider');
 
+  const list = [
+    {
+      label: t('timeFormat'),
+      content: <Input value={timeFormat} onChange={setTimeFormat} />,
+    },
+    {
+      label: t('dateFormat'),
+      content: <Input value={dateFormat} onChange={setDateFormat} />,
+    },
+    {
+      label: t('darkMode'),
+      content: (
+        <Select
+          value={darkMode}
+          placeholder={t('selectDarkMode')}
+          onChange={v => setDarkMode(v as any)}
+        >
+          <Select.Option value="auto">{t('followSystem')}</Select.Option>
+          <Select.Option value="on">{t('on')}</Select.Option>
+          <Select.Option value="off">{t('off')}</Select.Option>
+        </Select>
+      ),
+    },
+    {
+      label: t('theme'),
+      content: (
+        <Select
+          value={theme}
+          placeholder={t('selectIconPack')}
+          onChange={v => setTheme(v as any)}
+          optionList={[
+            { label: 'Default', value: 'default' },
+            { label: 'MBE Style', value: 'mbe-style' },
+            { label: 'Delta Icons', value: 'delta-icons' },
+            { label: 'Liquid Glass', value: 'liquid-glass' },
+          ]}
+        />
+      ),
+    },
+    {
+      label: t('iconProvider'),
+      help: t('whenAutoSelected'),
+      content: (
+        <Select
+          value={iconProvider}
+          placeholder={t('selectIconProvider')}
+          onChange={v => setIconProvider(v as any)}
+        >
+          <Select.Option value="google">Google</Select.Option>
+          <Select.Option value="duckduckgo">DuckDuckGo</Select.Option>
+          <Select.Option value="icon.horse">icon.horse</Select.Option>
+        </Select>
+      ),
+    },
+    {
+      label: t('backupToFile'),
+      content: <ExportButton />,
+    },
+    {
+      label: t('restoreFromFile'),
+      content: <ImportButton />,
+    },
+    {
+      label: t('viewHelp'),
+      content: (
+        <a href={t('helpUrl')} target="_blank">
+          <Button icon={<IconExternalOpen />}>{t('viewHelp')}</Button>
+        </a>
+      ),
+    },
+  ];
+
   return (
-    <List className="setting-list">
-      <List.Item
-        main={
-          <div className="list-item">
-            <Typography.Text className="title">
-              {t('timeFormat')}
-            </Typography.Text>
-          </div>
-        }
-        extra={<Input value={timeFormat} onChange={setTimeFormat} />}
-      />
-      <List.Item
-        main={
-          <div className="list-item">
-            <Typography.Text className="title">
-              {t('dateFormat')}
-            </Typography.Text>
-          </div>
-        }
-        extra={<Input value={dateFormat} onChange={setDateFormat} />}
-      />
-      <List.Item
-        main={
-          <div className="list-item">
-            <Typography.Text className="title">{t('darkMode')}</Typography.Text>
-          </div>
-        }
-        extra={
-          <Select
-            value={darkMode}
-            placeholder={t('selectDarkMode')}
-            onChange={v => setDarkMode(v as any)}
-          >
-            <Select.Option value="auto">{t('followSystem')}</Select.Option>
-            <Select.Option value="on">{t('on')}</Select.Option>
-            <Select.Option value="off">{t('off')}</Select.Option>
-          </Select>
-        }
-      />
-      <List.Item
-        main={
-          <div className="list-item">
-            <Typography.Text className="title">{t('theme')}</Typography.Text>
-          </div>
-        }
-        extra={
-          <Select
-            value={theme}
-            placeholder={t('selectIconPack')}
-            onChange={v => setTheme(v as any)}
-            optionList={[
-              { label: 'Default', value: 'default' },
-              { label: 'MBE Style', value: 'mbe-style' },
-              { label: 'Delta Icons', value: 'delta-icons' },
-              { label: 'Liquid Glass', value: 'liquid-glass' },
-            ]}
-          />
-        }
-      />
-      <List.Item
-        main={
-          <div className="list-item">
-            <Typography.Text className="title">
-              {t('iconProvider')}
-            </Typography.Text>
-            <Typography.Text type="quaternary" className="content">
-              {t('whenAutoSelected')}
-            </Typography.Text>
-          </div>
-        }
-        extra={
-          <Select
-            value={iconProvider}
-            placeholder={t('selectIconProvider')}
-            onChange={v => setIconProvider(v as any)}
-          >
-            <Select.Option value="google">Google</Select.Option>
-            <Select.Option value="duckduckgo">DuckDuckGo</Select.Option>
-            <Select.Option value="icon.horse">icon.horse</Select.Option>
-          </Select>
-        }
-      />
-      <List.Item
-        main={
-          <div className="list-item">
-            <Typography.Text className="title">
-              {t('backupToFile')}
-            </Typography.Text>
-          </div>
-        }
-        extra={<ExportButton />}
-      />
-      <List.Item
-        main={
-          <div className="list-item">
-            <Typography.Text className="title">
-              {t('restoreFromFile')}
-            </Typography.Text>
-          </div>
-        }
-        extra={<ImportButton />}
-      />
-    </List>
+    <List
+      className="setting-list"
+      dataSource={list}
+      renderItem={({ label, help, content }) => (
+        <List.Item
+          key={label}
+          main={
+            <div className="list-item">
+              <Typography.Text className="title">{label}</Typography.Text>
+              {help && (
+                <Typography.Text type="quaternary" className="content">
+                  {help}
+                </Typography.Text>
+              )}
+            </div>
+          }
+          extra={content}
+        />
+      )}
+    />
   );
 };

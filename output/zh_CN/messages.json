@@ -208,6 +208,10 @@
     "message": "常规设置",
     "description": "Tab label for general settings"
   },
+  "helpUrl": {
+    "message": "https://nebula-shift-tab.firefoxcn.net/guide/index.html",
+    "description": "URL for help"
+  },
   "higherValueDarker": {
     "message": "数值越大越暗",
     "description": "Description for background darkness setting"
@@ -401,6 +405,10 @@
   "validUrlRequired": {
     "message": "请输入有效的网址",
     "description": "Error message for invalid URL"
+  },
+  "viewHelp": {
+    "message": "查看帮助",
+    "description": "Button text for viewing help"
   },
   "whenAutoSelected": {
     "message": "当选择“自动获取”时，图标将从此源获取",

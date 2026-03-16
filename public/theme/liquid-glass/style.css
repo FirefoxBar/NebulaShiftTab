@@ -1,5 +1,5 @@
 body {
-  --site-icon-radius: 22.5px;
+  --site-icon-radius: 25%;
   --search-input-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
   --search-input-bg: rgba(255, 255, 255, 0.25);
   --search-input-bg-active: rgba(255, 255, 255, 0.4);

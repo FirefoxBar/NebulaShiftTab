@@ -112,6 +112,10 @@
     "message": "深色模式",
     "description": "Label for dark mode setting"
   },
+  "dateFormat": {
+    "message": "日期格式",
+    "description": "Label for date format selection"
+  },
   "deleteSearchEngine": {
     "message": "删除搜索引擎",
     "description": "Delete search engine dialog title"
@@ -381,6 +385,10 @@
   "theme": {
     "message": "主题",
     "description": "Label for theme setting"
+  },
+  "timeFormat": {
+    "message": "时间格式",
+    "description": "Label for time format selection"
   },
   "type": {
     "message": "类型",

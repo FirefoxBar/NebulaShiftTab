@@ -2,7 +2,7 @@ import { useRequest } from 'ahooks';
 import jsonata from 'jsonata';
 import { random } from 'lodash-es';
 import { type FC, useState } from 'react';
-import './JSONAtaTest.css';
+import './JSONata.css';
 
 const createJsonAta = (expr: string) => {
   const res = jsonata(expr);
@@ -15,7 +15,7 @@ const createJsonAta = (expr: string) => {
   return res;
 };
 
-interface JSONAtaTestProps {
+interface JSONataTestProps {
   lang: {
     inputData: string;
     inputExpr: string;
@@ -25,7 +25,7 @@ interface JSONAtaTestProps {
   };
 }
 
-const JSONAtaTest: FC<JSONAtaTestProps> = ({ lang }) => {
+const JSONataTest: FC<JSONataTestProps> = ({ lang }) => {
   const [data, setData] = useState('');
   const [expr, setExpr] = useState('');
 
@@ -71,7 +71,7 @@ const JSONAtaTest: FC<JSONAtaTestProps> = ({ lang }) => {
           <div className="content">{error.message}</div>
         </div>
       )}
-      {!error && !loading && result && (
+      {!error && !loading && (
         <div className="result">
           <div className="title">{lang.result}</div>
           <pre className="content">{JSON.stringify(result, null, 2)}</pre>
@@ -81,4 +81,4 @@ const JSONAtaTest: FC<JSONAtaTestProps> = ({ lang }) => {
   );
 };
 
-export default JSONAtaTest;
+export default JSONataTest;

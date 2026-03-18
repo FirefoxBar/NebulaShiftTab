@@ -7,7 +7,13 @@ import {
 export interface PrefValue {
   darkMode: 'auto' | 'on' | 'off';
   theme: 'default' | 'mbe-style' | 'delta-icons' | 'liquid-glass';
-  iconProvider: 'google' | 'duckduckgo' | 'icon.horse' | 'browser';
+  iconProvider:
+    | 'google'
+    | 'duckduckgo'
+    | 'icon.horse'
+    | 'favicon.im'
+    | 'toolb'
+    | 'favicon.run';
   timeFormat: string;
   dateFormat: string;
   background: {

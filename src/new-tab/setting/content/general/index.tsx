@@ -61,11 +61,15 @@ export const GeneralSettings = withErrorBoundary(() => {
           value={iconProvider}
           placeholder={t('selectIconProvider')}
           onChange={v => setIconProvider(v as any)}
-        >
-          <Select.Option value="google">Google</Select.Option>
-          <Select.Option value="duckduckgo">DuckDuckGo</Select.Option>
-          <Select.Option value="icon.horse">icon.horse</Select.Option>
-        </Select>
+          optionList={[
+            { label: 'Google', value: 'google' },
+            { label: 'DuckDuckGo', value: 'duckduckgo' },
+            { label: 'icon.horse', value: 'icon.horse' },
+            { label: 'ToolB', value: 'toolb' },
+            { label: 'Favicon.im', value: 'favicon.im' },
+            { label: 'favicon.run', value: 'favicon.run' },
+          ]}
+        />
       ),
     },
     {

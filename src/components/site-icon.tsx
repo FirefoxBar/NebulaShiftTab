@@ -81,13 +81,25 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
               `https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=128`,
             );
             return;
+          case 'icon.horse':
+            setIcon(`https://icon.horse/icon/${urlObj.hostname}`);
+            return;
+          case 'favicon.im':
+            setIcon(`https://favicon.im/${urlObj.hostname}?larger=true`);
+            return;
+          case 'toolb':
+            setIcon(`https://toolb.cn/favicon/${urlObj.hostname}`);
+            return;
+          case 'favicon.run':
+            setIcon(
+              `https://favicon.run/favicon?sz=256&domain=${urlObj.hostname}`,
+            );
+            return;
           case 'duckduckgo':
+          default:
             setIcon(
               `https://icons.duckduckgo.com/ip3/${urlObj.hostname}.ico?size=large`,
             );
-            return;
-          case 'icon.horse':
-            setIcon(`https://icon.horse/icon/${urlObj.hostname}`);
             return;
         }
       } catch (_e) {

@@ -10,7 +10,6 @@ const root = path.join(__dirname, '../..');
 const themes = path.join(root, 'public/theme');
 const src = path.join(root, 'src');
 const iconFile = path.join(src, 'share/theme/icon.json');
-const themeInfo = path.join(src, 'share/theme/info.json');
 
 async function exists(path) {
   try {
@@ -31,16 +30,11 @@ async function main() {
   const themeList = await readdir(themes);
 
   const iconResult = {};
-  const infoResult = {};
 
   for (const theme of themeList) {
     if (!(await isDir(path.join(themes, theme)))) {
       continue;
     }
-
-    infoResult[theme] = {
-      css: await exists(path.join(themes, theme, 'style.css')),
-    };
 
     const iconFileList = await readdir(path.join(themes, theme, 'icons'));
     const iconFileMap = Object.fromEntries(
@@ -69,7 +63,6 @@ async function main() {
   }
 
   await writeFile(iconFile, JSON.stringify(iconResult, null, 2), 'utf8');
-  await writeFile(themeInfo, JSON.stringify(infoResult, null, 2), 'utf8');
 
   console.log('✅ Done');
 }

@@ -8,6 +8,7 @@ import {
 import { CSS as cssDndKit } from '@dnd-kit/utilities';
 import { IconDelete, IconEdit, IconPlus } from '@douyinfe/semi-icons';
 import { Button, List, Modal, Typography } from '@douyinfe/semi-ui';
+import { withErrorBoundary } from '@/components/error-boundary';
 import { SiteIcon } from '@/components/site-icon';
 import {
   SiteIconContext,
@@ -78,7 +79,7 @@ const SortableItem = ({
   );
 };
 
-export const SitesManager: React.FC = () => {
+export const SitesManager = withErrorBoundary(() => {
   const [sites, setSites] = usePref('sites');
 
   // 添加站点
@@ -169,4 +170,4 @@ export const SitesManager: React.FC = () => {
       </SiteIconContext.Provider>
     </div>
   );
-};
+});

@@ -1,12 +1,13 @@
 import { IconExternalOpen } from '@douyinfe/semi-icons';
 import { Button, Input, List, Select, Typography } from '@douyinfe/semi-ui';
 import type React from 'react';
+import { withErrorBoundary } from '@/components/error-boundary';
 import usePref from '@/hooks/use-pref';
 import { t } from '@/share/locale';
 import { ExportButton } from './export-button';
 import { ImportButton } from './import-button';
 
-export const GeneralSettings: React.FC = () => {
+export const GeneralSettings = withErrorBoundary(() => {
   const [darkMode, setDarkMode] = usePref('darkMode');
   const [theme, setTheme] = usePref('theme');
   const [timeFormat, setTimeFormat] = usePref('timeFormat');
@@ -107,4 +108,4 @@ export const GeneralSettings: React.FC = () => {
       )}
     />
   );
-};
+});

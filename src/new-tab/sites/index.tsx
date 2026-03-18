@@ -1,4 +1,5 @@
 import type React from 'react';
+import { withErrorBoundary } from '@/components/error-boundary';
 import {
   SiteIconContext,
   useSiteIconContext,
@@ -9,7 +10,7 @@ import { SiteItem } from './site-item';
 
 import './index.less';
 
-export const Sites: React.FC = () => {
+export const Sites = withErrorBoundary(() => {
   const [sites] = usePref('sites');
 
   const iconContext = useSiteIconContext();
@@ -25,4 +26,4 @@ export const Sites: React.FC = () => {
       </div>
     </div>
   );
-};
+});

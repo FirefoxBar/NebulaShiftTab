@@ -22,7 +22,9 @@ import {
 } from '@douyinfe/semi-ui';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
+import { withErrorBoundary } from '@/components/error-boundary';
 import usePref from '@/hooks/use-pref';
+import { searchEngines } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import { SearchItemAlias } from '@/share/type-alias';
@@ -30,7 +32,6 @@ import type { SearchItem } from '@/share/types';
 import { SearchEditForm } from './search-edit-form';
 
 import './index.less';
-import { searchEngines } from '@/share/constant';
 
 // 拖拽项组件
 const SortableItem = ({
@@ -81,7 +82,7 @@ const SortableItem = ({
   );
 };
 
-export const SearchManager: React.FC = () => {
+export const SearchManager = withErrorBoundary(() => {
   const [editingSearch, setEditingSearch] = useState<SearchItem | undefined>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searches, setSearches] = usePref('searches');
@@ -240,4 +241,4 @@ export const SearchManager: React.FC = () => {
       </DndContext>
     </div>
   );
-};
+});

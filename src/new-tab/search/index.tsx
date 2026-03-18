@@ -1,6 +1,7 @@
 import { useRequest } from 'ahooks';
 import type React from 'react';
 import { useRef, useState } from 'react';
+import { withErrorBoundary } from '@/components/error-boundary';
 import usePref from '@/hooks/use-pref';
 import { hasFlag } from '@/share/bool-flags';
 import { SearchItemShowOnFlag } from '@/share/constant';
@@ -9,6 +10,7 @@ import { SearchItemAlias } from '@/share/type-alias';
 import type { SearchItem } from '@/share/types';
 import { createJsonAta, extractData, parseJsonp } from '@/share/utils';
 import { SearchIcon } from './search-icon';
+
 import './search.less';
 
 async function decodeResponse(response: Response): Promise<string> {
@@ -24,7 +26,7 @@ async function decodeResponse(response: Response): Promise<string> {
   return response.text();
 }
 
-export const Search: React.FC = () => {
+export const Search = withErrorBoundary(() => {
   const [currentEngine, setCurrentEngine] = useState<SearchItem | undefined>();
   const [searchValue, setSearchValue] = useState('');
   const [active, setActive] = useState(false);
@@ -205,4 +207,4 @@ export const Search: React.FC = () => {
       {renderSuggestions()}
     </div>
   );
-};
+});

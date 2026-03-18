@@ -38,6 +38,7 @@
     "nanoid": "^4.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-error-boundary": "^6.1.1",
     "tyme4ts": "^1.4.4"
   },
   "devDependencies": {

@@ -16,11 +16,12 @@ import { BackgroundItemAlias } from '@/share/type-alias';
 import type { PrefValue } from '@/share/types';
 import { CustomBg } from './custom-bg';
 import './index.less';
+import { withErrorBoundary } from '@/components/error-boundary';
 import { RefreshButton } from './refresh-button';
 
 type BackgroundType = PrefValue['background']['type'];
 
-export const BackgroundSetting: React.FC = () => {
+export const BackgroundSetting = withErrorBoundary(() => {
   const [type, setType] = useState<BackgroundType>('builtin');
   const [background, setBackground] = usePref('background', {
     onInitial: (value: PrefValue['background']) => {
@@ -256,4 +257,4 @@ export const BackgroundSetting: React.FC = () => {
       </List>
     </div>
   );
-};
+});

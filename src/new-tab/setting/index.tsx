@@ -1,11 +1,12 @@
 import type React from 'react';
 import { lazy, Suspense, useEffect, useState } from 'react';
+import { withErrorBoundary } from '@/components/error-boundary';
 import { SiteItemAlias } from '@/share/type-alias';
 import { SettingIcon } from './icon';
 
 const SettingSideSheet = lazy(() => import('./content'));
 
-const Setting: React.FC = () => {
+const Setting = withErrorBoundary(() => {
   const [visible, setVisible] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -51,6 +52,6 @@ const Setting: React.FC = () => {
       )}
     </>
   );
-};
+});
 
 export default Setting;

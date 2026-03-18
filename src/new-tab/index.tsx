@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { StorageKey } from '@/share/constant';
 import { getAndWatch, local } from '@/share/storage';
@@ -5,9 +6,9 @@ import { Search } from './search';
 import Setting from './setting';
 import { Sites } from './sites';
 import { initThemeHandler } from './theme-handler';
+import { Time } from './time';
 
 import './index.less';
-import { Time } from './time';
 
 const Page = () => (
   <>
@@ -30,8 +31,8 @@ const rootEl = document.getElementById('root');
 if (rootEl) {
   const root = ReactDOM.createRoot(rootEl);
   root.render(
-    // <React.StrictMode>
-    <Page />,
-    // </React.StrictMode>,
+    <React.StrictMode>
+      <Page />,
+    </React.StrictMode>,
   );
 }

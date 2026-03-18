@@ -12,44 +12,38 @@ import './index.less';
 
 interface SettingSideSheetProps {
   visible: boolean;
-  setVisible: (visible: boolean) => void;
+  handleClose: () => void;
 }
 
 const SettingContent: React.FC<SettingSideSheetProps> = ({
   visible,
-  setVisible,
-}) => {
-  const handleClose = () => {
-    setVisible(false);
-  };
-
-  return (
-    <SemiLocale>
-      <SideSheet
-        title={t('settings')}
-        placement="right"
-        visible={visible}
-        onCancel={handleClose}
-        height="100%"
-        className="setting-drawer"
-      >
-        <Tabs type="line" lazyRender={true}>
-          <TabPane itemKey="bookmark-management" tab={t('siteManagement')}>
-            <SitesManager />
-          </TabPane>
-          <TabPane itemKey="search-management" tab={t('searchManagement')}>
-            <SearchManager />
-          </TabPane>
-          <TabPane itemKey="background-settings" tab={t('backgroundSettings')}>
-            <BackgroundSetting />
-          </TabPane>
-          <TabPane itemKey="general-settings" tab={t('generalSettings')}>
-            <GeneralSettings />
-          </TabPane>
-        </Tabs>
-      </SideSheet>
-    </SemiLocale>
-  );
-};
+  handleClose,
+}) => (
+  <SemiLocale>
+    <SideSheet
+      title={t('settings')}
+      placement="right"
+      visible={visible}
+      onCancel={handleClose}
+      height="100%"
+      className="setting-drawer"
+    >
+      <Tabs type="line" lazyRender={true}>
+        <TabPane itemKey="bookmark-management" tab={t('siteManagement')}>
+          <SitesManager />
+        </TabPane>
+        <TabPane itemKey="search-management" tab={t('searchManagement')}>
+          <SearchManager />
+        </TabPane>
+        <TabPane itemKey="background-settings" tab={t('backgroundSettings')}>
+          <BackgroundSetting />
+        </TabPane>
+        <TabPane itemKey="general-settings" tab={t('generalSettings')}>
+          <GeneralSettings />
+        </TabPane>
+      </Tabs>
+    </SideSheet>
+  </SemiLocale>
+);
 
 export default SettingContent;

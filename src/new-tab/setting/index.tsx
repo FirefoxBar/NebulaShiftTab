@@ -47,7 +47,10 @@ const Setting = withErrorBoundary(() => {
       </div>
       {loadSideSheet && (
         <Suspense fallback={null}>
-          <SettingSideSheet visible={visible} setVisible={setVisible} />
+          <SettingSideSheet
+            visible={visible}
+            handleClose={() => setVisible(false)}
+          />
         </Suspense>
       )}
     </>

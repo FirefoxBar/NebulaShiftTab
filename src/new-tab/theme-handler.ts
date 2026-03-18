@@ -33,26 +33,9 @@ export function initThemeHandler() {
     bgEl.style.backdropFilter = blur ? `blur(${blur / 5}px)` : '';
   });
 
-  prefs.getAndWatch('theme', theme => {
-    const el = document.getElementById('theme-css');
-    const hasCSS = Boolean(themeInfo[theme]?.css);
-    if (!hasCSS) {
-      if (el) {
-        el.remove();
-      }
-      return;
-    }
-    // has css
-    if (el) {
-      (el as HTMLLinkElement).href = `/theme/${theme}/style.css`;
-    } else {
-      const l = document.createElement('link');
-      l.id = 'theme-css';
-      l.rel = 'stylesheet';
-      l.href = `/theme/${theme}/style.css`;
-      document.head.appendChild(l);
-    }
-  });
+  prefs.getAndWatch('theme', theme =>
+    document.body.setAttribute('data-theme', theme),
+  );
 
   prefs.getAndWatch('darkMode', () => {
     const nowDark = document.body.hasAttribute('theme-mode');

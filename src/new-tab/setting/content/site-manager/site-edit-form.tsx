@@ -8,7 +8,7 @@ import {
   useFormApi,
   useFormState,
 } from '@douyinfe/semi-ui';
-import { useCallback } from 'react';
+import { useDebounceFn } from 'ahooks';
 import { SiteIcon } from '@/components/site-icon';
 import {
   SiteIconContext,
@@ -19,7 +19,6 @@ import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteItem } from '@/share/types';
 
 import './site-edit-form.less';
-import { useDebounceFn } from 'ahooks';
 
 interface SiteEditFormProps {
   initialData?: SiteItem;

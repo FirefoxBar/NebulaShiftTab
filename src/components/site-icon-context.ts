@@ -13,8 +13,10 @@ interface IconContextValue {
 export const SiteIconContext = createContext<IconContextValue>({} as any);
 
 export const useSiteIconContext = (): IconContextValue => {
-  const [theme] = usePref('theme');
+  const [_theme] = usePref('theme');
   const [iconProvider] = usePref('iconProvider');
+
+  const theme = _theme && _theme in icons ? _theme : 'default';
 
   const activeIconPack = theme ? icons[theme] : undefined;
 

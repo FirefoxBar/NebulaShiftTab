@@ -8,6 +8,7 @@ import {
   useFormApi,
   useFormState,
 } from '@douyinfe/semi-ui';
+import { useCallback } from 'react';
 import { SiteIcon } from '@/components/site-icon';
 import {
   SiteIconContext,
@@ -92,6 +93,44 @@ const IconField = () => {
   );
 };
 
+const URLField = () => {
+  const formApi = useFormApi();
+
+  const fetchTitle = useCallback(() => {
+    const act = async () => {
+      const url = formApi.getValue(SiteItemAlias.url);
+      const name = formApi.getValue(SiteItemAlias.name);
+      if (name || !url || !/^https?:\/\//.test(url)) {
+        return;
+      }
+      // fetch url 并解析 html title
+      const resp = await fetch(url);
+      const html = await resp.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const title = doc.title;
+      if (title) {
+        formApi.setValue(SiteItemAlias.name, title);
+      }
+    };
+    setTimeout(act, 500);
+  }, []);
+
+  return (
+    <Form.Input
+      field={SiteItemAlias.url}
+      label={t('url')}
+      placeholder={t('enterSiteUrl')}
+      rules={[
+        { required: true, message: t('enterSiteUrl') },
+        { type: 'url', message: t('invalidUrl') },
+      ]}
+      onPaste={fetchTitle}
+      onBlur={fetchTitle}
+    />
+  );
+};
+
 export const SiteEditForm: React.FC<SiteEditFormProps> = ({
   initialData = {
     [SiteItemAlias.id]: '',
@@ -118,15 +157,8 @@ export const SiteEditForm: React.FC<SiteEditFormProps> = ({
         placeholder={t('enterSiteName')}
         rules={[{ required: true, message: t('enterSiteName') }]}
       />
-      <Form.Input
-        field={SiteItemAlias.url}
-        label={t('url')}
-        placeholder={t('enterSiteUrl')}
-        rules={[
-          { required: true, message: t('enterSiteUrl') },
-          { type: 'url', message: t('invalidUrl') },
-        ]}
-      />
+
+      <URLField />
 
       <IconField />
 

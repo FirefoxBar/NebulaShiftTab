@@ -19,9 +19,12 @@ const Page = () => (
   </>
 );
 
+const bgImgEl = document.createElement('div');
+bgImgEl.className = 'main-bg-img';
+document.body.appendChild(bgImgEl);
 getAndWatch(local, StorageKey.bg, x => {
   if (x) {
-    document.body.style.backgroundImage = `url(${x})`;
+    bgImgEl.style.backgroundImage = `url(${x})`;
   }
 });
 

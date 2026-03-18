@@ -19,6 +19,7 @@ import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteItem } from '@/share/types';
 
 import './site-edit-form.less';
+import { useDebounceFn } from 'ahooks';
 
 interface SiteEditFormProps {
   initialData?: SiteItem;
@@ -96,25 +97,33 @@ const IconField = () => {
 const URLField = () => {
   const formApi = useFormApi();
 
-  const fetchTitle = useCallback(() => {
-    const act = async () => {
-      const url = formApi.getValue(SiteItemAlias.url);
-      const name = formApi.getValue(SiteItemAlias.name);
-      if (name || !url || !/^https?:\/\//.test(url)) {
-        return;
-      }
-      // fetch url 并解析 html title
-      const resp = await fetch(url);
-      const html = await resp.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const title = doc.title;
-      if (title) {
-        formApi.setValue(SiteItemAlias.name, title);
-      }
-    };
-    setTimeout(act, 500);
-  }, []);
+  const { run, flush } = useDebounceFn(
+    () => {
+      const act = async () => {
+        const url = formApi.getValue(SiteItemAlias.url);
+        if (
+          formApi.getValue(SiteItemAlias.name) ||
+          !url ||
+          !/^https?:\/\//.test(url)
+        ) {
+          return;
+        }
+        // fetch url 并解析 html title
+        const resp = await fetch(url);
+        const html = await resp.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const title = doc.title;
+        if (title && !formApi.getValue(SiteItemAlias.name)) {
+          formApi.setValue(SiteItemAlias.name, title);
+        }
+      };
+      setTimeout(act, 200);
+    },
+    {
+      wait: 1500,
+    },
+  );
 
   return (
     <Form.Input
@@ -125,8 +134,9 @@ const URLField = () => {
         { required: true, message: t('enterSiteUrl') },
         { type: 'url', message: t('invalidUrl') },
       ]}
-      onPaste={fetchTitle}
-      onBlur={fetchTitle}
+      onPaste={flush}
+      onBlur={flush}
+      onChange={run}
     />
   );
 };

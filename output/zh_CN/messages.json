@@ -3,6 +3,10 @@
     "message": "添加",
     "description": "Add button text"
   },
+  "addCurrentPageToHome": {
+    "message": "将当前页面添加到首页",
+    "description": "Right-click menu for adding current page to home screen"
+  },
   "addSearchEngine": {
     "message": "添加搜索引擎",
     "description": "Add search engine dialog title"

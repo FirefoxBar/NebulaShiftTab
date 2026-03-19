@@ -8,7 +8,6 @@ import {
   useFormApi,
   useFormState,
 } from '@douyinfe/semi-ui';
-import { useDebounceFn } from 'ahooks';
 import { SiteIcon } from '@/components/site-icon';
 import {
   SiteIconContext,
@@ -19,6 +18,7 @@ import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteItem } from '@/share/types';
 
 import './site-edit-form.less';
+import useDebounceFn from '@/hooks/use-debounce-fn';
 
 interface SiteEditFormProps {
   initialData?: SiteItem;
@@ -96,7 +96,7 @@ const IconField = () => {
 const URLField = () => {
   const formApi = useFormApi();
 
-  const { run, flush } = useDebounceFn(
+  const { run, runImmediate } = useDebounceFn(
     () => {
       const act = async () => {
         const url = formApi.getValue(SiteItemAlias.url);
@@ -133,8 +133,8 @@ const URLField = () => {
         { required: true, message: t('enterSiteUrl') },
         { type: 'url', message: t('invalidUrl') },
       ]}
-      onPaste={flush}
-      onBlur={flush}
+      onPaste={runImmediate}
+      onBlur={runImmediate}
       onChange={run}
     />
   );

@@ -32,6 +32,9 @@ async function main() {
   const iconResult = {};
 
   for (const theme of themeList) {
+    if (theme.startsWith('~')) {
+      continue;
+    }
     if (!(await isDir(path.join(themes, theme)))) {
       continue;
     }
@@ -41,12 +44,9 @@ async function main() {
       iconFileList.map(file => [file.replace(/\.(\w+)$/, ''), file]),
     );
 
-    if (theme === 'default') {
-      baseList.forEach(key => {
-        if (!iconFileMap[key]) {
-          console.log(`⚠️  ${key} not in default theme`);
-        }
-      });
+    const notHas = [...baseList].filter(key => !iconFileMap[key]);
+    if (notHas.length) {
+      console.log(`⚠️ ${theme} missing icons: ${notHas.join(', ')}`);
     }
 
     Object.keys(iconFileMap).forEach(key => {

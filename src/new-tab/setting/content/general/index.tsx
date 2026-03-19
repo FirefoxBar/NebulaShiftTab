@@ -46,9 +46,9 @@ export const GeneralSettings = withErrorBoundary(() => {
           onChange={v => setTheme(v as any)}
           optionList={[
             { label: 'Default', value: 'default' },
+            { label: 'Liquid Glass', value: 'liquid-glass' },
             { label: 'MBE Style', value: 'mbe-style' },
             { label: 'Delta Icons', value: 'delta-icons' },
-            { label: 'Liquid Glass', value: 'liquid-glass' },
           ]}
         />
       ),
@@ -64,8 +64,8 @@ export const GeneralSettings = withErrorBoundary(() => {
           optionList={[
             { label: 'Google', value: 'google' },
             { label: 'DuckDuckGo', value: 'duckduckgo' },
-            { label: 'icon.horse', value: 'icon.horse' },
             { label: 'ToolB', value: 'toolb' },
+            { label: 'icon.horse', value: 'icon.horse' },
             { label: 'Favicon.im', value: 'favicon.im' },
             { label: 'favicon.run', value: 'favicon.run' },
           ]}

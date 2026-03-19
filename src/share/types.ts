@@ -6,7 +6,7 @@ import {
 
 export interface PrefValue {
   darkMode: 'auto' | 'on' | 'off';
-  theme: 'default' | 'mbe-style' | 'delta-icons' | 'liquid-glass';
+  theme: 'default' | 'liquid-glass' | 'mbe-style' | 'delta-icons';
   iconProvider:
     | 'google'
     | 'duckduckgo'

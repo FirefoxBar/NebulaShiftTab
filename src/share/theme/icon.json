@@ -8,6 +8,7 @@
     "amazon.com": "amazon.webp",
     "baidu.com": "baidu.webp",
     "map.baidu.com": "baidu-map.webp",
+    "tieba.baidu.com": "baidu-tieba.webp",
     "pan.baidu.com": "baiduyun.webp",
     "bilibili.com": "bilibili.webp",
     "chaoxing.com": "chaoxingstudy.webp",
@@ -59,12 +60,17 @@
     "v.qq.com": "tencent-video.webp",
     "tmall.com": "tmall.webp",
     "toutiao.com": "toutiao.webp",
+    "youdao.com": "youdao.webp",
     "chat.openai.com": "chatgpt.webp",
     "hupu.com": "hupu.webp",
     "kimi.com": "kimi.webp",
     "kuaishou.com": "kuaishou.webp",
     "github.com": "github.webp",
-    "weread.qq.com": "weread.webp"
+    "weread.qq.com": "weread.webp",
+    "kookapp.cn": "kook.webp",
+    "kook.vip": "kook.webp",
+    "discord.gg": "discord.webp",
+    "discord.com": "discord.webp"
   },
   "delta-icons": {
     "_default": "_default.png",

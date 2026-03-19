@@ -70,7 +70,14 @@
     "kookapp.cn": "kook.webp",
     "kook.vip": "kook.webp",
     "discord.gg": "discord.webp",
-    "discord.com": "discord.webp"
+    "discord.com": "discord.webp",
+    "smzdm.com": "smzdm.webp",
+    "jjwxc.net": "jjwxc.webp",
+    "mi.com": "mi.webp",
+    "xiaomi.com": "mi.webp",
+    "163.com": "netease.webp",
+    "netease.com": "netease.webp",
+    "kuaikanmanhua.com": "kuaikanmanhua.webp"
   },
   "delta-icons": {
     "_default": "_default.png",
@@ -162,7 +169,14 @@
     "kimi.com": "kimi.png",
     "kuaishou.com": "kuaishou.png",
     "github.com": "github.webp",
-    "weread.qq.com": "weread.png"
+    "weread.qq.com": "weread.png",
+    "smzdm.com": "smzdm.png",
+    "jjwxc.net": "jjwxc.png",
+    "mi.com": "mi.png",
+    "xiaomi.com": "mi.png",
+    "163.com": "netease.png",
+    "netease.com": "netease.png",
+    "kuaikanmanhua.com": "kuaikanmanhua.png"
   },
   "mbe-style": {
     "_default": "_default.png",

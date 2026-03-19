@@ -15,6 +15,10 @@
     "message": "Add to Home",
     "description": "Right-click menu for adding a link to home screen"
   },
+  "addCurrentPageToHome": {
+    "message": "Add the current page to Home",
+    "description": "Right-click menu for adding current page to home screen"
+  },
   "apiOrImageAddress": {
     "message": "$type$ Address",
     "description": "Dynamic label for API or image address",

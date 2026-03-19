@@ -3,6 +3,10 @@
     "message": "Add",
     "description": "Add button text"
   },
+  "addCurrentPageToHome": {
+    "message": "Add the current page to Home",
+    "description": "Right-click menu for adding current page to home screen"
+  },
   "addSearchEngine": {
     "message": "Add Search Engine",
     "description": "Add search engine dialog title"
@@ -14,10 +18,6 @@
   "addToHome": {
     "message": "Add to Home",
     "description": "Right-click menu for adding a link to home screen"
-  },
-  "addCurrentPageToHome": {
-    "message": "Add the current page to Home",
-    "description": "Right-click menu for adding current page to home screen"
   },
   "apiOrImageAddress": {
     "message": "$type$ Address",

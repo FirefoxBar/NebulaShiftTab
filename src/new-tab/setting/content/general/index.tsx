@@ -68,6 +68,7 @@ export const GeneralSettings = withErrorBoundary(() => {
             { label: 'icon.horse', value: 'icon.horse' },
             { label: 'Favicon.im', value: 'favicon.im' },
             { label: 'favicon.run', value: 'favicon.run' },
+            { label: 'Browser', value: 'builtin', disabled: !IS_CHROME },
           ]}
         />
       ),

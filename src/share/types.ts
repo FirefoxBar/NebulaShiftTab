@@ -13,7 +13,8 @@ export interface PrefValue {
     | 'icon.horse'
     | 'favicon.im'
     | 'toolb'
-    | 'favicon.run';
+    | 'favicon.run'
+    | 'builtin';
   timeFormat: string;
   dateFormat: string;
   background: {

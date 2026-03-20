@@ -40,6 +40,14 @@ function getManifest(browser, options) {
     manifest.background = {
       service_worker: 'background.js',
     };
+    manifest.permissions.push('favicon');
+    manifest.web_accessible_resources = [
+      {
+        resources: ['_favicon/*'],
+        matches: ['<all_urls>'],
+        extension_ids: ['*'],
+      },
+    ];
   }
 
   if (browser === 'firefox') {

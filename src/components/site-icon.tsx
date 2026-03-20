@@ -4,17 +4,44 @@ import { useContext, useState } from 'react';
 import { StorageKey } from '@/share/constant';
 import { getLocalStorage } from '@/share/storage';
 import { SiteItemAlias } from '@/share/type-alias';
-import type { SiteItem as TSiteItem } from '@/share/types';
+import type { PrefValue, SiteItem as TSiteItem } from '@/share/types';
 import { SiteIconContext } from './site-icon-context';
 
 interface SiteIconProps {
   site: TSiteItem;
 }
 
+function getProviderUrl(url: string, provider: PrefValue['iconProvider']) {
+  try {
+    const urlObj = new URL(url);
+    switch (provider) {
+      case 'google':
+        return `https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=128`;
+      case 'icon.horse':
+        return `https://icon.horse/icon/${urlObj.hostname}`;
+      case 'favicon.im':
+        return `https://favicon.im/${urlObj.hostname}?larger=true`;
+      case 'toolb':
+        return `https://toolb.cn/favicon/${urlObj.hostname}`;
+      case 'favicon.run':
+        return `https://favicon.run/favicon?sz=256&domain=${urlObj.hostname}`;
+      case 'duckduckgo':
+        return `https://icons.duckduckgo.com/ip3/${urlObj.hostname}.ico?size=large`;
+      case 'builtin':
+      default:
+        return `${chrome.runtime.getURL('/_favicon/')}?pageUrl=${encodeURIComponent(url)}&size=128`;
+    }
+  } catch (e) {
+    console.error('Invalid URL:', url, e);
+  }
+  return '';
+}
+
 export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
   const { defaultIcon, theme, activeIconPack, iconProvider } =
     useContext(SiteIconContext);
   const [icon, setIcon] = useState('');
+  const [type, setType] = useState('');
 
   useAsyncEffect(async () => {
     if (
@@ -22,6 +49,7 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
       site[SiteItemAlias.icon]
     ) {
       setIcon(site[SiteItemAlias.icon]!);
+      setType('custom');
       return;
     }
 
@@ -30,6 +58,7 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
         `${StorageKey.siteIcon}_${site[SiteItemAlias.id]}`,
       );
       setIcon(s || defaultIcon);
+      setType('custom');
       return;
     }
 
@@ -68,43 +97,15 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
     if (site[SiteItemAlias.iconType] === 'builtin') {
       const res = getIconFromPack();
       setIcon(res || defaultIcon || '');
+      setType('builtin');
       return;
     }
 
     // 如果是auto类型或者内置图标未找到，使用chrome默认的favicon
     if (site[SiteItemAlias.iconType] === 'auto') {
-      try {
-        const urlObj = new URL(site[SiteItemAlias.url]);
-        switch (iconProvider) {
-          case 'google':
-            setIcon(
-              `https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=128`,
-            );
-            return;
-          case 'icon.horse':
-            setIcon(`https://icon.horse/icon/${urlObj.hostname}`);
-            return;
-          case 'favicon.im':
-            setIcon(`https://favicon.im/${urlObj.hostname}?larger=true`);
-            return;
-          case 'toolb':
-            setIcon(`https://toolb.cn/favicon/${urlObj.hostname}`);
-            return;
-          case 'favicon.run':
-            setIcon(
-              `https://favicon.run/favicon?sz=256&domain=${urlObj.hostname}`,
-            );
-            return;
-          case 'duckduckgo':
-          default:
-            setIcon(
-              `https://icons.duckduckgo.com/ip3/${urlObj.hostname}.ico?size=large`,
-            );
-            return;
-        }
-      } catch (_e) {
-        console.error('Invalid URL for favicon:', site[SiteItemAlias.url]);
-      }
+      const u = getProviderUrl(site[SiteItemAlias.url], iconProvider);
+      setIcon(u);
+      setType('auto');
     }
   }, [
     activeIconPack,
@@ -115,14 +116,16 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
   ]);
 
   return (
-    <img
-      src={icon || defaultIcon}
-      alt={site[SiteItemAlias.name]}
-      className="site-icon"
-      onError={e => {
-        const target = e.target as HTMLImageElement;
-        target.src = defaultIcon || '';
-      }}
-    />
+    <div className={`site-icon-container ${type}`}>
+      <img
+        src={icon || defaultIcon}
+        alt={site[SiteItemAlias.name]}
+        className="site-icon"
+        onError={e => {
+          const target = e.target as HTMLImageElement;
+          target.src = defaultIcon || '';
+        }}
+      />
+    </div>
   );
 };

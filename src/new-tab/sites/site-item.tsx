@@ -12,9 +12,7 @@ interface SiteItemProps {
 
 export const SiteItem = withErrorBoundary<SiteItemProps>(({ site }) => (
   <a href={site[SiteItemAlias.url]} className="site-item">
-    <div className="site-icon-container">
-      <SiteIcon site={site} />
-    </div>
+    <SiteIcon site={site} />
     <div className="site-name">{site[SiteItemAlias.name]}</div>
   </a>
 ));

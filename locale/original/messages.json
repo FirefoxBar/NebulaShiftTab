@@ -422,9 +422,9 @@
     "message": "Browser Built-in",
     "description": "Option for browser built-in icon provider"
   },
-  "siteAreaMaxWidth": {
-    "message": "Maximum width of site area",
-    "description": "Label for site area maximum width setting"
+  "siteAreaWidth": {
+    "message": "Site area width",
+    "description": "Label for site area width setting"
   },
   "restoreDefault": {
     "message": "Restore Default",

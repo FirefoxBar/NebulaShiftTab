@@ -81,7 +81,7 @@ export const GeneralSettings = withErrorBoundary(() => {
       ),
     },
     {
-      label: t('siteAreaMaxWidth'),
+      label: t('siteAreaWidth'),
       content: (
         <Slider
           value={siteWidth}

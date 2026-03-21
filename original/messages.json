@@ -386,9 +386,9 @@
     "message": "Settings",
     "description": "Title for settings panel"
   },
-  "siteAreaMaxWidth": {
-    "message": "Maximum width of site area",
-    "description": "Label for site area maximum width setting"
+  "siteAreaWidth": {
+    "message": "Site area width",
+    "description": "Label for site area width setting"
   },
   "siteManagement": {
     "message": "Site Management",

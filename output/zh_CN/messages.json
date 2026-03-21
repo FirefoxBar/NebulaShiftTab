@@ -169,7 +169,7 @@
     "description": "Placeholder for site name input"
   },
   "enterSiteUrl": {
-    "message": "请输入网站地址",
+    "message": "请输入地址",
     "description": "Placeholder for site URL input"
   },
   "enterUrl": {
@@ -391,7 +391,7 @@
     "description": "Label for site area width setting"
   },
   "siteManagement": {
-    "message": "网站管理",
+    "message": "网址管理",
     "description": "Site management section title"
   },
   "suggestionType": {

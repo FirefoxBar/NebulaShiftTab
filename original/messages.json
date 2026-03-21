@@ -57,6 +57,10 @@
     "message": "Backup to File",
     "description": "Button text for backing up to file"
   },
+  "browserBuiltIn": {
+    "message": "Browser Built-in",
+    "description": "Option for browser built-in icon provider"
+  },
   "builtinIcon": {
     "message": "Built-in Icon",
     "description": "Option for built-in icon type"
@@ -303,6 +307,10 @@
     "message": "Refresh Frequency",
     "description": "Label for refresh frequency"
   },
+  "restoreDefault": {
+    "message": "Restore Default",
+    "description": "Button text for restoring default settings"
+  },
   "restoreFromFile": {
     "message": "Restore from File",
     "description": "Button text for restoring from file"
@@ -377,6 +385,10 @@
   "settings": {
     "message": "Settings",
     "description": "Title for settings panel"
+  },
+  "siteAreaMaxWidth": {
+    "message": "Maximum width of site area",
+    "description": "Label for site area maximum width setting"
   },
   "siteManagement": {
     "message": "Site Management",

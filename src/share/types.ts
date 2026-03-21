@@ -17,6 +17,7 @@ export interface PrefValue {
     | 'builtin';
   timeFormat: string;
   dateFormat: string;
+  siteWidth: number;
   background: {
     dark: number;
     dark2: number;

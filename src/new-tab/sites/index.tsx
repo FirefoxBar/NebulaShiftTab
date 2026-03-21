@@ -12,18 +12,17 @@ import './index.less';
 
 export const Sites = withErrorBoundary(() => {
   const [sites] = usePref('sites');
+  const [width] = usePref('siteWidth');
 
   const iconContext = useSiteIconContext();
 
   return (
-    <div className="sites">
-      <div className="sites-container">
-        <SiteIconContext.Provider value={iconContext}>
-          {sites.map(site => (
-            <SiteItem key={site[SiteItemAlias.id]} site={site} />
-          ))}
-        </SiteIconContext.Provider>
-      </div>
+    <div className="sites" style={{ width: `${width}px` }}>
+      <SiteIconContext.Provider value={iconContext}>
+        {sites.map(site => (
+          <SiteItem key={site[SiteItemAlias.id]} site={site} />
+        ))}
+      </SiteIconContext.Provider>
     </div>
   );
 });

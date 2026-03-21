@@ -2,7 +2,9 @@ import { IconExternalOpen } from '@douyinfe/semi-icons';
 import { Button, Input, List, Select, Typography } from '@douyinfe/semi-ui';
 import type React from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
+import { Slider } from '@/components/slider';
 import usePref from '@/hooks/use-pref';
+import { defaultPrefValue } from '@/share/constant';
 import { t } from '@/share/locale';
 import { ExportButton } from './export-button';
 import { ImportButton } from './import-button';
@@ -13,6 +15,7 @@ export const GeneralSettings = withErrorBoundary(() => {
   const [timeFormat, setTimeFormat] = usePref('timeFormat');
   const [dateFormat, setDateFormat] = usePref('dateFormat');
   const [iconProvider, setIconProvider] = usePref('iconProvider');
+  const [siteWidth, setSiteWidth] = usePref('siteWidth');
 
   const list = [
     {
@@ -68,8 +71,24 @@ export const GeneralSettings = withErrorBoundary(() => {
             { label: 'icon.horse', value: 'icon.horse' },
             { label: 'Favicon.im', value: 'favicon.im' },
             { label: 'favicon.run', value: 'favicon.run' },
-            { label: 'Browser', value: 'builtin', disabled: !IS_CHROME },
+            {
+              label: t('browserBuiltIn'),
+              value: 'builtin',
+              disabled: !IS_CHROME,
+            },
           ]}
+        />
+      ),
+    },
+    {
+      label: t('siteAreaMaxWidth'),
+      content: (
+        <Slider
+          value={siteWidth}
+          defaultValue={defaultPrefValue.siteWidth}
+          min={500}
+          max={3840}
+          onChange={setSiteWidth}
         />
       ),
     },

@@ -417,5 +417,17 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "browserBuiltIn": {
+    "message": "Browser Built-in",
+    "description": "Option for browser built-in icon provider"
+  },
+  "siteAreaMaxWidth": {
+    "message": "Maximum width of site area",
+    "description": "Label for site area maximum width setting"
+  },
+  "restoreDefault": {
+    "message": "Restore Default",
+    "description": "Button text for restoring default settings"
   }
 }

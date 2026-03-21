@@ -220,7 +220,6 @@ export const BackgroundSetting = withErrorBoundary(() => {
               min={-99}
               max={99}
               onChange={v => updateBackground({ dark2: v as number })}
-              showTip={true}
             />
           }
         />
@@ -239,7 +238,6 @@ export const BackgroundSetting = withErrorBoundary(() => {
               min={0}
               max={100}
               onChange={v => updateBackground({ blur: v as number })}
-              showTip={true}
             />
           }
         />

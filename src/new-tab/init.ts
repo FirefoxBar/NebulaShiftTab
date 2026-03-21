@@ -1,8 +1,9 @@
+import { StorageKey } from '@/share/constant';
 import isDarkMode from '@/share/is-dark-mode';
 import { prefs } from '@/share/prefs';
-import { themeInfo } from '@/share/theme';
+import { getAndWatch, local } from '@/share/storage';
 
-export function initThemeHandler() {
+function initThemeHandler() {
   const bgEl = document.createElement('div');
   bgEl.className = 'main-bg';
   document.body.appendChild(bgEl);
@@ -50,3 +51,14 @@ export function initThemeHandler() {
     }
   });
 }
+
+const bgImgEl = document.createElement('div');
+bgImgEl.className = 'main-bg-img';
+document.body.appendChild(bgImgEl);
+getAndWatch(local, StorageKey.bg, x => {
+  if (x) {
+    bgImgEl.style.backgroundImage = `url(${x})`;
+  }
+});
+
+initThemeHandler();

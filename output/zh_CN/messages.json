@@ -387,7 +387,7 @@
     "description": "Title for settings panel"
   },
   "siteAreaWidth": {
-    "message": "站点区宽度",
+    "message": "网址区宽度",
     "description": "Label for site area width setting"
   },
   "siteManagement": {

@@ -12,7 +12,7 @@
     "description": "Add search engine dialog title"
   },
   "addSite": {
-    "message": "添加网站",
+    "message": "添加网址",
     "description": "Add site button text"
   },
   "addToHome": {

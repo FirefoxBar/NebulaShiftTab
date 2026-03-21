@@ -145,7 +145,7 @@
     "description": "Edit search engine dialog title"
   },
   "editSite": {
-    "message": "编辑网站",
+    "message": "编辑网址",
     "description": "Edit site button text"
   },
   "enterJSONataPath": {
@@ -165,7 +165,7 @@
     "description": "Validation message for search URL"
   },
   "enterSiteName": {
-    "message": "请输入网站名称",
+    "message": "请输入名称",
     "description": "Placeholder for site name input"
   },
   "enterSiteUrl": {

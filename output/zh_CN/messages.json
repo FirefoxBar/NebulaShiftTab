@@ -386,9 +386,9 @@
     "message": "设置",
     "description": "Title for settings panel"
   },
-  "siteAreaMaxWidth": {
-    "message": "站点区最大宽度",
-    "description": "Label for site area maximum width setting"
+  "siteAreaWidth": {
+    "message": "站点区宽度",
+    "description": "Label for site area width setting"
   },
   "siteManagement": {
     "message": "网站管理",

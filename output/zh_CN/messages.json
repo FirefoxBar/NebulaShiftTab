@@ -57,6 +57,10 @@
     "message": "备份到文件",
     "description": "Button text for backing up to file"
   },
+  "browserBuiltIn": {
+    "message": "浏览器内置",
+    "description": "Option for browser built-in icon provider"
+  },
   "builtinIcon": {
     "message": "内置图标",
     "description": "Option for built-in icon type"
@@ -303,6 +307,10 @@
     "message": "刷新频率",
     "description": "Label for refresh frequency"
   },
+  "restoreDefault": {
+    "message": "恢复默认",
+    "description": "Button text for restoring default settings"
+  },
   "restoreFromFile": {
     "message": "从文件恢复",
     "description": "Button text for restoring from file"
@@ -377,6 +385,10 @@
   "settings": {
     "message": "设置",
     "description": "Title for settings panel"
+  },
+  "siteAreaMaxWidth": {
+    "message": "站点区最大宽度",
+    "description": "Label for site area maximum width setting"
   },
   "siteManagement": {
     "message": "网站管理",

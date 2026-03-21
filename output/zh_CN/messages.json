@@ -129,7 +129,7 @@
     "description": "Delete search engine dialog title"
   },
   "deleteSite": {
-    "message": "删除网站",
+    "message": "删除网址",
     "description": "Delete site dialog title"
   },
   "description": {

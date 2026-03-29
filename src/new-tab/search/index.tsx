@@ -33,6 +33,7 @@ export const Search = withErrorBoundary(() => {
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const blurTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const [searches] = usePref('searches', {
     onInitial: v => setCurrentEngine(v[0]),
@@ -104,7 +105,7 @@ export const Search = withErrorBoundary(() => {
   const handleSearchSubmit = () => {
     if (!currentEngine || !searchValue.trim()) return;
 
-    // 替换URL中的{{q}}为实际查询词
+    // 替换 URL 中的{{q}}为实际查询词
     const searchUrl = currentEngine[SearchItemAlias.url].replace(
       '{{q}}',
       encodeURIComponent(searchValue),
@@ -142,6 +143,25 @@ export const Search = withErrorBoundary(() => {
     }
   };
 
+  // 处理输入框聚焦
+  const handleFocus = () => {
+    // 清除之前的 blur 定时器，防止误关闭
+    if (blurTimerRef.current) {
+      clearTimeout(blurTimerRef.current);
+      blurTimerRef.current = null;
+    }
+    setActive(true);
+  };
+
+  // 处理输入框失焦
+  const handleBlur = () => {
+    // 使用定时器延迟关闭，允许点击建议项
+    blurTimerRef.current = setTimeout(() => {
+      setActive(false);
+      blurTimerRef.current = null;
+    }, 150);
+  };
+
   // 渲染建议列表
   const renderSuggestions = () => {
     if (!showSuggestions || !suggestions.length) return null;
@@ -162,6 +182,15 @@ export const Search = withErrorBoundary(() => {
     );
   };
 
+  // 处理引擎切换并自动聚焦
+  const handleEngineChange = (engine: SearchItem) => {
+    setCurrentEngine(engine);
+    // 切换引擎后自动聚焦到输入框
+    setTimeout(() => {
+      searchInputRef.current?.focus();
+    }, 0);
+  };
+
   return (
     <div
       className={`search-container ${active ? 'active' : ''} ${showSuggestions ? 'show-suggestions' : ''}`}
@@ -176,7 +205,7 @@ export const Search = withErrorBoundary(() => {
               key={engine[SearchItemAlias.name]}
               type="button"
               className={`engine-btn ${currentEngine?.[SearchItemAlias.name] === engine[SearchItemAlias.name] ? 'active' : ''}`}
-              onClick={() => setCurrentEngine(engine)}
+              onClick={() => handleEngineChange(engine)}
             >
               {engine[SearchItemAlias.name]}
             </button>
@@ -190,8 +219,8 @@ export const Search = withErrorBoundary(() => {
           value={searchValue}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          onFocus={() => setActive(true)}
-          onBlur={() => setTimeout(() => setActive(false), 150)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           placeholder={t('enterSearchKeywords')}
           className="search-input"
         />

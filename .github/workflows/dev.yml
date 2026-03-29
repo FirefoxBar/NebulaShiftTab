@@ -76,19 +76,19 @@ jobs:
       run: node ./scripts/get-snapshot-version.mjs
     - name: Build
       uses: ./.github/actions/build
-    - name: Publish snapshot
-      env:
-        AMO_KEY: ${{ secrets.ORG_AMO_KEY }}
-        AMO_SECRET: ${{ secrets.ORG_AMO_SECRET }}
-        PACK_PLATFORM: xpi
-        DEBUG: '*'
-      run: npm run pack
-    - name: Upload snapshot release
-      uses: actions/upload-artifact@v4
-      with:
-        name: release
-        retention-days: 7
-        path: temp/release
+    # - name: Publish snapshot
+    #   env:
+    #     AMO_KEY: ${{ secrets.ORG_AMO_KEY }}
+    #     AMO_SECRET: ${{ secrets.ORG_AMO_SECRET }}
+    #     PACK_PLATFORM: xpi
+    #     DEBUG: '*'
+    #   run: npm run pack
+    # - name: Upload snapshot release
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: release
+    #     retention-days: 7
+    #     path: temp/release
 
   sync-locale:
     needs: check_changes

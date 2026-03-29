@@ -1,6 +1,6 @@
 import { initFlag, packFlags } from '../bool-flags';
 import { SearchItemAlias } from '../type-alias';
-import { SearchItem } from '../types';
+import type { SearchItem } from '../types';
 
 export const SearchItemShowOnFlag = {
   HOME: initFlag(0),
@@ -98,6 +98,25 @@ export const searchEngines: SearchItem[] = [
     [SearchItemAlias.key]: 'mdn',
     [SearchItemAlias.name]: 'Mozilla Developer Network',
     [SearchItemAlias.url]: 'https://developer.mozilla.org/en-US/search?q={{q}}',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
+  },
+  {
+    [SearchItemAlias.key]: 'youtube',
+    [SearchItemAlias.name]: 'YouTube',
+    [SearchItemAlias.url]: 'https://www.youtube.com/results?search_query={{q}}',
+    [SearchItemAlias.suggestion]:
+      'https://suggestqueries-clients6.youtube.com/complete/search?client=youtube&q={{q}}&hl=zh-cn&gl=hk',
+    [SearchItemAlias.suggestionType]: 'jsonp',
+    [SearchItemAlias.extractSuggestion]: '$[1].*[0]',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
+  },
+  {
+    [SearchItemAlias.key]: 'duckduckgo',
+    [SearchItemAlias.name]: 'DuckDuckGo',
+    [SearchItemAlias.url]: 'https://duckduckgo.com/?q={{q}}',
+    [SearchItemAlias.suggestion]: 'https://duckduckgo.com/ac/?q={{q}}',
+    [SearchItemAlias.suggestionType]: 'json',
+    [SearchItemAlias.extractSuggestion]: '$.phrase',
     [SearchItemAlias.showOn]: searchItemShowOnAll,
   },
   {

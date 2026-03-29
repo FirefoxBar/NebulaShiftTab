@@ -21,9 +21,7 @@ export const parseJsonp = async <T = any>(jsonp: string): Promise<T> => {
   let cleanedJsonp = jsonp.trim();
 
   // 尝试移除 JSONP 的回调包装，例如 callback({...}) -> {...}
-  const match = cleanedJsonp.match(
-    /^\s*[a-zA-Z_$][a-zA-Z0-9_$]*\s*\((.*)\)\s*;?\s*$/,
-  );
+  const match = cleanedJsonp.match(/^\s*[a-zA-Z0-9_.$]*\s*\((.*)\)\s*;?\s*$/);
   if (match) {
     cleanedJsonp = match[1];
   }

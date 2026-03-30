@@ -96,6 +96,10 @@ const IconField = () => {
                 alpha
                 eyeDropper
                 usePopover
+                popoverProps={{
+                  trigger: 'click',
+                  position: 'left',
+                }}
                 value={
                   values[SiteItemAlias.backgroundColor]
                     ? ColorPicker.colorStringToValue(
@@ -114,6 +118,7 @@ const IconField = () => {
             <Form.Select
               label={t('margin')}
               field={SiteItemAlias.padding}
+              showClear
               optionList={[
                 { label: t('auto'), value: 'a' },
                 { label: t('none'), value: '0' },

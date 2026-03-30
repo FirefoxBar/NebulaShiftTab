@@ -29,6 +29,9 @@
       }
     }
   },
+  "auto": {
+    "message": "自动"
+  },
   "autoFetch": {
     "message": "自动获取",
     "description": "Option for auto fetch icon type"
@@ -36,6 +39,10 @@
   "backgroundBlur": {
     "message": "背景模糊",
     "description": "Label for background blur setting"
+  },
+  "backgroundColor": {
+    "message": "背景色",
+    "description": "Label for background color setting"
   },
   "backgroundDarkness": {
     "message": "背景暗度",
@@ -271,6 +278,10 @@
     "message": "本地图片",
     "description": "Option for local image"
   },
+  "margin": {
+    "message": "边距",
+    "description": "Label for margin setting"
+  },
   "name": {
     "message": "名称",
     "description": "Label for name field"
@@ -278,6 +289,9 @@
   "never": {
     "message": "从不",
     "description": "Option for never refreshing"
+  },
+  "none": {
+    "message": "无"
   },
   "off": {
     "message": "关闭",

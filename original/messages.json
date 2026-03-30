@@ -400,9 +400,17 @@
     "message": "Settings",
     "description": "Title for settings panel"
   },
+  "showSiteName": {
+    "message": "Display site name",
+    "description": "Label for display site name"
+  },
   "siteAreaWidth": {
     "message": "Site area width",
     "description": "Label for site area width setting"
+  },
+  "siteGap": {
+    "message": "Spacing of sites",
+    "description": "Label for spacing of sites"
   },
   "siteManagement": {
     "message": "Site Management",

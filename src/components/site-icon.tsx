@@ -37,6 +37,16 @@ function getProviderUrl(url: string, provider: PrefValue['iconProvider']) {
   return '';
 }
 
+function isTransparent(c?: string) {
+  if (!c) {
+    return true;
+  }
+  if (c.length === 8 && c.endsWith('00')) {
+    return true;
+  }
+  return false;
+}
+
 export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
   const { defaultIcon, theme, activeIconPack, iconProvider } =
     useContext(SiteIconContext);
@@ -46,12 +56,12 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
   const [iconPadding, setIconPadding] = useState('');
 
   useAsyncEffect(async () => {
-    if (
-      site[SiteItemAlias.backgroundColor] &&
-      site[SiteItemAlias.backgroundColor] !== 'ffffff'
-    ) {
-      setBgColor(`#${site[SiteItemAlias.backgroundColor]}`);
-    }
+    const bc = site[SiteItemAlias.backgroundColor];
+    setBgColor(
+      isTransparent(bc)
+        ? 'transparent'
+        : `#${site[SiteItemAlias.backgroundColor]}`,
+    );
     const p = site[SiteItemAlias.padding];
     setIconPadding(typeof p === 'string' && p !== 'a' ? p : '');
 

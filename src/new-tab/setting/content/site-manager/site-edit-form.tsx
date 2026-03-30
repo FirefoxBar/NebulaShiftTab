@@ -55,39 +55,6 @@ const IconField = () => {
           </Select>
         </Form.Slot>
 
-        {iconType === 'auto' && (
-          <>
-            <Form.Slot label={t('backgroundColor')}>
-              <ColorPicker
-                alpha
-                eyeDropper
-                usePopover
-                value={
-                  values[SiteItemAlias.backgroundColor]
-                    ? ColorPicker.colorStringToValue(
-                        `#${values[SiteItemAlias.backgroundColor]}`,
-                      )
-                    : defaultBackgroundColor
-                }
-                onChange={value => {
-                  formApi.setValue(
-                    SiteItemAlias.backgroundColor,
-                    value.hex.substring(1),
-                  );
-                }}
-              />
-            </Form.Slot>
-            <Form.Select
-              label={t('margin')}
-              field={SiteItemAlias.padding}
-              optionList={[
-                { label: t('auto'), value: 'a' },
-                { label: t('none'), value: '0' },
-              ]}
-            />
-          </>
-        )}
-
         {iconType === 'custom' && (
           <Form.Input
             label={t('customIconUrl')}
@@ -120,6 +87,39 @@ const IconField = () => {
               </Button>
             </Upload>
           </Form.Slot>
+        )}
+
+        {iconType !== 'builtinIcon' && (
+          <>
+            <Form.Slot label={t('backgroundColor')}>
+              <ColorPicker
+                alpha
+                eyeDropper
+                usePopover
+                value={
+                  values[SiteItemAlias.backgroundColor]
+                    ? ColorPicker.colorStringToValue(
+                        `#${values[SiteItemAlias.backgroundColor]}`,
+                      )
+                    : defaultBackgroundColor
+                }
+                onChange={value => {
+                  formApi.setValue(
+                    SiteItemAlias.backgroundColor,
+                    value.hex.substring(1),
+                  );
+                }}
+              />
+            </Form.Slot>
+            <Form.Select
+              label={t('margin')}
+              field={SiteItemAlias.padding}
+              optionList={[
+                { label: t('auto'), value: 'a' },
+                { label: t('none'), value: '0' },
+              ]}
+            />
+          </>
         )}
       </div>
       <SiteIconContext.Provider value={iconContext}>

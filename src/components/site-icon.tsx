@@ -47,6 +47,15 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
 
   useAsyncEffect(async () => {
     if (
+      site[SiteItemAlias.backgroundColor] &&
+      site[SiteItemAlias.backgroundColor] !== 'ffffff'
+    ) {
+      setBgColor(`#${site[SiteItemAlias.backgroundColor]}`);
+    }
+    const p = site[SiteItemAlias.padding];
+    setIconPadding(typeof p === 'string' && p !== 'a' ? p : '');
+
+    if (
       ['local', 'custom'].includes(site[SiteItemAlias.iconType]) &&
       site[SiteItemAlias.icon]
     ) {
@@ -108,14 +117,6 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
       const u = getProviderUrl(site[SiteItemAlias.url], iconProvider);
       setIcon(u);
       setType('auto');
-      if (
-        site[SiteItemAlias.backgroundColor] &&
-        site[SiteItemAlias.backgroundColor] !== 'ffffff'
-      ) {
-        setBgColor(`#${site[SiteItemAlias.backgroundColor]}`);
-      }
-      const p = site[SiteItemAlias.padding];
-      setIconPadding(typeof p === 'string' && p !== 'a' ? p : '');
     }
   }, [
     activeIconPack,
@@ -127,9 +128,12 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
     site[SiteItemAlias.padding],
   ]);
 
-  const s: CSSProperties = { backgroundColor: bgColor };
-  if (iconPadding) {
-    s.padding = iconPadding;
+  const s: CSSProperties = {};
+  if (type !== 'builtin') {
+    s.backgroundColor = bgColor;
+    if (iconPadding) {
+      s.padding = iconPadding;
+    }
   }
 
   return (

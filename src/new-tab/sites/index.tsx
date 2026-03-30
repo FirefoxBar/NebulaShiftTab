@@ -1,4 +1,3 @@
-import type React from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
 import {
   SiteIconContext,
@@ -13,14 +12,20 @@ import './index.less';
 export const Sites = withErrorBoundary(() => {
   const [sites] = usePref('sites');
   const [width] = usePref('siteWidth');
+  const [gap] = usePref('siteGap');
+  const [showName] = usePref('showSiteName');
 
   const iconContext = useSiteIconContext();
 
   return (
-    <div className="sites" style={{ width: `${width}px` }}>
+    <div className="sites" style={{ width: `${width}px`, gap: `${gap}px` }}>
       <SiteIconContext.Provider value={iconContext}>
         {sites.map(site => (
-          <SiteItem key={site[SiteItemAlias.id]} site={site} />
+          <SiteItem
+            key={site[SiteItemAlias.id]}
+            site={site}
+            showName={showName}
+          />
         ))}
       </SiteIconContext.Provider>
     </div>

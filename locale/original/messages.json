@@ -443,5 +443,13 @@
   },
   "none": {
     "message": "None"
+  },
+  "siteGap": {
+    "message": "Spacing of sites",
+    "description": "Label for spacing of sites"
+  },
+  "showSiteName": {
+    "message": "Display site name",
+    "description": "Label for display site name"
   }
 }

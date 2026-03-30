@@ -1,6 +1,12 @@
 import { IconExternalOpen } from '@douyinfe/semi-icons';
-import { Button, Input, List, Select, Typography } from '@douyinfe/semi-ui';
-import type React from 'react';
+import {
+  Button,
+  Checkbox,
+  Input,
+  List,
+  Select,
+  Typography,
+} from '@douyinfe/semi-ui';
 import { withErrorBoundary } from '@/components/error-boundary';
 import { Slider } from '@/components/slider';
 import usePref from '@/hooks/use-pref';
@@ -16,6 +22,8 @@ export const GeneralSettings = withErrorBoundary(() => {
   const [dateFormat, setDateFormat] = usePref('dateFormat');
   const [iconProvider, setIconProvider] = usePref('iconProvider');
   const [siteWidth, setSiteWidth] = usePref('siteWidth');
+  const [siteGap, setSiteGap] = usePref('siteGap');
+  const [showSiteName, setShowSiteName] = usePref('showSiteName');
 
   const list = [
     {
@@ -89,6 +97,27 @@ export const GeneralSettings = withErrorBoundary(() => {
           min={500}
           max={3840}
           onChange={setSiteWidth}
+        />
+      ),
+    },
+    {
+      label: t('siteGap'),
+      content: (
+        <Slider
+          value={siteGap}
+          defaultValue={defaultPrefValue.siteGap}
+          min={0}
+          max={160}
+          onChange={setSiteGap}
+        />
+      ),
+    },
+    {
+      label: t('showSiteName'),
+      content: (
+        <Checkbox
+          checked={Boolean(showSiteName)}
+          onChange={e => setShowSiteName(Boolean(e.target.checked))}
         />
       ),
     },

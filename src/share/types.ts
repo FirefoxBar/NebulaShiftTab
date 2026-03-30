@@ -18,6 +18,8 @@ export interface PrefValue {
   timeFormat: string;
   dateFormat: string;
   siteWidth: number;
+  siteGap: number;
+  showSiteName: boolean;
   background: {
     dark: number;
     dark2: number;

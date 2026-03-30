@@ -5,7 +5,7 @@ import {
   Slider as SemiSlider,
   Tooltip,
 } from '@douyinfe/semi-ui';
-import { ComponentProps, FC } from 'react';
+import type { ComponentProps, FC } from 'react';
 import { t } from '@/share/locale';
 
 import './slider.less';
@@ -20,10 +20,42 @@ type SliderProps = Omit<
     value: number;
     onChange: (value: number) => void;
     defaultValue?: number;
+    mini?: boolean;
   };
 
 export const Slider: FC<SliderProps> = props => {
-  const { min, max, value, onChange, className = '', defaultValue } = props;
+  const {
+    min,
+    max,
+    value,
+    onChange,
+    className = '',
+    mini = false,
+    defaultValue,
+  } = props;
+
+  const restoreDefault =
+    typeof defaultValue === 'number' ? (
+      <Tooltip content={t('restoreDefault')}>
+        <Button
+          icon={<IconUndo />}
+          size="small"
+          onClick={() => onChange(defaultValue)}
+        />
+      </Tooltip>
+    ) : null;
+
+  if (mini) {
+    return (
+      <div className={`slider ${className} mini`}>
+        <SemiSlider
+          {...props}
+          onChange={onChange as BaseSliderProps['onChange']}
+        />
+        {restoreDefault}
+      </div>
+    );
+  }
 
   return (
     <div className={`slider ${className}`}>
@@ -39,15 +71,7 @@ export const Slider: FC<SliderProps> = props => {
           onChange={v => onChange(v as number)}
           size="small"
         />
-        {typeof defaultValue === 'number' && (
-          <Tooltip content={t('restoreDefault')}>
-            <Button
-              icon={<IconUndo />}
-              size="small"
-              onClick={() => onChange(defaultValue)}
-            />
-          </Tooltip>
-        )}
+        {restoreDefault}
       </div>
     </div>
   );

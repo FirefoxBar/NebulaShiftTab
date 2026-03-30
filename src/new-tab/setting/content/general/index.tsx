@@ -107,8 +107,9 @@ export const GeneralSettings = withErrorBoundary(() => {
           value={siteGap}
           defaultValue={defaultPrefValue.siteGap}
           min={0}
-          max={160}
+          max={120}
           onChange={setSiteGap}
+          mini
         />
       ),
     },

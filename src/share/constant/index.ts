@@ -36,7 +36,7 @@ export const defaultPrefValue: PrefValue = {
   showSiteName: true,
   background: {
     dark: 40,
-    dark2: 40,
+    dark2: 60,
     blur: 0,
     type: 'builtin',
     key: 'bing',

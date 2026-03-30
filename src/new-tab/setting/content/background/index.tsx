@@ -2,21 +2,25 @@ import {
   Button,
   List,
   Select,
-  Slider,
+  Slider as SemiSlider,
   Typography,
   Upload,
 } from '@douyinfe/semi-ui';
-import type React from 'react';
 import { useState } from 'react';
 import Modal from '@/components/modal';
 import usePref from '@/hooks/use-pref';
-import { backgroundEngines, StorageKey } from '@/share/constant';
+import {
+  backgroundEngines,
+  defaultPrefValue,
+  StorageKey,
+} from '@/share/constant';
 import { t } from '@/share/locale';
 import { BackgroundItemAlias } from '@/share/type-alias';
 import type { PrefValue } from '@/share/types';
 import { CustomBg } from './custom-bg';
 import './index.less';
 import { withErrorBoundary } from '@/components/error-boundary';
+import { Slider } from '@/components/slider';
 import { RefreshButton } from './refresh-button';
 
 type BackgroundType = PrefValue['background']['type'];
@@ -198,7 +202,8 @@ export const BackgroundSetting = withErrorBoundary(() => {
               min={-99}
               max={99}
               onChange={v => updateBackground({ dark: v as number })}
-              showTip={true}
+              defaultValue={defaultPrefValue.background.dark}
+              mini
             />
           }
         />
@@ -220,6 +225,8 @@ export const BackgroundSetting = withErrorBoundary(() => {
               min={-99}
               max={99}
               onChange={v => updateBackground({ dark2: v as number })}
+              defaultValue={defaultPrefValue.background.dark2}
+              mini
             />
           }
         />
@@ -233,7 +240,7 @@ export const BackgroundSetting = withErrorBoundary(() => {
             </div>
           }
           extra={
-            <Slider
+            <SemiSlider
               value={background.blur}
               min={0}
               max={100}

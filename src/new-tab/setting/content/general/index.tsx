@@ -1,10 +1,10 @@
 import { IconExternalOpen } from '@douyinfe/semi-icons';
 import {
   Button,
-  Checkbox,
   Input,
   List,
   Select,
+  Switch,
   Typography,
 } from '@douyinfe/semi-ui';
 import { withErrorBoundary } from '@/components/error-boundary';
@@ -115,10 +115,7 @@ export const GeneralSettings = withErrorBoundary(() => {
     {
       label: t('showSiteName'),
       content: (
-        <Checkbox
-          checked={Boolean(showSiteName)}
-          onChange={e => setShowSiteName(Boolean(e.target.checked))}
-        />
+        <Switch checked={Boolean(showSiteName)} onChange={setShowSiteName} />
       ),
     },
     {

@@ -29,6 +29,9 @@
       }
     }
   },
+  "auto": {
+    "message": "Auto"
+  },
   "autoFetch": {
     "message": "Auto Fetch",
     "description": "Option for auto fetch icon type"
@@ -36,6 +39,10 @@
   "backgroundBlur": {
     "message": "Background Blur",
     "description": "Label for background blur setting"
+  },
+  "backgroundColor": {
+    "message": "Background Color",
+    "description": "Label for background color setting"
   },
   "backgroundDarkness": {
     "message": "Background Darkness",
@@ -271,6 +278,10 @@
     "message": "Local Image",
     "description": "Option for local image"
   },
+  "margin": {
+    "message": "Margin",
+    "description": "Label for margin setting"
+  },
   "name": {
     "message": "Name",
     "description": "Label for name field"
@@ -278,6 +289,9 @@
   "never": {
     "message": "Never",
     "description": "Option for never refreshing"
+  },
+  "none": {
+    "message": "None"
   },
   "off": {
     "message": "Off",
@@ -386,9 +400,17 @@
     "message": "Settings",
     "description": "Title for settings panel"
   },
+  "showSiteName": {
+    "message": "Display site name",
+    "description": "Label for display site name"
+  },
   "siteAreaWidth": {
     "message": "Site area width",
     "description": "Label for site area width setting"
+  },
+  "siteGap": {
+    "message": "Spacing of sites",
+    "description": "Label for spacing of sites"
   },
   "siteManagement": {
     "message": "Site Management",
@@ -429,27 +451,5 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
-  },
-  "backgroundColor": {
-    "message": "Background Color",
-    "description": "Label for background color setting"
-  },
-  "margin": {
-    "message": "Margin",
-    "description": "Label for margin setting"
-  },
-  "auto": {
-    "message": "Auto"
-  },
-  "none": {
-    "message": "None"
-  },
-  "siteGap": {
-    "message": "Spacing of sites",
-    "description": "Label for spacing of sites"
-  },
-  "showSiteName": {
-    "message": "Display site name",
-    "description": "Label for display site name"
   }
 }

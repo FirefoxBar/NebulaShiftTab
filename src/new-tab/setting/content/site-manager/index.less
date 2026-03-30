@@ -25,9 +25,22 @@
     align-items: center;
     width: 100%;
 
-    .site-icon {
+    .site-icon-container {
       width: 32px;
+      height: 32px;
       margin-right: 8px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      box-sizing: border-box;
+
+      &.auto {
+        padding: 3.2px;
+      }
+
+      > img {
+        width: 100%;
+      }
     }
   }
 

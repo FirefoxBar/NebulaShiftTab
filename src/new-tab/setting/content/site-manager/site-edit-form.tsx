@@ -1,6 +1,7 @@
 import { IconUpload } from '@douyinfe/semi-icons';
 import {
   Button,
+  ColorPicker,
   Form,
   Select,
   Upload,
@@ -25,6 +26,8 @@ interface SiteEditFormProps {
   onSave: (data: SiteItem) => void;
   onCancel: () => void;
 }
+
+const defaultBackgroundColor = ColorPicker.colorStringToValue('#ffffff');
 
 const IconField = () => {
   const iconContext = useSiteIconContext();
@@ -51,6 +54,39 @@ const IconField = () => {
             <Select.Option value="custom">{t('custom')}</Select.Option>
           </Select>
         </Form.Slot>
+
+        {iconType === 'auto' && (
+          <>
+            <Form.Slot label={t('backgroundColor')}>
+              <ColorPicker
+                alpha
+                eyeDropper
+                usePopover
+                value={
+                  values[SiteItemAlias.backgroundColor]
+                    ? ColorPicker.colorStringToValue(
+                        `#${values[SiteItemAlias.backgroundColor]}`,
+                      )
+                    : defaultBackgroundColor
+                }
+                onChange={value => {
+                  formApi.setValue(
+                    SiteItemAlias.backgroundColor,
+                    value.hex.substring(1),
+                  );
+                }}
+              />
+            </Form.Slot>
+            <Form.Select
+              label={t('margin')}
+              field={SiteItemAlias.padding}
+              optionList={[
+                { label: t('auto'), value: 'a' },
+                { label: t('none'), value: '0' },
+              ]}
+            />
+          </>
+        )}
 
         {iconType === 'custom' && (
           <Form.Input

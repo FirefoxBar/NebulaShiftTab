@@ -1,6 +1,6 @@
 import { useAsyncEffect } from 'ahooks';
 import type React from 'react';
-import { useContext, useState } from 'react';
+import { type CSSProperties, useContext, useState } from 'react';
 import { StorageKey } from '@/share/constant';
 import { getLocalStorage } from '@/share/storage';
 import { SiteItemAlias } from '@/share/type-alias';
@@ -42,6 +42,8 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
     useContext(SiteIconContext);
   const [icon, setIcon] = useState('');
   const [type, setType] = useState('');
+  const [bgColor, setBgColor] = useState('transparent');
+  const [iconPadding, setIconPadding] = useState('');
 
   useAsyncEffect(async () => {
     if (
@@ -106,6 +108,14 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
       const u = getProviderUrl(site[SiteItemAlias.url], iconProvider);
       setIcon(u);
       setType('auto');
+      if (
+        site[SiteItemAlias.backgroundColor] &&
+        site[SiteItemAlias.backgroundColor] !== 'ffffff'
+      ) {
+        setBgColor(`#${site[SiteItemAlias.backgroundColor]}`);
+      }
+      const p = site[SiteItemAlias.padding];
+      setIconPadding(typeof p === 'string' && p !== 'a' ? p : '');
     }
   }, [
     activeIconPack,
@@ -113,10 +123,17 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
     site[SiteItemAlias.url],
     site[SiteItemAlias.iconType],
     site[SiteItemAlias.icon],
+    site[SiteItemAlias.backgroundColor],
+    site[SiteItemAlias.padding],
   ]);
 
+  const s: CSSProperties = { backgroundColor: bgColor };
+  if (iconPadding) {
+    s.padding = iconPadding;
+  }
+
   return (
-    <div className={`site-icon-container ${type}`}>
+    <div className={`site-icon-container ${type}`} style={s}>
       <img
         src={icon || defaultIcon}
         alt={site[SiteItemAlias.name]}

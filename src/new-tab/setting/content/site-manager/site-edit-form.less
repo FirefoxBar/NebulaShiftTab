@@ -5,9 +5,25 @@
     align-items: center;
     justify-content: space-between;
 
-    .site-icon {
+    .site-icon-container {
       width: 48px;
-      flex: 0;
+      height: 48px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      box-sizing: border-box;
+
+      &.auto {
+        padding: 4.8px;
+      }
+
+      > img {
+        width: 100%;
+      }
+    }
+
+    .semi-colorPicker-popover-defaultChildren {
+      border: 2px solid var(--semi-color-border);
     }
   }
 

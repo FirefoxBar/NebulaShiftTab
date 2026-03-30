@@ -35,6 +35,8 @@ export interface SiteItem {
   [SiteItemAlias.url]: string;
   [SiteItemAlias.iconType]: 'builtin' | 'auto' | 'local' | 'custom';
   [SiteItemAlias.icon]?: string;
+  [SiteItemAlias.backgroundColor]?: string;
+  [SiteItemAlias.padding]?: 'a' | string;
 }
 
 export interface SearchItem {

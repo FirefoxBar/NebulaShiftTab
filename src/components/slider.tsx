@@ -40,6 +40,8 @@ export const Slider: FC<SliderProps> = props => {
         <Button
           icon={<IconUndo />}
           size="small"
+          theme="outline"
+          type="tertiary"
           onClick={() => onChange(defaultValue)}
         />
       </Tooltip>

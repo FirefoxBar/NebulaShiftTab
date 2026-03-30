@@ -400,9 +400,17 @@
     "message": "设置",
     "description": "Title for settings panel"
   },
+  "showSiteName": {
+    "message": "显示网址名称",
+    "description": "Label for display site name"
+  },
   "siteAreaWidth": {
     "message": "网址区宽度",
     "description": "Label for site area width setting"
+  },
+  "siteGap": {
+    "message": "网址间隔",
+    "description": "Label for spacing of sites"
   },
   "siteManagement": {
     "message": "网址管理",

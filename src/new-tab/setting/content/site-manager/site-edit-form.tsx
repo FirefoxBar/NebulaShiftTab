@@ -89,7 +89,7 @@ const IconField = () => {
           </Form.Slot>
         )}
 
-        {iconType !== 'builtinIcon' && (
+        {iconType !== 'builtin' && (
           <>
             <Form.Slot label={t('backgroundColor')}>
               <ColorPicker

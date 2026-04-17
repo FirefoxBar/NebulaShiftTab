@@ -412,6 +412,10 @@
     "message": "Spacing of sites",
     "description": "Label for spacing of sites"
   },
+  "siteIconSize": {
+    "message": "Site Icon size",
+    "description": "Label for site icon size setting"
+  },
   "siteManagement": {
     "message": "Site Management",
     "description": "Site management section title"

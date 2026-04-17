@@ -412,6 +412,10 @@
     "message": "网址间隔",
     "description": "Label for spacing of sites"
   },
+  "siteIconSize": {
+    "message": "网址图标大小",
+    "description": "Label for site icon size setting"
+  },
   "siteManagement": {
     "message": "网址管理",
     "description": "Site management section title"

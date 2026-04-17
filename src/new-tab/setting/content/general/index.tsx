@@ -21,6 +21,7 @@ export const GeneralSettings = withErrorBoundary(() => {
   const [timeFormat, setTimeFormat] = usePref('timeFormat');
   const [dateFormat, setDateFormat] = usePref('dateFormat');
   const [iconProvider, setIconProvider] = usePref('iconProvider');
+  const [siteSize, setSiteSize] = usePref('siteSize');
   const [siteWidth, setSiteWidth] = usePref('siteWidth');
   const [siteGap, setSiteGap] = usePref('siteGap');
   const [showSiteName, setShowSiteName] = usePref('showSiteName');
@@ -85,6 +86,19 @@ export const GeneralSettings = withErrorBoundary(() => {
               disabled: !IS_CHROME,
             },
           ]}
+        />
+      ),
+    },
+    {
+      label: t('siteIconSize'),
+      content: (
+        <Slider
+          value={siteSize}
+          defaultValue={defaultPrefValue.siteSize}
+          min={24}
+          max={256}
+          onChange={setSiteSize}
+          mini
         />
       ),
     },

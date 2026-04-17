@@ -31,6 +31,7 @@ export const defaultPrefValue: PrefValue = {
   iconProvider: 'duckduckgo',
   timeFormat: 'HH:mm',
   dateFormat: 'M月D日 dddd LMLD',
+  siteSize: 84,
   siteWidth: 805,
   siteGap: 36,
   showSiteName: true,

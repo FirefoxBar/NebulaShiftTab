@@ -451,5 +451,9 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "siteIconSize": {
+    "message": "Site Icon size",
+    "description": "Label for site icon size setting"
   }
 }

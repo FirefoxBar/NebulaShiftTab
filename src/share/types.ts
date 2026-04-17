@@ -17,6 +17,7 @@ export interface PrefValue {
     | 'builtin';
   timeFormat: string;
   dateFormat: string;
+  siteSize: number;
   siteWidth: number;
   siteGap: number;
   showSiteName: boolean;

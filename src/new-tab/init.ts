@@ -50,6 +50,12 @@ function initThemeHandler() {
       updateDark(prefs.get('background').dark);
     }
   });
+
+  const styleEl = document.createElement('style');
+  document.head.appendChild(styleEl);
+  prefs.getAndWatch('siteSize', size => {
+    styleEl.innerHTML = `body{--site-icon-size:${size}px}`;
+  });
 }
 
 const bgImgEl = document.createElement('div');

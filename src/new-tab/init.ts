@@ -53,9 +53,25 @@ function initThemeHandler() {
 
   const styleEl = document.createElement('style');
   document.head.appendChild(styleEl);
-  prefs.getAndWatch('siteSize', size => {
-    styleEl.innerHTML = `body{--site-icon-size:${size}px}`;
-  });
+  let updatingStyle = false;
+  function updateStyle() {
+    if (updatingStyle) {
+      return;
+    }
+    updatingStyle = true;
+    requestAnimationFrame(() => {
+      const width = prefs.get('siteWidth');
+      const gap = prefs.get('siteGap');
+      const size = prefs.get('siteSize');
+      styleEl.innerHTML = `body{--site-area-width:${width}px;--site-area-gap:${gap}px;--site-icon-size:${size}px}`;
+      updatingStyle = false;
+    });
+  }
+
+  prefs.watchKey('siteGap', updateStyle);
+  prefs.watchKey('siteSize', updateStyle);
+  prefs.watchKey('siteWidth', updateStyle);
+  updateStyle();
 }
 
 const bgImgEl = document.createElement('div');

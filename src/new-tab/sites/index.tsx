@@ -11,14 +11,12 @@ import './index.less';
 
 export const Sites = withErrorBoundary(() => {
   const [sites] = usePref('sites');
-  const [width] = usePref('siteWidth');
-  const [gap] = usePref('siteGap');
   const [showName] = usePref('showSiteName');
 
   const iconContext = useSiteIconContext();
 
   return (
-    <div className="sites" style={{ width: `${width}px`, gap: `${gap}px` }}>
+    <div className="sites">
       <SiteIconContext.Provider value={iconContext}>
         {sites.map(site => (
           <SiteItem

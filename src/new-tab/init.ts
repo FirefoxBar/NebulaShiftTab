@@ -3,23 +3,33 @@ import isDarkMode from '@/share/is-dark-mode';
 import { prefs } from '@/share/prefs';
 import { getAndWatch, local } from '@/share/storage';
 
+function withRAF(callback: () => void) {
+  let waiting = false;
+  return () => {
+    if (waiting) {
+      return;
+    }
+    waiting = true;
+    requestAnimationFrame(() => {
+      try {
+        callback();
+      } catch (e) {
+        console.error(e);
+      }
+      waiting = false;
+    });
+  };
+}
+
 function handleStyleVar() {
   const styleEl = document.createElement('style');
   document.head.appendChild(styleEl);
-  let updatingStyle = false;
-  function updateStyle() {
-    if (updatingStyle) {
-      return;
-    }
-    updatingStyle = true;
-    requestAnimationFrame(() => {
-      const width = prefs.get('siteWidth');
-      const gap = prefs.get('siteGap');
-      const size = prefs.get('siteSize');
-      styleEl.innerHTML = `body{--site-area-width:${width}px;--site-area-gap:${gap}px;--site-icon-size:${size}px}`;
-      updatingStyle = false;
-    });
-  }
+  const updateStyle = withRAF(() => {
+    const width = prefs.get('siteWidth');
+    const gap = prefs.get('siteGap');
+    const size = prefs.get('siteSize');
+    styleEl.innerHTML = `body{--site-area-width:${width}px;--site-area-gap:${gap}px;--site-icon-size:${size}px}`;
+  });
 
   prefs.watchKey('siteGap', updateStyle);
   prefs.watchKey('siteSize', updateStyle);
@@ -32,13 +42,15 @@ function handleDarkMode() {
   bgEl.className = 'main-bg';
   document.body.appendChild(bgEl);
 
-  function updateDark(dark: number) {
-    if (dark === 0) {
+  let currentDark = 0;
+
+  const updateDark = withRAF(() => {
+    if (currentDark === 0) {
       bgEl.style.backgroundColor = 'transparent';
       return;
     }
-    if (dark < 0) {
-      const abs = Math.abs(dark);
+    if (currentDark < 0) {
+      const abs = Math.abs(currentDark);
       if (abs < 10) {
         bgEl.style.backgroundColor = `rgba(255,255,255,0.0${abs})`;
         return;
@@ -46,16 +58,17 @@ function handleDarkMode() {
       bgEl.style.backgroundColor = `rgba(255,255,255,0.${abs})`;
       return;
     }
-    if (dark < 10) {
-      bgEl.style.backgroundColor = `rgba(0,0,0,0.0${dark})`;
+    if (currentDark < 10) {
+      bgEl.style.backgroundColor = `rgba(0,0,0,0.0${currentDark})`;
       return;
     }
-    bgEl.style.backgroundColor = `rgba(0,0,0,0.${dark})`;
-  }
+    bgEl.style.backgroundColor = `rgba(0,0,0,0.${currentDark})`;
+  });
 
   prefs.getAndWatch('background', ({ dark, dark2, blur }) => {
-    updateDark(isDarkMode() ? dark2 : dark);
+    currentDark = isDarkMode() ? dark2 : dark;
     bgEl.style.backdropFilter = blur ? `blur(${blur / 5}px)` : '';
+    updateDark();
   });
 
   prefs.getAndWatch('darkMode', () => {
@@ -63,11 +76,13 @@ function handleDarkMode() {
     const is = isDarkMode();
     if (is && !nowDark) {
       document.body.setAttribute('theme-mode', 'dark');
-      updateDark(prefs.get('background').dark2);
+      currentDark = prefs.get('background').dark2;
+      updateDark();
     }
     if (!is && nowDark) {
       document.body.removeAttribute('theme-mode');
-      updateDark(prefs.get('background').dark);
+      currentDark = prefs.get('background').dark;
+      updateDark();
     }
   });
 }

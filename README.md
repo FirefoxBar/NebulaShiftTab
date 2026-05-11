@@ -60,7 +60,7 @@ Nebula Shift Tab 自身不收集任何数据。但是，在使用第三方服务
 * default: 从 App Store、Play 等应用商店获取各应用的原始图标，然后使用 cwebp 转换
 * mbe-style: 来源于[meolunr/MBEStyle](https://github.com/meolunr/MBEStyle)，原始协议为 [GPL-3.0](https://github.com/meolunr/MBEStyle/blob/master/LICENSE)
 * delta-icons: 来源于[Delta-Icons/android](https://github.com/Delta-Icons/android)，原始协议为 [CC BY-NC-ND License 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
-* liquid-glass: 来源于网络收集
+* pure / liquid-glass: 来源于网络收集
 
 上述图标作者未参与本项目开发，不以任何形式为本项目背书。本项目亦无权转授权。如您认为项目所使用的图标侵犯了您的权利，请提交 issue，我们将从项目中移除相关图标。
 

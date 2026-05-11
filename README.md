@@ -69,7 +69,7 @@ All icon packs are sourced from third parties, including:
 * default: get the original icons of each app from app stores such as the App Store and Play Store, then convert them using cwebp
 * mbe-style: from [meolunr/MBEStyle](https://github.com/meolunr/MBEStyle), originally licensed under [GPL-3.0](https://github.com/meolunr/MBEStyle/blob/master/LICENSE)
 * delta-icons: from [Delta-Icons/android](https://github.com/Delta-Icons/android), originally licensed under [CC BY-NC-ND License 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
-* liquid-glass: collected from the internet
+* pure / liquid-glass: collected from the internet
 
 The authors of the above icons were not involved in the development of this project and do not endorse it in any way. This project is not authorized for sublicensing. If you believe that the icons used in this project infringe upon your rights, please submit an issue, and we will remove the relevant icons from the project.
 

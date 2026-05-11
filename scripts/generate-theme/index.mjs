@@ -46,7 +46,9 @@ async function main() {
 
     const notHas = [...baseList].filter(key => !iconFileMap[key]);
     if (notHas.length) {
-      console.log(`⚠️ ${theme} missing icons: ${notHas.join(', ')}`);
+      console.log(
+        `⚠️ ${theme} missing ${notHas.length} icons: ${notHas.join(', ')}`,
+      );
     }
 
     Object.keys(iconFileMap).forEach(key => {

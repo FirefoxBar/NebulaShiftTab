@@ -10,6 +10,7 @@
  */
 
 import { mkdir, unlink } from 'node:fs/promises';
+import { join } from 'node:path';
 import { rimraf } from 'rimraf';
 import getManifest from './browser-config/get-manifest.js';
 import {
@@ -18,12 +19,13 @@ import {
   extension,
   getDistPath,
   getVersion,
+  scriptRoot,
 } from './config.mjs';
 import amo from './pack-utils/amo.mjs';
 import cws from './pack-utils/cws.mjs';
 import edge from './pack-utils/edge.mjs';
 import xpi from './pack-utils/xpi.mjs';
-import { copyDir, outputJSON } from './utils.mjs';
+import { copyDir, outputJSON, readJSON } from './utils.mjs';
 import { createZip } from './zip.mjs';
 
 const packUtils = {
@@ -36,8 +38,8 @@ const packUtils = {
 /**
  * 打包一个平台的产物
  * @param {*} name
- * @param {*} browserConfig 对应browser.config.json中的配置
- * @param {*} extensionConfig 对应extension.json中的配置
+ * @param {*} browserConfig 对应browser.config.json中的单项配置
+ * @param {*} extensionConfig 对应extension.json中的单项配置
  * @returns
  */
 async function prepareOnePlatform(name, extensionConfig) {
@@ -62,15 +64,15 @@ async function prepareOnePlatform(name, extensionConfig) {
       }),
     );
     // 打包成zip
-    console.log(`zip ${thisPack} -> ${zipPath}`);
+    console.log(`[${name}] zip ${thisPack} -> ${zipPath}`);
     await createZip(thisPack, zipPath);
   } catch (e) {
-    console.error(`Prepare ${name} error`);
+    console.error(`[${name}] prepare error`);
     console.error(e);
   }
   return { dirName, thisPack, zipPath };
 }
-async function packOnePlatform(name, prepare, extensionConfig) {
+async function packOnePlatform(name, prepare, browserConfig, extensionConfig) {
   const { thisPack, zipPath } = prepare;
   if (typeof packUtils[name] === 'undefined') {
     console.error(`pack-utils for ${name} not found`);
@@ -82,11 +84,12 @@ async function packOnePlatform(name, prepare, extensionConfig) {
       sourcePath: thisPack,
       zipPath,
       releasePath: _path.release,
+      browserConfig,
       extensionConfig,
     });
-    console.log(`Pack ${name} success: ${res}`);
+    console.log(`[${name}] pack success: ${res}`);
   } catch (e) {
-    console.error(`Pack ${name} error`);
+    console.error(`[${name}] pack error`);
     console.error(e);
   }
   try {
@@ -118,13 +121,18 @@ async function main() {
     );
   }
 
+  const browserConfig = await readJSON(
+    join(scriptRoot, 'browser-config/browser.config.json'),
+  );
+
   const queue = [];
 
   for (const name of platform) {
     const platformConfig = extension[name];
     for (const item of platformConfig) {
+      const browser = browserConfig[item.browser];
       const prepare = await prepareOnePlatform(name, item);
-      queue.push(packOnePlatform(name, { ...prepare }, item));
+      queue.push(packOnePlatform(name, { ...prepare }, browser, item));
     }
   }
 

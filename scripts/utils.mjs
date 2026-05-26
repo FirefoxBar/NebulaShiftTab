@@ -70,8 +70,13 @@ export function copyDir(source, target) {
 export function getNote() {
   const repo = process.env.GITHUB_REPOSITORY;
   const runId = process.env.GITHUB_RUN_ID;
+  const text = [
+    'For build instructions and other information, please read the README.md',
+  ];
   if (repo && runId) {
-    return `Submit via GitHub Actions: https://github.com/${repo}/actions/runs/${runId}`;
+    text.push(
+      `This release conducted via GitHub Actions: https://github.com/${repo}/actions/runs/${runId}`,
+    );
   }
-  return 'https://github.com/FirefoxBar/NebulaShiftTab/blob/main/README.md';
+  return text.join('\n\n');
 }

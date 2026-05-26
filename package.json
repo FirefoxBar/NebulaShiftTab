@@ -55,14 +55,13 @@
     "@types/node": "^18.15.5",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
-    "amo-upload": "^1.0.0",
+    "amo-upload": "^1.1.0",
     "axios": "^1.7.2",
     "cpr": "^3.0.1",
     "cross-env": "^7.0.3",
     "lint-staged": "^13.2.2",
     "lodash": "^4.17.21",
     "rimraf": "^6.0.1",
-    "sign-addon": "^6.4.0",
     "simple-git-hooks": "^2.13.0",
     "typescript": "^5.7.3"
   },
@@ -75,20 +74,7 @@
     ]
   },
   "engines": {
-    "node": ">=20",
-    "pnpm": ">=10"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "lodash-es": "patches/lodash-es.patch",
-      "lodash": "patches/lodash.patch"
-    },
-    "ignoredBuiltDependencies": [
-      "core-js"
-    ],
-    "onlyBuiltDependencies": [
-      "simple-git-hooks",
-      "spawn-sync"
-    ]
+    "node": ">=24",
+    "pnpm": ">=11"
   }
 }

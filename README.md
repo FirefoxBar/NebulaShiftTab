@@ -45,7 +45,7 @@ Nebula Shift Tab 自身不收集任何数据。但是，在使用第三方服务
 
 ## How to build
 
-* Install Node.js 20.x and pnpm 10.x.
+* Install Node.js 24.x and pnpm 11.x.
 * Clone this project, or download the source code and extract it.
 * Run `pnpm i --frozen-lockfile`.
 * Run build command
@@ -60,7 +60,7 @@ Nebula Shift Tab 自身不收集任何数据。但是，在使用第三方服务
 * default: 从 App Store、Play 等应用商店获取各应用的原始图标，然后使用 cwebp 转换
 * mbe-style: 来源于[meolunr/MBEStyle](https://github.com/meolunr/MBEStyle)，原始协议为 [GPL-3.0](https://github.com/meolunr/MBEStyle/blob/master/LICENSE)
 * delta-icons: 来源于[Delta-Icons/android](https://github.com/Delta-Icons/android)，原始协议为 [CC BY-NC-ND License 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
-* liquid-glass: 来源于网络收集
+* pure / liquid-glass: 来源于网络收集
 
 上述图标作者未参与本项目开发，不以任何形式为本项目背书。本项目亦无权转授权。如您认为项目所使用的图标侵犯了您的权利，请提交 issue，我们将从项目中移除相关图标。
 
@@ -69,7 +69,7 @@ All icon packs are sourced from third parties, including:
 * default: get the original icons of each app from app stores such as the App Store and Play Store, then convert them using cwebp
 * mbe-style: from [meolunr/MBEStyle](https://github.com/meolunr/MBEStyle), originally licensed under [GPL-3.0](https://github.com/meolunr/MBEStyle/blob/master/LICENSE)
 * delta-icons: from [Delta-Icons/android](https://github.com/Delta-Icons/android), originally licensed under [CC BY-NC-ND License 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
-* liquid-glass: collected from the internet
+* pure / liquid-glass: collected from the internet
 
 The authors of the above icons were not involved in the development of this project and do not endorse it in any way. This project is not authorized for sublicensing. If you believe that the icons used in this project infringe upon your rights, please submit an issue, and we will remove the relevant icons from the project.
 

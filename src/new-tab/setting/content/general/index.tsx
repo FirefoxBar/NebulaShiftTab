@@ -58,6 +58,7 @@ export const GeneralSettings = withErrorBoundary(() => {
           onChange={v => setTheme(v as any)}
           optionList={[
             { label: 'Default', value: 'default' },
+            { label: 'Pure', value: 'pure' },
             { label: 'Liquid Glass', value: 'liquid-glass' },
             { label: 'MBE Style', value: 'mbe-style' },
             { label: 'Delta Icons', value: 'delta-icons' },

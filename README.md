@@ -45,7 +45,7 @@ Nebula Shift Tab 自身不收集任何数据。但是，在使用第三方服务
 
 ## How to build
 
-* Install Node.js 20.x and pnpm 10.x.
+* Install Node.js 24.x and pnpm 11.x.
 * Clone this project, or download the source code and extract it.
 * Run `pnpm i --frozen-lockfile`.
 * Run build command

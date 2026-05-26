@@ -29,7 +29,7 @@ jobs:
       docs_changed: ${{ steps.filter.outputs.docs }}
       src_changed: ${{ steps.filter.outputs.src }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 2
       - uses: dorny/paths-filter@v3
@@ -54,18 +54,18 @@ jobs:
     runs-on: ubuntu-24.04
     if: ${{ needs.check_changes.outputs.src_changed == 'true' || github.event_name == 'workflow_dispatch' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Inject Env
       run: |
         echo "INPUT_PLATFORM=${{ github.event.inputs.platform }}" >> $GITHUB_ENV
         echo "INPUT_VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
-    - uses: pnpm/action-setup@v4
+    - uses: pnpm/action-setup@v6
       with:
-        version: 10
+        version: 11
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: 20
+        node-version: 24
         cache: 'pnpm'
     - name: Install dependencies
       run: pnpm i --frozen-lockfile
@@ -76,30 +76,29 @@ jobs:
       run: node ./scripts/get-snapshot-version.mjs
     - name: Build
       uses: ./.github/actions/build
-    # - name: Publish snapshot
-    #   env:
-    #     AMO_KEY: ${{ secrets.ORG_AMO_KEY }}
-    #     AMO_SECRET: ${{ secrets.ORG_AMO_SECRET }}
-    #     PACK_PLATFORM: xpi
-    #     DEBUG: '*'
-    #   run: npm run pack
-    # - name: Upload snapshot release
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: release
-    #     retention-days: 7
-    #     path: temp/release
+    - name: Publish snapshot
+      env:
+        AMO_KEY: ${{ secrets.ORG_AMO_KEY }}
+        AMO_SECRET: ${{ secrets.ORG_AMO_SECRET }}
+        PACK_PLATFORM: xpi
+      run: npm run pack
+    - name: Upload snapshot release
+      uses: actions/upload-artifact@v4
+      with:
+        name: release
+        retention-days: 7
+        path: temp/release
 
   sync-locale:
     needs: check_changes
     runs-on: ubuntu-24.04
     if: ${{ needs.check_changes.outputs.locale_changed == 'true' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: 20
+        node-version: 24
     - name: Sort
       run: node ./locale/sort-origin.js
     - name: Deploy
@@ -115,14 +114,14 @@ jobs:
     runs-on: ubuntu-24.04
     if: ${{ needs.check_changes.outputs.docs_changed == 'true' }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: pnpm/action-setup@v4
+    - uses: actions/checkout@v6
+    - uses: pnpm/action-setup@v6
       with:
-        version: 10
+        version: 11
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: 20
+        node-version: 24
     - name: Install base dependencies
       run: pnpm i --frozen-lockfile
     - name: Install dependencies
@@ -145,9 +144,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: 20
+        node-version: 24
     - name: Download
       uses: actions/download-artifact@v5
       with:
@@ -164,9 +163,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: 20
+        node-version: 24
     - name: Download
       uses: actions/download-artifact@v5
       with:

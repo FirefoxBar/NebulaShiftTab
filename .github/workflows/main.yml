@@ -15,7 +15,7 @@ jobs:
     outputs:
       docs_changed: ${{ steps.filter.outputs.docs }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 2
       - uses: dorny/paths-filter@v3
@@ -31,14 +31,14 @@ jobs:
     runs-on: ubuntu-24.04
     if: ${{ needs.check_changes.outputs.docs_changed == 'true' }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: pnpm/action-setup@v4
+    - uses: actions/checkout@v6
+    - uses: pnpm/action-setup@v6
       with:
-        version: 10
+        version: 11
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: 20
+        node-version: 24
     - name: Install base dependencies
       run: pnpm i --frozen-lockfile
     - name: Install dependencies
@@ -61,9 +61,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: 20
+        node-version: 24
     - name: Download
       uses: actions/download-artifact@v5
       with:
@@ -80,9 +80,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: 20
+        node-version: 24
     - name: Download
       uses: actions/download-artifact@v5
       with:

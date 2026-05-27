@@ -1,5 +1,5 @@
-function getOutputFile(version, extension) {
-  return ['NebulaShiftTab', version].join('-') + '.' + extension;
+function getOutputFile(_, version, extension) {
+  return `NebulaShiftTab-${version}.${extension}`;
 }
 
 function getDistDir(browser) {

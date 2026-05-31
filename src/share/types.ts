@@ -29,6 +29,7 @@ export interface PrefValue {
     key?: string;
     value?: BackgroundItem;
   };
+  customCSS: string;
   sites: Array<SiteItem>;
   searches: Array<SearchItem>;
 }

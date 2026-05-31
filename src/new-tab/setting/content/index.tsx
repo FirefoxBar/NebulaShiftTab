@@ -9,6 +9,7 @@ import { SitesManager } from './site-manager';
 
 import '@douyinfe/semi-ui/lib/es/_base/base.css';
 import './index.less';
+import { Advanced } from './advanced';
 
 interface SettingSideSheetProps {
   visible: boolean;
@@ -40,6 +41,9 @@ const SettingContent: React.FC<SettingSideSheetProps> = ({
         </TabPane>
         <TabPane itemKey="general-settings" tab={t('generalSettings')}>
           <GeneralSettings />
+        </TabPane>
+        <TabPane itemKey="advanced-settings" tab={t('advanced')}>
+          <Advanced />
         </TabPane>
       </Tabs>
     </SideSheet>

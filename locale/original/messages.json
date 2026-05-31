@@ -455,5 +455,17 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "advanced": {
+    "message": "Advanced",
+    "description": "Advanced settings"
+  },
+  "customCSS": {
+    "message": "Custom CSS",
+    "description": "Custom CSS"
+  },
+  "edit": {
+    "message": "Edit",
+    "description": "Edit"
   }
 }

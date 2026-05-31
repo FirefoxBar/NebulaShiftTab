@@ -19,6 +19,10 @@
     "message": "添加到首页",
     "description": "Right-click menu for adding a link to home screen"
   },
+  "advanced": {
+    "message": "高级",
+    "description": "Advanced settings"
+  },
   "apiOrImageAddress": {
     "message": "$type$ 地址",
     "description": "Dynamic label for API or image address",
@@ -115,6 +119,10 @@
     "message": "自定义背景",
     "description": "Title for custom background configuration"
   },
+  "customCSS": {
+    "message": "自定义CSS",
+    "description": "Custom CSS"
+  },
   "customIconUrl": {
     "message": "自定义图标网址",
     "description": "Label for custom icon URL field"
@@ -146,6 +154,10 @@
   "displayedAt": {
     "message": "显示于",
     "description": "Label for displayed at field"
+  },
+  "edit": {
+    "message": "编辑",
+    "description": "Edit"
   },
   "editSearchEngine": {
     "message": "编辑搜索引擎",

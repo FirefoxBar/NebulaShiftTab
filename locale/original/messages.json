@@ -19,6 +19,10 @@
     "message": "Add to Home",
     "description": "Right-click menu for adding a link to home screen"
   },
+  "advanced": {
+    "message": "Advanced",
+    "description": "Advanced settings"
+  },
   "apiOrImageAddress": {
     "message": "$type$ Address",
     "description": "Dynamic label for API or image address",
@@ -115,6 +119,10 @@
     "message": "Custom Background",
     "description": "Title for custom background configuration"
   },
+  "customCSS": {
+    "message": "Custom CSS",
+    "description": "Custom CSS"
+  },
   "customIconUrl": {
     "message": "Custom Icon URL",
     "description": "Label for custom icon URL field"
@@ -146,6 +154,10 @@
   "displayedAt": {
     "message": "Displayed at",
     "description": "Label for displayed at field"
+  },
+  "edit": {
+    "message": "Edit",
+    "description": "Edit"
   },
   "editSearchEngine": {
     "message": "Edit Search Engine",
@@ -455,17 +467,5 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
-  },
-  "advanced": {
-    "message": "Advanced",
-    "description": "Advanced settings"
-  },
-  "customCSS": {
-    "message": "Custom CSS",
-    "description": "Custom CSS"
-  },
-  "edit": {
-    "message": "Edit",
-    "description": "Edit"
   }
 }

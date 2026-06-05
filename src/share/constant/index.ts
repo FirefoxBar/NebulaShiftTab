@@ -42,6 +42,7 @@ export const defaultPrefValue: PrefValue = {
     type: 'builtin',
     key: 'bing',
   },
+  customCSS: '',
   searches: defaultSearchEngines,
   sites: [],
 };

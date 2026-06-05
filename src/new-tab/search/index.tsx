@@ -37,6 +37,10 @@ export const Search = withErrorBoundary(() => {
 
   const [searches] = usePref('searches', {
     onInitial: v => setCurrentEngine(v[0]),
+    filter: v =>
+      v.filter(x =>
+        hasFlag(x[SearchItemAlias.showOn], SearchItemShowOnFlag.HOME),
+      ),
   });
 
   // 使用useRequest处理搜索建议
@@ -191,16 +195,17 @@ export const Search = withErrorBoundary(() => {
     }, 0);
   };
 
+  if (searches.length === 0) {
+    return null;
+  }
+
   return (
     <div
       className={`search-container ${active ? 'active' : ''} ${showSuggestions ? 'show-suggestions' : ''}`}
     >
-      <div className="search-engines">
-        {searches
-          .filter(x =>
-            hasFlag(x[SearchItemAlias.showOn], SearchItemShowOnFlag.HOME),
-          )
-          .map(engine => (
+      {searches.length > 1 && (
+        <div className="search-engines">
+          {searches.map(engine => (
             <button
               key={engine[SearchItemAlias.name]}
               type="button"
@@ -210,7 +215,8 @@ export const Search = withErrorBoundary(() => {
               {engine[SearchItemAlias.name]}
             </button>
           ))}
-      </div>
+        </div>
+      )}
 
       <div className="search-input-wrapper">
         <input

@@ -8,19 +8,21 @@ const usePref = <K extends keyof PrefValue>(
   key: K,
   options?: {
     onInitial?: (value: PrefValue[K]) => void;
+    filter?: (value: PrefValue[K]) => PrefValue[K];
   },
 ): [PrefValue[K], (value: PrefValue[K]) => void] => {
   const [state, setState] = useState(defaultPrefValue[key]);
 
   useEffect(() => {
+    const filter = options?.filter || (v => v);
     prefs.ready(() => {
-      const value = prefs.get(key);
+      const value = filter(prefs.get(key));
       setState(value);
       options?.onInitial?.(value);
     });
     const handler = (k: keyof PrefValue, val: any) => {
       if (key === k) {
-        setState(val);
+        setState(filter(val));
       }
     };
     emitter.on(emitter.EVENT_PREFS_UPDATE, handler);

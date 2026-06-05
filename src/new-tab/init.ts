@@ -98,6 +98,15 @@ function handleBackgroundImage() {
   });
 }
 
+function handleCustomCSS() {
+  const styleEl = document.createElement('style');
+  styleEl.id = 'custom-css';
+  document.head.appendChild(styleEl);
+  prefs.getAndWatch('customCSS', css => {
+    styleEl.innerHTML = css;
+  });
+}
+
 function handleOther() {
   prefs.getAndWatch('theme', theme =>
     document.body.setAttribute('data-theme', theme),
@@ -107,4 +116,5 @@ function handleOther() {
 handleStyleVar();
 handleDarkMode();
 handleBackgroundImage();
+handleCustomCSS();
 handleOther();

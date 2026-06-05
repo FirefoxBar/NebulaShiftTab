@@ -1,4 +1,3 @@
-import type React from 'react';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
 import { SiteItemAlias } from '@/share/type-alias';
@@ -26,6 +25,8 @@ const Setting = withErrorBoundary(() => {
         },
       );
     }
+    // add alternative functions
+    (window as any).openSetting = () => setVisible(true);
   }, []);
 
   useEffect(() => {

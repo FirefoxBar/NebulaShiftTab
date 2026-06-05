@@ -46,6 +46,9 @@ jobs:
     - name: Build
       uses: ./.github/actions/build
     - name: Pack
+      uses: FirefoxBar/extension-packer@action
+      with:
+        script: ${{ github.workspace }}/scripts/pack.mjs
       env:
         AMO_KEY: ${{ secrets.ORG_AMO_KEY }}
         AMO_SECRET: ${{ secrets.ORG_AMO_SECRET }}
@@ -54,8 +57,6 @@ jobs:
         CWS_TOKEN: ${{ secrets.ORG_CWS_TOKEN }}
         MS_CLIENT_ID: ${{ secrets.ORG_MS_CLIENT_ID }}
         MS_API_KEY: ${{ secrets.ORG_MS_API_KEY }}
-        DEBUG: '*'
-      run: npm run pack
     - name: Upload release
       uses: actions/upload-artifact@v4
       with:
@@ -64,8 +65,10 @@ jobs:
         path: temp/release
     - name: Release
       if: ${{ github.ref_type == 'tag' || github.event.inputs.release_tag != '' }}
+      uses: FirefoxBar/extension-packer@action
+      with:
+        script: ${{ github.workspace }}/scripts/release.mjs
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TOKEN: ${{ secrets.ORG_EXT_API_TOKEN }}
         INPUT_RELEASE_TAG: ${{ github.event.inputs.release_tag }}
-      run: npm run release

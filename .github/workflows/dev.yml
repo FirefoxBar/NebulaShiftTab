@@ -70,18 +70,22 @@ jobs:
     - name: Install dependencies
       run: pnpm i --frozen-lockfile
     - name: Get snapshot version
+      uses: FirefoxBar/extension-packer@action
+      with:
+        script: ${{ github.workspace }}/scripts/get-snapshot-version.mjs
       env:
         TOKEN: ${{ secrets.ORG_EXT_API_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: node ./scripts/get-snapshot-version.mjs
     - name: Build
       uses: ./.github/actions/build
     - name: Publish snapshot
+      uses: FirefoxBar/extension-packer@action
+      with:
+        script: ${{ github.workspace }}/scripts/pack.mjs
       env:
         AMO_KEY: ${{ secrets.ORG_AMO_KEY }}
         AMO_SECRET: ${{ secrets.ORG_AMO_SECRET }}
         PACK_PLATFORM: xpi
-      run: npm run pack
     - name: Upload snapshot release
       uses: actions/upload-artifact@v4
       with:

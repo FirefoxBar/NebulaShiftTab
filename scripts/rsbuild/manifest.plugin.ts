@@ -1,6 +1,6 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import type { RsbuildPlugin } from '@rsbuild/core';
-import fs from 'fs/promises';
-import path from 'path';
 import getManifest from '../browser-config/get-manifest';
 
 const targetBrowser = String(process.env.TARGET_BROWSER) || 'firefox_v3';

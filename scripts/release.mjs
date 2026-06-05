@@ -11,6 +11,7 @@ export const run = async ({ getVersion, readJSON, release }) => {
   );
 
   let distRootPath = '';
+  const browserList = ['chrome', 'firefox'];
   for (const browser of browserList) {
     const path = getDistPath(browser);
     try {

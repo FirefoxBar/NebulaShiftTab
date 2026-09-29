@@ -25,6 +25,8 @@ export enum APIs {
   REFRESH_BACKGROUND = 'refresh-background',
 }
 
+export const MAX_SUGGESTION_COUNT = 12;
+
 export const defaultPrefValue: PrefValue = {
   darkMode: 'auto',
   theme: 'default',
@@ -35,6 +37,7 @@ export const defaultPrefValue: PrefValue = {
   siteWidth: 805,
   siteGap: 36,
   showSiteName: true,
+  recordHistory: MAX_SUGGESTION_COUNT,
   background: {
     dark: 40,
     dark2: 60,

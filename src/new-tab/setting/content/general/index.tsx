@@ -1,7 +1,8 @@
-import { IconExternalOpen } from '@douyinfe/semi-icons';
+import { IconDelete, IconExternalOpen } from '@douyinfe/semi-icons';
 import {
   Button,
   Input,
+  InputNumber,
   List,
   Select,
   Switch,
@@ -10,7 +11,7 @@ import {
 import { withErrorBoundary } from '@/components/error-boundary';
 import { Slider } from '@/components/slider';
 import usePref from '@/hooks/use-pref';
-import { defaultPrefValue } from '@/share/constant';
+import { defaultPrefValue, MAX_SUGGESTION_COUNT } from '@/share/constant';
 import { t } from '@/share/locale';
 import { ExportButton } from './export-button';
 import { ImportButton } from './import-button';
@@ -25,6 +26,7 @@ export const GeneralSettings = withErrorBoundary(() => {
   const [siteWidth, setSiteWidth] = usePref('siteWidth');
   const [siteGap, setSiteGap] = usePref('siteGap');
   const [showSiteName, setShowSiteName] = usePref('showSiteName');
+  const [recordHistory, setRecordHistory] = usePref('recordHistory');
 
   const list = [
     {
@@ -133,6 +135,22 @@ export const GeneralSettings = withErrorBoundary(() => {
       content: (
         <Switch checked={Boolean(showSiteName)} onChange={setShowSiteName} />
       ),
+    },
+    {
+      label: '记录搜索历史',
+      help: '填写0表示不记录',
+      content: (
+        <InputNumber
+          min={0}
+          max={MAX_SUGGESTION_COUNT}
+          value={recordHistory}
+          onChange={v => setRecordHistory(v as number)}
+        />
+      ),
+    },
+    {
+      label: '清空搜索历史',
+      content: <Button icon={<IconDelete />} />,
     },
     {
       label: t('backupToFile'),

@@ -21,6 +21,7 @@ export interface PrefValue {
   siteWidth: number;
   siteGap: number;
   showSiteName: boolean;
+  recordHistory: number;
   background: {
     dark: number;
     dark2: number;

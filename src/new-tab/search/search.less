@@ -76,6 +76,14 @@
         height: var(--search-button-size);
       }
     }
+
+    &.active {
+      background-color: var(--search-input-bg-active);
+    }
+
+    &.show-suggestions {
+      border-radius: var(--search-input-radius-active);
+    }
   }
 
   .search-suggestions {
@@ -102,6 +110,14 @@
       padding: 12px 16px;
       cursor: pointer;
       transition: background 0.15s;
+      display: flex;
+      align-items: center;
+
+      .icon {
+        opacity: 0.6;
+        height: var(--search-suggestion-font-size);
+        margin-right: 8px;
+      }
 
       &:last-child {
         border-bottom: none;
@@ -111,18 +127,6 @@
       &.active {
         background: var(--search-suggestion-bg-hover);
       }
-    }
-  }
-
-  &.active {
-    .search-input-wrapper {
-      background-color: var(--search-input-bg-active);
-    }
-  }
-
-  &.show-suggestions {
-    .search-input-wrapper {
-      border-radius: var(--search-input-radius-active);
     }
   }
 }

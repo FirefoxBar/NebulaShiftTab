@@ -139,6 +139,22 @@ export default defineConfig({
           strategy: 'split-by-experience',
         },
       },
+      output: {
+        copy: [
+          {
+            from: './theme',
+            to: './theme',
+            // TODO: rename
+            // to: ({ context, absoluteFilename }) => {
+            //   if (!absoluteFilename) {
+            //     return '';
+            //   }
+            //   const sub = path.relative(context, absoluteFilename);
+            //   return `./theme/${sub}`;
+            // },
+          },
+        ],
+      },
       html: {
         title: 'Nebula Shift Tab',
         tags: [

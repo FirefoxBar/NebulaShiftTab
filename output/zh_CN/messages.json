@@ -84,6 +84,10 @@
     "message": "取消",
     "description": "Cancel button text"
   },
+  "clear": {
+    "message": "清空",
+    "description": "Button text for clearing search history"
+  },
   "configure": {
     "message": "配置",
     "description": "Button text for configuring custom background"
@@ -302,6 +306,10 @@
     "message": "从不",
     "description": "Option for never refreshing"
   },
+  "noSearchHistory": {
+    "message": "无历史搜索",
+    "description": "Message for no search history"
+  },
   "none": {
     "message": "无"
   },
@@ -329,6 +337,14 @@
     "message": "重新获取背景",
     "description": "Button text for reacquiring background"
   },
+  "recordSearchHistory": {
+    "message": "记录搜索历史",
+    "description": "Label for record search history setting"
+  },
+  "recordSearchHistoryHelp": {
+    "message": "填写0表示不记录",
+    "description": "Description for record history setting"
+  },
   "refreshFrequency": {
     "message": "刷新频率",
     "description": "Label for refresh frequency"
@@ -347,6 +363,10 @@
   "save": {
     "message": "保存",
     "description": "Save button text"
+  },
+  "searchHistoryManagement": {
+    "message": "搜索历史管理",
+    "description": "Title for search history management section"
   },
   "searchManagement": {
     "message": "搜索引擎管理",

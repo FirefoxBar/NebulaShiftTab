@@ -84,6 +84,10 @@
     "message": "Cancel",
     "description": "Cancel button text"
   },
+  "clear": {
+    "message": "Clear",
+    "description": "Button text for clearing search history"
+  },
   "configure": {
     "message": "Configure",
     "description": "Button text for configuring custom background"
@@ -302,6 +306,10 @@
     "message": "Never",
     "description": "Option for never refreshing"
   },
+  "noSearchHistory": {
+    "message": "No Search History",
+    "description": "Message for no search history"
+  },
   "none": {
     "message": "None"
   },
@@ -329,6 +337,14 @@
     "message": "Reacquire Background",
     "description": "Button text for reacquiring background"
   },
+  "recordSearchHistory": {
+    "message": "Record Search History",
+    "description": "Label for record search history setting"
+  },
+  "recordSearchHistoryHelp": {
+    "message": "Enter 0 to disable recording",
+    "description": "Description for record history setting"
+  },
   "refreshFrequency": {
     "message": "Refresh Frequency",
     "description": "Label for refresh frequency"
@@ -347,6 +363,10 @@
   "save": {
     "message": "Save",
     "description": "Save button text"
+  },
+  "searchHistoryManagement": {
+    "message": "Search History Management",
+    "description": "Title for search history management section"
   },
   "searchManagement": {
     "message": "Search Management",
@@ -467,25 +487,5 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
-  },
-  "recordSearchHistory": {
-    "message": "Record Search History",
-    "description": "Label for record search history setting"
-  },
-  "recordSearchHistoryHelp": {
-    "message": "Enter 0 to disable recording",
-    "description": "Description for record history setting"
-  },
-  "searchHistoryManagement": {
-    "message": "Search History Management",
-    "description": "Title for search history management section"
-  },
-  "noSearchHistory": {
-    "message": "No Search History",
-    "description": "Message for no search history"
-  },
-  "clear": {
-    "message": "Clear",
-    "description": "Button text for clearing search history"
   }
 }

@@ -138,8 +138,8 @@ export const GeneralSettings = withErrorBoundary(() => {
       ),
     },
     {
-      label: '记录搜索历史',
-      help: '填写0表示不记录',
+      label: t('recordSearchHistory'),
+      help: t('recordSearchHistoryHelp'),
       content: (
         <InputNumber
           min={0}
@@ -150,7 +150,7 @@ export const GeneralSettings = withErrorBoundary(() => {
       ),
     },
     {
-      label: '搜索历史管理',
+      label: t('searchHistoryManagement'),
       content: <HistoryManage />,
     },
     {

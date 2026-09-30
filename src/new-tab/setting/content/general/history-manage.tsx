@@ -1,7 +1,8 @@
-import { IconDelete, IconSetting } from '@douyinfe/semi-icons';
+import { IconDelete } from '@douyinfe/semi-icons';
 import { Button, Table, Toast } from '@douyinfe/semi-ui';
 import Modal from '@/components/modal';
 import { useReadStorage } from '@/hooks/use-storage';
+import { t } from '@/share/locale';
 import { getSyncStorage } from '@/share/storage';
 import { isValidArray } from '@/share/utils';
 
@@ -59,7 +60,7 @@ const Content = () => {
         disabled={history.length === 0}
         onClick={() => chrome.storage.sync.set({ searchHistory: [] })}
       >
-        清空历史记录
+        {t('clear')}
       </Button>
     </div>
   );
@@ -68,20 +69,21 @@ const Content = () => {
 export const HistoryManage = () => {
   return (
     <Button
-      icon={<IconSetting />}
       onClick={async () => {
         const history = await getSyncStorage('searchHistory');
         if (!isValidArray(history)) {
-          Toast.error('历史记录为空');
+          Toast.error(t('noSearchHistory'));
           return;
         }
         Modal.confirm({
-          title: '搜索历史管理',
+          title: t('searchHistoryManagement'),
           icon: null,
           content: <Content />,
           hasCancel: false,
         });
       }}
-    />
+    >
+      {t('searchHistoryManagement')}
+    </Button>
   );
 };

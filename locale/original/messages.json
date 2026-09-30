@@ -467,5 +467,25 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "recordSearchHistory": {
+    "message": "Record Search History",
+    "description": "Label for record search history setting"
+  },
+  "recordSearchHistoryHelp": {
+    "message": "Enter 0 to disable recording",
+    "description": "Description for record history setting"
+  },
+  "searchHistoryManagement": {
+    "message": "Search History Management",
+    "description": "Title for search history management section"
+  },
+  "noSearchHistory": {
+    "message": "No Search History",
+    "description": "Message for no search history"
+  },
+  "clear": {
+    "message": "Clear",
+    "description": "Button text for clearing search history"
   }
 }

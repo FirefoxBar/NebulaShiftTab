@@ -1,7 +1,7 @@
 import { IconHistory, IconSearch } from '@douyinfe/semi-icons';
-import { useGetState, useLatest, useRequest, useUpdateEffect } from 'ahooks';
+import { useGetState, useLatest, useRequest } from 'ahooks';
 import type React from 'react';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
 import { useReadStorage } from '@/hooks/use-storage';
 import { MAX_SUGGESTION_COUNT } from '@/share/constant';
@@ -42,15 +42,18 @@ async function doSearch(engine?: SearchItem, key?: string) {
   if (recordHistory > 0) {
     const currentHistory = await getSyncStorage('searchHistory');
     if (Array.isArray(currentHistory)) {
-      currentHistory.unshift(key);
-      if (currentHistory.length > recordHistory) {
-        currentHistory.pop();
+      if (!currentHistory.includes(key)) {
+        currentHistory.unshift(key);
+        if (currentHistory.length > recordHistory) {
+          currentHistory.pop();
+        }
+        await chrome.storage.sync.set({ searchHistory: currentHistory });
+        wait = 100;
       }
-      await chrome.storage.sync.set({ searchHistory: currentHistory });
     } else {
       await chrome.storage.sync.set({ searchHistory: [key] });
+      wait = 100;
     }
-    wait = 100;
   }
   const searchUrl = engine[SearchItemAlias.url].replace(
     '{{q}}',
@@ -63,7 +66,7 @@ async function doSearch(engine?: SearchItem, key?: string) {
 
 const EMPTY_ARR: SearchSlugItem[] = [];
 export const SearchInput = withErrorBoundary(({ engine }: SearchInputProps) => {
-  const engineRef = useRef(engine);
+  const engineRef = useLatest(engine);
   const [searchValue, setSearchValue, getSearchValue] = useGetState('');
   const [searchInputValue, setSearchInputValue, getSearchInputValue] =
     useGetState('');
@@ -153,8 +156,12 @@ export const SearchInput = withErrorBoundary(({ engine }: SearchInputProps) => {
   const suggestionsRef = useLatest(suggestions);
   const showSuggestions = _showSuggestion && suggestions.length > 0;
 
-  useUpdateEffect(() => {
-    setShowSuggestion(true);
+  useEffect(() => {
+    searchInputRef.current?.focus();
+    // 忽略页面刚载入的那一会儿
+    if (Date.now() - window.RENDER_TIME > 500) {
+      setShowSuggestion(true);
+    }
   }, [engine]);
 
   // 处理搜索值变化
@@ -170,18 +177,17 @@ export const SearchInput = withErrorBoundary(({ engine }: SearchInputProps) => {
 
   // 处理搜索提交
   const handleSearchSubmit = useCallback(
-    () => doSearch(engineRef.current, getSearchValue()),
+    () => doSearch(engineRef.current!, getSearchValue()),
     [],
   );
 
   // 选择建议项
   const handleSuggestionClick = (suggestion: string) =>
-    doSearch(engineRef.current, suggestion);
+    doSearch(engineRef.current!, suggestion);
 
   // 键盘导航处理
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
-      console.log(e.key);
       if (e.key === 'Escape') {
         setShowSuggestion(false);
         e.preventDefault();
@@ -233,7 +239,10 @@ export const SearchInput = withErrorBoundary(({ engine }: SearchInputProps) => {
       blurTimerRef.current = null;
     }
     setActive(true);
-    setShowSuggestion(true);
+    // 忽略页面刚载入的那一会儿
+    if (Date.now() - window.RENDER_TIME > 500) {
+      setShowSuggestion(true);
+    }
   }, []);
 
   // 处理输入框失焦
@@ -261,6 +270,7 @@ export const SearchInput = withErrorBoundary(({ engine }: SearchInputProps) => {
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
+        onClick={handleFocus}
         onBlur={handleBlur}
         placeholder={t('enterSearchKeywords')}
         className="search-input"

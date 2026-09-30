@@ -19,6 +19,7 @@ const Page = () => (
   </>
 );
 
+window.RENDER_TIME = Date.now();
 const rootEl = document.getElementById('root');
 if (rootEl) {
   const root = ReactDOM.createRoot(rootEl);

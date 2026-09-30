@@ -12,20 +12,29 @@ export const useReadStorage = <T = any>(
 
   useEffect(() => {
     const onValueUpdate = (value: any) => {
-      if (!(key in value) || !value[key]) {
-        return;
-      }
       const newValue = onGetValueRef.current
-        ? onGetValueRef.current?.(value[key])
-        : value[key];
-      if (newValue) {
+        ? onGetValueRef.current?.(value)
+        : value;
+      if (typeof newValue !== 'undefined') {
         setState(newValue as T);
       }
     };
 
-    const handleChange = (changes: any) => onValueUpdate(changes);
+    const handleGet = (value: any) => {
+      if (!(key in value)) {
+        return;
+      }
+      onValueUpdate(value[key]);
+    };
 
-    storage.get(key, value => onValueUpdate(value));
+    const handleChange = (changes: any) => {
+      if (!(key in changes)) {
+        return;
+      }
+      onValueUpdate(changes[key].newValue);
+    };
+
+    storage.get(key, handleGet);
     storage.onChanged.addListener(handleChange);
     return () => {
       storage.onChanged.removeListener(handleChange);

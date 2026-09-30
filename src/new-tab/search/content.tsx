@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
 import { SearchItemAlias } from '@/share/type-alias';
 import type { SearchItem } from '@/share/types';
@@ -23,6 +23,10 @@ export const SearchContent = withErrorBoundary(
         searchInputRef.current?.focus();
       }, 0);
     }, []);
+
+    useEffect(() => {
+      setCurrentEngine(engines[0]);
+    }, [engines]);
 
     return (
       <div className="search-container">

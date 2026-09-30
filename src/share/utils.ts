@@ -141,3 +141,6 @@ export const extractData = <T = any>(
   j: ReturnType<typeof jsonata>,
   data: any,
 ): Promise<T> => j.evaluate(data);
+
+export const isValidArray = (arr: any): arr is any[] =>
+  Array.isArray(arr) && arr.length > 0;

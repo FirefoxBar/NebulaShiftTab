@@ -1,4 +1,4 @@
-import { IconDelete, IconExternalOpen } from '@douyinfe/semi-icons';
+import { IconExternalOpen } from '@douyinfe/semi-icons';
 import {
   Button,
   Input,
@@ -14,6 +14,7 @@ import usePref from '@/hooks/use-pref';
 import { defaultPrefValue, MAX_SUGGESTION_COUNT } from '@/share/constant';
 import { t } from '@/share/locale';
 import { ExportButton } from './export-button';
+import { HistoryManage } from './history-manage';
 import { ImportButton } from './import-button';
 
 export const GeneralSettings = withErrorBoundary(() => {
@@ -149,8 +150,8 @@ export const GeneralSettings = withErrorBoundary(() => {
       ),
     },
     {
-      label: '清空搜索历史',
-      content: <Button icon={<IconDelete />} />,
+      label: '搜索历史管理',
+      content: <HistoryManage />,
     },
     {
       label: t('backupToFile'),

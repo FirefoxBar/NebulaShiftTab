@@ -9,6 +9,9 @@ const baseManifest = {
   chrome_url_overrides: {
     newtab: 'new-tab.html',
   },
+  chrome_settings_overrides: {
+    homepage: 'new-tab.html',
+  },
   homepage_url: 'https://team.firefoxcn.net',
   icons: {
     16: 'icons/logo.png',

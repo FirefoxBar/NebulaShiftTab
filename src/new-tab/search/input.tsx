@@ -70,7 +70,7 @@ export const SearchInput = withErrorBoundary(({ engine }: SearchInputProps) => {
   const [searchValue, setSearchValue, getSearchValue] = useGetState('');
   const [searchInputValue, setSearchInputValue, getSearchInputValue] =
     useGetState('');
-  const [active, setActive] = useState(false);
+  const [active, setActive, getActive] = useGetState(false);
   const [_showSuggestion, setShowSuggestion] = useState(false);
   const [
     activeSuggestionIndex,
@@ -159,7 +159,7 @@ export const SearchInput = withErrorBoundary(({ engine }: SearchInputProps) => {
   useEffect(() => {
     searchInputRef.current?.focus();
     // 忽略页面刚载入的那一会儿
-    if (Date.now() - window.RENDER_TIME > 500) {
+    if (Date.now() - window.RENDER_TIME > 500 && getActive()) {
       setShowSuggestion(true);
     }
   }, [engine]);

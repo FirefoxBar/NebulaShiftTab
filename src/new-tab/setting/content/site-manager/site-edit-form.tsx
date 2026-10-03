@@ -14,12 +14,12 @@ import {
   SiteIconContext,
   useSiteIconContext,
 } from '@/components/site-icon-context';
+import useDebounceFn from '@/hooks/use-debounce-fn';
 import { t } from '@/share/locale';
 import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteItem } from '@/share/types';
 
 import './site-edit-form.less';
-import useDebounceFn from '@/hooks/use-debounce-fn';
 
 interface SiteEditFormProps {
   initialData?: SiteItem;

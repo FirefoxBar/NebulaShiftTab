@@ -3,8 +3,6 @@ import { SiteIcon } from '@/components/site-icon';
 import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteItem as TSiteItem } from '@/share/types';
 
-import './site-item.less';
-
 interface SiteItemProps {
   showName?: boolean;
   site: TSiteItem;
@@ -12,9 +10,13 @@ interface SiteItemProps {
 
 export const SiteItem = withErrorBoundary<SiteItemProps>(
   ({ site, showName = true }) => (
-    <a href={site[SiteItemAlias.url]} className="site-item">
-      <SiteIcon site={site} />
-      {showName && <div className="site-name">{site[SiteItemAlias.name]}</div>}
+    <a href={site[SiteItemAlias.url]} className="site-item item">
+      <SiteIcon site={site} className="icon" />
+      {showName && (
+        <div className="title" title={site[SiteItemAlias.name]}>
+          {site[SiteItemAlias.name]}
+        </div>
+      )}
     </a>
   ),
 );

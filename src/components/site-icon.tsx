@@ -9,6 +9,7 @@ import { SiteIconContext } from './site-icon-context';
 
 interface SiteIconProps {
   site: TSiteItem;
+  className?: string;
 }
 
 function getProviderUrl(url: string, provider: PrefValue['iconProvider']) {
@@ -47,7 +48,7 @@ function isTransparent(c?: string) {
   return false;
 }
 
-export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
+export const SiteIcon: React.FC<SiteIconProps> = ({ site, className }) => {
   const { defaultIcon, theme, activeIconPack, iconProvider } =
     useContext(SiteIconContext);
   const [icon, setIcon] = useState('');
@@ -147,7 +148,7 @@ export const SiteIcon: React.FC<SiteIconProps> = ({ site }) => {
   }
 
   return (
-    <div className={`site-icon-container ${type}`} style={s}>
+    <div className={`site-icon-container ${type} ${className || ''}`} style={s}>
       <img
         src={icon || defaultIcon}
         alt={site[SiteItemAlias.name]}

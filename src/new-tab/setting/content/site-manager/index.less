@@ -3,7 +3,31 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
-    align-items: center;
+    gap: 8px;
+  }
+
+  .drag-list {
+    position: relative; // 插入线定位用，必须有
+
+    .drop-indicator {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--semi-color-primary);
+      pointer-events: none;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: -3px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--semi-color-primary);
+      }
+    }
   }
 
   .list-item {
@@ -12,11 +36,37 @@
     margin: 8px 0;
     padding: 8px;
     cursor: grab;
+    position: relative;
+    touch-action: none; // 触屏别让页面跟着滚
+    user-select: none;
+    transition: box-shadow 0.15s;
 
     &.dragging {
       z-index: 999;
       position: relative;
       background-color: var(--semi-color-bg-0);
+      opacity: 0.4;
+      cursor: grabbing;
+    }
+
+    &.merge-target {
+      outline: 2px dashed var(--semi-color-primary);
+      outline-offset: -2px;
+      border-radius: 6px;
+      background: var(--semi-color-primary-light-default);
+    }
+
+    .merge-badge {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 12px;
+      color: #fff;
+      background: var(--semi-color-primary);
+      pointer-events: none;
     }
   }
 

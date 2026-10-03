@@ -25,4 +25,5 @@ export const SiteItemAlias = {
   icon: 'j' as const,
   backgroundColor: 'c' as const,
   padding: 'p' as const,
+  children: 'r' as const,
 };

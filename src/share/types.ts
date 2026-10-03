@@ -31,9 +31,10 @@ export interface PrefValue {
     value?: BackgroundItem;
   };
   customCSS: string;
-  sites: Array<SiteItem>;
+  sites: Array<SiteItem | SiteDirItem>;
   searches: Array<SearchItem>;
 }
+
 export interface SiteItem {
   [SiteItemAlias.id]: string;
   [SiteItemAlias.name]: string;
@@ -43,6 +44,17 @@ export interface SiteItem {
   [SiteItemAlias.backgroundColor]?: string;
   [SiteItemAlias.padding]?: 'a' | string;
 }
+
+export interface SiteDirItem {
+  [SiteItemAlias.id]: string;
+  [SiteItemAlias.name]: string;
+  [SiteItemAlias.children]: Array<SiteItem>;
+}
+
+export const isSiteItem = (item: any): item is SiteItem =>
+  typeof item === 'object' && item[SiteItemAlias.url] !== undefined;
+export const isSiteDirItem = (item: any): item is SiteDirItem =>
+  typeof item === 'object' && Array.isArray(item[SiteItemAlias.children]);
 
 export interface SearchItem {
   [SearchItemAlias.key]: string;

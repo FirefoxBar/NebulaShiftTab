@@ -108,7 +108,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 36px 48px 48px;
+  padding: 0;
   box-sizing: border-box;
   border-radius: 20px;
   background: rgba(40, 40, 42, 0.85);
@@ -119,19 +119,30 @@
   animation: site-dir-pop 0.2s ease;
 
   > .popup-title {
-    margin-bottom: 36px;
+    padding: 36px 48px 18px 48px;
     font-size: calc(var(--site-icon-size) * 0.5);
     color: #fff;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
   }
 
-  > .sites {
-    width: auto;
-    margin: 0;
-    padding-top: 0;
+  > .sites-container {
+    padding: 18px 48px 36px 48px;
+    flex-shrink: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    > .sites {
+      padding: 0;
+      justify-content: flex-start;
+      width: auto;
+      overflow: visible;
+    }
   }
 }
 

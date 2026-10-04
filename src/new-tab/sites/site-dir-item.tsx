@@ -65,14 +65,16 @@ export const SiteDirItem = withErrorBoundary<SiteDirItemProps>(
                 aria-label={site[SiteItemAlias.name]}
               >
                 <div className="popup-title">{site[SiteItemAlias.name]}</div>
-                <div className="sites">
-                  {all.map(child => (
-                    <SiteItem
-                      key={child[SiteItemAlias.id]}
-                      site={child}
-                      showName={showName}
-                    />
-                  ))}
+                <div className="sites-container">
+                  <div className="sites">
+                    {all.map(child => (
+                      <SiteItem
+                        key={child[SiteItemAlias.id]}
+                        site={child}
+                        showName={showName}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>,

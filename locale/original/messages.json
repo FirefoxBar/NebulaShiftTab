@@ -84,9 +84,22 @@
     "message": "Cancel",
     "description": "Cancel button text"
   },
+  "clear": {
+    "message": "Clear",
+    "description": "Button text for clearing search history"
+  },
   "configure": {
     "message": "Configure",
     "description": "Button text for configuring custom background"
+  },
+  "confirmDeleteFolder": {
+    "message": "Are you sure you want to delete the folder \"$name$\"? Sites inside will be moved up one level and not deleted.",
+    "description": "Confirmation message for deleting a folder",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
   },
   "confirmDeleteSearchEngine": {
     "message": "Are you sure you want to delete \"$name$\"?",
@@ -138,6 +151,10 @@
   "dateFormat": {
     "message": "Date format",
     "description": "Label for date format selection"
+  },
+  "deleteFolder": {
+    "message": "Delete Folder",
+    "description": "Button text for deleting a folder"
   },
   "deleteSearchEngine": {
     "message": "Delete Search Engine",
@@ -227,6 +244,10 @@
     "message": "Failed to get search suggestions",
     "description": "Error message when failing to get search suggestions"
   },
+  "folderName": {
+    "message": "Folder Name",
+    "description": "Label for folder name field"
+  },
   "followSystem": {
     "message": "Follow System",
     "description": "Option for following system dark mode setting"
@@ -294,6 +315,10 @@
     "message": "Margin",
     "description": "Label for margin setting"
   },
+  "mergeIntoFolder": {
+    "message": "Merge into Folder",
+    "description": "Button text for merging sites into a folder"
+  },
   "name": {
     "message": "Name",
     "description": "Label for name field"
@@ -301,6 +326,14 @@
   "never": {
     "message": "Never",
     "description": "Option for never refreshing"
+  },
+  "newFolder": {
+    "message": "New Folder",
+    "description": "Default name for a new folder"
+  },
+  "noSearchHistory": {
+    "message": "No Search History",
+    "description": "Message for no search history"
   },
   "none": {
     "message": "None"
@@ -312,6 +345,10 @@
   "on": {
     "message": "On",
     "description": "Option for enabling dark mode"
+  },
+  "placeInFolder": {
+    "message": "Place in this Folder",
+    "description": "Button text for placing a site in a folder"
   },
   "pleaseEnterAddressMsg": {
     "message": "Please enter address",
@@ -328,6 +365,14 @@
   "reacquireBackground": {
     "message": "Reacquire Background",
     "description": "Button text for reacquiring background"
+  },
+  "recordSearchHistory": {
+    "message": "Record Search History",
+    "description": "Label for record search history setting"
+  },
+  "recordSearchHistoryHelp": {
+    "message": "Enter 0 to disable recording",
+    "description": "Description for record history setting"
   },
   "refreshFrequency": {
     "message": "Refresh Frequency",
@@ -347,6 +392,10 @@
   "save": {
     "message": "Save",
     "description": "Save button text"
+  },
+  "searchHistoryManagement": {
+    "message": "Search History Management",
+    "description": "Title for search history management section"
   },
   "searchManagement": {
     "message": "Search Management",
@@ -467,54 +516,5 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
-  },
-  "recordSearchHistory": {
-    "message": "Record Search History",
-    "description": "Label for record search history setting"
-  },
-  "recordSearchHistoryHelp": {
-    "message": "Enter 0 to disable recording",
-    "description": "Description for record history setting"
-  },
-  "searchHistoryManagement": {
-    "message": "Search History Management",
-    "description": "Title for search history management section"
-  },
-  "noSearchHistory": {
-    "message": "No Search History",
-    "description": "Message for no search history"
-  },
-  "clear": {
-    "message": "Clear",
-    "description": "Button text for clearing search history"
-  },
-  "folderName": {
-    "message": "Folder Name",
-    "description": "Label for folder name field"
-  },
-  "deleteFolder": {
-    "message": "Delete Folder",
-    "description": "Button text for deleting a folder"
-  },
-  "confirmDeleteFolder": {
-    "message": "Are you sure you want to delete the folder \"$name$\"? Sites inside will be moved up one level and not deleted.",
-    "description": "Confirmation message for deleting a folder",
-    "placeholders": {
-      "name": {
-        "content": "$1"
-      }
-    }
-  },
-  "newFolder": {
-    "message": "New Folder",
-    "description": "Default name for a new folder"
-  },
-  "placeInFolder": {
-    "message": "Place in this Folder",
-    "description": "Button text for placing a site in a folder"
-  },
-  "mergeIntoFolder": {
-    "message": "Merge into Folder",
-    "description": "Button text for merging sites into a folder"
   }
 }

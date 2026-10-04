@@ -27,7 +27,12 @@ import usePref from '@/hooks/use-pref';
 import { StorageKey } from '@/share/constant';
 import { t } from '@/share/locale';
 import { SiteItemAlias } from '@/share/type-alias';
-import type { SiteDirItem, SiteItem, SiteNode } from '@/share/types';
+import {
+  isSiteDirItem,
+  type SiteDirItem,
+  type SiteItem,
+  type SiteNode,
+} from '@/share/types';
 import { showSiteEditModal } from './site-edit-modal';
 
 import './index.less';
@@ -48,9 +53,6 @@ const MERGE_DWELL_MS = 220;
 const MERGE_FAST_SPEED = 1.4;
 
 // ---------------------------------------------------------------------------
-
-const isDirItem = (item: SiteNode): item is SiteDirItem =>
-  Array.isArray((item as SiteDirItem)[SiteItemAlias.children]);
 
 const getId = (item: SiteNode) => item[SiteItemAlias.id];
 
@@ -482,7 +484,6 @@ const DirPanel = ({
                     <Button
                       icon={<IconExport />}
                       onClick={() => onMoveOut(item)}
-                      aria-label="移出到顶层"
                     />
                     <Button
                       type="danger"
@@ -516,7 +517,7 @@ export const SitesManager = withErrorBoundary(() => {
   ) =>
     setSitesValue(
       sites.map(item =>
-        getId(item) === dirId && isDirItem(item) ? updater(item) : item,
+        getId(item) === dirId && isSiteDirItem(item) ? updater(item) : item,
       ),
     );
 
@@ -543,7 +544,7 @@ export const SitesManager = withErrorBoundary(() => {
     const index = sites.findIndex(site => getId(site) === id);
     if (index === -1) return;
     const dir = sites[index];
-    if (!isDirItem(dir)) return;
+    if (!isSiteDirItem(dir)) return;
     Modal.warning({
       title: t('deleteFolder'),
       content: t('confirmDeleteFolder', dir[SiteItemAlias.name]),
@@ -573,9 +574,9 @@ export const SitesManager = withErrorBoundary(() => {
       if (activeIndex === -1 || mergeIndex === -1) return;
       const activeItem = sites[activeIndex];
       const target = sites[mergeIndex];
-      if (isDirItem(activeItem)) return; // 文件夹不能塞进文件夹
+      if (isSiteDirItem(activeItem)) return; // 文件夹不能塞进文件夹
 
-      if (isDirItem(target)) {
+      if (isSiteDirItem(target)) {
         // 2. 站点 → 已有文件夹
         const next = [...sites];
         next.splice(activeIndex, 1);
@@ -608,7 +609,7 @@ export const SitesManager = withErrorBoundary(() => {
   const canMerge = useCallback(
     (activeId: string) => {
       const item = sites.find(site => getId(site) === activeId);
-      return !!item && !isDirItem(item);
+      return !!item && !isSiteDirItem(item);
     },
     [sites],
   );
@@ -630,7 +631,7 @@ export const SitesManager = withErrorBoundary(() => {
     const id = getId(item);
     const isMerge = Boolean(list.drag?.armed && list.drag.targetId === id);
 
-    if (isDirItem(item)) {
+    if (isSiteDirItem(item)) {
       return (
         <DragRow
           key={id}
@@ -694,7 +695,7 @@ export const SitesManager = withErrorBoundary(() => {
 
   return (
     <div className="sites-manager-container">
-      {editingDir && isDirItem(editingDir) ? (
+      {editingDir && isSiteDirItem(editingDir) ? (
         <DirPanel
           dir={editingDir}
           onBack={() => setEditingDirId(null)}

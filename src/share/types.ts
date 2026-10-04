@@ -4,6 +4,29 @@ import {
   SiteItemAlias,
 } from './type-alias';
 
+export interface SiteItem {
+  [SiteItemAlias.id]: string;
+  [SiteItemAlias.name]: string;
+  [SiteItemAlias.url]: string;
+  [SiteItemAlias.iconType]: 'builtin' | 'auto' | 'local' | 'custom';
+  [SiteItemAlias.icon]?: string;
+  [SiteItemAlias.backgroundColor]?: string;
+  [SiteItemAlias.padding]?: 'a' | string;
+}
+
+export interface SiteDirItem {
+  [SiteItemAlias.id]: string;
+  [SiteItemAlias.name]: string;
+  [SiteItemAlias.children]: Array<SiteItem>;
+}
+
+export type SiteNode = SiteItem | SiteDirItem;
+
+export const isSiteItem = (item: any): item is SiteItem =>
+  typeof item === 'object' && item[SiteItemAlias.url] !== undefined;
+export const isSiteDirItem = (item: any): item is SiteDirItem =>
+  typeof item === 'object' && Array.isArray(item[SiteItemAlias.children]);
+
 export interface PrefValue {
   darkMode: 'auto' | 'on' | 'off';
   theme: 'default' | 'liquid-glass' | 'pure' | 'pixel' | 'delta-icons';
@@ -31,30 +54,9 @@ export interface PrefValue {
     value?: BackgroundItem;
   };
   customCSS: string;
-  sites: Array<SiteItem | SiteDirItem>;
+  sites: Array<SiteNode>;
   searches: Array<SearchItem>;
 }
-
-export interface SiteItem {
-  [SiteItemAlias.id]: string;
-  [SiteItemAlias.name]: string;
-  [SiteItemAlias.url]: string;
-  [SiteItemAlias.iconType]: 'builtin' | 'auto' | 'local' | 'custom';
-  [SiteItemAlias.icon]?: string;
-  [SiteItemAlias.backgroundColor]?: string;
-  [SiteItemAlias.padding]?: 'a' | string;
-}
-
-export interface SiteDirItem {
-  [SiteItemAlias.id]: string;
-  [SiteItemAlias.name]: string;
-  [SiteItemAlias.children]: Array<SiteItem>;
-}
-
-export const isSiteItem = (item: any): item is SiteItem =>
-  typeof item === 'object' && item[SiteItemAlias.url] !== undefined;
-export const isSiteDirItem = (item: any): item is SiteDirItem =>
-  typeof item === 'object' && Array.isArray(item[SiteItemAlias.children]);
 
 export interface SearchItem {
   [SearchItemAlias.key]: string;

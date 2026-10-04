@@ -4,12 +4,17 @@ import { StorageKey } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import { SiteItemAlias } from '@/share/type-alias';
-import { SiteItem } from '@/share/types';
+import {
+  isSiteDirItem,
+  isSiteItem,
+  type SiteItem,
+  type SiteNode,
+} from '@/share/types';
 import { SiteEditForm } from './site-edit-form';
 
 interface SiteEditModalProps {
   initialData?: SiteItem;
-  onSave?: (site: SiteItem, sites: SiteItem[]) => void;
+  onSave?: (site: SiteItem, sites: SiteNode[]) => void;
   onCancel?: () => void;
 }
 
@@ -38,7 +43,7 @@ export const showSiteEditModal = ({
       newSites.push(updatedSite);
     }
 
-    newSites.forEach(site => {
+    const workOnItem = (site: SiteItem) => {
       if (
         ['local', 'custom'].includes(site[SiteItemAlias.iconType]) &&
         site[SiteItemAlias.icon]?.startsWith('data:image/')
@@ -52,6 +57,15 @@ export const showSiteEditModal = ({
       }
       if (site[SiteItemAlias.icon] === '') {
         delete site[SiteItemAlias.icon];
+      }
+    };
+
+    newSites.forEach(site => {
+      if (isSiteItem(site)) {
+        workOnItem(site);
+      }
+      if (isSiteDirItem(site)) {
+        (site[SiteItemAlias.children] ?? []).forEach(workOnItem);
       }
     });
 

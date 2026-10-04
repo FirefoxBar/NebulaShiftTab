@@ -7,6 +7,7 @@ import {
   IconPlus,
 } from '@douyinfe/semi-icons';
 import { Button, Input, List, Modal, Typography } from '@douyinfe/semi-ui';
+import { nanoid } from 'nanoid';
 import {
   type CSSProperties,
   type ReactNode,
@@ -26,12 +27,10 @@ import usePref from '@/hooks/use-pref';
 import { StorageKey } from '@/share/constant';
 import { t } from '@/share/locale';
 import { SiteItemAlias } from '@/share/type-alias';
-import type { SiteDirItem, SiteItem } from '@/share/types';
+import type { SiteDirItem, SiteItem, SiteNode } from '@/share/types';
 import { showSiteEditModal } from './site-edit-modal';
 
 import './index.less';
-
-type SiteNode = SiteItem | SiteDirItem;
 
 // ---------------------------------------------------------------------------
 // 拖拽参数
@@ -54,10 +53,6 @@ const isDirItem = (item: SiteNode): item is SiteDirItem =>
   Array.isArray((item as SiteDirItem)[SiteItemAlias.children]);
 
 const getId = (item: SiteNode) => item[SiteItemAlias.id];
-
-const genId = () =>
-  crypto.randomUUID?.() ??
-  `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 
 const removeIconCache = (id: string) =>
   chrome.storage.local.remove(`${StorageKey.siteIcon}_${id}`);
@@ -409,7 +404,7 @@ const DragRow = ({
     {children}
     {merge && (
       <span className="merge-badge">
-        {type === 'dir' ? '放入文件夹' : '合并为文件夹'}
+        {type === 'dir' ? t('placeInFolder') : t('mergeIntoFolder')}
       </span>
     )}
   </div>
@@ -450,7 +445,7 @@ const DirPanel = ({
           onChange={setName}
           onBlur={submitName}
           onEnterPress={submitName}
-          placeholder={t('folderName') || '文件夹名称'}
+          placeholder={t('folderName')}
         />
       </div>
 
@@ -550,10 +545,8 @@ export const SitesManager = withErrorBoundary(() => {
     const dir = sites[index];
     if (!isDirItem(dir)) return;
     Modal.warning({
-      title: t('deleteFolder') || '删除文件夹',
-      content:
-        t('confirmDeleteFolder', dir[SiteItemAlias.name]) ||
-        '文件夹内的站点会被移到上层，不会删除',
+      title: t('deleteFolder'),
+      content: t('confirmDeleteFolder', dir[SiteItemAlias.name]),
       onOk: () => {
         const next = [...sites];
         next.splice(index, 1, ...(dir[SiteItemAlias.children] ?? []));
@@ -598,15 +591,14 @@ export const SitesManager = withErrorBoundary(() => {
       } else {
         // 1. 站点 → 站点，新建文件夹（放在被放置项的原位置）
         const dir: SiteDirItem = {
-          [SiteItemAlias.id]: genId(),
-          [SiteItemAlias.name]: t('newFolder') || '新建文件夹',
+          [SiteItemAlias.id]: nanoid(),
+          [SiteItemAlias.name]: t('newFolder'),
           [SiteItemAlias.children]: [target, activeItem],
         };
         const next = [...sites];
         next[mergeIndex] = dir;
         next.splice(activeIndex, 1);
         setSitesValue(next);
-        // 想让新建后立刻改名/排序，就打开这行：setEditingDirId(dir[SiteItemAlias.id]);
       }
     },
     [sites, setSitesValue],

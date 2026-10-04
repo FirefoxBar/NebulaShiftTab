@@ -92,6 +92,15 @@
     "message": "Configure",
     "description": "Button text for configuring custom background"
   },
+  "confirmDeleteFolder": {
+    "message": "Are you sure you want to delete the folder \"$name$\"? Sites inside will be moved up one level and not deleted.",
+    "description": "Confirmation message for deleting a folder",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
   "confirmDeleteSearchEngine": {
     "message": "Are you sure you want to delete \"$name$\"?",
     "description": "Confirm deletion message for search engine",
@@ -142,6 +151,10 @@
   "dateFormat": {
     "message": "Date format",
     "description": "Label for date format selection"
+  },
+  "deleteFolder": {
+    "message": "Delete Folder",
+    "description": "Button text for deleting a folder"
   },
   "deleteSearchEngine": {
     "message": "Delete Search Engine",
@@ -231,6 +244,10 @@
     "message": "Failed to get search suggestions",
     "description": "Error message when failing to get search suggestions"
   },
+  "folderName": {
+    "message": "Folder Name",
+    "description": "Label for folder name field"
+  },
   "followSystem": {
     "message": "Follow System",
     "description": "Option for following system dark mode setting"
@@ -298,6 +315,10 @@
     "message": "Margin",
     "description": "Label for margin setting"
   },
+  "mergeIntoFolder": {
+    "message": "Merge into Folder",
+    "description": "Button text for merging sites into a folder"
+  },
   "name": {
     "message": "Name",
     "description": "Label for name field"
@@ -305,6 +326,10 @@
   "never": {
     "message": "Never",
     "description": "Option for never refreshing"
+  },
+  "newFolder": {
+    "message": "New Folder",
+    "description": "Default name for a new folder"
   },
   "noSearchHistory": {
     "message": "No Search History",
@@ -320,6 +345,10 @@
   "on": {
     "message": "On",
     "description": "Option for enabling dark mode"
+  },
+  "placeInFolder": {
+    "message": "Place in this Folder",
+    "description": "Button text for placing a site in a folder"
   },
   "pleaseEnterAddressMsg": {
     "message": "Please enter address",

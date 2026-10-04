@@ -94,10 +94,15 @@ export const SearchInput = withErrorBoundary(({ engine }: SearchInputProps) => {
   // 使用useRequest处理搜索建议
   const { data } = useRequest(
     async () => {
+      const v = searchValue.trim();
+      if (!v) {
+        return undefined;
+      }
+
       const response = await fetch(
         engine[SearchItemAlias.suggestion]!.replace(
           '{{q}}',
-          encodeURIComponent(searchValue),
+          encodeURIComponent(v),
         ),
       );
 
@@ -143,8 +148,7 @@ export const SearchInput = withErrorBoundary(({ engine }: SearchInputProps) => {
     {
       refreshDeps: [searchValue, engine],
       ready: Boolean(
-        searchValue.trim() &&
-          engine[SearchItemAlias.suggestion] &&
+        engine[SearchItemAlias.suggestion] &&
           engine[SearchItemAlias.suggestionType] &&
           engine[SearchItemAlias.extractSuggestion],
       ),

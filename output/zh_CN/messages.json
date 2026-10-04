@@ -92,6 +92,15 @@
     "message": "配置",
     "description": "Button text for configuring custom background"
   },
+  "confirmDeleteFolder": {
+    "message": "确认要删除文件夹“$name$”吗？文件夹内的网址会被移至上层",
+    "description": "Confirmation message for deleting a folder",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
   "confirmDeleteSearchEngine": {
     "message": "确定要删除 \"$name$\" 吗？",
     "description": "Confirm deletion message for search engine",
@@ -142,6 +151,10 @@
   "dateFormat": {
     "message": "日期格式",
     "description": "Label for date format selection"
+  },
+  "deleteFolder": {
+    "message": "删除文件夹",
+    "description": "Button text for deleting a folder"
   },
   "deleteSearchEngine": {
     "message": "删除搜索引擎",
@@ -231,6 +244,10 @@
     "message": "获取搜索建议失败",
     "description": "Error message when failing to get search suggestions"
   },
+  "folderName": {
+    "message": "文件夹名称",
+    "description": "Label for folder name field"
+  },
   "followSystem": {
     "message": "跟随系统",
     "description": "Option for following system dark mode setting"
@@ -298,6 +315,10 @@
     "message": "边距",
     "description": "Label for margin setting"
   },
+  "mergeIntoFolder": {
+    "message": "合并为文件夹",
+    "description": "Button text for merging sites into a folder"
+  },
   "name": {
     "message": "名称",
     "description": "Label for name field"
@@ -305,6 +326,10 @@
   "never": {
     "message": "从不",
     "description": "Option for never refreshing"
+  },
+  "newFolder": {
+    "message": "新文件夹",
+    "description": "Default name for a new folder"
   },
   "noSearchHistory": {
     "message": "无历史搜索",
@@ -320,6 +345,10 @@
   "on": {
     "message": "开启",
     "description": "Option for enabling dark mode"
+  },
+  "placeInFolder": {
+    "message": "放入文件夹",
+    "description": "Button text for placing a site in a folder"
   },
   "pleaseEnterAddressMsg": {
     "message": "请输入地址",

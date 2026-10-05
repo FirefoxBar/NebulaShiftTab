@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useGetState } from 'ahooks';
+import { useEffect } from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
 import { SearchItemAlias } from '@/share/type-alias';
 import type { SearchItem } from '@/share/types';
@@ -10,22 +11,19 @@ interface SearchContentProps {
 
 export const SearchContent = withErrorBoundary(
   ({ engines }: SearchContentProps) => {
-    const [currentEngine, setCurrentEngine] = useState<SearchItem>(engines[0]);
-
-    const searchInputRef = useRef<HTMLInputElement>(null);
-
-    // 处理引擎切换并自动聚焦
-    const handleEngineChange = useCallback((engine: SearchItem) => {
-      setCurrentEngine(engine);
-      // 切换引擎后自动聚焦到输入框
-      setTimeout(() => {
-        // setShowSuggestion(true);
-        searchInputRef.current?.focus();
-      }, 0);
-    }, []);
+    const [current, setCurrent, getCurrent] = useGetState<SearchItem>(
+      engines[0],
+    );
 
     useEffect(() => {
-      setCurrentEngine(engines[0]);
+      if (getCurrent()) {
+        const has = engines.find(
+          x => x[SearchItemAlias.key] === getCurrent()[SearchItemAlias.key],
+        );
+        setCurrent(has || engines[0]);
+      } else {
+        setCurrent(engines[0]);
+      }
     }, [engines]);
 
     return (
@@ -36,8 +34,8 @@ export const SearchContent = withErrorBoundary(
               <button
                 key={engine[SearchItemAlias.name]}
                 type="button"
-                className={`engine-btn ${currentEngine?.[SearchItemAlias.name] === engine[SearchItemAlias.name] ? 'active' : ''}`}
-                onClick={() => handleEngineChange(engine)}
+                className={`engine-btn ${current?.[SearchItemAlias.name] === engine[SearchItemAlias.name] ? 'active' : ''}`}
+                onClick={() => setCurrent(engine)}
               >
                 {engine[SearchItemAlias.name]}
               </button>
@@ -45,7 +43,7 @@ export const SearchContent = withErrorBoundary(
           </div>
         )}
 
-        <SearchInput engine={currentEngine} />
+        <SearchInput engine={current} />
       </div>
     );
   },

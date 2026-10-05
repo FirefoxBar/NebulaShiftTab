@@ -419,6 +419,14 @@
     "message": "On",
     "description": "Option for enabling dark mode"
   },
+  "password": {
+    "message": "Password",
+    "description": "Label for password field"
+  },
+  "path": {
+    "message": "Path",
+    "description": "Label for path field"
+  },
   "placeInFolder": {
     "message": "Place in this Folder",
     "description": "Button text for placing a site in a folder"
@@ -581,6 +589,10 @@
   "url": {
     "message": "URL",
     "description": "Label for URL field"
+  },
+  "username": {
+    "message": "Username",
+    "description": "Label for username field"
   },
   "validUrlRequired": {
     "message": "Please enter a valid URL",

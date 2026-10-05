@@ -1,4 +1,8 @@
 {
+  "action": {
+    "message": "操作",
+    "description": "Action title in management page"
+  },
   "add": {
     "message": "添加",
     "description": "Add button text"
@@ -64,6 +68,14 @@
     "message": "背景类型",
     "description": "Label for background type selection"
   },
+  "backup": {
+    "message": "备份",
+    "description": "Title for backup section"
+  },
+  "backupList": {
+    "message": "备份列表",
+    "description": "Backup list title"
+  },
   "backupToFile": {
     "message": "备份到文件",
     "description": "Button text for backing up to file"
@@ -91,6 +103,15 @@
   "configure": {
     "message": "配置",
     "description": "Button text for configuring custom background"
+  },
+  "confirmDeleteFile": {
+    "message": "您确认要删除文件“$name$”吗？",
+    "description": "Delete file confirm dialog",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
   },
   "confirmDeleteFolder": {
     "message": "确认要删除文件夹“$name$”吗？文件夹内的网址会被移至上层",
@@ -124,6 +145,10 @@
     "message": "继续导入",
     "description": "Button text for continuing import"
   },
+  "createdTime": {
+    "message": "创建时间",
+    "description": "Created time title"
+  },
   "custom": {
     "message": "自定义",
     "description": "Option for custom icon type"
@@ -152,6 +177,10 @@
     "message": "日期格式",
     "description": "Label for date format selection"
   },
+  "delete": {
+    "message": "删除",
+    "description": "Delete button"
+  },
   "deleteFolder": {
     "message": "删除文件夹",
     "description": "Button text for deleting a folder"
@@ -171,6 +200,10 @@
   "displayedAt": {
     "message": "显示于",
     "description": "Label for displayed at field"
+  },
+  "downloadToLocal": {
+    "message": "下载到本地",
+    "description": "Download to local button"
   },
   "edit": {
     "message": "编辑",
@@ -232,6 +265,18 @@
       }
     }
   },
+  "export": {
+    "message": "导出",
+    "description": "Button to export"
+  },
+  "exportFilename": {
+    "message": "导出文件名",
+    "description": "Export file name"
+  },
+  "exportSuccess": {
+    "message": "导出成功",
+    "description": "Exported successfully"
+  },
   "extName": {
     "message": "Nebula Shift 新标签页",
     "description": "Extension name"
@@ -243,6 +288,14 @@
   "failedToGetSuggestions": {
     "message": "获取搜索建议失败",
     "description": "Error message when failing to get search suggestions"
+  },
+  "filename": {
+    "message": "文件名",
+    "description": "File name title"
+  },
+  "filesize": {
+    "message": "文件大小",
+    "description": "File size title"
   },
   "folderName": {
     "message": "文件夹名称",
@@ -283,13 +336,13 @@
     "message": "导入备份",
     "description": "Title for import backup modal"
   },
-  "importExport": {
-    "message": "导入和导出",
-    "description": "Tab label for import/export section"
-  },
   "importWillOverrideSettings": {
     "message": "导入备份将覆盖当前设置",
     "description": "Description for import warning"
+  },
+  "invalidBackupFile": {
+    "message": "备份文件已损坏",
+    "description": "Error message for invalid backup file"
   },
   "invalidUrl": {
     "message": "请输入有效的网址",
@@ -303,6 +356,10 @@
     "message": "JSONP",
     "description": "JSONP option"
   },
+  "localFile": {
+    "message": "本地文件",
+    "description": "Local file backup"
+  },
   "localIcon": {
     "message": "本地图标",
     "description": "Option for local icon type"
@@ -310,6 +367,18 @@
   "localImage": {
     "message": "本地图片",
     "description": "Option for local image"
+  },
+  "login": {
+    "message": "登录",
+    "description": "Login button"
+  },
+  "logout": {
+    "message": "退出登录",
+    "description": "Logout button"
+  },
+  "logoutSuccess": {
+    "message": "退出登录成功",
+    "description": "Successfully logged out"
   },
   "margin": {
     "message": "边距",
@@ -330,6 +399,10 @@
   "newFolder": {
     "message": "新文件夹",
     "description": "Default name for a new folder"
+  },
+  "noBackup": {
+    "message": "未找到备份文件",
+    "description": "No backup found"
   },
   "noSearchHistory": {
     "message": "无历史搜索",
@@ -460,6 +533,10 @@
   "settings": {
     "message": "设置",
     "description": "Title for settings panel"
+  },
+  "showBackup": {
+    "message": "查看备份",
+    "description": "Show backups button"
   },
   "showSiteName": {
     "message": "显示网址名称",

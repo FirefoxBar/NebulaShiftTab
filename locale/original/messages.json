@@ -593,5 +593,17 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "username": {
+    "message": "Username",
+    "description": "Label for username field"
+  },
+  "password": {
+    "message": "Password",
+    "description": "Label for password field"
+  },
+  "path": {
+    "message": "Path",
+    "description": "Label for path field"
   }
 }

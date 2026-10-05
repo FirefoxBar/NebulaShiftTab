@@ -193,7 +193,7 @@ const WebDAV = createDriveComponent({
           >
             <Form.Input
               field="url"
-              label={t('match_url')}
+              label={t('url')}
               placeholder="https://example.com/webdav"
               rules={[{ required: true }, { type: 'url' }]}
             />

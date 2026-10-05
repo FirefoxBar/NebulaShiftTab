@@ -1,0 +1,140 @@
+import { getLocalStorage } from '@/share/storage';
+import { createDriveComponent, type FileItem } from './base-drive';
+
+const apiPrefix = 'https://www.googleapis.com/';
+interface GoogleDriveAuth {
+  access_token: string;
+  expires_at: number;
+}
+
+const callApi = async (
+  path: string,
+  data: any = undefined,
+  method = 'GET',
+  type = 'json',
+) => {
+  const auth = await getAuth();
+  if (!auth) {
+    return null;
+  }
+  const res = await fetch(apiPrefix + path, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${auth.access_token}`,
+    },
+    body: data,
+  });
+  const d = await (type === 'json' ? res.json() : res.text());
+  if (!d) {
+    return null;
+  }
+  return d;
+};
+
+const getAuth = async () => {
+  const authInfo = await getLocalStorage<GoogleDriveAuth>('drive_google');
+  if (!authInfo) {
+    return null;
+  }
+  if (authInfo.expires_at <= Date.now()) {
+    await chrome.storage.local.remove('drive_google');
+    return null;
+  }
+  return authInfo;
+};
+
+const handleLogin = async (access_token: string) => {
+  const res = await fetch(
+    `${apiPrefix}oauth2/v3/tokeninfo?access_token=${access_token}`,
+  );
+  const data = await res.json();
+  if (!data) {
+    return null;
+  }
+  const authInfo = {
+    ...data,
+    access_token,
+    expires_at: Date.now() + data.expires_in * 1000 - 1,
+  };
+  await chrome.storage.local.set({
+    drive_google: authInfo,
+  });
+  return authInfo;
+};
+
+const GoogleDrive = createDriveComponent({
+  name: 'GoogleDrive',
+  key: 'google-drive',
+  handleLoginMessage: async (request: any) => {
+    const accessToken = request.accessToken;
+    await handleLogin(accessToken);
+  },
+  checkAuth: async () => {
+    const auth = await getAuth();
+    return auth !== null;
+  },
+  startLogin: () => {
+    window.open(
+      'http://ext.firefoxcn.net/login/go/google.html?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.appdata&state=nebula-shift-tab',
+    );
+  },
+  logout: () => chrome.storage.local.remove('drive_google'),
+  listFiles: async () => {
+    const result = await callApi(
+      `drive/v3/files?spaces=appDataFolder&orderBy=quotaBytesUsed&q=${encodeURIComponent(
+        "name contains 'NST_'",
+      )}&fields=${encodeURIComponent('files(id, size, name, modifiedTime)')}`,
+    );
+    return result.files.map(
+      (x: any) =>
+        ({
+          name: x.name.replace(/^NST_/, ''),
+          size: x.size,
+          key: x.id,
+          time: new Date(x.modifiedTime).getTime(),
+        }) as FileItem,
+    );
+  },
+  downloadFile: (file: FileItem) =>
+    callApi(
+      `drive/v3/files/${file.key}?spaces=appDataFolder&alt=media`,
+      undefined,
+      'GET',
+      'text',
+    ),
+  deleteFile: (file: FileItem) =>
+    callApi(`drive/v3/files/${file.key}`, undefined, 'DELETE', 'text'),
+  writeFile: async (fileName: string, content: string) => {
+    const auth = await getAuth();
+    if (!auth) {
+      return;
+    }
+    const boundary = 'BOUNDARY';
+    const delimiter = `\r\n--${boundary}\r\n`;
+    const closeDelimiter = `\r\n--${boundary}--`;
+    const requestBody = new Blob([
+      `--${boundary}\r\n`,
+      'Content-Type: application/json; charset=UTF-8\r\n\r\n',
+      JSON.stringify({ name: `NST_${fileName}`, parents: ['appDataFolder'] }),
+      delimiter,
+      `Content-Type: application/octet-stream\r\n\r\n`,
+      content,
+      closeDelimiter,
+    ]);
+    const response = await fetch(
+      'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${auth.access_token}`,
+          'Content-Type': `multipart/related; boundary=${boundary}`,
+        },
+        body: requestBody,
+      },
+    );
+    return response.json();
+  },
+});
+
+export default GoogleDrive;

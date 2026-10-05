@@ -23,6 +23,7 @@ export const StorageKey = {
 
 export enum APIs {
   REFRESH_BACKGROUND = 'refresh-background',
+  ON_DRIVE_LOGIN = 'on-drive-login',
 }
 
 export const MAX_SUGGESTION_COUNT = 12;

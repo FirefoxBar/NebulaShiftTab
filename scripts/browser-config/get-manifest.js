@@ -25,6 +25,17 @@ const baseManifest = {
     'tabs',
   ],
   host_permissions: ['*://*/*'],
+  content_scripts: [
+    {
+      matches: [
+        'https://login.microsoftonline.com/common/oauth2/nativeclient*',
+        'https://ext.firefoxcn.net/login/callback/*',
+        'https://oauth.yandex.ru/verification_code*',
+      ],
+      run_at: 'document_start',
+      js: ['content-cloud-drive.js'],
+    },
+  ],
 };
 
 const firefoxDataCollection = {

@@ -283,10 +283,6 @@
     "message": "Import Backup",
     "description": "Title for import backup modal"
   },
-  "importExport": {
-    "message": "Import and Export",
-    "description": "Tab label for import/export section"
-  },
   "importWillOverrideSettings": {
     "message": "Importing backup will overwrite current settings",
     "description": "Description for import warning"
@@ -516,5 +512,86 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "backup": {
+    "message": "Backup",
+    "description": "Title for backup section"
+  },
+  "invalidBackupFile": {
+    "message": "Invalid backup file",
+    "description": "Error message for invalid backup file"
+  },
+  "downloadToLocal": {
+    "message": "Download to local",
+    "description": "Download to local button"
+  },
+  "confirmDeleteFile": {
+    "message": "Do you want to delete file \"$name$\"?",
+    "description": "Delete file confirm dialog",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "delete": {
+    "message": "Delete",
+    "description": "Delete button"
+  },
+  "filename": {
+    "message": "File name",
+    "description": "File name title"
+  },
+  "filesize": {
+    "message": "File size",
+    "description": "File size title"
+  },
+  "createdTime": {
+    "message": "Created time",
+    "description": "Created time title"
+  },
+  "action": {
+    "message": "Action",
+    "description": "Action title in management page"
+  },
+  "noBackup": {
+    "message": "No backup found",
+    "description": "No backup found"
+  },
+  "backupList": {
+    "message": "Backup list",
+    "description": "Backup list title"
+  },
+  "exportSuccess": {
+    "message": "Exported successfully",
+    "description": "Exported successfully"
+  },
+  "logoutSuccess": {
+    "message": "Successfully logged out",
+    "description": "Successfully logged out"
+  },
+  "exportFilename": {
+    "message": "Export file name",
+    "description": "Export file name"
+  },
+  "export": {
+    "message": "Export",
+    "description": "Button to export"
+  },
+  "showBackup": {
+    "message": "Show backups",
+    "description": "Show backups button"
+  },
+  "logout": {
+    "message": "Logout",
+    "description": "Logout button"
+  },
+  "login": {
+    "message": "Login",
+    "description": "Login button"
+  },
+  "localFile": {
+    "message": "Local File",
+    "description": "Local file backup"
   }
 }

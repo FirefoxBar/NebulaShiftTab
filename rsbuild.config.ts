@@ -100,6 +100,10 @@ export default defineConfig({
             import: './src/background/index.ts',
             html: false,
           },
+          'content-cloud-drive': {
+            import: './src/content-cloud-drive/index.ts',
+            html: false,
+          },
         },
       },
       output: {

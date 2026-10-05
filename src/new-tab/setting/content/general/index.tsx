@@ -13,9 +13,7 @@ import { Slider } from '@/components/slider';
 import usePref from '@/hooks/use-pref';
 import { defaultPrefValue, MAX_SUGGESTION_COUNT } from '@/share/constant';
 import { t } from '@/share/locale';
-import { ExportButton } from './export-button';
 import { HistoryManage } from './history-manage';
-import { ImportButton } from './import-button';
 
 export const GeneralSettings = withErrorBoundary(() => {
   const [darkMode, setDarkMode] = usePref('darkMode');
@@ -152,14 +150,6 @@ export const GeneralSettings = withErrorBoundary(() => {
     {
       label: t('searchHistoryManagement'),
       content: <HistoryManage />,
-    },
-    {
-      label: t('backupToFile'),
-      content: <ExportButton />,
-    },
-    {
-      label: t('restoreFromFile'),
-      content: <ImportButton />,
     },
     {
       label: t('viewHelp'),

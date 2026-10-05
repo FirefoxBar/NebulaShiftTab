@@ -1,0 +1,154 @@
+import { getLocalStorage } from '@/share/storage';
+import { createDriveComponent, type FileItem } from './base-drive';
+
+const clientId = 'd742c0ec-f3ba-4ce9-949a-56507e86ca98';
+const scope = [
+  'openid',
+  'offline_access',
+  'files.readwrite',
+  'files.readwrite.appfolder',
+];
+const apiPrefix = 'https://graph.microsoft.com/v1.0/me/';
+const pathPrefix = 'special/approot:/nebula-shift-tab';
+
+interface OneDriveAuth {
+  expires_at: number;
+  refresh_token: string;
+}
+
+const fetchToken = async (params: any) => {
+  const newAuth = await fetch(
+    'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        client_id: clientId,
+        scope: scope.join(' '),
+        ...params,
+        redirect_uri:
+          'https://login.microsoftonline.com/common/oauth2/nativeclient',
+      }),
+    },
+  );
+  const data = await newAuth.json();
+  if (!data) {
+    return null;
+  }
+  const authInfo = {
+    ...data,
+    expires_at: Date.now() + data.expires_in * 1000,
+  };
+  await chrome.storage.local.set({
+    drive_onedrive: authInfo,
+  });
+  return authInfo;
+};
+
+const callApi = async (
+  path: string,
+  data: any = undefined,
+  method = 'GET',
+  type = 'json',
+) => {
+  const auth = await getAuth();
+  if (!auth) {
+    return null;
+  }
+  const res = await fetch(apiPrefix + path, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${auth.access_token}`,
+    },
+    body: data,
+  });
+  const d = await (type === 'json' ? res.json() : res.text());
+  if (!d) {
+    return null;
+  }
+  return d;
+};
+
+const getAuth = async () => {
+  const authInfo = await getLocalStorage<OneDriveAuth>('drive_onedrive');
+  if (!authInfo) {
+    return null;
+  }
+  if (authInfo.expires_at <= Date.now()) {
+    return fetchToken({
+      refresh_token: authInfo.refresh_token,
+      grant_type: 'refresh_token',
+    });
+  }
+  return authInfo;
+};
+
+const handleLogin = async (code: string) => {
+  await fetchToken({ code, grant_type: 'authorization_code' });
+  // check folder
+  const result = await callApi(`drive/${pathPrefix}`);
+  if (result.error) {
+    try {
+      const info = await callApi('drive/special/approot');
+      await callApi(
+        `drive/items/${info.id}/children`,
+        JSON.stringify({
+          name: 'nebula-shift-tab',
+          folder: {},
+        }),
+        'POST',
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
+
+const OneDrive = createDriveComponent({
+  name: 'OneDrive',
+  key: 'onedrive',
+  handleLoginMessage: async (request: any) => {
+    const code = request.code;
+    await handleLogin(code);
+  },
+  checkAuth: async () => {
+    const auth = await getAuth();
+    return auth !== null;
+  },
+  startLogin: () => {
+    window.open(
+      `http://ext.firefoxcn.net/login/go/onedrive.html?scope=${encodeURIComponent(scope.join(' '))}&state=nebula-shift-tab`,
+    );
+  },
+  logout: () => chrome.storage.local.remove('drive_onedrive'),
+  listFiles: async () => {
+    const result = await callApi(`drive/${pathPrefix}:/children`);
+    return result.value
+      .filter((x: any) => !x.folder)
+      .map(
+        (x: any) =>
+          ({
+            name: x.name,
+            size: x.size,
+            key: x.name,
+            time: new Date(x.lastModifiedDateTime).getTime(),
+          }) as FileItem,
+      );
+  },
+  downloadFile: (file: FileItem) =>
+    callApi(
+      `drive/${pathPrefix}/${file.key}:/content`,
+      undefined,
+      'GET',
+      'text',
+    ),
+  deleteFile: (file: FileItem) =>
+    callApi(`drive/${pathPrefix}/${file.key}:/`, '', 'DELETE', 'text'),
+  writeFile: (fileName: string, content: string) =>
+    callApi(`drive/${pathPrefix}/${fileName}:/content`, content, 'PUT'),
+});
+
+export default OneDrive;

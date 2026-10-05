@@ -10,6 +10,7 @@ import { SitesManager } from './site-manager';
 import '@douyinfe/semi-ui/lib/es/_base/base.css';
 import './index.less';
 import { Advanced } from './advanced';
+import Backup from './backup';
 
 interface SettingSideSheetProps {
   visible: boolean;
@@ -42,7 +43,10 @@ const SettingContent: React.FC<SettingSideSheetProps> = ({
         <TabPane itemKey="general-settings" tab={t('generalSettings')}>
           <GeneralSettings />
         </TabPane>
-        <TabPane itemKey="advanced-settings" tab={t('advanced')}>
+        <TabPane itemKey="backup" tab={t('backup')}>
+          <Backup />
+        </TabPane>
+        <TabPane itemKey="advanced" tab={t('advanced')}>
           <Advanced />
         </TabPane>
       </Tabs>

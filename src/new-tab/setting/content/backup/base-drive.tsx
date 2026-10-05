@@ -1,0 +1,354 @@
+import {
+  IconDelete,
+  IconDownload,
+  IconFolderOpen,
+  IconImport,
+  IconSave,
+} from '@douyinfe/semi-icons';
+import { Button, Input, Space, Spin, Table, Toast } from '@douyinfe/semi-ui';
+import { useRequest } from 'ahooks';
+import { useEffect, useState } from 'react';
+import { withErrorBoundary } from '@/components/error-boundary';
+import Modal from '@/components/modal';
+import { APIs } from '@/share/constant';
+import emitter from '@/share/emitter';
+import { save as saveFile } from '@/share/file';
+import { t } from '@/share/locale';
+import {
+  type ImportAndExportContext,
+  useImportAndExportContext,
+} from './context';
+import { getExportName } from './utils';
+
+interface FileItem {
+  name: string;
+  size: number;
+  time: number;
+  key: string;
+}
+
+interface Drive {
+  name: string;
+  key: string;
+  onMounted?: () => undefined | (() => void);
+  checkAuth: () => Promise<boolean>;
+  startLogin: () => void;
+  logout: () => Promise<void>;
+  listFiles: () => Promise<FileItem[]>;
+  downloadFile: (file: FileItem) => Promise<string>;
+  deleteFile: (file: FileItem) => Promise<void>;
+  writeFile: (fileName: string, content: string) => Promise<void>;
+  handleLoginMessage?: (request: any) => Promise<void>;
+}
+
+interface ActionBtnProps extends ImportAndExportContext {
+  file: FileItem;
+  onSuccess?: () => void;
+}
+
+interface FileListProps extends ImportAndExportContext {
+  fileList: FileItem[];
+  close: () => void;
+}
+
+const createDriveComponent = (drive: Drive) => {
+  const ImportBtn = ({ file, startImport, onSuccess }: ActionBtnProps) => {
+    const { loading, run } = useRequest(() => drive.downloadFile(file), {
+      manual: true,
+      onSuccess: content => {
+        startImport(JSON.parse(content));
+        onSuccess?.();
+      },
+      onError: error => Toast.error((error as Error).message),
+    });
+
+    return (
+      <Button
+        theme="borderless"
+        onClick={() => {
+          Modal.warning({
+            title: t('importBackup'),
+            content: t('importWillOverrideSettings'),
+            okText: t('continueImport'),
+            onOk: run,
+          });
+        }}
+        icon={<IconImport />}
+        loading={loading}
+      >
+        {t('importBackup')}
+      </Button>
+    );
+  };
+
+  const DownloadBtn = ({ file, onSuccess }: ActionBtnProps) => {
+    const { loading, run } = useRequest(() => drive.downloadFile(file), {
+      manual: true,
+      onSuccess: content => {
+        saveFile(content, file.name);
+        onSuccess?.();
+      },
+      onError: error => Toast.error((error as Error).message),
+    });
+
+    return (
+      <Button
+        theme="borderless"
+        onClick={run}
+        icon={<IconDownload />}
+        loading={loading}
+      >
+        {t('downloadToLocal')}
+      </Button>
+    );
+  };
+
+  const DeleteBtn = ({ file, onSuccess }: ActionBtnProps) => {
+    const { loading, run } = useRequest(() => drive.deleteFile(file), {
+      manual: true,
+      onSuccess: () => onSuccess?.(),
+      onError: error => Toast.error((error as Error).message),
+    });
+
+    return (
+      <Button
+        onClick={() => {
+          Modal.warning({
+            title: t('confirmDeleteFile', file.name),
+            onOk: run,
+          });
+        }}
+        icon={<IconDelete />}
+        loading={loading}
+        theme="borderless"
+        type="danger"
+      >
+        {t('delete')}
+      </Button>
+    );
+  };
+
+  const FileList = ({ fileList, close, ...rest }: FileListProps) => {
+    const [list, setList] = useState<FileItem[]>(fileList);
+
+    return (
+      <Table
+        showHeader
+        style={{ marginTop: '8px' }}
+        dataSource={list}
+        size="small"
+        columns={[
+          {
+            title: t('filename'),
+            dataIndex: 'name',
+          },
+          {
+            title: t('filesize'),
+            dataIndex: 'size',
+            render: (text: number) => `${Math.round(text / 1024)} KB`,
+          },
+          {
+            title: t('createdTime'),
+            dataIndex: 'time',
+            render: (text: number) => new Date(text).toLocaleString(),
+          },
+          {
+            title: t('action'),
+            dataIndex: '',
+            render: (_, record: FileItem) => (
+              <Space>
+                <ImportBtn file={record} {...rest} onSuccess={close} />
+                <DownloadBtn file={record} {...rest} />
+                <DeleteBtn
+                  file={record}
+                  {...rest}
+                  onSuccess={() =>
+                    setList(prev =>
+                      prev.filter(item => item.key !== record.key),
+                    )
+                  }
+                />
+              </Space>
+            ),
+          },
+        ]}
+        pagination={false}
+      />
+    );
+  };
+
+  const DriveComponent = () => {
+    const { startImport, getExportContent } = useImportAndExportContext();
+    const [loading, setLoading] = useState(false);
+
+    const {
+      refresh: refreshAuth,
+      data: isLoggedIn,
+      loading: authLoading,
+    } = useRequest(drive.checkAuth, {
+      manual: false,
+    });
+
+    const { run: listFiles, loading: listLoading } = useRequest(
+      drive.listFiles,
+      {
+        manual: true,
+        onSuccess: fileList => {
+          if (fileList.length === 0) {
+            Toast.info(t('noBackup'));
+            return;
+          }
+
+          const { destroy } = Modal.confirm({
+            title: t('backupList'),
+            icon: null,
+            size: 'large',
+            hasCancel: false,
+            content: (
+              <FileList
+                fileList={fileList}
+                getExportContent={getExportContent}
+                startImport={startImport}
+                close={() => destroy()}
+              />
+            ),
+          });
+        },
+        onError: error => Toast.error((error as Error).message),
+      },
+    );
+
+    const { run: exportFile, loading: exportLoading } = useRequest(
+      async (fileName: string) => {
+        const content = await getExportContent();
+        await drive.writeFile(fileName, JSON.stringify(content, null, '\t'));
+      },
+      {
+        manual: true,
+        onSuccess: () => Toast.success(t('exportSuccess')),
+        onError: error => Toast.error((error as Error).message),
+      },
+    );
+
+    const { run: logout, loading: logoutLoading } = useRequest(drive.logout, {
+      manual: true,
+      onSuccess: () => {
+        Toast.success(t('logoutSuccess'));
+        refreshAuth();
+      },
+      onError: error => Toast.error((error as Error).message),
+    });
+
+    useEffect(() => {
+      const unmount: Array<() => void> = [];
+
+      const handleDriveReady = (key: string) => {
+        if (drive.key === key) {
+          setLoading(false);
+          refreshAuth();
+        }
+      };
+      emitter.on(emitter.INNER_DRIVE_READY, handleDriveReady);
+      unmount.push(() =>
+        emitter.off(emitter.INNER_DRIVE_READY, handleDriveReady),
+      );
+
+      const handleDriveLoading = (key: string) => {
+        if (drive.key === key) {
+          setLoading(true);
+        }
+      };
+      emitter.on(emitter.INNER_DRIVE_LOADING, handleDriveLoading);
+      unmount.push(() =>
+        emitter.off(emitter.INNER_DRIVE_LOADING, handleDriveLoading),
+      );
+
+      if (drive.onMounted) {
+        const unmountHandler = drive.onMounted();
+        if (unmountHandler) {
+          unmount.push(unmountHandler);
+        }
+      }
+
+      if (drive.handleLoginMessage) {
+        const handler: Parameters<
+          typeof chrome.runtime.onMessage.addListener
+        >[0] = (request: any, sender) => {
+          if (
+            request.method === APIs.ON_DRIVE_LOGIN &&
+            request.type === drive.key
+          ) {
+            if (sender.tab?.id) {
+              chrome.tabs.remove(sender.tab.id);
+            }
+            emitter.emit(emitter.INNER_DRIVE_LOADING, drive.key);
+            drive.handleLoginMessage!(request).finally(() =>
+              emitter.emit(emitter.INNER_DRIVE_READY, drive.key),
+            );
+          }
+        };
+        chrome.runtime.onMessage.addListener(handler);
+        unmount.push(() => chrome.runtime.onMessage.removeListener(handler));
+      }
+
+      return () => unmount.forEach(handler => handler());
+    }, []);
+
+    if (authLoading || loading) {
+      return <Spin />;
+    }
+
+    return (
+      <div>
+        {isLoggedIn ? (
+          <Space>
+            <Button
+              onClick={() => {
+                let fileName = getExportName();
+                Modal.confirm({
+                  title: t('exportFilename'),
+                  icon: null,
+                  content: (
+                    <Input
+                      defaultValue={fileName}
+                      onChange={value => (fileName = value)}
+                    />
+                  ),
+                  onOk: () => {
+                    if (fileName) {
+                      exportFile(fileName);
+                    }
+                  },
+                });
+              }}
+              icon={<IconSave />}
+              loading={exportLoading}
+            >
+              {t('export')}
+            </Button>
+            <Button
+              onClick={listFiles}
+              icon={<IconFolderOpen />}
+              loading={listLoading}
+            >
+              {t('showBackup')}
+            </Button>
+            <Button onClick={logout} type="danger" loading={logoutLoading}>
+              {t('logout')}
+            </Button>
+          </Space>
+        ) : (
+          <Button onClick={() => drive.startLogin()} type="primary">
+            {t('login')}
+          </Button>
+        )}
+      </div>
+    );
+  };
+
+  DriveComponent.displayName = `${drive.name}Drive`;
+
+  return withErrorBoundary(DriveComponent);
+};
+
+export { createDriveComponent, type Drive, type FileItem };

@@ -26,7 +26,8 @@
         "noDuplicateFontNames": "off",
         "noExplicitAny": "off",
         "noAssignInExpressions": "off",
-        "noArrayIndexKey": "warn"
+        "noArrayIndexKey": "warn",
+        "useIterableCallbackReturn": "off"
       },
       "correctness": {
         "useExhaustiveDependencies": "off",

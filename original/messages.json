@@ -1,4 +1,8 @@
 {
+  "action": {
+    "message": "Action",
+    "description": "Action title in management page"
+  },
   "add": {
     "message": "Add",
     "description": "Add button text"
@@ -64,6 +68,14 @@
     "message": "Background Type",
     "description": "Label for background type selection"
   },
+  "backup": {
+    "message": "Backup",
+    "description": "Title for backup section"
+  },
+  "backupList": {
+    "message": "Backup list",
+    "description": "Backup list title"
+  },
   "backupToFile": {
     "message": "Backup to File",
     "description": "Button text for backing up to file"
@@ -91,6 +103,15 @@
   "configure": {
     "message": "Configure",
     "description": "Button text for configuring custom background"
+  },
+  "confirmDeleteFile": {
+    "message": "Do you want to delete file \"$name$\"?",
+    "description": "Delete file confirm dialog",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
   },
   "confirmDeleteFolder": {
     "message": "Are you sure you want to delete the folder \"$name$\"? Sites inside will be moved up one level and not deleted.",
@@ -124,6 +145,10 @@
     "message": "Continue Import",
     "description": "Button text for continuing import"
   },
+  "createdTime": {
+    "message": "Created time",
+    "description": "Created time title"
+  },
   "custom": {
     "message": "Custom",
     "description": "Option for custom icon type"
@@ -152,6 +177,10 @@
     "message": "Date format",
     "description": "Label for date format selection"
   },
+  "delete": {
+    "message": "Delete",
+    "description": "Delete button"
+  },
   "deleteFolder": {
     "message": "Delete Folder",
     "description": "Button text for deleting a folder"
@@ -171,6 +200,10 @@
   "displayedAt": {
     "message": "Displayed at",
     "description": "Label for displayed at field"
+  },
+  "downloadToLocal": {
+    "message": "Download to local",
+    "description": "Download to local button"
   },
   "edit": {
     "message": "Edit",
@@ -232,6 +265,18 @@
       }
     }
   },
+  "export": {
+    "message": "Export",
+    "description": "Button to export"
+  },
+  "exportFilename": {
+    "message": "Export file name",
+    "description": "Export file name"
+  },
+  "exportSuccess": {
+    "message": "Exported successfully",
+    "description": "Exported successfully"
+  },
   "extName": {
     "message": "Nebula Shift Tab",
     "description": "Extension name"
@@ -243,6 +288,14 @@
   "failedToGetSuggestions": {
     "message": "Failed to get search suggestions",
     "description": "Error message when failing to get search suggestions"
+  },
+  "filename": {
+    "message": "File name",
+    "description": "File name title"
+  },
+  "filesize": {
+    "message": "File size",
+    "description": "File size title"
   },
   "folderName": {
     "message": "Folder Name",
@@ -283,13 +336,13 @@
     "message": "Import Backup",
     "description": "Title for import backup modal"
   },
-  "importExport": {
-    "message": "Import and Export",
-    "description": "Tab label for import/export section"
-  },
   "importWillOverrideSettings": {
     "message": "Importing backup will overwrite current settings",
     "description": "Description for import warning"
+  },
+  "invalidBackupFile": {
+    "message": "Invalid backup file",
+    "description": "Error message for invalid backup file"
   },
   "invalidUrl": {
     "message": "Please enter a valid URL",
@@ -303,6 +356,10 @@
     "message": "JSONP",
     "description": "JSONP option"
   },
+  "localFile": {
+    "message": "Local File",
+    "description": "Local file backup"
+  },
   "localIcon": {
     "message": "Local Icon",
     "description": "Option for local icon type"
@@ -310,6 +367,18 @@
   "localImage": {
     "message": "Local Image",
     "description": "Option for local image"
+  },
+  "login": {
+    "message": "Login",
+    "description": "Login button"
+  },
+  "logout": {
+    "message": "Logout",
+    "description": "Logout button"
+  },
+  "logoutSuccess": {
+    "message": "Successfully logged out",
+    "description": "Successfully logged out"
   },
   "margin": {
     "message": "Margin",
@@ -330,6 +399,10 @@
   "newFolder": {
     "message": "New Folder",
     "description": "Default name for a new folder"
+  },
+  "noBackup": {
+    "message": "No backup found",
+    "description": "No backup found"
   },
   "noSearchHistory": {
     "message": "No Search History",
@@ -460,6 +533,10 @@
   "settings": {
     "message": "Settings",
     "description": "Title for settings panel"
+  },
+  "showBackup": {
+    "message": "Show backups",
+    "description": "Show backups button"
   },
   "showSiteName": {
     "message": "Display site name",

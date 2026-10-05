@@ -161,10 +161,12 @@ export const SearchInput = withErrorBoundary(({ engine }: SearchInputProps) => {
   const showSuggestions = _showSuggestion && suggestions.length > 0;
 
   useEffect(() => {
-    searchInputRef.current?.focus();
     // 忽略页面刚载入的那一会儿
-    if (Date.now() - window.RENDER_TIME > 500 && getActive()) {
-      setShowSuggestion(true);
+    if (Date.now() - window.RENDER_TIME > 500) {
+      searchInputRef.current?.focus();
+      if (getActive()) {
+        setShowSuggestion(true);
+      }
     }
   }, [engine]);
 

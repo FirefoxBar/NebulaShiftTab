@@ -76,7 +76,7 @@ const GoogleDrive = createDriveComponent({
   },
   startLogin: () => {
     window.open(
-      'http://ext.firefoxcn.net/login/go/google.html?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.appdata&state=nebula-shift-tab',
+      'https://ext.firefoxcn.net/login/go/google.html?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.appdata&state=nebula-shift-tab',
     );
   },
   logout: () => chrome.storage.local.remove('drive_google'),

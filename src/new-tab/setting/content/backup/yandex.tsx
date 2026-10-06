@@ -86,7 +86,7 @@ const Yandex = createDriveComponent({
   },
   startLogin: () => {
     window.open(
-      'http://ext.firefoxcn.net/login/go/yandex.html?state=nebula-shift-tab',
+      'https://ext.firefoxcn.net/login/go/yandex.html?state=nebula-shift-tab',
     );
   },
   logout: () => chrome.storage.local.remove('drive_yandex'),

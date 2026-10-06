@@ -120,7 +120,7 @@ const OneDrive = createDriveComponent({
   },
   startLogin: () => {
     window.open(
-      `http://ext.firefoxcn.net/login/go/onedrive.html?scope=${encodeURIComponent(scope.join(' '))}&state=nebula-shift-tab`,
+      `https://ext.firefoxcn.net/login/go/onedrive.html?scope=${encodeURIComponent(scope.join(' '))}&state=nebula-shift-tab`,
     );
   },
   logout: () => chrome.storage.local.remove('drive_onedrive'),

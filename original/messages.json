@@ -217,6 +217,10 @@
     "message": "Edit Site",
     "description": "Edit site button text"
   },
+  "enableContextMenu": {
+    "message": "Enable context menu",
+    "description": "Label for context menu setting"
+  },
   "enterJSONataPath": {
     "message": "Enter JSONata expression",
     "description": "Placeholder for JSONata input"

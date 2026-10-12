@@ -217,6 +217,10 @@
     "message": "Edit Site",
     "description": "Edit site button text"
   },
+  "enableContextMenu": {
+    "message": "Enable context menu",
+    "description": "Label for context menu setting"
+  },
   "enterJSONataPath": {
     "message": "Enter JSONata expression",
     "description": "Placeholder for JSONata input"
@@ -605,9 +609,5 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
-  },
-  "enableContextMenu": {
-    "message": "Enable context menu",
-    "description": "Label for context menu setting"
   }
 }

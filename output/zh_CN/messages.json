@@ -217,6 +217,10 @@
     "message": "编辑网址",
     "description": "Edit site button text"
   },
+  "enableContextMenu": {
+    "message": "启用上下文菜单",
+    "description": "Label for context menu setting"
+  },
   "enterJSONataPath": {
     "message": "请输入 JSONata 表达式",
     "description": "Placeholder for JSONata input"

@@ -56,6 +56,7 @@ export interface PrefValue {
   customCSS: string;
   sites: Array<SiteNode>;
   searches: Array<SearchItem>;
+  contextMenu: boolean;
 }
 
 export interface SearchItem {

@@ -43,46 +43,66 @@ async function handleSearch(searchKey: string, query: string) {
   );
 }
 
+async function updateContextMenus() {
+  if (!prefs.get('contextMenu')) {
+    return;
+  }
+
+  await chrome.contextMenus.removeAll();
+
+  const searches = prefs.get('searches');
+  searches.forEach(search => {
+    if (
+      !hasFlag(
+        search[SearchItemAlias.showOn],
+        SearchItemShowOnFlag.CONTEXT_MENU,
+      )
+    ) {
+      return;
+    }
+    chrome.contextMenus.create(
+      {
+        id: `search-${search[SearchItemAlias.key]}`,
+        contexts: ['selection'],
+        title: search[SearchItemAlias.name],
+      },
+      noop,
+    );
+  });
+
+  chrome.contextMenus.create(
+    {
+      id: 'add-to-home',
+      contexts: ['link'],
+      title: t('addToHome'),
+    },
+    noop,
+  );
+
+  chrome.contextMenus.create(
+    {
+      id: 'add-page-to-home',
+      contexts: ['page'],
+      title: t('addCurrentPageToHome'),
+    },
+    noop,
+  );
+}
+
 export function initContextMenus() {
-  prefs.getAndWatch('searches', async searches => {
-    await chrome.contextMenus.removeAll();
+  prefs.getAndWatch('contextMenu', async contextMenu => {
+    if (!contextMenu) {
+      chrome.contextMenus.removeAll();
+    } else {
+      updateContextMenus();
+    }
+  });
 
-    searches.forEach(search => {
-      if (
-        !hasFlag(
-          search[SearchItemAlias.showOn],
-          SearchItemShowOnFlag.CONTEXT_MENU,
-        )
-      ) {
-        return;
-      }
-      chrome.contextMenus.create(
-        {
-          id: `search-${search[SearchItemAlias.key]}`,
-          contexts: ['selection'],
-          title: search[SearchItemAlias.name],
-        },
-        noop,
-      );
-    });
-
-    chrome.contextMenus.create(
-      {
-        id: 'add-to-home',
-        contexts: ['link'],
-        title: t('addToHome'),
-      },
-      noop,
-    );
-
-    chrome.contextMenus.create(
-      {
-        id: 'add-page-to-home',
-        contexts: ['page'],
-        title: t('addCurrentPageToHome'),
-      },
-      noop,
-    );
+  prefs.getAndWatch('searches', () => {
+    if (!prefs.get('contextMenu')) {
+      return;
+    }
+    updateContextMenus();
   });
 
   chrome.contextMenus.onClicked.addListener((info, tab) => {

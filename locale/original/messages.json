@@ -605,5 +605,9 @@
   "whenAutoSelected": {
     "message": "When \"Auto Fetch\" is selected, icons will be retrieved from this source",
     "description": "Description for icon provider setting"
+  },
+  "enableContextMenu": {
+    "message": "Enable context menu",
+    "description": "Label for context menu setting"
   }
 }

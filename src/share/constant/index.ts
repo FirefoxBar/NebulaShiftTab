@@ -39,6 +39,7 @@ export const defaultPrefValue: PrefValue = {
   siteGap: 36,
   showSiteName: true,
   recordHistory: MAX_SUGGESTION_COUNT,
+  contextMenu: true,
   background: {
     dark: 40,
     dark2: 60,

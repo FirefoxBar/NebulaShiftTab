@@ -26,6 +26,7 @@ export const GeneralSettings = withErrorBoundary(() => {
   const [siteGap, setSiteGap] = usePref('siteGap');
   const [showSiteName, setShowSiteName] = usePref('showSiteName');
   const [recordHistory, setRecordHistory] = usePref('recordHistory');
+  const [contextMenu, setContextMenu] = usePref('contextMenu');
 
   const list = [
     {
@@ -150,6 +151,12 @@ export const GeneralSettings = withErrorBoundary(() => {
     {
       label: t('searchHistoryManagement'),
       content: <HistoryManage />,
+    },
+    {
+      label: t('enableContextMenu'),
+      content: (
+        <Switch checked={Boolean(contextMenu)} onChange={setContextMenu} />
+      ),
     },
     {
       label: t('viewHelp'),

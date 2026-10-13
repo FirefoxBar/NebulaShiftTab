@@ -15,15 +15,15 @@ export const run = async ({ getVersion, readJSON, release }) => {
     join(scriptRoot, 'browser-config/browser.config.json'),
   );
 
-  let distRootPath = '';
+  let version = '';
   const browserList = ['chrome', 'firefox'];
   for (const browser of browserList) {
     const path = getDistPath(browser);
     try {
-      await getVersion(path);
-      distRootPath = path;
+      version = await getVersion(path);
+      console.log(`Get version from ${path}`);
       break;
-    } catch (e) {
+    } catch (_) {
       // ignore
     }
   }
@@ -33,7 +33,7 @@ export const run = async ({ getVersion, readJSON, release }) => {
     gitHubApi: process.env.GITHUB_API_URL,
     gitHubRepo: process.env.GITHUB_REPOSITORY,
     gitHubToken: process.env.GITHUB_TOKEN,
-    distRootPath,
+    version,
     browserConfig,
     tagName,
     releasePath,

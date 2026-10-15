@@ -24,7 +24,7 @@ import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
 import usePref from '@/hooks/use-pref';
-import { searchEngines } from '@/share/constant';
+import { EMPTY_ARR, searchEngines } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
 import { SearchItemAlias } from '@/share/type-alias';
@@ -85,7 +85,9 @@ const SortableItem = ({
 export const SearchManager = withErrorBoundary(() => {
   const [editingSearch, setEditingSearch] = useState<SearchItem | undefined>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searches, setSearches] = usePref('searches');
+  const [searches, setSearches] = usePref('searches', {
+    defaultValue: EMPTY_ARR,
+  });
 
   // 添加搜索
   const handleAddSearch = () => {

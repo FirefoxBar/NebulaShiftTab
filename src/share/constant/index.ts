@@ -26,6 +26,8 @@ export enum APIs {
   ON_DRIVE_LOGIN = 'on-drive-login',
 }
 
+export const EMPTY_ARR: [] = [];
+
 export const MAX_SUGGESTION_COUNT = 12;
 
 export const defaultPrefValue: PrefValue = {

@@ -7,11 +7,14 @@ import type { PrefValue } from '../share/types';
 const usePref = <K extends keyof PrefValue>(
   key: K,
   options?: {
+    defaultValue?: PrefValue[K];
     onInitial?: (value: PrefValue[K]) => void;
     filter?: (value: PrefValue[K]) => PrefValue[K];
   },
 ): [PrefValue[K], (value: PrefValue[K]) => void] => {
-  const [state, setState] = useState(defaultPrefValue[key]);
+  const [state, setState] = useState(
+    options?.defaultValue ?? defaultPrefValue[key],
+  );
 
   useEffect(() => {
     const filter = options?.filter || (v => v);

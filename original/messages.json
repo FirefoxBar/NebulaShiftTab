@@ -44,6 +44,10 @@
     "message": "Auto Fetch",
     "description": "Option for auto fetch icon type"
   },
+  "background": {
+    "message": "Background",
+    "description": "Tab label for background settings"
+  },
   "backgroundBlur": {
     "message": "Background Blur",
     "description": "Label for background blur setting"
@@ -59,10 +63,6 @@
   "backgroundDarknessDarkMode": {
     "message": "Background Darkness (Dark Mode)",
     "description": "Label for background darkness setting"
-  },
-  "backgroundSettings": {
-    "message": "Background Settings",
-    "description": "Tab label for background settings"
   },
   "backgroundType": {
     "message": "Background Type",
@@ -317,8 +317,8 @@
     "message": "Follow System",
     "description": "Option for following system dark mode setting"
   },
-  "generalSettings": {
-    "message": "General Settings",
+  "general": {
+    "message": "General",
     "description": "Tab label for general settings"
   },
   "gridCols": {
@@ -494,13 +494,13 @@
     "message": "Save",
     "description": "Save button text"
   },
+  "search": {
+    "message": "Search",
+    "description": "Search section title"
+  },
   "searchHistoryManagement": {
     "message": "Search History Management",
     "description": "Title for search history management section"
-  },
-  "searchManagement": {
-    "message": "Search Management",
-    "description": "Search management section title"
   },
   "searchUrl": {
     "message": "Search URL",
@@ -585,10 +585,6 @@
   "siteIconSize": {
     "message": "Site Icon size",
     "description": "Label for site icon size setting"
-  },
-  "siteManagement": {
-    "message": "Site Management",
-    "description": "Site management section title"
   },
   "siteMode": {
     "message": "Site layout",

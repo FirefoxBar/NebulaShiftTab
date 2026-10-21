@@ -50,9 +50,6 @@
   "backgroundDarknessDarkMode": {
     "message": "背景暗度（深色模式）"
   },
-  "backgroundSettings": {
-    "message": "背景设置"
-  },
   "backgroundType": {
     "message": "背景类型"
   },
@@ -254,9 +251,6 @@
   "general": {
     "message": "常规"
   },
-  "generalSettings": {
-    "message": "常规设置"
-  },
   "gridCols": {
     "message": "列数"
   },
@@ -395,9 +389,6 @@
   "searchHistoryManagement": {
     "message": "搜索历史管理"
   },
-  "searchManagement": {
-    "message": "搜索引擎管理"
-  },
   "searchUrl": {
     "message": "搜索网址"
   },
@@ -460,9 +451,6 @@
   },
   "siteIconSize": {
     "message": "网址图标大小"
-  },
-  "siteManagement": {
-    "message": "网址管理"
   },
   "siteMode": {
     "message": "网址布局模式"

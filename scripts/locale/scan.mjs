@@ -9,12 +9,20 @@ const ROOT = path.join(__dirname, '../..');
 const LOCALES_DIR = path.join(ROOT, 'locales');
 const EN_FILE = path.join(LOCALES_DIR, 'en', 'messages.json');
 const ZH_FILE = path.join(LOCALES_DIR, 'zh_CN', 'messages.json');
-const OUT_DIR = path.join(ROOT, 'temp', 'locale');
+const OUT_DIR = path.join(ROOT, 'temp', 'locale-text');
 const NEW_DIR = path.join(ROOT, 'temp', 'new-locale');
 
 // 除英语（en）外，其他语言都需要检查
 const SKIP_LANGS = new Set(['en']);
 const SKIP_KEYS = new Set([]);
+
+function tryRm(filePath) {
+  try {
+    fs.rmSync(filePath, { recursive: true });
+  } catch (_) {
+    // ignore
+  }
+}
 
 function readJSON(filePath) {
   return JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' }));
@@ -63,7 +71,10 @@ function main() {
     )
     .sort();
 
+  // clean old contents
+  tryRm(OUT_DIR);
   fs.mkdirSync(OUT_DIR, { recursive: true });
+  tryRm(NEW_DIR);
   fs.mkdirSync(NEW_DIR, { recursive: true });
 
   let totalLangs = 0;
@@ -181,7 +192,7 @@ function main() {
           lines.push(
             `key:${escapeField(key)}\t英文:${escapeField(en)}\t中文:${escapeField(zh)}`,
           );
-          untranslatedJson[key] = { message: `${en} --- ${zh}` };
+          untranslatedJson[key] = { message: '', en, zh };
         }
         fs.writeFileSync(
           path.join(NEW_DIR, `${lang}.json`),

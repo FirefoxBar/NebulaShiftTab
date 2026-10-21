@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { omit } from 'lodash-es';
 import { sort } from './sort.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,8 +25,11 @@ async function readJSON(filePath) {
 }
 
 async function transformAllInOne() {
+  const EN = path.join(LOCALES_DIR, 'en', 'messages.json');
+  const enMap = await readJSON(EN);
+
   const file = path.join(TARGET_DIR, 'all-in-one.json');
-  const current = readJSON(file);
+  const current = await readJSON(file);
 
   for (const key in current) {
     const originalLocale = path.join(LOCALES_DIR, key, 'messages.json');
@@ -33,11 +37,16 @@ async function transformAllInOne() {
       console.log(`[${key}] not found`);
       continue;
     }
+
     const original = await readJSON(originalLocale);
     for (const key2 in current[key]) {
-      original[key2] = {
-        message: current[key][key2],
-      };
+      const message = current[key][key2];
+      if (message) {
+        original[key2] = {
+          ...omit(enMap[key2], ['description']),
+          message,
+        };
+      }
     }
 
     await fs.writeFile(
@@ -55,6 +64,9 @@ async function transformAllInOne() {
 }
 
 async function transformLangs() {
+  const EN = path.join(LOCALES_DIR, 'en', 'messages.json');
+  const enMap = await readJSON(EN);
+
   const entries = await fs.readdir(TARGET_DIR, { withFileTypes: true });
   const langs = entries
     .filter(e => e.isFile())
@@ -74,12 +86,16 @@ async function transformLangs() {
 
     const original = await readJSON(originalLocale);
     for (const key2 in newLocale) {
-      original[key2] =
+      const message =
         typeof newLocale[key2] === 'string'
-          ? {
-              message: newLocale[key2],
-            }
-          : newLocale[key2];
+          ? newLocale[key2]
+          : newLocale[key2].message;
+      if (message) {
+        original[key2] = {
+          ...omit(enMap[key2], ['description']),
+          message,
+        };
+      }
     }
 
     await fs.writeFile(

@@ -498,9 +498,9 @@
     "message": "Search History Management",
     "description": "Title for search history management section"
   },
-  "search": {
-    "message": "Search",
-    "description": "Search section title"
+  "searchEngine": {
+    "message": "Search engine",
+    "description": "Search engine section title"
   },
   "searchUrl": {
     "message": "Search URL",

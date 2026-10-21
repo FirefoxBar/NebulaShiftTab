@@ -6,10 +6,10 @@ import ReactDOM from 'react-dom/client';
 import { Search } from './search';
 import Setting from './setting';
 import { Sites } from './sites';
+import { EditToggle } from './sites/edit-toggle';
 import { Time } from './time';
 
 import './index.less';
-import { EditToggle } from './sites/edit-toggle';
 
 const Page = () => (
   <>

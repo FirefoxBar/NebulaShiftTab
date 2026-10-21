@@ -44,6 +44,10 @@
     "message": "Auto Fetch",
     "description": "Option for auto fetch icon type"
   },
+  "background": {
+    "message": "Background",
+    "description": "Tab label for background settings"
+  },
   "backgroundBlur": {
     "message": "Background Blur",
     "description": "Label for background blur setting"
@@ -59,10 +63,6 @@
   "backgroundDarknessDarkMode": {
     "message": "Background Darkness (Dark Mode)",
     "description": "Label for background darkness setting"
-  },
-  "background": {
-    "message": "Background",
-    "description": "Tab label for background settings"
   },
   "backgroundType": {
     "message": "Background Type",
@@ -494,13 +494,13 @@
     "message": "Save",
     "description": "Save button text"
   },
-  "searchHistoryManagement": {
-    "message": "Search History Management",
-    "description": "Title for search history management section"
-  },
   "searchEngine": {
     "message": "Search engine",
     "description": "Search engine section title"
+  },
+  "searchHistoryManagement": {
+    "message": "Search History Management",
+    "description": "Title for search history management section"
   },
   "searchUrl": {
     "message": "Search URL",

@@ -1,7 +1,7 @@
-import { IconSetting } from '@douyinfe/semi-icons';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
 import { SiteItemAlias } from '@/share/type-alias';
+import { SettingIcon } from './icon';
 
 const SettingSideSheet = lazy(() => import('./content'));
 
@@ -42,7 +42,7 @@ const Setting = withErrorBoundary(() => {
         onClick={() => setVisible(true)}
         onMouseEnter={() => setLoaded(true)}
       >
-        <IconSetting />
+        <SettingIcon />
       </div>
       {loadSideSheet && (
         <Suspense fallback={null}>

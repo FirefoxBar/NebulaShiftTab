@@ -217,6 +217,10 @@
     "message": "Edit Site",
     "description": "Edit site button text"
   },
+  "editSites": {
+    "message": "Edit sites",
+    "description": "Tooltip for the site edit mode toggle button"
+  },
   "enableContextMenu": {
     "message": "Enable context menu",
     "description": "Label for context menu setting"
@@ -269,6 +273,10 @@
       }
     }
   },
+  "exitEditSites": {
+    "message": "Done",
+    "description": "Button to exit site edit mode"
+  },
   "export": {
     "message": "Export",
     "description": "Button to export"
@@ -312,6 +320,14 @@
   "generalSettings": {
     "message": "General Settings",
     "description": "Tab label for general settings"
+  },
+  "gridCols": {
+    "message": "Columns",
+    "description": "Label for grid layout column count"
+  },
+  "gridRows": {
+    "message": "Rows",
+    "description": "Label for grid layout row count"
   },
   "helpUrl": {
     "message": "https://nebula-shift-tab.firefoxcn.net/en-US/guide/index.html",
@@ -558,6 +574,10 @@
     "message": "Site area width",
     "description": "Label for site area width setting"
   },
+  "siteAreaWidthHelp": {
+    "message": "This option only takes effect in flow layout.",
+    "description": "Help text for site area width setting"
+  },
   "siteGap": {
     "message": "Spacing of sites",
     "description": "Label for spacing of sites"
@@ -569,6 +589,18 @@
   "siteManagement": {
     "message": "Site Management",
     "description": "Site management section title"
+  },
+  "siteMode": {
+    "message": "Site layout",
+    "description": "Label for site layout mode setting"
+  },
+  "siteModeFlex": {
+    "message": "Flow layout",
+    "description": "Option for flow (flex) site layout"
+  },
+  "siteModeGrid": {
+    "message": "Grid layout",
+    "description": "Option for grid site layout"
   },
   "suggestionType": {
     "message": "Suggestion Type",

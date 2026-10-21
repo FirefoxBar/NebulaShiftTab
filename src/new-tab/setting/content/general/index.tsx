@@ -22,6 +22,7 @@ export const GeneralSettings = withErrorBoundary(() => {
   const [dateFormat, setDateFormat] = usePref('dateFormat');
   const [iconProvider, setIconProvider] = usePref('iconProvider');
   const [siteSize, setSiteSize] = usePref('siteSize');
+  const [siteMode, setSiteMode] = usePref('siteMode');
   const [siteWidth, setSiteWidth] = usePref('siteWidth');
   const [siteGap, setSiteGap] = usePref('siteGap');
   const [showSiteName, setShowSiteName] = usePref('showSiteName');
@@ -93,6 +94,20 @@ export const GeneralSettings = withErrorBoundary(() => {
       ),
     },
     {
+      label: t('siteMode'),
+      content: (
+        <Select
+          value={siteMode}
+          placeholder={t('siteMode')}
+          onChange={v => setSiteMode(v as any)}
+          optionList={[
+            { label: t('siteModeFlex'), value: 'flex' },
+            { label: t('siteModeGrid'), value: 'grid' },
+          ]}
+        />
+      ),
+    },
+    {
       label: t('siteIconSize'),
       content: (
         <Slider
@@ -107,6 +122,7 @@ export const GeneralSettings = withErrorBoundary(() => {
     },
     {
       label: t('siteAreaWidth'),
+      help: t('siteAreaWidthHelp'),
       content: (
         <Slider
           value={siteWidth}

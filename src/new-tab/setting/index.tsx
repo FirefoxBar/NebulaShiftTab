@@ -1,7 +1,7 @@
+import { IconSetting } from '@douyinfe/semi-icons';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
 import { SiteItemAlias } from '@/share/type-alias';
-import { SettingIcon } from './icon';
 
 const SettingSideSheet = lazy(() => import('./content'));
 
@@ -12,18 +12,16 @@ const Setting = withErrorBoundary(() => {
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (query.get('action') === 'add-site') {
-      import('./content/site-manager/site-edit-modal').then(
-        ({ showSiteEditModal }) => {
-          showSiteEditModal({
-            initialData: {
-              [SiteItemAlias.id]: '',
-              [SiteItemAlias.iconType]: 'builtin',
-              [SiteItemAlias.name]: query.get('name') || '',
-              [SiteItemAlias.url]: query.get('url') || '',
-            },
-          });
-        },
-      );
+      import('../sites/site-edit').then(({ openSiteEditModal }) => {
+        openSiteEditModal({
+          initialData: {
+            [SiteItemAlias.id]: '',
+            [SiteItemAlias.iconType]: 'builtin',
+            [SiteItemAlias.name]: query.get('name') || '',
+            [SiteItemAlias.url]: query.get('url') || '',
+          },
+        });
+      });
     }
     // add alternative functions
     (window as any).openSetting = () => setVisible(true);
@@ -44,7 +42,7 @@ const Setting = withErrorBoundary(() => {
         onClick={() => setVisible(true)}
         onMouseEnter={() => setLoaded(true)}
       >
-        <SettingIcon />
+        <IconSetting />
       </div>
       {loadSideSheet && (
         <Suspense fallback={null}>

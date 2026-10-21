@@ -1,0 +1,59 @@
+/* ------------------------------------------------------------------ */
+/* 拖拽指示：排序插入线 + 拖放高亮。
+   flex 根级的 item、grid 的格子共用同一套盒子，
+   高亮盒子是真实元素（badge 要往里放），不是伪元素。 */
+/* ------------------------------------------------------------------ */
+
+/* 排序插入线（竖线，标记「插到这个 item 前面」） */
+.sites .site-drop-indicator {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  background: var(--semi-color-primary, #4d70ff);
+  pointer-events: none;
+  border-radius: 2px;
+  transform: translateX(-1px);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -4px;
+    width: 8px;
+    height: 8px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: inherit;
+  }
+}
+
+/* 拖放高亮：都靠宿主的 position: relative 铺满（item / grid-cell 都已相对定位） */
+.sites.editing .item.drop-target > .drop-target-box,
+.sites.sites-grid.editing > .grid-cell.drop-target > .drop-target-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.65);
+  outline: 2px dashed var(--semi-color-primary, #4d70ff);
+  outline-offset: -2px;
+  pointer-events: none;
+
+  /* 「会把这两个放进同一个文件夹」之类的提示 */
+  > .drop-target-badge {
+    position: relative;
+    top: 8px;
+    left: 8px;
+    max-width: calc(var(--site-icon-size) - 32px);
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    color: #fff;
+    background: var(--semi-color-primary, #4d70ff);
+  }
+}

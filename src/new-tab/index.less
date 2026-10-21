@@ -95,12 +95,63 @@ body[data-theme="pixel"] {
   box-sizing: border-box;
 }
 
-.setting-icon {
+.actions {
   position: fixed;
   right: 12px;
   bottom: 12px;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
+
+  > * {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    color: #fff;
+    opacity: 0.6;
+    transition: opacity 0.15s ease;
+    margin-top: 12px;
+
+    > .semi-icon {
+      font-size: 22px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* 通用输入框基础样式：只管「字段」本身的观感，
+   尺寸（宽度 / 字号 / 对齐）留给各处上下文覆盖 */
+/* ------------------------------------------------------------------ */
+.grid-edit .grid-layout-bar .semi-input,
+.ui-input {
+  box-sizing: border-box;
+  padding: 6px 10px;
   color: #fff;
+  font: inherit;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  &:focus {
+    border-color: var(--semi-color-primary, #4d70ff);
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
 }

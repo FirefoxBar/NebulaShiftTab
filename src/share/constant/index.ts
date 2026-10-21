@@ -40,6 +40,8 @@ export const defaultPrefValue: PrefValue = {
   siteWidth: 805,
   siteGap: 36,
   showSiteName: true,
+  siteMode: 'flex',
+  siteGrid: { cols: 6, rows: 3, cells: [] },
   recordHistory: MAX_SUGGESTION_COUNT,
   contextMenu: true,
   background: {

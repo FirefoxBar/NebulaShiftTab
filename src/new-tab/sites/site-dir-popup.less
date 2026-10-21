@@ -1,0 +1,143 @@
+.site-dir-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  animation: site-dir-fade 0.18s ease;
+}
+
+.site-dir-popup {
+  width: var(--site-area-width);
+  min-width: 240px;
+  max-width: 90vw;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background: rgba(40, 40, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  transform-origin: center center;
+  animation: site-dir-pop 0.2s ease;
+
+  > .popup-title {
+    padding: 36px 48px 18px 48px;
+    font-size: calc(var(--site-icon-size) * 0.5);
+    color: #fff;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  > .popup-title-input {
+    padding: 36px 48px 18px 48px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: 100%;
+
+    /* 字段外观来自 .ui-input，这里只声明整行输入的字号 */
+    .ui-input {
+      width: 100%;
+      font-size: calc(var(--site-icon-size) * 0.42);
+    }
+  }
+
+  > .sites-container {
+    padding: 18px 48px 36px 48px;
+    flex-shrink: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    > .sites {
+      padding: 0;
+      justify-content: flex-start;
+      width: auto;
+      overflow: visible;
+      position: relative; // 插入线定位
+    }
+  }
+}
+
+/* 拖拽中放开内容区裁剪：图标拖出弹层也继续跟随显示 */
+.site-dir-mask.has-drag .sites-container {
+  overflow: visible;
+}
+
+/* ------------------------------------------------------------------ */
+/* 编辑态的子项：可拖拽、悬停删除（flex 根级 / grid 格子 / 弹层子项） */
+/* ------------------------------------------------------------------ */
+
+.site-dir-popup .dir-child,
+.sites.editing .item {
+  position: relative;
+  touch-action: none; // 触屏别让页面跟着滚
+  user-select: none;
+
+  &.dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+  }
+
+  .delete-badge {
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: var(--semi-color-danger, #f5222d);
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  &:hover .delete-badge {
+    display: flex;
+  }
+}
+
+/* 弹层里的编辑态子项不使用 hover 上浮 */
+.site-dir-popup.editing .dir-child:hover > .icon {
+  transform: none;
+}
+
+/* 拖拽指示（插入线 / 拖放高亮）已移到 drop.less，两种布局共用 */
+
+@keyframes site-dir-pop {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes site-dir-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

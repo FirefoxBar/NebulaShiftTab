@@ -5,7 +5,6 @@ import { t } from '@/share/locale';
 import { BackgroundSetting } from './background';
 import { GeneralSettings } from './general';
 import { SearchManager } from './search-manager';
-import { SitesManager } from './site-manager';
 
 import '@douyinfe/semi-ui/lib/es/_base/base.css';
 import './index.less';
@@ -31,9 +30,6 @@ const SettingContent: React.FC<SettingSideSheetProps> = ({
       className="setting-drawer"
     >
       <Tabs type="line" lazyRender={true}>
-        <TabPane itemKey="bookmark-management" tab={t('siteManagement')}>
-          <SitesManager />
-        </TabPane>
         <TabPane itemKey="search-management" tab={t('searchManagement')}>
           <SearchManager />
         </TabPane>

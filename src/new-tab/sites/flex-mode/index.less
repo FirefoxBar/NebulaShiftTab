@@ -69,6 +69,8 @@
     > .site-list {
       display: flex;
       flex-wrap: wrap;
+      // 不足一行时靠左上排列（.icon 的 justify-content: center 会把它居中）
+      justify-content: flex-start;
       align-items: flex-start;
       width: var(--site-icon-size);
       height: var(--site-icon-size);
@@ -89,80 +91,81 @@
   }
 }
 
-.site-dir-mask {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.45);
-  animation: site-dir-fade 0.18s ease;
-}
+/* 弹层样式见 site-dir-popup.less（flex / grid 共用） */
 
-.site-dir-popup {
-  width: var(--site-area-width);
-  min-width: 240px;
-  max-width: 90vw;
-  max-height: 70vh;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0;
-  box-sizing: border-box;
-  border-radius: 20px;
-  background: rgba(40, 40, 42, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-  transform-origin: center center;
-  animation: site-dir-pop 0.2s ease;
+/* ------------------------------------------------------------------ */
+/* 编辑态 */
+/* ------------------------------------------------------------------ */
+.sites.editing {
+  position: relative; // 插入线定位
 
-  > .popup-title {
-    padding: 36px 48px 18px 48px;
-    font-size: calc(var(--site-icon-size) * 0.5);
-    color: #fff;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    flex-grow: 0;
-    flex-shrink: 0;
-    box-sizing: border-box;
+  // 编辑态不使用 hover 上浮
+  > .item:hover > .icon {
+    transform: none;
   }
 
-  > .sites-container {
-    padding: 18px 48px 36px 48px;
-    flex-shrink: 1;
-    overflow-y: auto;
-    scrollbar-width: none;
+  /* 编辑态的「+」：flex 排在末尾、grid 排在空格子里，组件与外观完全一致 */
+  .site-add-item {
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
 
-    > .sites {
-      padding: 0;
-      justify-content: flex-start;
-      width: auto;
-      overflow: visible;
+    .add-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed rgba(255, 255, 255, 0.45);
+      border-radius: var(--site-icon-radius);
+      color: rgba(255, 255, 255, 0.75);
+      transition: background 0.15s ease;
+
+      > .semi-icon {
+        font-size: 24px;
+        line-height: 1;
+      }
+    }
+
+    &:hover .add-icon {
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
     }
   }
 }
 
-@keyframes site-dir-pop {
-  from {
-    transform: scale(0.7);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
+.sites.editing:not(.sites-grid) {
+  cursor: grab;
+
+  // 可拖的是节点本身，末尾的「+」不在此列（它自己是 button）
+  > .item:not(.site-add-item) {
+    cursor: grab;
+    touch-action: none; // 触屏别让页面跟着滚
+    user-select: none;
+    position: relative;
+
+    &.dragging {
+      opacity: 0.45;
+      cursor: grabbing;
+      z-index: 20;
+    }
   }
 }
 
-@keyframes site-dir-fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+/* 改名输入框：外观来自 .ui-input，这里只声明 tile 内的尺寸 */
+.sites.editing .dir-rename {
+  width: var(--site-icon-size);
+  margin-top: 8px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  font-size: var(--site-name-size);
+  text-align: center;
+  color: #ddd;
+
+  &:focus {
+    color: #fff;
   }
 }
 

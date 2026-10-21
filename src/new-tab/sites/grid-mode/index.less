@@ -1,0 +1,181 @@
+/* ------------------------------------------------------------------ */
+/* grid 布局：容器宽度由行内样式给出 = cols*icon + (cols-1)*gap
+   （siteAreaWidth 在 grid 下不生效） */
+/* ------------------------------------------------------------------ */
+.sites.sites-grid {
+  display: grid;
+  grid-auto-rows: min-content;
+  justify-content: start;
+  align-content: start;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-top: 64px;
+  min-height: 100px;
+  max-width: 96vw;
+
+  /* 空白区块占位，保持格子形状 */
+  > .grid-cell.empty {
+    width: var(--site-icon-size);
+    height: var(--site-icon-size);
+    box-sizing: border-box;
+  }
+
+  /* 复用 flex 的 item 视觉（.sites > .item 选择器不命中，这里重申） */
+  > .grid-cell > .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    width: var(--site-icon-size);
+    cursor: pointer;
+    position: relative;
+    touch-action: none;
+    user-select: none;
+  }
+
+  > .grid-cell > .item > .title {
+    margin-top: 12px;
+    font-size: var(--site-name-size);
+    text-align: center;
+    color: #ddd;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  > .grid-cell > .item > .icon,
+  > .grid-cell > .item > .site-list {
+    width: var(--site-icon-size);
+    height: var(--site-icon-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    border-radius: var(--site-icon-radius);
+    overflow: hidden;
+  }
+
+  > .grid-cell > .item:hover > .icon {
+    transform: translateY(-4px);
+  }
+
+  .site-icon-container {
+    overflow: hidden;
+    border-radius: var(--site-icon-radius);
+
+    &.auto {
+      padding: 10%;
+      box-sizing: border-box;
+      background-color: #fff;
+    }
+
+    .site-icon {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  /* 文件夹预览图标（.sites > .site-dir-item 不命中；特异性要压过上面 .icon 的居中） */
+  > .grid-cell > .item.site-dir-item > .site-list {
+    display: flex;
+    flex-wrap: wrap;
+    // 不足一行时靠左上排列（.icon 的 justify/align center 会把它摆到中间）
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: var(--site-icon-size);
+    height: var(--site-icon-size);
+    padding: calc(var(--site-icon-size) * 0.14);
+    box-sizing: border-box;
+    gap: calc(var(--site-icon-size) * 0.08);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: var(--site-icon-radius);
+    overflow: hidden;
+
+    .site-icon-container {
+      --new-site-icon-size: calc(
+        (var(--site-icon-size) - var(--site-icon-size) * 0.36) / 2
+      );
+      width: var(--new-site-icon-size);
+      height: var(--new-site-icon-size);
+    }
+  }
+}
+
+/* 编辑态不使用 hover 上浮 */
+.sites.sites-grid.editing > .grid-cell > .item:hover > .icon {
+  transform: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* grid 编辑态 */
+/* ------------------------------------------------------------------ */
+.grid-edit {
+  padding-top: 64px;
+  margin: 0 auto;
+  max-width: 96vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  .grid-layout-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    .semi-input-wrapper,
+    .semi-input-wrapper-focus {
+      border: none;
+    }
+
+    .semi-input-number-suffix-btns {
+      margin-top: 0;
+      background: transparent;
+
+      > .semi-input-number-button {
+        color: #fff;
+        width: 24px;
+        transition: background 0.2s ease;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+
+    .grid-layout-label {
+      color: #ddd;
+      font-size: 13px;
+      user-select: none;
+    }
+  }
+
+  .sites.sites-grid {
+    padding-top: 0;
+  }
+}
+
+.sites.sites-grid.editing > .grid-cell {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: var(--site-icon-radius);
+  transition: box-shadow 0.15s ease;
+  touch-action: none; // 触屏别让页面跟着滚
+  user-select: none;
+
+  /* 空白区块：虚线框由里面的「+」（.site-add-item）给出，这里只负责占位与居中 */
+  &.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}

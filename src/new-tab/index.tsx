@@ -9,13 +9,17 @@ import { Sites } from './sites';
 import { Time } from './time';
 
 import './index.less';
+import { EditToggle } from './sites/edit-toggle';
 
 const Page = () => (
   <>
     <Time />
     <Search />
     <Sites />
-    <Setting />
+    <div className="actions">
+      <EditToggle />
+      <Setting />
+    </div>
   </>
 );
 

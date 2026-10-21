@@ -494,9 +494,9 @@
     "message": "Save",
     "description": "Save button text"
   },
-  "search": {
-    "message": "Search",
-    "description": "Search section title"
+  "searchEngine": {
+    "message": "Search engine",
+    "description": "Search engine section title"
   },
   "searchHistoryManagement": {
     "message": "Search History Management",

@@ -29,7 +29,6 @@ export const isSiteDirItem = (item: any): item is SiteDirItem =>
 
 export interface SiteGridConfig {
   cols: number;
-  rows: number;
   /** 一维数组，索引 = 行 * cols + 列；值为站点/文件夹 id，null 表示空白区块 */
   cells: Array<string | null>;
 }

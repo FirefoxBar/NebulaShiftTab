@@ -11,7 +11,7 @@ export const getGrid = (): SiteGridConfig => {
   return grid;
 };
 
-const setGrid = (grid: SiteGridConfig) => prefs.set('siteGrid', grid);
+export const setGrid = (grid: SiteGridConfig) => prefs.set('siteGrid', grid);
 
 /**
  * 读一份「跟 sites 对过账」的 grid：渲染期只算不写（useGridLayout 里的 memo），
@@ -19,7 +19,7 @@ const setGrid = (grid: SiteGridConfig) => prefs.set('siteGrid', grid);
  * 写路径统一以它为基底，顺带把 pref 洗干净 —— reconcileGrid 是纯函数，
  * 和渲染那份的计算结果必然一致。
  */
-const getSyncedGrid = (): SiteGridConfig =>
+export const getSyncedGrid = (): SiteGridConfig =>
   reconcileGrid(getSites(), getGrid()) ?? getGrid();
 
 /**
@@ -49,23 +49,8 @@ export const reconcileGrid = (
   for (const site of sites) {
     const id = getId(site);
     if (seen.has(id)) continue;
-    const empty = cells.indexOf(null);
-    if (empty !== -1) {
-      cells[empty] = id;
-    } else {
-      cells.push(id);
-    }
+    placeAtLastEmptyCell(cells, [id]);
     seen.add(id);
-    changed = true;
-  }
-
-  const minLen = grid.cols * grid.rows;
-  if (cells.length < minLen) {
-    while (cells.length < minLen) cells.push(null);
-    changed = true;
-  }
-  while (cells.length > minLen && cells[cells.length - 1] === null) {
-    cells.pop();
     changed = true;
   }
 
@@ -87,31 +72,23 @@ export const placeSiteAtCell = (cellIndex: number, siteId: string) => {
   setGrid({ ...grid, cells });
 };
 
-/**
- * 把回到根级的站点放进第一个空格（文件夹弹层拖出后调用），没有空格就追加。
- * 让 grid 在 sites 变化后立刻拿到落位，不必等下一次渲染期对账。
- */
-export const placeSiteInFirstEmptyCell = (siteId: string) => {
-  const grid = getSyncedGrid();
-  const cells = [...grid.cells];
-  const empty = cells.indexOf(null);
-  if (empty === -1) cells.push(siteId);
-  else cells[empty] = siteId;
-  setGrid({ ...grid, cells });
-};
-
-export const resizeGrid = (cols: number, rows: number) => {
-  const grid = getGrid();
-  const safeCols = Math.max(1, Math.min(24, Math.floor(cols) || 1));
-  const safeRows = Math.max(1, Math.min(16, Math.floor(rows) || 1));
-  const sites = getSites();
-  const next: SiteGridConfig = {
-    cols: safeCols,
-    rows: safeRows,
-    cells: grid.cells,
-  };
-  const synced = reconcileGrid(sites, next) ?? next;
-  setGrid(synced);
+export const placeAtLastEmptyCell = (
+  cells: Array<string | null>,
+  sites: string[],
+) => {
+  let index = -1;
+  for (let i = cells.length - 1; i >= 0; i--) {
+    if (cells[i] === null) {
+      index = i;
+    } else {
+      break;
+    }
+  }
+  if (index !== -1) {
+    cells.splice(index, cells.length - index, ...sites);
+  } else {
+    cells.push(...sites);
+  }
 };
 
 // ---------------------------------------------------------------------------
@@ -146,9 +123,19 @@ export const applyGridDrop = (
   const dstId = cells[toIndex];
   cells[fromIndex] = null;
 
+  const checkLastRow = () => {
+    // 如果最后一行是空的则移除
+    const lastRowIndex = (Math.ceil(cells.length / grid.cols) - 1) * grid.cols;
+    const lastRow = cells.slice(lastRowIndex, lastRowIndex + grid.cols);
+    if (lastRow.every(cell => cell === null)) {
+      cells.length = lastRowIndex;
+    }
+  };
+
   // 目标空 → 直接移动（文件夹也只能拖到空格，所以走不到下面的合并）
   if (!dstId) {
     cells[toIndex] = srcId;
+    checkLastRow();
     setGrid({ ...grid, cells });
     return { kind: 'move' };
   }
@@ -159,6 +146,7 @@ export const applyGridDrop = (
 
   cells[toIndex] = merged.dirId ?? dstId;
   prefs.set('sites', merged.sites);
+  checkLastRow();
   setGrid({ ...grid, cells });
   return merged.dirId
     ? { kind: 'create-dir', dirId: merged.dirId }

@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import usePref from '@/hooks/use-pref';
 import { SiteItemAlias } from '@/share/type-alias';
-import type { SiteNode } from '@/share/types';
-import { reconcileGrid } from './grid-store';
+import type { SiteGridConfig, SiteNode } from '@/share/types';
 
 export interface GridLayout {
+  setGrid: (grid: SiteGridConfig) => void;
   /** 根级站点（调用方喂给 useDirPopup 等） */
   sites: SiteNode[];
   cols: number;
@@ -38,35 +38,24 @@ export const gridCellKey = (id: string | null, index: number) =>
  * cells 在渲染期跟 sites 对账（纯计算，不写回）—— 死 id 清空、重复清空、
  * 还没落位的根站点补进空格；写路径的持久化由 grid-store 的写函数负责。
  */
-export const useGridLayout = (
-  /** 本地还没提交到 pref 的行数 */
-  pendingRows = 0,
-): GridLayout => {
+export const useGridLayout = (): GridLayout => {
   const [sites] = usePref('sites');
-  const [grid] = usePref('siteGrid');
+  const [grid, setGrid] = usePref('siteGrid');
 
-  // usePref 的值只在 prefs.set 真变化时换引用（isEqual 去重），依赖稳定
-  const synced = useMemo(
-    () => reconcileGrid(sites, grid) ?? grid,
-    [sites, grid],
-  );
   const nodeById = useMemo(
     () => new Map(sites.map(s => [s[SiteItemAlias.id], s])),
     [sites],
   );
 
-  const cols = synced.cols;
-  const rows = Math.max(
-    synced.rows,
-    Math.ceil(synced.cells.length / cols) || 0,
-    pendingRows,
-  );
+  const cols = grid.cols;
+  const rows = Math.ceil(grid.cells.length / cols) || 1;
 
   return {
+    setGrid,
     sites,
     cols,
     rows,
-    cells: buildCells(synced.cells, cols, rows),
+    cells: buildCells(grid.cells, cols, rows),
     nodeById,
   };
 };

@@ -1,8 +1,8 @@
 import { InputNumber } from '@douyinfe/semi-ui';
-import { useEffect, useState } from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
 import usePref from '@/hooks/use-pref';
 import { t } from '@/share/locale';
+import { prefs } from '@/share/prefs';
 import { SiteItemAlias } from '@/share/type-alias';
 import { isSiteDirItem, type SiteNode } from '@/share/types';
 import { AddSiteButton } from '../add-site-button';
@@ -11,9 +11,10 @@ import { openSiteEditModal } from '../site-edit';
 import { useDirPopup } from '../use-dir-popup';
 import {
   applyGridDrop,
+  getSyncedGrid,
+  placeAtLastEmptyCell,
   placeSiteAtCell,
-  placeSiteInFirstEmptyCell,
-  resizeGrid,
+  setGrid,
 } from './grid-store';
 import { useDragGrid } from './use-drag-grid';
 import { gridCellKey, useGridLayout } from './use-grid-layout';
@@ -25,31 +26,42 @@ import { gridCellKey, useGridLayout } from './use-grid-layout';
  */
 const GridEdit = withErrorBoundary(() => {
   const [showName] = usePref('showSiteName');
-  // 仅布局栏草稿的初值/同步用（布局计算本身在 useGridLayout 里订阅）
-  const [grid] = usePref('siteGrid');
-  const [cols, setCols] = useState(grid.cols);
-  const [rows, setRows] = useState(grid.rows);
-
-  useEffect(() => {
-    setCols(grid.cols);
-    setRows(grid.rows);
-  }, [grid.cols, grid.rows]);
 
   const drag = useDragGrid((from, to) => {
     applyGridDrop(from, to);
   });
 
   // 行数 = 配置的行数 / cells 实际占用的行数 / 本地待提交的行数
-  const { sites, cells, nodeById } = useGridLayout(rows);
+  const { cols, sites, cells, nodeById } = useGridLayout();
   // 拖出文件夹的站点回到根级 → grid 立刻把它落进空格
   const { openNode, popup } = useDirPopup(sites, showName, {
-    onDropOutside: placeSiteInFirstEmptyCell,
+    onDropOutside: () => setGrid(getSyncedGrid()),
   });
 
-  const commitLayout = (nextCols: number, nextRows: number) => {
-    setCols(nextCols);
-    setRows(nextRows);
-    resizeGrid(nextCols, nextRows);
+  const updateCols = (newCols: number) => {
+    const { cols: oldCols, cells: oldCells } = getSyncedGrid();
+    const diff = newCols - oldCols;
+    const oldRows = Math.ceil(oldCells.length / oldCols);
+    const newCells: Array<string | null> = [];
+    if (diff === 0) return;
+    if (diff >= 1) {
+      for (let i = 0; i < oldRows; i++) {
+        newCells.push(...oldCells.slice(i * oldCols, (i + 1) * oldCols));
+        newCells.push(...Array(diff).fill(null));
+      }
+    } else {
+      const rest: string[] = [];
+      for (let i = 0; i < oldRows; i++) {
+        newCells.push(...oldCells.slice(i * oldCols, i * oldCols + newCols));
+        rest.push(
+          ...(oldCells
+            .slice(i * oldCols + newCols, (i + 1) * oldCols)
+            .filter(Boolean) as string[]),
+        );
+      }
+      placeAtLastEmptyCell(newCells, rest);
+    }
+    prefs.set('siteGrid', { cols: newCols, cells: newCells });
   };
 
   /**
@@ -131,14 +143,7 @@ const GridEdit = withErrorBoundary(() => {
             min={1}
             max={24}
             value={cols}
-            onChange={v => commitLayout(Number(v) || 1, rows)}
-          />
-          <span className="grid-layout-label">{t('gridRows')}</span>
-          <InputNumber
-            min={1}
-            max={16}
-            value={rows}
-            onChange={v => commitLayout(cols, Number(v) || 1)}
+            onChange={v => updateCols(Number(v) || 1)}
           />
         </div>
         <div
@@ -146,6 +151,9 @@ const GridEdit = withErrorBoundary(() => {
           ref={drag.containerRef as any}
         >
           {cells.map(renderCell)}
+          {Array(cols)
+            .fill(null)
+            .map((_, i) => renderCell(null, i + cells.length))}
         </div>
       </div>
       {popup}

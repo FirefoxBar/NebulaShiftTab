@@ -30,13 +30,13 @@ const SettingContent: React.FC<SettingSideSheetProps> = ({
       className="setting-drawer"
     >
       <Tabs type="line" lazyRender={true}>
-        <TabPane itemKey="search-management" tab={t('searchManagement')}>
+        <TabPane itemKey="search" tab={t('searchEngine')}>
           <SearchManager />
         </TabPane>
-        <TabPane itemKey="background-settings" tab={t('backgroundSettings')}>
+        <TabPane itemKey="background" tab={t('background')}>
           <BackgroundSetting />
         </TabPane>
-        <TabPane itemKey="general-settings" tab={t('generalSettings')}>
+        <TabPane itemKey="general" tab={t('general')}>
           <GeneralSettings />
         </TabPane>
         <TabPane itemKey="backup" tab={t('backup')}>

@@ -28,12 +28,15 @@ function handleStyleVar() {
     const width = prefs.get('siteWidth');
     const gap = prefs.get('siteGap');
     const size = prefs.get('siteSize');
-    styleEl.innerHTML = `body{--site-area-width:${width}px;--site-area-gap:${gap}px;--site-icon-size:${size}px}`;
+    const grid = prefs.get('siteGrid');
+    styleEl.innerHTML = `body{--site-area-width:${width}px;--site-area-gap:${gap}px;--site-icon-size:${size}px;--site-grid-cols:${grid.cols};--site-grid-rows:${grid.rows};`;
   });
 
-  prefs.watchKey('siteGap', updateStyle);
-  prefs.watchKey('siteSize', updateStyle);
-  prefs.watchKey('siteWidth', updateStyle);
+  prefs.watch((_, changedKey) => {
+    if (['siteGap', 'siteSize', 'siteWidth', 'siteGrid'].includes(changedKey)) {
+      updateStyle();
+    }
+  });
   updateStyle();
 }
 

@@ -12,6 +12,12 @@
   padding-top: 64px;
   min-height: 100px;
   max-width: 96vw;
+  gap: var(--site-area-gap);
+  width: calc(
+    var(--site-icon-size) * var(--site-grid-cols) + var(--site-area-gap) *
+      calc(var(--site-grid-cols) - 1)
+  );
+  grid-template-columns: repeat(var(--site-grid-cols), var(--site-icon-size));
 
   /* 空白区块占位，保持格子形状 */
   > .grid-cell.empty {

@@ -1,4 +1,4 @@
-import { type CSSProperties, useMemo } from 'react';
+import { useMemo } from 'react';
 import usePref from '@/hooks/use-pref';
 import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteNode } from '@/share/types';
@@ -14,8 +14,6 @@ export interface GridLayout {
   cells: Array<string | null>;
   /** id → 节点，供格子渲染时反查 */
   nodeById: Map<string, SiteNode>;
-  /** 容器 style：宽度 = cols*图标大小 + (cols-1)*间隔 */
-  style: CSSProperties;
 }
 
 /** 把 cells 补齐到 cols*rows（超出的保持原样，由 reconcile 去尾巴） */
@@ -46,8 +44,6 @@ export const useGridLayout = (
 ): GridLayout => {
   const [sites] = usePref('sites');
   const [grid] = usePref('siteGrid');
-  const [siteSize] = usePref('siteSize');
-  const [siteGap] = usePref('siteGap');
 
   // usePref 的值只在 prefs.set 真变化时换引用（isEqual 去重），依赖稳定
   const synced = useMemo(
@@ -72,10 +68,5 @@ export const useGridLayout = (
     rows,
     cells: buildCells(synced.cells, cols, rows),
     nodeById,
-    style: {
-      width: siteSize * cols + siteGap * (cols - 1),
-      gridTemplateColumns: `repeat(${cols}, ${siteSize}px)`,
-      gap: siteGap,
-    },
   };
 };

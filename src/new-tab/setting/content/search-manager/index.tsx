@@ -201,7 +201,7 @@ export const SearchManager = withErrorBoundary(() => {
 
       <div className="header">
         <Typography.Title heading={6}>
-          {t('searchManagement')} ({searches.length})
+          {t('searchEngine')} ({searches.length})
         </Typography.Title>
         <SplitButtonGroup>
           <Button icon={<IconPlus />} onClick={handleAddSearch}>

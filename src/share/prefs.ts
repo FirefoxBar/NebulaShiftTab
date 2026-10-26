@@ -123,9 +123,11 @@ class Prefs {
     }
   }
 
-  watch(cb: (values: PrefValue) => void) {
-    const c = () => {
-      cb(this.values);
+  watch(
+    cb: (values: PrefValue, changedKey: keyof PrefValue, value: any) => void,
+  ) {
+    const c = (changedKey: keyof PrefValue, value: any) => {
+      cb(this.values, changedKey, value);
     };
     emitter.on(emitter.EVENT_PREFS_UPDATE, c);
     return () => {

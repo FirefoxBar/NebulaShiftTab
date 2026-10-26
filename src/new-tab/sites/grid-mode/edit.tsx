@@ -40,7 +40,7 @@ const GridEdit = withErrorBoundary(() => {
   });
 
   // 行数 = 配置的行数 / cells 实际占用的行数 / 本地待提交的行数
-  const { sites, cells, nodeById, style } = useGridLayout(rows);
+  const { sites, cells, nodeById } = useGridLayout(rows);
   // 拖出文件夹的站点回到根级 → grid 立刻把它落进空格
   const { openNode, popup } = useDirPopup(sites, showName, {
     onDropOutside: placeSiteInFirstEmptyCell,
@@ -144,7 +144,6 @@ const GridEdit = withErrorBoundary(() => {
         <div
           className="sites sites-grid editing"
           ref={drag.containerRef as any}
-          style={style}
         >
           {cells.map(renderCell)}
         </div>

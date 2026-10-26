@@ -5,10 +5,10 @@ import { gridCellKey, useGridLayout } from './use-grid-layout';
 import './index.less';
 
 const GridNormal = ({ showName }: ModeShellContent) => {
-  const { cells, nodeById, style } = useGridLayout();
+  const { cells, nodeById } = useGridLayout();
 
   return (
-    <div className="sites sites-grid" style={style}>
+    <div className="sites sites-grid">
       {cells.map((id, index) => {
         const node = id ? nodeById.get(id) : null;
         const key = gridCellKey(id, index);

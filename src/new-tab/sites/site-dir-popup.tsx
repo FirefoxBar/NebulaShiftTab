@@ -1,13 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { t } from '@/share/locale';
 import { SiteItemAlias } from '@/share/type-alias';
 import type { SiteDirItem } from '@/share/types';
 import { DeleteBadge, SiteNodeBody } from './node-body';
 import { RenameInput } from './rename-input';
 import { openSiteEditModal } from './site-edit';
 import { SiteItem as SiteItemView } from './site-item';
-import { moveOutOfDir, renameDir, reorderInDir } from './site-ops';
+import { moveOutOfDir, reorderInDir } from './site-ops';
 import useDragList from './use-drag-list';
 
 import './site-dir-popup.less';
@@ -83,11 +82,7 @@ export const SiteDirPopup = ({
       >
         {editing ? (
           <div className="popup-title-input">
-            <RenameInput
-              defaultValue={site[SiteItemAlias.name]}
-              onCommit={next => renameDir(dirId, next)}
-              placeholder={t('folderName')}
-            />
+            <RenameInput nodeId={dirId} nodeName={site[SiteItemAlias.name]} />
           </div>
         ) : (
           <div className="popup-title">{site[SiteItemAlias.name]}</div>

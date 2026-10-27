@@ -5,7 +5,6 @@ import { t } from '@/share/locale';
 import { SiteItemAlias } from '@/share/type-alias';
 import { isSiteDirItem, type SiteNode } from '@/share/types';
 import { RenameInput } from './rename-input';
-import { renameDir } from './site-ops';
 
 export interface SiteNodeBodyProps {
   node: SiteNode;
@@ -50,8 +49,8 @@ export const SiteNodeBody = ({
         (editing ? (
           <RenameInput
             className="dir-rename"
-            defaultValue={name}
-            onCommit={next => renameDir(node[SiteItemAlias.id], next)}
+            nodeId={node[SiteItemAlias.id]}
+            nodeName={name}
           />
         ) : (
           <div className="title" title={name}>

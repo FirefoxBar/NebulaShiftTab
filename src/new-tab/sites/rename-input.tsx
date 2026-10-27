@@ -1,13 +1,12 @@
-import type { FC } from 'react';
+import { type FC, useEffect, useState } from 'react';
+import { t } from '@/share/locale';
+import { renameDir } from './site-ops';
 
 export interface RenameInputProps {
-  /** 初始值：失焦时拿它判断「改了没」，清空也回滚到它 */
-  defaultValue: string;
-  /** trim 后非空且与原值不同才回调 */
-  onCommit: (next: string) => void;
+  nodeId: string;
+  nodeName: string;
   /** 上下文尺寸钩子（tile 内的 `dir-rename` 等），基础外观由 `.ui-input` 提供 */
   className?: string;
-  placeholder?: string;
 }
 
 /**
@@ -16,31 +15,37 @@ export interface RenameInputProps {
  * flex 文件夹标题与文件夹弹层标题共用这一份交互。
  */
 export const RenameInput: FC<RenameInputProps> = ({
-  defaultValue,
-  onCommit,
+  nodeId,
+  nodeName,
   className,
-  placeholder,
-}) => (
-  <input
-    type="text"
-    className={['ui-input', className].filter(Boolean).join(' ')}
-    defaultValue={defaultValue}
-    placeholder={placeholder}
-    onClick={e => e.stopPropagation()}
-    onKeyDown={e => {
-      e.stopPropagation();
-      if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
-    }}
-    onBlur={e => {
-      const raw = e.target.value;
-      const next = raw.trim();
-      if (next !== defaultValue) {
-        if (next) onCommit(next);
-        else e.target.value = defaultValue;
-      } else if (raw !== defaultValue) {
-        // 只是多了首尾空白，归一成原值
-        e.target.value = defaultValue;
-      }
-    }}
-  />
-);
+}) => {
+  const [value, setValue] = useState(nodeName);
+
+  useEffect(() => setValue(nodeName), [nodeName]);
+
+  return (
+    <input
+      placeholder={t('folderName')}
+      type="text"
+      className={['ui-input', className].filter(Boolean).join(' ')}
+      value={value}
+      onChange={e => setValue(e.target.value)}
+      onClick={e => e.stopPropagation()}
+      onKeyDown={e => {
+        e.stopPropagation();
+        if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
+      }}
+      onBlur={e => {
+        const raw = e.target.value;
+        const next = raw.trim();
+        if (next !== nodeName) {
+          if (next) renameDir(nodeId, next);
+          else setValue(nodeName);
+        } else if (raw !== nodeName) {
+          // 只是多了首尾空白，归一成原值
+          setValue(nodeName);
+        }
+      }}
+    />
+  );
+};

@@ -62,12 +62,16 @@ export const SiteNodeBody = ({
   );
 };
 
+interface DeleteBadgeProps {
+  node: SiteNode;
+  onDelete?: () => void;
+}
 /** 悬停删除角标；删除确认（semi Modal）按需加载，普通态的 chunk 里不该有它 */
-export const DeleteBadge = ({ node }: { node: SiteNode }) => {
+export const DeleteBadge = ({ node, onDelete }: DeleteBadgeProps) => {
   const onClick = async (e: ReactMouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     const { confirmDeleteNode } = await import('./site-delete');
-    confirmDeleteNode(node);
+    confirmDeleteNode(node, onDelete);
   };
 
   return (

@@ -8,7 +8,7 @@ import { deleteDirNode, deleteSiteNode, getId } from './site-ops';
  * 删除确认。semi Modal 较重，只允许编辑态（按需加载）引入，
  * 普通态永远不应该 import 到这里。
  */
-export const confirmDeleteNode = (node: SiteNode) => {
+export const confirmDeleteNode = (node: SiteNode, onDelete?: () => void) => {
   const isDir = isSiteDirItem(node);
   const name = node[SiteItemAlias.name];
 
@@ -21,6 +21,7 @@ export const confirmDeleteNode = (node: SiteNode) => {
     onOk: () => {
       if (isDir) {
         deleteDirNode(getId(node));
+        onDelete?.();
       } else {
         deleteSiteNode(getId(node));
       }

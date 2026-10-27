@@ -20,6 +20,8 @@ import {
 import { useDragGrid } from './use-drag-grid';
 import { gridCellKey, useGridLayout } from './use-grid-layout';
 
+const writeReconcileGrid = () => setGrid(getSyncedGrid());
+
 /**
  * grid 编辑态：N*M 布局配置、空白区块「+」、
  * 拖放到区块的三规则（空→移动 / 站点→建文件夹 / 文件夹→放入）、
@@ -36,7 +38,7 @@ const GridEdit = withErrorBoundary(() => {
   const { cols, sites, cells, nodeById } = useGridLayout();
   // 拖出文件夹的站点回到根级 → grid 立刻把它落进空格
   const { openNode, popup } = useDirPopup(sites, showName, {
-    onDropOutside: () => setGrid(getSyncedGrid()),
+    onDropOutside: writeReconcileGrid,
   });
 
   const updateCols = (newCols: number) => {
@@ -118,7 +120,7 @@ const GridEdit = withErrorBoundary(() => {
             }}
           >
             <SiteNodeBody node={node} showName={showName} editing />
-            <DeleteBadge node={node} />
+            <DeleteBadge node={node} onDelete={writeReconcileGrid} />
           </div>
         ) : (
           <AddSiteButton

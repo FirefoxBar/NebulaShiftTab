@@ -325,9 +325,9 @@
     "message": "Columns",
     "description": "Label for grid layout column count"
   },
-  "gridRows": {
-    "message": "Rows",
-    "description": "Label for grid layout row count"
+  "gridReset": {
+    "message": "Reset Grid",
+    "description": "Label for resetting grid layout"
   },
   "helpUrl": {
     "message": "https://nebula-shift-tab.firefoxcn.net/en-US/guide/index.html",

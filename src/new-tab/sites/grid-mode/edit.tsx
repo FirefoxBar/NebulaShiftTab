@@ -8,6 +8,7 @@ import { isSiteDirItem, type SiteNode } from '@/share/types';
 import { AddSiteButton } from '../add-site-button';
 import { DeleteBadge, SiteNodeBody } from '../node-body';
 import { openSiteEditModal } from '../site-edit';
+import { getSites } from '../site-ops';
 import { useDirPopup } from '../use-dir-popup';
 import {
   applyGridDrop,
@@ -62,6 +63,17 @@ const GridEdit = withErrorBoundary(() => {
       placeAtLastEmptyCell(newCells, rest);
     }
     prefs.set('siteGrid', { cols: newCols, cells: newCells });
+  };
+
+  const resetCols = () => {
+    if (!window.confirm(t('gridReset'))) return;
+    const { cols } = getSyncedGrid();
+    const sites = getSites();
+    const newCells: Array<string | null> = [];
+    sites.forEach(site => {
+      newCells.push(site[SiteItemAlias.id]);
+    });
+    prefs.set('siteGrid', { cols, cells: newCells });
   };
 
   /**
@@ -145,6 +157,9 @@ const GridEdit = withErrorBoundary(() => {
             value={cols}
             onChange={v => updateCols(Number(v) || 1)}
           />
+          <button type="button" className="reset-btn" onClick={resetCols}>
+            {t('gridReset')}
+          </button>
         </div>
         <div
           className="sites sites-grid editing"

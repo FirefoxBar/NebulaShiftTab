@@ -254,8 +254,8 @@
   "gridCols": {
     "message": "列数"
   },
-  "gridRows": {
-    "message": "行数"
+  "gridReset": {
+    "message": "重置网格"
   },
   "helpUrl": {
     "message": "https://nebula-shift-tab.firefoxcn.net/guide/index.html"

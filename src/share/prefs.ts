@@ -6,6 +6,8 @@ import { getSyncStorage } from './storage';
 import { SearchItemAlias } from './type-alias';
 import type { PrefValue } from './types';
 
+type PrefSource = 'default' | 'init' | 'sync' | 'update';
+
 class Prefs {
   private boundMethods: { [key: string]: (value: any) => any } = {};
   private boundWrappers: { [key: string]: any } = {};
@@ -17,13 +19,13 @@ class Prefs {
     this.values = { ...defaultPrefValue };
 
     Object.entries(defaultPrefValue).forEach(it => {
-      this.set(it[0] as keyof PrefValue, it[1], true);
+      this.set(it[0] as keyof PrefValue, it[1], 'default');
     });
 
     getSyncStorage('settings').then(synced => {
       for (const key in defaultPrefValue) {
         if (synced && key in synced) {
-          this.set(key as keyof PrefValue, synced[key], true);
+          this.set(key as keyof PrefValue, synced[key], 'init');
         }
       }
       this.isDefault = false;
@@ -36,7 +38,7 @@ class Prefs {
         if (synced) {
           for (const key in defaultPrefValue) {
             if (key in synced) {
-              this.set(key as keyof PrefValue, synced[key], true);
+              this.set(key as keyof PrefValue, synced[key], 'sync');
             }
           }
         } else {
@@ -88,7 +90,7 @@ class Prefs {
   set<T extends keyof PrefValue>(
     key: T,
     value: PrefValue[T] | undefined,
-    noSync = false,
+    source: PrefSource = 'update',
   ) {
     const oldValue = this.values[key as keyof PrefValue];
     if (key === 'searches' && value) {
@@ -100,8 +102,8 @@ class Prefs {
     }
     if (!isEqual(value, oldValue)) {
       (this.values as any)[key] = value;
-      emitter.emit(emitter.EVENT_PREFS_UPDATE, key, value);
-      if (!noSync) {
+      emitter.emit(emitter.EVENT_PREFS_UPDATE, key, value, source);
+      if (source === 'update') {
         this.save();
       }
     }
@@ -124,10 +126,15 @@ class Prefs {
   }
 
   watch(
-    cb: (values: PrefValue, changedKey: keyof PrefValue, value: any) => void,
+    cb: (
+      values: PrefValue,
+      changedKey: keyof PrefValue,
+      value: any,
+      source: PrefSource,
+    ) => void,
   ) {
-    const c = (changedKey: keyof PrefValue, value: any) => {
-      cb(this.values, changedKey, value);
+    const c = (changedKey: keyof PrefValue, value: any, source: PrefSource) => {
+      cb(this.values, changedKey, value, source);
     };
     emitter.on(emitter.EVENT_PREFS_UPDATE, c);
     return () => {
@@ -137,11 +144,11 @@ class Prefs {
 
   watchKey<K extends keyof PrefValue>(
     key: K,
-    cb: (value: PrefValue[K]) => void,
+    cb: (value: PrefValue[K], source: PrefSource) => void,
   ) {
-    const c = (changedKey: keyof PrefValue, value: any) => {
+    const c = (changedKey: keyof PrefValue, value: any, source: PrefSource) => {
       if (changedKey === key) {
-        cb(value);
+        cb(value, source);
       }
     };
     emitter.on(emitter.EVENT_PREFS_UPDATE, c);
@@ -152,9 +159,9 @@ class Prefs {
 
   getAndWatch<K extends keyof PrefValue>(
     key: K,
-    cb: (value: PrefValue[K]) => void,
+    cb: (value: PrefValue[K], source: PrefSource) => void,
   ) {
-    this.ready(() => cb(this.get(key)));
+    this.ready(() => cb(this.get(key), 'init'));
     return this.watchKey(key, cb);
   }
 }

@@ -58,6 +58,11 @@ export const reconcileGrid = (
   return { ...grid, cells };
 };
 
+export const updateSyncedGrid = () => {
+  const n = reconcileGrid(getSites(), getGrid());
+  if (n) setGrid(n);
+};
+
 /** 把新站点落到指定空格（编辑态空白区块「+」） */
 export const placeSiteAtCell = (cellIndex: number, siteId: string) => {
   const grid = getSyncedGrid();

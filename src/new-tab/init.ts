@@ -29,7 +29,7 @@ function handleStyleVar() {
     const gap = prefs.get('siteGap');
     const size = prefs.get('siteSize');
     const grid = prefs.get('siteGrid');
-    styleEl.innerHTML = `body{--site-area-width:${width}px;--site-area-gap:${gap}px;--site-icon-size:${size}px;--site-grid-cols:${grid.cols};--site-grid-rows:${grid.rows};`;
+    styleEl.innerHTML = `body{--site-area-width:${width}px;--site-area-gap:${gap}px;--site-icon-size:${size}px;--site-grid-cols:${grid.cols};`;
   });
 
   prefs.watch((_, changedKey) => {
@@ -116,8 +116,19 @@ function handleOther() {
   );
 }
 
+function handleGridInit() {
+  import('./sites/grid-mode/grid-store').then(({ updateSyncedGrid }) => {
+    prefs.watchKey('siteMode', (mode, source) => {
+      if (mode === 'grid' && source === 'update') {
+        updateSyncedGrid();
+      }
+    });
+  });
+}
+
 handleStyleVar();
 handleDarkMode();
 handleBackgroundImage();
 handleCustomCSS();
 handleOther();
+handleGridInit();

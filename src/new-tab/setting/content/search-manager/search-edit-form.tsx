@@ -1,11 +1,11 @@
 import { Button, Form, Select } from '@douyinfe/semi-ui';
+import { BoolFlagsField } from '@/components/bool-flags-editor';
+import { SearchItemShowOnFlag, searchItemShowOnAll } from '@/share/constant';
 import { t } from '@/share/locale';
 import { SearchItemAlias } from '@/share/type-alias';
 import type { SearchItem } from '@/share/types';
 
 import './search-edit-form.less';
-import { BoolFlagsField } from '@/components/bool-flags-editor';
-import { SearchItemShowOnFlag, searchItemShowOnAll } from '@/share/constant';
 
 interface SearchEditFormProps {
   initialData?: SearchItem;

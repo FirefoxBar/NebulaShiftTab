@@ -386,6 +386,24 @@
   "searchEngine": {
     "message": "搜索引擎"
   },
+  "searchEngineCategoryCommon": {
+    "message": "综合(国内)"
+  },
+  "searchEngineCategoryCommonGlobal": {
+    "message": "综合(全球)"
+  },
+  "searchEngineCategorySocial": {
+    "message": "社交网络"
+  },
+  "searchEngineCategoryShopping": {
+    "message": "购物"
+  },
+  "searchEngineCategoryDeveloper": {
+    "message": "开发"
+  },
+  "searchEngineCategoryOther": {
+    "message": "其他"
+  },
   "searchHistoryManagement": {
     "message": "搜索历史管理"
   },

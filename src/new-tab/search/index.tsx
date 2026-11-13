@@ -1,25 +1,27 @@
+import { useMemo } from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
-import usePref from '@/hooks/use-pref';
+import { useSearches } from '@/hooks/use-searches';
 import { hasFlag } from '@/share/bool-flags';
-import { EMPTY_ARR, SearchItemShowOnFlag } from '@/share/constant';
+import { SearchItemShowOnFlag } from '@/share/constant';
 import { SearchItemAlias } from '@/share/type-alias';
-import { isValidArray } from '@/share/utils';
 import { SearchContent } from './content';
 
 import './search.less';
 
 export const Search = withErrorBoundary(() => {
-  const [searches] = usePref('searches', {
-    defaultValue: EMPTY_ARR,
-    filter: v =>
-      v.filter(x =>
+  const { searches } = useSearches();
+
+  const homeSearches = useMemo(
+    () =>
+      searches.filter(x =>
         hasFlag(x[SearchItemAlias.showOn], SearchItemShowOnFlag.HOME),
       ),
-  });
+    [searches],
+  );
 
-  if (!isValidArray(searches)) {
+  if (homeSearches.length === 0) {
     return null;
   }
 
-  return <SearchContent engines={searches} />;
+  return <SearchContent engines={homeSearches} />;
 });

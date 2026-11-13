@@ -1,6 +1,5 @@
 import { DndContext, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
 import {
-  arrayMove,
   SortableContext,
   useSortable,
   verticalListSortingStrategy,
@@ -14,24 +13,71 @@ import {
 } from '@douyinfe/semi-icons';
 import {
   Button,
-  Dropdown,
   List,
   Modal,
+  Popover,
   SplitButtonGroup,
   Typography,
 } from '@douyinfe/semi-ui';
-import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { withErrorBoundary } from '@/components/error-boundary';
-import usePref from '@/hooks/use-pref';
-import { EMPTY_ARR, searchEngines } from '@/share/constant';
+import { useSearches } from '@/hooks/use-searches';
+import { searchEngines } from '@/share/constant';
 import { t } from '@/share/locale';
-import { prefs } from '@/share/prefs';
 import { SearchItemAlias } from '@/share/type-alias';
 import type { SearchItem } from '@/share/types';
 import { SearchEditForm } from './search-edit-form';
 
 import './index.less';
+
+const groupSearchEngines = (keys: string[]) =>
+  searchEngines.filter(x => keys.includes(x[SearchItemAlias.key]));
+
+const engineCategories = {
+  common: {
+    label: t('searchEngineCategoryCommon'),
+    items: ['bing-cn', 'baidu', 'qq', '360', 'douyin-so'],
+  },
+  commonGlobal: {
+    label: t('searchEngineCategoryCommonGlobal'),
+    items: ['google', 'bing', 'duckduckgo', 'brave'],
+  },
+  social: {
+    label: t('searchEngineCategorySocial'),
+    items: ['douyin-web', 'xiaohongshu', 'bilibili', 'youtube'],
+  },
+  shopping: {
+    label: t('searchEngineCategoryShopping'),
+    items: ['taobao', 'jd'],
+  },
+  developer: {
+    label: t('searchEngineCategoryDeveloper'),
+    items: ['github', 'mdn'],
+  },
+};
+
+const categoryGroups = Object.values(engineCategories).map(category => ({
+  title: category.label,
+  engines: groupSearchEngines(category.items),
+}));
+
+// 未归类的内置引擎追加到第一个分组，避免新增引擎在快速添加中缺失
+const categorizedKeys = new Set(
+  Object.values(engineCategories).flatMap(category => category.items),
+);
+const ungroupedEngines = searchEngines.filter(
+  x => !categorizedKeys.has(x[SearchItemAlias.key]),
+);
+if (categoryGroups.length > 0) {
+  categoryGroups[0].engines.push(...ungroupedEngines);
+} else if (ungroupedEngines.length > 0) {
+  categoryGroups.push({
+    title: t('searchEngineCategoryOther'),
+    engines: ungroupedEngines,
+  });
+}
+
+const quickAddGroups = categoryGroups.filter(group => group.engines.length > 0);
 
 // 拖拽项组件
 const SortableItem = ({
@@ -83,91 +129,77 @@ const SortableItem = ({
 };
 
 export const SearchManager = withErrorBoundary(() => {
+  const {
+    items,
+    searches,
+    getSearchForEdit,
+    saveSearch,
+    addDefaultSearch,
+    deleteSearch,
+    moveSearch,
+  } = useSearches();
   const [editingSearch, setEditingSearch] = useState<SearchItem | undefined>();
+  const [editingDefaultKey, setEditingDefaultKey] = useState<
+    string | undefined
+  >();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searches, setSearches] = usePref('searches', {
-    defaultValue: EMPTY_ARR,
-  });
+
+  const closeModal = () => {
+    setEditingSearch(undefined);
+    setEditingDefaultKey(undefined);
+    setIsModalOpen(false);
+  };
 
   // 添加搜索
   const handleAddSearch = () => {
     setEditingSearch(undefined);
+    setEditingDefaultKey(undefined);
     setIsModalOpen(true);
   };
 
   // 编辑搜索
   const handleEditSearch = (search: SearchItem) => {
-    setEditingSearch({ ...search });
+    const editData = getSearchForEdit(search[SearchItemAlias.key]);
+    if (!editData) {
+      return;
+    }
+    setEditingSearch({ ...editData.search });
+    setEditingDefaultKey(editData.defaultKey);
     setIsModalOpen(true);
   };
 
   // 删除搜索
   const handleDeleteSearch = (key: string) => {
-    const newSearches = [...searches];
-    const index = newSearches.findIndex(
-      search => search[SearchItemAlias.key] === key,
-    );
-    if (index === -1) {
+    const search = searches.find(x => x[SearchItemAlias.key] === key);
+    if (!search) {
       return;
     }
     Modal.warning({
       title: t('deleteSearchEngine'),
-      content: t(
-        'confirmDeleteSearchEngine',
-        newSearches[index][SearchItemAlias.name],
-      ),
-      onOk: () => {
-        newSearches.splice(index, 1);
-        setSearches(newSearches);
-      },
+      content: t('confirmDeleteSearchEngine', search[SearchItemAlias.name]),
+      onOk: () => deleteSearch(key),
     });
   };
 
   // 保存搜索
-  const handleSaveSearch = (updatedSearch: SearchItem) => {
-    if (!updatedSearch[SearchItemAlias.key]) {
-      updatedSearch[SearchItemAlias.key] = nanoid();
-    }
-    const newSearches = [...searches];
-    const index = newSearches.findIndex(
-      search =>
-        search[SearchItemAlias.key] === updatedSearch[SearchItemAlias.key],
-    );
-
-    if (index !== -1) {
-      newSearches[index] = updatedSearch;
-    } else {
-      // 添加新搜索
-      newSearches.push(updatedSearch);
-    }
-
-    setSearches(newSearches);
-    setEditingSearch(undefined);
-    setIsModalOpen(false);
-  };
-
-  // 取消编辑
-  const handleCancelEdit = () => {
-    setEditingSearch(undefined);
-    setIsModalOpen(false);
+  const handleSaveSearch = (search: SearchItem) => {
+    saveSearch(search, editingDefaultKey);
+    closeModal();
   };
 
   // 拖拽结束处理
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
-
-    if (active.id !== over?.id) {
-      const oldIndex = searches.findIndex(
-        search => search[SearchItemAlias.key] === active.id,
-      );
-      const newIndex = searches.findIndex(
-        search => search[SearchItemAlias.key] === over.id,
-      );
-
-      const newSearches = arrayMove(searches, oldIndex, newIndex);
-      setSearches(newSearches);
-      prefs.set('searches', newSearches);
+    if (!over || active.id === over.id) {
+      return;
     }
+    const oldIndex = items.findIndex(
+      search => search[SearchItemAlias.key] === active.id,
+    );
+    const newIndex = items.findIndex(
+      search => search[SearchItemAlias.key] === over.id,
+    );
+    moveSearch(oldIndex, newIndex);
   };
 
   // 初始化鼠标传感器
@@ -187,7 +219,7 @@ export const SearchManager = withErrorBoundary(() => {
         }
         visible={isModalOpen}
         footer={null}
-        onCancel={handleCancelEdit}
+        onCancel={closeModal}
         width={600}
         maskClosable={false}
         closeOnEsc={false}
@@ -195,7 +227,7 @@ export const SearchManager = withErrorBoundary(() => {
         <SearchEditForm
           initialData={editingSearch || undefined}
           onSave={handleSaveSearch}
-          onCancel={handleCancelEdit}
+          onCancel={closeModal}
         />
       </Modal>
 
@@ -207,18 +239,33 @@ export const SearchManager = withErrorBoundary(() => {
           <Button icon={<IconPlus />} onClick={handleAddSearch}>
             {t('add')}
           </Button>
-          <Dropdown
-            menu={searchEngines.map(x => ({
-              node: 'item',
-              name: x[SearchItemAlias.name],
-              onClick: () =>
-                handleSaveSearch({ ...x, [SearchItemAlias.key]: '' }),
-            }))}
-            trigger="click"
+          <Popover
+            trigger="hover"
             position="bottomRight"
+            content={
+              <div className="quick-add-popover">
+                {quickAddGroups.map(group => (
+                  <div className="quick-add-group" key={group.title}>
+                    <div className="quick-add-group-title">{group.title}</div>
+                    <div className="quick-add-group-items">
+                      {group.engines.map(engine => (
+                        <Button
+                          key={engine[SearchItemAlias.key]}
+                          theme="outline"
+                          type="tertiary"
+                          onClick={() => addDefaultSearch(engine)}
+                        >
+                          {engine[SearchItemAlias.name]}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            }
           >
             <Button type="primary" icon={<IconTreeTriangleDown />} />
-          </Dropdown>
+          </Popover>
         </SplitButtonGroup>
       </div>
 

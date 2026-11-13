@@ -498,6 +498,24 @@
     "message": "Search engine",
     "description": "Search engine section title"
   },
+  "searchEngineCategoryCommon": {
+    "message": "General (China)"
+  },
+  "searchEngineCategoryCommonGlobal": {
+    "message": "General (Global)"
+  },
+  "searchEngineCategorySocial": {
+    "message": "Social Media"
+  },
+  "searchEngineCategoryShopping": {
+    "message": "Shopping"
+  },
+  "searchEngineCategoryDeveloper": {
+    "message": "Developer"
+  },
+  "searchEngineCategoryOther": {
+    "message": "Other"
+  },
   "searchHistoryManagement": {
     "message": "Search History Management",
     "description": "Title for search history management section"

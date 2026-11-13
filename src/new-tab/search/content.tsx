@@ -32,9 +32,9 @@ export const SearchContent = withErrorBoundary(
           <div className="search-engines">
             {engines.map(engine => (
               <button
-                key={engine[SearchItemAlias.name]}
+                key={engine[SearchItemAlias.key]}
                 type="button"
-                className={`engine-btn ${current?.[SearchItemAlias.name] === engine[SearchItemAlias.name] ? 'active' : ''}`}
+                className={`engine-btn ${current?.[SearchItemAlias.key] === engine[SearchItemAlias.key] ? 'active' : ''}`}
                 onClick={() => setCurrent(engine)}
               >
                 {engine[SearchItemAlias.name]}

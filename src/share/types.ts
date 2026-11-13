@@ -63,19 +63,34 @@ export interface PrefValue {
   };
   customCSS: string;
   sites: Array<SiteNode>;
-  searches: Array<SearchItem>;
+  searches: Array<SearchItem | SearchDefaultItem>;
   contextMenu: boolean;
 }
-
-export interface SearchItem {
+export interface BaseSearchItem {
   [SearchItemAlias.key]: string;
   [SearchItemAlias.name]: string;
-  [SearchItemAlias.url]: string;
   [SearchItemAlias.showOn]: number;
+}
+
+export interface SearchDefaultItem extends BaseSearchItem {
+  [SearchItemAlias.defaultKey]: string;
+}
+
+export interface SearchItem extends BaseSearchItem {
+  [SearchItemAlias.url]: string;
   [SearchItemAlias.suggestion]?: string;
   [SearchItemAlias.suggestionType]?: 'json' | 'jsonp';
   [SearchItemAlias.extractSuggestion]?: string;
 }
+
+export const isSearchDefaultItem = (item: any): item is SearchDefaultItem =>
+  typeof item === 'object' &&
+  item[SearchItemAlias.defaultKey] !== undefined &&
+  item[SearchItemAlias.showOn] !== undefined;
+export const isSearchItem = (item: any): item is SearchItem =>
+  typeof item === 'object' &&
+  item[SearchItemAlias.url] !== undefined &&
+  item[SearchItemAlias.showOn] !== undefined;
 
 export interface BackgroundItem {
   [BackgroundItemAlias.key]: string;

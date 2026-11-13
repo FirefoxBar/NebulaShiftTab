@@ -1,4 +1,5 @@
 export const SearchItemAlias = {
+  defaultKey: 'dk' as const,
   key: 'k' as const,
   name: 'n' as const,
   url: 'u' as const,

@@ -1,6 +1,6 @@
 import { initFlag, packFlags } from '../bool-flags';
 import { SearchItemAlias } from '../type-alias';
-import type { SearchItem } from '../types';
+import type { SearchDefaultItem, SearchItem } from '../types';
 
 export const SearchItemShowOnFlag = {
   HOME: initFlag(0),
@@ -23,6 +23,16 @@ export const searchEngines: SearchItem[] = [
   {
     [SearchItemAlias.key]: 'bing',
     [SearchItemAlias.name]: 'Bing',
+    [SearchItemAlias.url]: 'https://www.bing.com/search?q={{q}}',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
+    [SearchItemAlias.suggestion]:
+      'https://api.bing.com/osjson.aspx?query={{q}}',
+    [SearchItemAlias.suggestionType]: 'json',
+    [SearchItemAlias.extractSuggestion]: '$[1]',
+  },
+  {
+    [SearchItemAlias.key]: 'bing-cn',
+    [SearchItemAlias.name]: 'Bing 中国',
     [SearchItemAlias.url]: 'https://cn.bing.com/search?q={{q}}',
     [SearchItemAlias.showOn]: searchItemShowOnAll,
     [SearchItemAlias.suggestion]:
@@ -120,6 +130,16 @@ export const searchEngines: SearchItem[] = [
     [SearchItemAlias.showOn]: searchItemShowOnAll,
   },
   {
+    [SearchItemAlias.key]: 'brave',
+    [SearchItemAlias.name]: 'Brave',
+    [SearchItemAlias.url]: 'https://duckduckgo.com/?q={{q}}',
+    [SearchItemAlias.suggestion]:
+      'https://search.brave.com/api/suggest?q={{q}}',
+    [SearchItemAlias.suggestionType]: 'json',
+    [SearchItemAlias.extractSuggestion]: '$[1]',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
+  },
+  {
     [SearchItemAlias.key]: 'taobao',
     [SearchItemAlias.name]: '淘宝',
     [SearchItemAlias.url]: 'https://s.taobao.com/search?q={{q}}',
@@ -131,11 +151,23 @@ export const searchEngines: SearchItem[] = [
     [SearchItemAlias.url]: 'https://search.jd.com/Search?keyword={{q}}',
     [SearchItemAlias.showOn]: searchItemShowOnAll,
   },
+  {
+    [SearchItemAlias.key]: 'qq',
+    [SearchItemAlias.name]: '元宝搜索',
+    [SearchItemAlias.url]: 'https://so.qq.com/isearch?query={{q}}',
+    [SearchItemAlias.showOn]: searchItemShowOnAll,
+    [SearchItemAlias.suggestion]:
+      'https://sor.html5.qq.com/api/getsug?type=pc&pid=aimode&pagename=sgresult&key={{q}}&m=a',
+    [SearchItemAlias.suggestionType]: 'jsonp',
+    [SearchItemAlias.extractSuggestion]: '$[1]',
+  },
 ];
 
-export const defaultSearchEngines = [
-  searchEngines[0],
-  searchEngines[1],
-  searchEngines[2],
-  searchEngines[3],
-];
+export const defaultSearchEngines: SearchDefaultItem[] = searchEngines
+  .slice(0, 4)
+  .map(engine => ({
+    [SearchItemAlias.key]: engine[SearchItemAlias.key],
+    [SearchItemAlias.name]: engine[SearchItemAlias.name],
+    [SearchItemAlias.showOn]: engine[SearchItemAlias.showOn],
+    [SearchItemAlias.defaultKey]: engine[SearchItemAlias.key],
+  }));

@@ -19,6 +19,7 @@ export const StorageKey = {
   bg: 'bg',
   bgLastUpdate: 'bg-last-update',
   siteIcon: 'site-icon',
+  migration: 'migration',
 };
 
 export enum APIs {
@@ -41,7 +42,7 @@ export const defaultPrefValue: PrefValue = {
   siteGap: 36,
   showSiteName: true,
   siteMode: 'flex',
-  siteGrid: { cols: 6, rows: 3, cells: [] },
+  siteGrid: { cols: 6, cells: [] },
   recordHistory: MAX_SUGGESTION_COUNT,
   contextMenu: true,
   background: {

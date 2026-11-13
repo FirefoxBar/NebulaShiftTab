@@ -2,6 +2,7 @@ import { hasFlag } from '@/share/bool-flags';
 import { SearchItemShowOnFlag } from '@/share/constant';
 import { t } from '@/share/locale';
 import { prefs } from '@/share/prefs';
+import { getSearches } from '@/share/search';
 import { SearchItemAlias } from '@/share/type-alias';
 import { getNewTabs } from './utils';
 
@@ -32,9 +33,7 @@ async function handleAddSite(name: string, url: string) {
 }
 
 async function handleSearch(searchKey: string, query: string) {
-  const search = prefs
-    .get('searches')
-    .find(s => s[SearchItemAlias.key] === searchKey);
+  const search = getSearches().find(x => x[SearchItemAlias.key] === searchKey);
   if (!search) {
     return;
   }
@@ -50,8 +49,7 @@ async function updateContextMenus() {
 
   await chrome.contextMenus.removeAll();
 
-  const searches = prefs.get('searches');
-  searches.forEach(search => {
+  getSearches().forEach(search => {
     if (
       !hasFlag(
         search[SearchItemAlias.showOn],

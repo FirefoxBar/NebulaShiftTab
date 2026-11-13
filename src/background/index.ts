@@ -1,6 +1,7 @@
 import createApiHandler from './api-handler';
 import { initBg } from './bg';
 import { initContextMenus } from './context-menus';
+import { initMigration } from './migration';
 import { getNewTabs } from './utils';
 
 let initd = false;
@@ -12,6 +13,7 @@ function init() {
   createApiHandler();
   initBg();
   initContextMenus();
+  initMigration();
 }
 function onInstalled() {
   getNewTabs().then(tabs =>
